@@ -1,0 +1,49 @@
+set shell=/bin/zsh
+autocmd VimEnter * set nospell
+"autocmd BufRead,BufNewFile /etc/nginx/* setfiletype conf
+
+" let g:spf13_leader=","
+" let g:airline_powerline_fonts=1
+" 
+" Set Vim ColorSchem
+ "colorscheme solarized
+"colorscheme molokai
+ colorscheme zenburn
+"colorscheme ir_black 
+"colorscheme fruity
+"colorscheme peaksea
+" colorscheme cobalt
+
+ set nobackup
+ set writebackup
+ "
+ set cursorcolumn
+ set cursorline
+
+let g:airline_theme = 'molokai'
+"let g:solarized_termtrans=0
+"let g:solarized_contrast="normal"
+"let g:solarized_visibility="normal"
+"
+set wrap
+set nospell
+
+
+" disble tab highlight
+let g:indent_guides_enable_on_vim_startup = 0
+" or user <leader>  ig
+
+"markdown
+let g:vim_markdown_toc_autofit = 1
+
+
+"golang
+"
+let g:go_test_timeout = '20s'
+
+" unbind
+unmap <C-e>
+unmap <leader>e
+map <leader>e <plug>NERDTreeTabsToggle<CR>
+
+" markdown-previewer
