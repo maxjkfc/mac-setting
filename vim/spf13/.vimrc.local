@@ -45,5 +45,3 @@ let g:go_test_timeout = '20s'
 unmap <C-e>
 unmap <leader>e
 map <leader>e <plug>NERDTreeTabsToggle<CR>
-
-" markdown-previewer

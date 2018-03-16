@@ -6,5 +6,4 @@ Plugin 'SirVer/ultisnips'
 Plugin 'rizzatti/dash.vim'
 Plugin 'nsf/gocode' ,{'rtp':'vim/'}
 Plugin 'Xuyuanp/nerdtree-git-plugin'
-"Plugin 'JamshedVesuna/vim-markdown-preview'
 
