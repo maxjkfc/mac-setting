@@ -1,0 +1,10 @@
+let g:override_spf13_bundles = 1
+let g:spf13_bundle_groups=['general', 'writing', 'neocomplete', 'programming', 'go', 'python', 'javascript', 'misc',]
+
+Plugin 'suan/vim-instant-markdown'
+Plugin 'SirVer/ultisnips'
+Plugin 'rizzatti/dash.vim'
+Plugin 'nsf/gocode' ,{'rtp':'vim/'}
+Plugin 'Xuyuanp/nerdtree-git-plugin'
+"Plugin 'JamshedVesuna/vim-markdown-preview'
+
