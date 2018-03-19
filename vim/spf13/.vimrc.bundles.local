@@ -6,4 +6,5 @@ Plugin 'SirVer/ultisnips'
 Plugin 'rizzatti/dash.vim'
 Plugin 'nsf/gocode' ,{'rtp':'vim/'}
 Plugin 'Xuyuanp/nerdtree-git-plugin'
-
+" 快速移動 <C-k> <C-j>
+Plugin 'matze/vim-move'

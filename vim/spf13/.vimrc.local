@@ -45,3 +45,12 @@ let g:go_test_timeout = '20s'
 unmap <C-e>
 unmap <leader>e
 map <leader>e <plug>NERDTreeTabsToggle<CR>
+
+" yamlformatter
+let g:yaml_formatter_indent_collection=1
+
+" yaml file type
+au FileType yaml setlocal tabstop=2 expandtab shiftwidth=2 softtabstop=2
+au FileType yml setlocal tabstop=2 expandtab shiftwidth=2 softtabstop=2
+
+let g:move_key_modifier='C'
