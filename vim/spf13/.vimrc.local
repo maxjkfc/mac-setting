@@ -1,19 +1,19 @@
 set shell=/bin/zsh
 autocmd VimEnter * set nospell
-"autocmd BufRead,BufNewFile /etc/nginx/* setfiletype conf
 
 " let g:spf13_leader=","
 " let g:airline_powerline_fonts=1
-" 
+"
 " Set Vim ColorSchem
- "colorscheme solarized
+" colorscheme solarized
 "colorscheme molokai
- colorscheme zenburn
-"colorscheme ir_black 
-"colorscheme fruity
-"colorscheme peaksea
+colorscheme molokai-max
+"colorscheme monokai-chris
+"colorscheme monokain
+" colorscheme zenburn
+" colorscheme ir_black 
 " colorscheme cobalt
-
+ set ruler
  set nobackup
  set writebackup
  "
@@ -36,21 +36,66 @@ let g:indent_guides_enable_on_vim_startup = 0
 "markdown
 let g:vim_markdown_toc_autofit = 1
 
-
 "golang
-"
 let g:go_test_timeout = '20s'
 
+
+
 " unbind
-unmap <C-e>
-unmap <leader>e
-map <leader>e <plug>NERDTreeTabsToggle<CR>
+"unmap <C-e>
+"unmap <leader>e
+"map <leader>e <plug>NERDTreeTabsToggle<CR>
 
 " yamlformatter
 let g:yaml_formatter_indent_collection=1
+
+" deoplete.nvim
+let g:deoplete#enable_at_startup = 1
+set completeopt+=noselect
+
+" deoplete-go
+let g:deoplete#sources#go#gocode_binary=$GOPATH.'/bin/gocode'
+let g:deoplete#sources#go#sort_class = ['package', 'func', 'type', 'var', 'const']
 
 " yaml file type
 au FileType yaml setlocal tabstop=2 expandtab shiftwidth=2 softtabstop=2
 au FileType yml setlocal tabstop=2 expandtab shiftwidth=2 softtabstop=2
 
+" matze/vim-move
 let g:move_key_modifier='C'
+
+
+" lsc
+let g:lsc_server_commands = {'dart': 'dart_language_server'}
+
+let g:lsc_auto_map = v:true " Use defaults
+" ... or set only the keys you want mapped, defaults are:
+let g:lsc_auto_map = {
+    \ 'GoToDefinition': '<C-]>',
+    \ 'FindReferences': 'gr',
+    \ 'NextReference': '<C-n>',
+    \ 'PreviousReference': '<C-p>',
+    \ 'FindImplementations': 'gI',
+    \ 'FindCodeActions': 'ga',
+    \ 'DocumentSymbol': 'go',
+    \ 'WorkspaceSymbol': 'gS',
+    \ 'ShowHover': 'K',
+    \ 'Completion': 'completefunc',
+    \}
+
+
+augroup autoformat_settings
+  autocmd FileType bzl AutoFormatBuffer buildifier
+  autocmd FileType c,cpp,proto,javascript AutoFormatBuffer clang-format
+  autocmd FileType dart AutoFormatBuffer dartfmt
+  autocmd FileType go AutoFormatBuffer gofmt
+  autocmd FileType gn AutoFormatBuffer gn
+  autocmd FileType html,css,json AutoFormatBuffer js-beautify
+  autocmd FileType java AutoFormatBuffer google-java-format
+  autocmd FileType python AutoFormatBuffer yapf
+  " Alternative: autocmd FileType python AutoFormatBuffer autopep8
+augroup END
+
+map <leader>f <plug>FormatCode<CR>
+
+set rtp+=/usr/local/opt/fzf
