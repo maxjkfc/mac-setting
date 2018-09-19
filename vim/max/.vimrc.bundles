@@ -1,0 +1,119 @@
+let s:bundle_dir = $HOME.'/.vim/bundle'
+let g:plug_shallow = 0
+let g:plug_window  = 'enew'
+let g:plug_pwindow = 'vertical rightbelow new'
+
+call plug#begin(s:bundle_dir)
+
+
+" Go {
+    Plug 'fatih/vim-go', { 'for': 'go' ,'tag': '*' }
+    Plug 'tweekmonster/hl-goimport.vim', { 'for': 'go' }
+
+" deoplete  {
+    if has('nvim')
+      Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+    else
+      Plug 'Shougo/deoplete.nvim'
+      Plug 'roxma/nvim-yarp'
+      Plug 'roxma/vim-hug-neovim-rpc'
+    endif
+
+    Plug 'fszymanski/deoplete-emoji'
+    Plug 'zchee/deoplete-go',{'do':'make'}
+    
+" Snippet
+    Plug 'Shougo/neosnippet.vim'
+    Plug 'Shougo/neosnippet-snippets'
+    Plug 'honza/vim-snippets'
+    Plug 'SirVer/ultisnips'
+
+" code fmt 
+    Plug 'google/vim-maktaba'
+    Plug 'google/vim-codefmt'
+    Plug 'google/vim-glaive'
+
+" Dash
+    Plug 'rizzatti/dash.vim'
+
+" Tools
+    Plug 'easymotion/vim-easymotion'
+    "Plug 'easymotion/vim-easymotion', { 'on': '<plug>(easymotion-2)' }
+    "Plug 'matze/vim-move'
+    Plug 'tpope/vim-sensible'
+    Plug 'jiangmiao/auto-pairs'
+    Plug 'nathanaelkane/vim-indent-guides'
+    Plug 'yonchu/accelerated-smooth-scroll'
+    Plug 'gcmt/wildfire.vim'
+
+" Emoji
+    Plug 'junegunn/vim-emoji'
+
+" GUI
+    Plug 'mhinz/vim-startify'
+    Plug 'luochen1990/rainbow'
+
+" Status
+    Plug 'bling/vim-bufferline'
+
+" Importain    
+    Plug 'tpope/vim-surround'   
+    Plug 'scrooloose/nerdcommenter'                                     " Easy commenting
+    Plug 'terryma/vim-multiple-cursors'
+    "Plug 'godlygeek/tabular'
+    Plug 'junegunn/vim-easy-align', { 'on': '<plug>(EasyAlign)' }
+    Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
+
+"FZF
+    "Plug 'junegunn/fzf' , {'on':'FZF'}
+    Plug '/usr/local/bin/fzf'
+
+" Search
+     Plug 'mhinz/vim-grepper'
+
+" NerdTree
+    "Plug 'scrooloose/nerdtree', { 'on':  '<plug>(NERDTreeTabsToggle)' }
+    Plug 'scrooloose/nerdtree'
+    Plug 'Xuyuanp/nerdtree-git-plugin'
+    Plug 'jistr/vim-nerdtree-tabs'
+
+" syntax
+    Plug 'elzr/vim-json'
+    Plug 'stephpy/vim-yaml'
+    Plug 'ekalinin/Dockerfile.vim'
+    Plug 'chr4/nginx.vim'
+    Plug 'cespare/vim-toml'
+    Plug 'plasticboy/vim-markdown'
+    Plug 'chrisbra/csv.vim'
+
+" Git
+    Plug 'tpope/vim-fugitive'
+    Plug 'junegunn/gv.vim'
+    Plug 'rhysd/conflict-marker.vim'
+    "Plug 'airblade/vim-gitgutter'
+    Plug 'mhinz/vim-signify'
+
+" UndoTree
+    "Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
+    Plug 'mbbill/undotree'
+
+" Ctrlp    
+    Plug 'ctrlpvim/ctrlp.vim'
+    Plug 'tacahiroy/ctrlp-funky'
+" AirLine
+    Plug 'vim-airline/vim-airline'
+    Plug 'vim-airline/vim-airline-themes'
+    Plug 'powerline/fonts'
+" Ack
+    Plug 'mileszs/ack.vim'
+" DB
+    "Plug 'tpope/vim-dadbod'
+
+" HTML
+    Plug 'gorodinskiy/vim-coloresque'
+    Plug 'hail2u/vim-css3-syntax'
+    Plug 'mattn/emmet-vim', { 'for': 'html' }
+    Plug 'pangloss/vim-javascript'
+    Plug 'prettier/vim-prettier', { 'for': 'javascript' }
+
+call plug#end()
