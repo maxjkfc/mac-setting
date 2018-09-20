@@ -46,9 +46,6 @@ call plug#begin(s:bundle_dir)
 
 " EasyMotion
     Plug 'easymotion/vim-easymotion'
-    Plug 'haya14busa/incsearch.vim'
-    Plug 'haya14busa/incsearch-easymotion.vim'
-    Plug 'haya14busa/incsearch-fuzzy.vim'
 
 " Emoji
     Plug 'junegunn/vim-emoji'
