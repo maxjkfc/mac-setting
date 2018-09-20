@@ -16,7 +16,7 @@
     set encoding=utf-8
     scriptencoding utf-8
     
-     "Always switch to the current file directory
+    "Always switch to the current file directory
     "autocmd BufEnter * if bufname("") !~ "^\[A-Za-z0-9\]*://" | lcd %:p:h | endif
 
     set shortmess+=filmnrxoOtT              " Abbrev. Of messages (avoids 'hit enter')
@@ -28,10 +28,7 @@
     set undofile                            " So is persistent undo ...
     set undolevels=1000                     " Maximum number of changes that can be undone
     set undoreload=10000                    " Maximum number lines to save for undo on a buffer reload
-
     set writebackup
-    
-
 
 " GUI 
     colorscheme molokai-max         " use vim theme
