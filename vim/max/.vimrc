@@ -185,6 +185,7 @@
 
     " Insert mode completion
     " 查詢字典
+    
     imap <c-f>w <plug>(fzf-complete-word)
     " 查詢路徑
     imap <c-f>f <plug>(fzf-complete-path)
@@ -225,6 +226,11 @@
     nnoremap <C-f>r :FzfRg<CR>
     nnoremap <C-f>t :FzfTags<CR>
     nnoremap <C-f>p :call FzfOmniFiles()<CR>
+    nnoremap <C-f>h :FzfHistory<CR>
+    nnoremap <C-f>s :FzfSnippets<CR>
+    nnoremap <C-f>c :FzfCommit<CR>
+    nnoremap <C-f>m :FzfMaps<CR>
+    nnoremap <C-f>g :FzfGFiles?<CR>
     
 " vim-emoji
 "
@@ -397,22 +403,6 @@
     " JK motions: Line motions
     map <Leader>j <Plug>(easymotion-j)
     map <Leader>k <Plug>(easymotion-k)
-
-
-    "haya14busa/incsearch.vim
-    "haya14busa/incsearch-fuzzy.vim
-    "haya14busa/incsearch-easymotion.vim
-    function! s:config_easyfuzzymotion(...) abort
-      return extend(copy({
-      \   'converters': [incsearch#config#fuzzyword#converter()],
-      \   'modules': [incsearch#config#easymotion#module({'overwin': 1})],
-      \   'keymap': {"\<C-l>": '<Over>(easymotion)'},
-      \   'is_expr': 0,
-      \   'is_stay': 1
-      \ }), get(a:, 1, {}))
-    endfunction
-
-    noremap <silent><expr> <Space>\ incsearch#go(<SID>config_easyfuzzymotion())
 
 "FileType
  " Filetype: Sh, Zsh {{{2
