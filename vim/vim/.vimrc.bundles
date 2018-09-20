@@ -124,6 +124,4 @@ call plug#begin(s:bundle_dir)
     Plug 'pangloss/vim-javascript'
     Plug 'prettier/vim-prettier', { 'for': 'javascript' }
 
-
-
 call plug#end()
