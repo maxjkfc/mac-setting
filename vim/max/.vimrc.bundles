@@ -34,17 +34,21 @@ call plug#begin(s:bundle_dir)
     Plug 'google/vim-glaive'
 
 " Dash
-    Plug 'rizzatti/dash.vim'
+    Plug 'rizzatti/dash.vim' , {'on':'Dash'}
 
 " Tools
-    Plug 'easymotion/vim-easymotion'
-    "Plug 'easymotion/vim-easymotion', { 'on': '<plug>(easymotion-2)' }
     "Plug 'matze/vim-move'
     Plug 'tpope/vim-sensible'
     Plug 'jiangmiao/auto-pairs'
     Plug 'nathanaelkane/vim-indent-guides'
-    Plug 'yonchu/accelerated-smooth-scroll'
+    "Plug 'yonchu/accelerated-smooth-scroll'
     Plug 'gcmt/wildfire.vim'
+
+" EasyMotion
+    Plug 'easymotion/vim-easymotion'
+    Plug 'haya14busa/incsearch.vim'
+    Plug 'haya14busa/incsearch-easymotion.vim'
+    Plug 'haya14busa/incsearch-fuzzy.vim'
 
 " Emoji
     Plug 'junegunn/vim-emoji'
@@ -65,11 +69,13 @@ call plug#begin(s:bundle_dir)
     Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
 
 "FZF
-    "Plug 'junegunn/fzf' , {'on':'FZF'}
     Plug '/usr/local/bin/fzf'
+    "Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+    Plug 'junegunn/fzf.vim' 
+    "Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
 
 " Search
-     Plug 'mhinz/vim-grepper'
+     "Plug 'mhinz/vim-grepper'
 
 " NerdTree
     "Plug 'scrooloose/nerdtree', { 'on':  '<plug>(NERDTreeTabsToggle)' }
@@ -98,14 +104,19 @@ call plug#begin(s:bundle_dir)
     Plug 'mbbill/undotree'
 
 " Ctrlp    
-    Plug 'ctrlpvim/ctrlp.vim'
-    Plug 'tacahiroy/ctrlp-funky'
+    "Plug 'ctrlpvim/ctrlp.vim' 
+    "Plug 'tacahiroy/ctrlp-funky'
+" Ale
+    Plug 'w0rp/ale'
+    
 " AirLine
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
     Plug 'powerline/fonts'
+
 " Ack
-    Plug 'mileszs/ack.vim'
+    "Plug 'rking/ag.vim'
+    "Plug 'mileszs/ack.vim'
 " DB
     "Plug 'tpope/vim-dadbod'
 
@@ -116,7 +127,6 @@ call plug#begin(s:bundle_dir)
     Plug 'pangloss/vim-javascript'
     Plug 'prettier/vim-prettier', { 'for': 'javascript' }
 
-" LSC
-    Plug 'natebosch/vim-lsc'
+
 
 call plug#end()
