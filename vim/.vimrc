@@ -65,15 +65,15 @@
 	    endif
 
 	    "Load the lightline config
-	    if has('nvim') 
-		    if filereadable(expand('~/.vim/max/lightline.vim'))
-			source ~/.vim/max/lightline.vim
-		    endif
-	    else
+		"if has('nvim') 
+			"if filereadable(expand('~/.vim/max/lightline.vim'))
+			"source ~/.vim/max/lightline.vim
+			"endif
+		"else
 		    if filereadable(expand('~/.vim/max/airline.vim'))
 			source ~/.vim/max/airline.vim
 		    endif
-	    endif
+		"endif
 
 	    " Load the undotree config
 	    if filereadable(expand('~/.vim/max/undotree.vim'))
