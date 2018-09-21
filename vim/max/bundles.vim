@@ -5,12 +5,12 @@ let g:plug_pwindow = 'vertical rightbelow new'
 
 call plug#begin(s:bundle_dir)
 
-
-" Go {
+" Golang
     Plug 'fatih/vim-go', { 'for': 'go' ,'tag': '*' }
     Plug 'tweekmonster/hl-goimport.vim', { 'for': 'go' }
 
-" deoplete  {
+" Deoplete  
+
     if has('nvim')
       Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
     else
@@ -21,6 +21,10 @@ call plug#begin(s:bundle_dir)
 
     Plug 'fszymanski/deoplete-emoji'
     Plug 'zchee/deoplete-go',{'do':'make'}
+    Plug 'zchee/deoplete-jedi'
+    Plug 'zchee/deoplete-zsh' ,{ 'for': ['zsh' , 'sh'] }
+    Plug 'Shougo/neco-vim'
+    Plug 'Shougo/neco-syntax'
     
 " Snippet
     Plug 'Shougo/neosnippet.vim'
@@ -28,7 +32,7 @@ call plug#begin(s:bundle_dir)
     Plug 'honza/vim-snippets'
     Plug 'SirVer/ultisnips'
 
-" code fmt 
+" Code fmt 
     Plug 'google/vim-maktaba'
     Plug 'google/vim-codefmt'
     Plug 'google/vim-glaive'
@@ -37,11 +41,9 @@ call plug#begin(s:bundle_dir)
     Plug 'rizzatti/dash.vim' , {'on':'Dash'}
 
 " Tools
-    "Plug 'matze/vim-move'
     Plug 'tpope/vim-sensible'
     Plug 'jiangmiao/auto-pairs'
     Plug 'nathanaelkane/vim-indent-guides'
-    "Plug 'yonchu/accelerated-smooth-scroll'
     Plug 'gcmt/wildfire.vim'
 
 " EasyMotion
@@ -54,28 +56,19 @@ call plug#begin(s:bundle_dir)
     Plug 'mhinz/vim-startify'
     Plug 'luochen1990/rainbow'
 
-" Status
-    Plug 'bling/vim-bufferline'
-
 " Importain    
     Plug 'tpope/vim-surround'   
     Plug 'scrooloose/nerdcommenter'                                     " Easy commenting
     Plug 'terryma/vim-multiple-cursors'
-    "Plug 'godlygeek/tabular'
     Plug 'junegunn/vim-easy-align', { 'on': '<plug>(EasyAlign)' }
     Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
 
-"FZF
+" FZF
     Plug '/usr/local/bin/fzf'
     "Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
     Plug 'junegunn/fzf.vim' 
-    "Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
-
-" Search
-     "Plug 'mhinz/vim-grepper'
 
 " NerdTree
-    "Plug 'scrooloose/nerdtree', { 'on':  '<plug>(NERDTreeTabsToggle)' }
     Plug 'scrooloose/nerdtree'
     Plug 'Xuyuanp/nerdtree-git-plugin'
     Plug 'jistr/vim-nerdtree-tabs'
@@ -93,29 +86,25 @@ call plug#begin(s:bundle_dir)
     Plug 'tpope/vim-fugitive'
     Plug 'junegunn/gv.vim'
     Plug 'rhysd/conflict-marker.vim'
-    "Plug 'airblade/vim-gitgutter'
     Plug 'mhinz/vim-signify'
 
 " UndoTree
-    "Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
     Plug 'mbbill/undotree'
 
-" Ctrlp    
-    "Plug 'ctrlpvim/ctrlp.vim' 
-    "Plug 'tacahiroy/ctrlp-funky'
 " Ale
     Plug 'w0rp/ale'
     
-" AirLine
-    Plug 'vim-airline/vim-airline'
-    Plug 'vim-airline/vim-airline-themes'
+" AirLine || lightline
     Plug 'powerline/fonts'
 
-" Ack
-    "Plug 'rking/ag.vim'
-    "Plug 'mileszs/ack.vim'
-" DB
-    "Plug 'tpope/vim-dadbod'
+    if has('nvim')
+        Plug 'itchyny/lightline.vim'
+	    Plug 'mgee/lightline-bufferline'
+    else
+        Plug 'vim-airline/vim-airline'
+        Plug 'vim-airline/vim-airline-themes'
+        Plug 'bling/vim-bufferline'
+    endif
 
 " HTML
     Plug 'gorodinskiy/vim-coloresque'
@@ -123,7 +112,8 @@ call plug#begin(s:bundle_dir)
     Plug 'mattn/emmet-vim', { 'for': 'html' }
     Plug 'pangloss/vim-javascript'
     Plug 'prettier/vim-prettier', { 'for': 'javascript' }
-"devicon
+
+"dev-icons
     Plug 'ryanoasis/vim-devicons'
 
 call plug#end()
