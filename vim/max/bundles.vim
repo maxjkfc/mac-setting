@@ -97,14 +97,14 @@ call plug#begin(s:bundle_dir)
 " AirLine || lightline
     Plug 'powerline/fonts'
 
-    if has('nvim')
-        Plug 'itchyny/lightline.vim'
-	    Plug 'mgee/lightline-bufferline'
-    else
+    "if has('nvim')
+        "Plug 'itchyny/lightline.vim'
+		"Plug 'mgee/lightline-bufferline'
+    "else
         Plug 'vim-airline/vim-airline'
         Plug 'vim-airline/vim-airline-themes'
         Plug 'bling/vim-bufferline'
-    endif
+    "endif
 
 " HTML
     Plug 'gorodinskiy/vim-coloresque'
