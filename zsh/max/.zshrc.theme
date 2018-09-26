@@ -1,0 +1,10 @@
+
+## Bullet-train 
+BULLETTRAIN_PROMPT_ORDER=(
+  status
+  context
+  dir
+  go
+  git
+  cmd_exec_time
+)

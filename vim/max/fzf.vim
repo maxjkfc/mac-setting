@@ -93,6 +93,7 @@
     nnoremap <C-f>r :FzfRg<CR>
     nnoremap <C-f>t :FzfTags<CR>
     nnoremap <C-f>p :call FzfOmniFiles()<CR>
+    nnoremap <C-f>f :FzfFilesP<CR>
     nnoremap <C-f>h :FzfHistory<CR>
     nnoremap <C-f>s :FzfSnippets<CR>
     nnoremap <C-f>c :FzfCommit<CR>
