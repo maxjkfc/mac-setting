@@ -1,0 +1,32 @@
+# Example aliases
+alias zshconfig="vim ~/.zshrc"
+alias ohmyzsh="vim ~/.oh-my-zsh"
+#
+#
+alias la='ls -laG '
+alias ll='ls -lahG '
+alias ls='ls -G '
+alias lz='ls -ZG '
+alias mv='mv -i'
+alias cp='cp -i'
+alias vim='nvim'
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+
+# tools path
+alias mtr=' sudo /usr/local/sbin/mtr'
+alias vim='/usr/local/bin/vim'
+alias git='/usr/local/bin/git'
+alias cat='ccat'
+alias curl='/usr/local/opt/curl/bin/curl'
+alias sqlite3='/usr/local/opt/sqlite3/bin/sqlite3'
+alias sed="/usr/local/Cellar/gnu-sed/4.5/bin/sed"
+
+# 
+alias -s sh="sh "
+alias -s go="go run "
+alias -s zip="unzip"
+alias -s gz="tar -xzvf"
+alias -s tgz="tar -xzvf"
+alias -s bz2="tar -xjvf"
