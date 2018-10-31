@@ -8,6 +8,8 @@ call plug#begin(s:bundle_dir)
 " Golang
     Plug 'fatih/vim-go', { 'for': 'go' ,'tag': '*' }
     Plug 'tweekmonster/hl-goimport.vim', { 'for': 'go' }
+    "Plug 'mdempsky/gocode', {'rtp': 'vim/'}
+    Plug 'mdempsky/gocode', { 'rtp': 'vim', 'do': '~/.vim/bundle/gocode/vim/symlink.sh' }
 
 " Deoplete  
 
