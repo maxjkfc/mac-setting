@@ -30,19 +30,32 @@
     set grepprg=rg\ --vimgrep
 
     " Customize fzf colors to match your color scheme
+    "let g:fzf_colors =
+    "\ { 'fg':      ['fg', 'Normal'],
+      "\ 'bg':      ['bg', 'Normal'],
+      "\ 'hl':      ['fg', 'Comment'],
+      "\ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+      "\ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+      "\ 'hl+':     ['fg', 'Statement'],
+      "\ 'info':    ['fg', 'PreProc'],
+      "\ 'border':  ['fg', 'Ignore'],
+      "\ 'prompt':  ['fg', 'Conditional'],
+      "\ 'pointer': ['fg', 'Exception'],
+      "\ 'marker':  ['fg', 'Keyword'],
+      "\ 'spinner': ['fg', 'Label'],
+      "\ 'header':  ['fg', 'Comment'] }
     let g:fzf_colors =
-    \ { 'fg':      ['fg', 'Normal'],
-      \ 'bg':      ['bg', 'Normal'],
-      \ 'hl':      ['fg', 'Comment'],
-      \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-      \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
-      \ 'hl+':     ['fg', 'Statement'],
-      \ 'info':    ['fg', 'PreProc'],
-      \ 'border':  ['fg', 'Ignore'],
-      \ 'prompt':  ['fg', 'Conditional'],
-      \ 'pointer': ['fg', 'Exception'],
-      \ 'marker':  ['fg', 'Keyword'],
-      \ 'spinner': ['fg', 'Label'],
+    \ { 'fg':      ['fg', -1],
+      \ 'bg':      ['bg', -1],
+      \ 'hl':      ['fg', 230],
+      \ 'fg+':     ['fg', 3],
+      \ 'bg+':     ['bg', 233],
+      \ 'hl+':     ['fg', 229],
+      \ 'info':    ['fg', 150],
+      \ 'prompt':  ['fg', 110],
+      \ 'pointer': ['fg', 167],
+      \ 'marker':  ['fg', 174],
+      \ 'spinner': ['fg', 150],
       \ 'header':  ['fg', 'Comment'] }
 
 
@@ -93,6 +106,7 @@
     nnoremap <C-f>r :FzfRg<CR>
     nnoremap <C-f>t :FzfTags<CR>
     nnoremap <C-f>p :call FzfOmniFiles()<CR>
+    nnoremap <C-f>f :FzfFilesP<CR>
     nnoremap <C-f>h :FzfHistory<CR>
     nnoremap <C-f>s :FzfSnippets<CR>
     nnoremap <C-f>c :FzfCommit<CR>

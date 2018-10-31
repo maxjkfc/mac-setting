@@ -1,4 +1,5 @@
 " deoplete
+    set completeopt+=noselect
     let g:deoplete#enable_at_startup = 1
 
 	" neosnippet
@@ -9,3 +10,5 @@
     let g:deoplete#sources#go#sort_class = ['package', 'func', 'type', 'var', 'const']
     let g:deoplete#sources#go#use_cache = 1
     let g:deoplete#sources#go#json_directory = '~/.cache/deoplete/go/'
+    let g:deoplete#sources#go#package_dot = 1
+    let g:deoplete#sources#go#pointer=1
