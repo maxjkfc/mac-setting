@@ -1,39 +1,129 @@
 #/bin/bash
 
+install_brew(){
+    echo "Install Ruby Brew ..."
+if  hash brew 2>/dev/null; then
+    echo "brew is installed"
+else
+     #Install Brew
+    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+fi
+
+}
+
+install_git() {
+    brew install git
+}
 
 
-# Install Brew
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+install_zsh() {
+    echo "Install Zsh ...."
+    # zsh
+    brew install zsh     
+    chsh -s /bin/zsh
+    
+    # oh my zsh
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
-# zsh
-brew install zsh zsh-completions
+    # Install zsh plug 
+    brew install zplug
+    
+    brew install zsh-history-substring-search
 
-chsh -s /bin/zsh
+    brew install zsh-autosuggestions
 
-# oh my zsh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+    brew install zsh-completions
 
+}
 
-# Install tmux
-brew install tmux
-
-# Install FZF
-brew install fzf
-
-# Install rg
-brew install ripgrep
-
-# Install clipboard
-brew install reattach-to-user-namespace
-
-# Install neovim
-brew install neovim
-
-# Install vim
-#brew install vim
+install_dev(){
 
 
-# Fonts
-brew tap caskroom/fonts
-brew cask install font-hack-nerd-font
+    # Install neovim
+    brew install neovim
+    
+    # Install vim
+    #brew install vim --lua
+    
+    # Fonts
+    brew tap caskroom/fonts
+    brew cask install font-hack-nerd-font
 
+    # Install Node.js
+    brew install npm
+    
+}
+
+
+
+install_tmux(){
+    # Install tmux
+    brew install tmux
+    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+}
+
+
+
+install_golang(){
+
+    brew install golang
+}
+
+
+install_tools(){
+
+    # Install FZF
+    brew install fzf
+    
+    # Install rg
+    brew install ripgrep
+    
+    # Install clipboard
+    brew install reattach-to-user-namespace
+    
+    # Install ccat
+    brew install ccat
+    
+    # Install sed
+    brew install gnu-sed --with-default-name
+
+    # Install coreutils
+    brew install coreutils
+
+    # Install watch
+    brew install watch
+
+    brew install gawk
+    # Install fd
+    brew install fd
+
+}
+
+
+
+run_shell(){
+    # run shell to setup zsh
+    sh setup-zsh.sh
+
+    # run shell to setup nvim
+
+    sh setup-vim.sh nvim
+
+}
+
+install_all(){
+    install_brew
+    install_git
+    install_zsh
+    install_dev
+    install_tmux
+    install_golang
+    install_tools
+}
+
+case $1 in
+    "init" )
+        install_all
+        run_shell
+        ;;
+esac
