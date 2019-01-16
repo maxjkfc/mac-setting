@@ -13,6 +13,8 @@ setup(){
 
     ln -s $PWD/zsh/max $HOME/.zsh/max
 
+    ln -s $PWD/zsh/themes $HOME/.zsh/themes
+
     source ~/.zshrc
     
 }
