@@ -41,9 +41,9 @@ case $vim_type in
     "vim")
         setup_vim
         ;;
-    "neovim","nvim")
+    "nvim")
         check_nvimdir
-        setup_nvim
+        setup_vim
         ;;
     *)
         echo "Please Input the vim / nvim"
