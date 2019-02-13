@@ -11,10 +11,6 @@ fi
 
 }
 
-install_git() {
-    brew install git
-}
-
 
 install_zsh() {
     echo "Install Zsh ...."
@@ -29,8 +25,6 @@ install_zsh() {
     brew install zplug
     
     brew install zsh-history-substring-search
-
-    brew install zsh-autosuggestions
 
     brew install zsh-completions
 
@@ -67,10 +61,16 @@ install_tmux(){
 install_golang(){
 
     brew install golang
+    brew install glide
 }
 
 
 install_tools(){
+    # install git
+    brew install git
+
+    # install curl
+    brew isntall curl
 
     # Install FZF
     brew install fzf
@@ -93,9 +93,14 @@ install_tools(){
     # Install watch
     brew install watch
 
+    #
+    brew install mtr
+
     brew install gawk
     # Install fd
     brew install fd
+
+    sudo gem install coderay bundler
 
 }
 
@@ -113,12 +118,16 @@ run_shell(){
 
 install_all(){
     install_brew
-    install_git
     install_zsh
     install_dev
     install_tmux
     install_golang
     install_tools
+    install_app
+}
+
+install_app(){
+    brew cask install iterm2
 }
 
 case $1 in

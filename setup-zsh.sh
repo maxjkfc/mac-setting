@@ -13,7 +13,11 @@ setup(){
 
     ln -s $PWD/zsh/max $HOME/.zsh/max
 
-    ln -s $PWD/zsh/themes $HOME/.zsh/themes
+    #cp $PWD/zsh/themes/* $ZSH/themes/
+
+    brew tap sambadevi/powerlevel9k
+
+    brew install powerlevel9k
 
     source ~/.zshrc
     

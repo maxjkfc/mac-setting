@@ -21,7 +21,7 @@ alias git='/usr/local/bin/git'
 alias cat='ccat'
 alias curl='/usr/local/opt/curl/bin/curl'
 alias sqlite3='/usr/local/opt/sqlite3/bin/sqlite3'
-alias sed="/usr/local/Cellar/gnu-sed/4.5/bin/sed"
+alias sed="gsed"
 
 # 
 alias -s sh="sh "
