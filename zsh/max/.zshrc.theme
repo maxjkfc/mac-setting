@@ -1,10 +1,15 @@
 
 ## Bullet-train 
-BULLETTRAIN_PROMPT_ORDER=(
-  status
-  context
-  dir
-  go
-  git
-  cmd_exec_time
-)
+#BULLETTRAIN_PROMPT_ORDER=(
+  #status
+  #context
+  #dir
+  #go
+  #git
+  #cmd_exec_time
+#)
+
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(ssh dir vcs newline status)
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=()
+POWERLEVEL9K_PROMPT_ADD_NEWLINE=true
+#POWERLEVEL9K_PROMPT_ON_NEWLINE=true

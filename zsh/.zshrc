@@ -85,3 +85,9 @@ test -e "${myzshconfig}/.zshrc.zplug"  && source "${myzshconfig}/.zshrc.zplug"
 
 
 
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/maxjkfc/workplace/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/maxjkfc/workplace/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/maxjkfc/workplace/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/maxjkfc/workplace/google-cloud-sdk/completion.zsh.inc'; fi

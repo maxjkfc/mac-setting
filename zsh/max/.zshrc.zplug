@@ -2,15 +2,17 @@
 source $ZPLUG_HOME/init.zsh
 setopt prompt_subst # Make sure prompt is able to be generated properly.
 
-zplug "caiogondim/bullet-train.zsh", use:bullet-train.zsh-theme, defer:3 # defer until other plugins like oh-my-zsh is loaded
+#zplug "caiogondim/bullet-train.zsh", use:bullet-train.zsh-theme, defer:3 # defer until other plugins like oh-my-zsh is loaded
+zplug "bhilburn/powerlevel9k", use:powerlevel9k.zsh-theme
 zplug "plugins/git", from:oh-my-zsh
 zplug "plugins/docker", from:oh-my-zsh
 zplug "plugins/docker-compose", from:oh-my-zsh
 zplug "plugins/golang", from:oh-my-zsh
-zplug "plugins/docker-compose", from:oh-my-zsh
 zplug "b4b4r07/enhancd", use:init.sh
 zplug "zsh-users/zsh-syntax-highlighting", defer:2
 zplug "zsh-users/zsh-autosuggestions"
+zplug "zsh-users/zsh-completions"
+
 
 zplug "~/.zsh", from:local
 
