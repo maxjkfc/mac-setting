@@ -11,6 +11,8 @@
     let g:go_auto_sameids = 1
     let g:go_auto_type_info =1
     let g:go_snippet_engine = 'neosnippet'
+    " use the other source  fo godoc
+    let g:gocode_propose_source = 1
     
     augroup golangcmd
         au FileType go nmap <Leader>s <Plug>(go-implements)
