@@ -99,6 +99,8 @@ install_tools(){
     brew install gawk
     # Install fd
     brew install fd
+    # ctags
+    brew install ctags-exuberant
 
     sudo gem install coderay bundler
 
