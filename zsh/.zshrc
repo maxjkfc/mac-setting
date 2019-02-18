@@ -29,23 +29,25 @@ HIST_STAMPS="yyyy-mm-dd"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(
-    zsh-autosuggestions  
-    zsh-syntax-highlighting 
-    zsh-completions
-)
+#plugins=(
+    #zsh-autosuggestions  
+    #zsh-syntax-highlighting 
+    #zsh-completions
+#)
 
 
 #
 
 # oh my zsh
-source $ZSH/oh-my-zsh.sh
+#source $ZSH/oh-my-zsh.sh
 
 # You may need to manually set your language environment
 export LANG=en_US.UTF-8
 
 # 
 export EDITOR='nvim'
+# set the shell 
+set -o emacs
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
