@@ -45,7 +45,8 @@ install_dev(){
 
     # Install Node.js
     brew install npm
-    
+
+    brew install gotop
 }
 
 
@@ -68,6 +69,8 @@ install_golang(){
 install_tools(){
     # install git
     brew install git
+
+    brew install lazygit
 
     # install curl
     brew isntall curl

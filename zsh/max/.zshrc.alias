@@ -13,6 +13,7 @@ alias vim='nvim'
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
+alias lg='lazygit'
 
 # tools path
 alias mtr=' sudo /usr/local/sbin/mtr'
