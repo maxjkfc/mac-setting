@@ -114,6 +114,23 @@ fpush() {
     git push origin $(echo "$target" | awk '{print $2}')
 }
 
+fpull() {
+
+    local tags branches target
+    tags=$(
+        git tag | awk '{print "\x1b[31;1mtag\x1b[m\t" $1}') || return
+    branches=$(
+        git branch --all | grep -v HEAD |
+        sed "s/.* //" | sed "s#remotes/[^/]*/##" |
+        sort -u | awk '{print "\x1b[34;1mbranch\x1b[m\t" $1}') || return
+    target=$(
+        (echo "$tags"; echo "$branches") |
+        fzf --no-hscroll --no-multi --delimiter="\t" -n 2 \
+            --ansi --preview="git log -200 --pretty=format:%s $(echo {+2..} |  sed 's/$/../' )" ) || return
+    git pull origin $(echo "$target" | awk '{print $2}')
+}
+
+
 # vg - 
 vg() {
   local file
@@ -155,6 +172,12 @@ myip() {
     inter_ip=$(curl -s https://api.ipify.org)
     echo $fg[red]"Local:" $fg[white] $local_ip
     echo $fg[red]"Inter:" $fg[white] $inter_ip
+}
+# fdim - docker rm image use fzf
+fdim() {
+  local id
+  id=$(docker image ls |fzf -m | awk {'print$3'})
+  docker image rm -f $id
 }
 
 
