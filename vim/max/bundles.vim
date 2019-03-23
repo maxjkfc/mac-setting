@@ -81,7 +81,6 @@ call plug#begin(s:bundle_dir)
     Plug 'ekalinin/Dockerfile.vim'
     Plug 'chr4/nginx.vim'
     Plug 'cespare/vim-toml'
-    Plug 'plasticboy/vim-markdown'
     Plug 'chrisbra/csv.vim'
 
 " Git
@@ -115,7 +114,10 @@ call plug#begin(s:bundle_dir)
     Plug 'pangloss/vim-javascript'
     Plug 'prettier/vim-prettier', { 'for': 'javascript' }
 
-"dev-icons
+" dev-icons
     Plug 'ryanoasis/vim-devicons'
+
+" markdown
+    Plug 'plasticboy/vim-markdown'
 
 call plug#end()
