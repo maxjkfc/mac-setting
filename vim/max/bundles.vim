@@ -119,5 +119,6 @@ call plug#begin(s:bundle_dir)
 
 " markdown
     Plug 'plasticboy/vim-markdown'
+    Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
 
 call plug#end()
