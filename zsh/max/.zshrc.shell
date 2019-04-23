@@ -3,7 +3,7 @@
 # tm - create new tmux session, or switch to existing one. Works from within tmux too. (@bag-man)
 # `tm` will allow you to select your tmux session via fzf.
 # `tm irc` will attach to the irc session (if it exists), else it will create it.
-tm() {
+ftm() {
   [[ -n "$TMUX" ]] && change="switch-client" || change="attach-session"
   if [ $1 ]; then
     tmux $change -t "$1" 2>/dev/null || (tmux new-session -d -s $1 && tmux $change -t "$1"); return
@@ -42,7 +42,7 @@ ftpane() {
   fi
 }
 
-bip() {
+fbip() {
   local inst=$(brew search | fzf -m)
 
   if [[ $inst ]]; then
@@ -51,7 +51,7 @@ bip() {
   fi
 }
 
-bup() {
+fbup() {
     local upd=$(brew leaves | fzf -m)
 
     if [[ $upd ]]; then
