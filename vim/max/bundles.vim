@@ -8,7 +8,6 @@ call plug#begin(s:bundle_dir)
 " Golang
     Plug 'fatih/vim-go', { 'for': 'go' ,'tag': '*' }
     Plug 'tweekmonster/hl-goimport.vim', { 'for': 'go' }
-    "Plug 'mdempsky/gocode', {'rtp': 'vim/'}
     Plug 'mdempsky/gocode', { 'rtp': 'vim', 'do': '~/.vim/bundle/gocode/vim/symlink.sh' }
 
 " Deoplete  
@@ -29,8 +28,8 @@ call plug#begin(s:bundle_dir)
     Plug 'Shougo/neco-syntax'
     
 " Snippet
-    Plug 'Shougo/neosnippet.vim'
-    Plug 'Shougo/neosnippet-snippets'
+    "Plug 'Shougo/neosnippet.vim'
+    "Plug 'Shougo/neosnippet-snippets'
     Plug 'honza/vim-snippets'
     Plug 'SirVer/ultisnips'
 
@@ -98,14 +97,9 @@ call plug#begin(s:bundle_dir)
 " AirLine || lightline
     Plug 'powerline/fonts'
 
-    "if has('nvim')
-        "Plug 'itchyny/lightline.vim'
-		"Plug 'mgee/lightline-bufferline'
-    "else
-        Plug 'vim-airline/vim-airline'
-        Plug 'vim-airline/vim-airline-themes'
-        Plug 'bling/vim-bufferline'
-    "endif
+    Plug 'vim-airline/vim-airline'
+    Plug 'vim-airline/vim-airline-themes'
+    Plug 'bling/vim-bufferline'
 
 " HTML
     Plug 'gorodinskiy/vim-coloresque'

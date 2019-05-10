@@ -55,8 +55,8 @@ set -o emacs
 # For a full list of active aliases, run `alias`.
 #
 # Example aliases
-alias zshconfig="vim ~/.zshrc"
-alias ohmyzsh="vim ~/.oh-my-zsh"
+#alias zshconfig="vim ~/.zshrc"
+#alias ohmyzsh="vim ~/.oh-my-zsh"
 
 #artii $(date +%Y-%m-%d\ %H:%M:%S)
 
@@ -75,16 +75,16 @@ echo    '   ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝ ╚�
 
 export myzshconfig="$HOME/.zsh/max"
 
-test -e "${myzshconfig}/.zshrc.path"   && source "${myzshconfig}/.zshrc.path"
-test -e "${myzshconfig}/.zshrc.alias"  && source "${myzshconfig}/.zshrc.alias"
-test -e "${myzshconfig}/.zshrc.plugin" && source "${myzshconfig}/.zshrc.plugin"
-test -e "${myzshconfig}/.zshrc.shell"  && source "${myzshconfig}/.zshrc.shell"
-test -e "${myzshconfig}/.zshrc.fzf"    && source "${myzshconfig}/.zshrc.fzf"
-test -e "${myzshconfig}/.zshrc.gcp"    && source "${myzshconfig}/.zshrc.gcp"
-test -e "${myzshconfig}/.zshrc.iterm2" && source "${myzshconfig}/.zshrc.iterm2"
-test -e "${myzshconfig}/.zshrc.theme"  && source "${myzshconfig}/.zshrc.theme"
-test -e "${myzshconfig}/.zshrc.zplug"  && source "${myzshconfig}/.zshrc.zplug"
-
+test -e "${myzshconfig}/.zshrc.path"     && source "${myzshconfig}/.zshrc.path"
+test -e "${myzshconfig}/.zshrc.alias"    && source "${myzshconfig}/.zshrc.alias"
+test -e "${myzshconfig}/.zshrc.plugin"   && source "${myzshconfig}/.zshrc.plugin"
+test -e "${myzshconfig}/.zshrc.shell"    && source "${myzshconfig}/.zshrc.shell"
+test -e "${myzshconfig}/.zshrc.fzf"      && source "${myzshconfig}/.zshrc.fzf"
+test -e "${myzshconfig}/.zshrc.gcp"      && source "${myzshconfig}/.zshrc.gcp"
+test -e "${myzshconfig}/.zshrc.iterm2"   && source "${myzshconfig}/.zshrc.iterm2"
+test -e "${myzshconfig}/.zshrc.theme"    && source "${myzshconfig}/.zshrc.theme"
+test -e "${myzshconfig}/.zshrc.zplug"    && source "${myzshconfig}/.zshrc.zplug"
+test -e "${myzshconfig}/.zshrc.kubectl"  && source "${myzshconfig}/.zshrc.kubectl"
 
 
 
