@@ -107,6 +107,11 @@
 	    if filereadable(expand('~/.vim/max/swapLine.vim'))
             source ~/.vim/max/swapLine.vim
 	    endif
+
+	    " Load the swap line config
+	    if filereadable(expand('~/.vim/max/ultisnips.vim'))
+            source ~/.vim/max/ultisnips.vim
+	    endif
     endif
 
 
