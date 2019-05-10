@@ -1,6 +1,6 @@
 # Example aliases
 alias zshconfig="vim ~/.zshrc"
-alias ohmyzsh="vim ~/.oh-my-zsh"
+#alias ohmyzsh="vim ~/.oh-my-zsh"
 #
 #
 alias la='ls -laG '
@@ -25,7 +25,7 @@ alias sqlite3='/usr/local/opt/sqlite3/bin/sqlite3'
 alias sed="gsed"
 
 # 
-alias -s sh="sh "
+alias -s sh="source "
 alias -s go="go run "
 alias -s zip="unzip"
 alias -s gz="tar -xzvf"

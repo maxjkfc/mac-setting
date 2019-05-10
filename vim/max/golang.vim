@@ -10,7 +10,7 @@
     let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
     let g:go_auto_sameids = 1
     let g:go_auto_type_info =1
-    let g:go_snippet_engine = 'neosnippet'
+    let g:go_snippet_engine = 'ultisnips'
     " use the other source  fo godoc
     "let g:gocode_propose_source = 1
     
