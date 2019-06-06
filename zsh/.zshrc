@@ -1,5 +1,3 @@
-# Path to your oh-my-zsh installation.
-export ZSH=$HOME/.oh-my-zsh
 #export TERM=xterm-256color
 [[ $TMUX = "" ]] && export TERM="xterm-256color"
 
@@ -25,27 +23,12 @@ COMPLETION_WAITING_DOTS="true"
 
 HIST_STAMPS="yyyy-mm-dd"
 
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-#plugins=(
-    #zsh-autosuggestions  
-    #zsh-syntax-highlighting 
-    #zsh-completions
-#)
-
-
-#
-
-# oh my zsh
-#source $ZSH/oh-my-zsh.sh
-
 # You may need to manually set your language environment
 export LANG=en_US.UTF-8
 
 # 
 export EDITOR='nvim'
+
 # set the shell 
 set -o emacs
 
@@ -73,18 +56,19 @@ echo    '   ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝ ╚�
 # User configuration
 #source ~/.bash_profile
 
-export myzshconfig="$HOME/.zsh/max"
+export myzshconfig="$HOME/.zsh/config"
 
-test -e "${myzshconfig}/.zshrc.path"     && source "${myzshconfig}/.zshrc.path"
-test -e "${myzshconfig}/.zshrc.alias"    && source "${myzshconfig}/.zshrc.alias"
-test -e "${myzshconfig}/.zshrc.plugin"   && source "${myzshconfig}/.zshrc.plugin"
-test -e "${myzshconfig}/.zshrc.shell"    && source "${myzshconfig}/.zshrc.shell"
-test -e "${myzshconfig}/.zshrc.fzf"      && source "${myzshconfig}/.zshrc.fzf"
-test -e "${myzshconfig}/.zshrc.gcp"      && source "${myzshconfig}/.zshrc.gcp"
-test -e "${myzshconfig}/.zshrc.iterm2"   && source "${myzshconfig}/.zshrc.iterm2"
-test -e "${myzshconfig}/.zshrc.theme"    && source "${myzshconfig}/.zshrc.theme"
-test -e "${myzshconfig}/.zshrc.zplug"    && source "${myzshconfig}/.zshrc.zplug"
-test -e "${myzshconfig}/.zshrc.kubectl"  && source "${myzshconfig}/.zshrc.kubectl"
+test -e "${myzshconfig}/.zshrc.path"       && source "${myzshconfig}/.zshrc.path"
+test -e "${myzshconfig}/.zshrc.alias"      && source "${myzshconfig}/.zshrc.alias"
+test -e "${myzshconfig}/.zshrc.plugin"     && source "${myzshconfig}/.zshrc.plugin"
+test -e "${myzshconfig}/.zshrc.shell"      && source "${myzshconfig}/.zshrc.shell"
+test -e "${myzshconfig}/.zshrc.fzf"        && source "${myzshconfig}/.zshrc.fzf"
+test -e "${myzshconfig}/.zshrc.gcp"        && source "${myzshconfig}/.zshrc.gcp"
+test -e "${myzshconfig}/.zshrc.iterm2"     && source "${myzshconfig}/.zshrc.iterm2"
+test -e "${myzshconfig}/.zshrc.theme"      && source "${myzshconfig}/.zshrc.theme"
+test -e "${myzshconfig}/.zshrc.zplug"      && source "${myzshconfig}/.zshrc.zplug"
+test -e "${myzshconfig}/.zshrc.kubectl"    && source "${myzshconfig}/.zshrc.kubectl"
+test -e "${myzshconfig}/.zshrc.completion" && source "${myzshconfig}/.zshrc.completion"
 
 
 

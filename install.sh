@@ -23,11 +23,11 @@ install_zsh() {
 
     # Install zsh plug 
     brew install zplug
-    
-    brew install zsh-history-substring-search
+}
 
-    brew install zsh-completions
-
+setup_zsh_completions_docker-compose() {
+    mkdir -p ~/.zsh/completion
+    curl -L https://raw.githubusercontent.com/docker/compose/1.24.0/contrib/completion/zsh/_docker-compose > ~/.zsh/completion/_docker-compose
 }
 
 install_dev(){
@@ -69,36 +69,23 @@ install_golang(){
 install_tools(){
     # install git
     brew install git
-
+    # install lazygit
     brew install lazygit
-
-    # install curl
-    brew isntall curl
-
     # Install FZF
     brew install fzf
-    
     # Install rg
     brew install ripgrep
-    
     # Install clipboard
     brew install reattach-to-user-namespace
-    
     # Install ccat
     brew install ccat
-    
     # Install sed
     brew install gnu-sed --with-default-name
-
     # Install coreutils
     brew install coreutils
-
     # Install watch
     brew install watch
-
     #
-    brew install mtr
-
     brew install gawk
     # Install fd
     brew install fd
@@ -106,6 +93,12 @@ install_tools(){
     brew install ctags-exuberant
 
     sudo gem install coderay bundler
+
+    # network 
+    #
+    brew install mtr
+    # install curl
+    brew isntall curl
 
 }
 

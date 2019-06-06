@@ -1,5 +1,3 @@
-
-
 # tm - create new tmux session, or switch to existing one. Works from within tmux too. (@bag-man)
 # `tm` will allow you to select your tmux session via fzf.
 # `tm irc` will attach to the irc session (if it exists), else it will create it.
@@ -134,10 +132,8 @@ fpull() {
 # vg - 
 vg() {
   local file
-
   file="$(rg --no-block-buffered --color=always --no-heading $@ | fzf -0 -1 | awk -F: '{print $1}')" 
-  if [[ -n $file ]]
-  then
+  if [[ -n $file ]]; then
       ${EDITOR:-vim} "$file"
   fi
 }
@@ -166,6 +162,13 @@ fkill() {
   fi
 }
 
+# fdim - docker rm image use fzf
+fdim() {
+  local id
+  id=$(docker image ls |fzf -m | awk {'print$3'})
+  docker image rm -f $id
+}
+
 # myip - show my ip
 myip() {
     local_ip=$(ifconfig en0 |grep "inet\ " | awk {'print $2'})
@@ -173,11 +176,28 @@ myip() {
     echo $fg[red]"Local:" $fg[white] $local_ip
     echo $fg[red]"Inter:" $fg[white] $inter_ip
 }
-# fdim - docker rm image use fzf
-fdim() {
-  local id
-  id=$(docker image ls |fzf -m | awk {'print$3'})
-  docker image rm -f $id
+
+# git
+
+gct() {
+    local tag=$1    
+    local msg=$2
+
+
+    if [[ -z $tag ]] then
+        echo $fg[red]"The empty tag : $tag"
+    fi
+
+    if [[ -z $msg ]] then
+        echo $fg[red]"The empty msg : $msg"
+    fi
+
+
+    git commit -m "$msg" 
+    git tag -a $tag -m "$msg"
+
+    git push origin master $tag
+
 }
 
 
