@@ -24,7 +24,18 @@
     set writebackup
 
 " GUI 
-    colorscheme molokai-max         " use vim theme
+    "colorscheme molokai-max         " use vim theme
+    
+    " use google colorscheme
+    "colorscheme primary 
+    "set t_Co=256
+    
+    " use gruvbox colorscheme
+    colorscheme gruvbox
+    let g:gruvbox_contrast_dark="hard"
+    let g:gruvbox_italicize_strings=0                                                                                                                                                        
+    let g:gruvbox_improved_strings=1   
+
     set background=dark             " Assume a dark background
     set tabpagemax=15               " Only show 15 tabs
     set showmode                    " Display the current mode
