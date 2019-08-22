@@ -18,9 +18,6 @@ install_zsh() {
     brew install zsh     
     chsh -s /bin/zsh
     
-    # oh my zsh
-    #sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-
     # Install zsh plug 
     brew install zplug
 }
@@ -42,11 +39,11 @@ install_dev(){
     # Fonts
     brew tap caskroom/fonts
     brew cask install font-hack-nerd-font
-
     # Install Node.js
     brew install npm
 
-    brew install gotop
+
+
 }
 
 
@@ -60,9 +57,7 @@ install_tmux(){
 
 
 install_golang(){
-
     brew install golang
-    brew install glide
 }
 
 
@@ -89,16 +84,20 @@ install_tools(){
     brew install gawk
     # Install fd
     brew install fd
+    # gotop
+    brew install gotop
     # ctags
     brew install ctags-exuberant
-
+    # for fzf and cat
     sudo gem install coderay bundler
 
     # network 
     #
     brew install mtr
     # install curl
-    brew isntall curl
+    brew install curl
+    # clang-format
+    brew install clang-format
 
 }
 

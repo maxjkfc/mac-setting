@@ -11,6 +11,9 @@
     let g:go_auto_sameids = 1
     let g:go_auto_type_info =1
     let g:go_snippet_engine = 'ultisnips'
+    " gopls
+    "let g:go_def_mode='gopls'
+    "let g:go_info_mode='gopls'
     " use the other source  fo godoc
     "let g:gocode_propose_source = 1
     

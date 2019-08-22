@@ -1,7 +1,5 @@
 # Example aliases
-alias zshconfig="vim ~/.zshrc"
-#alias ohmyzsh="vim ~/.oh-my-zsh"
-#
+alias zshconfig="nvim ~/.zshrc"
 #
 alias la='ls -laG '
 alias ll='ls -lahG '

@@ -5,6 +5,10 @@ let g:plug_pwindow = 'vertical rightbelow new'
 
 call plug#begin(s:bundle_dir)
 
+" TabNine
+    "Plug 'zxqfl/tabnine-vim'
+    Plug 'tbodt/deoplete-tabnine' , {'do' : './install.sh'}
+
 " Golang
     Plug 'fatih/vim-go', { 'for': 'go' ,'tag': '*' }
     Plug 'tweekmonster/hl-goimport.vim', { 'for': 'go' }
@@ -28,8 +32,6 @@ call plug#begin(s:bundle_dir)
     Plug 'Shougo/neco-syntax'
     
 " Snippet
-    "Plug 'Shougo/neosnippet.vim'
-    "Plug 'Shougo/neosnippet-snippets'
     Plug 'honza/vim-snippets'
     Plug 'SirVer/ultisnips'
 
@@ -37,6 +39,10 @@ call plug#begin(s:bundle_dir)
     Plug 'google/vim-maktaba'
     Plug 'google/vim-codefmt'
     Plug 'google/vim-glaive'
+
+" ColorScheme
+    Plug 'google/vim-colorscheme-primary'
+    Plug 'morhetz/gruvbox'
 
 " Dash
     Plug 'rizzatti/dash.vim' , {'on':'Dash'}
@@ -81,6 +87,8 @@ call plug#begin(s:bundle_dir)
     Plug 'chr4/nginx.vim'
     Plug 'cespare/vim-toml'
     Plug 'chrisbra/csv.vim'
+    Plug 'uarun/vim-protobuf'
+
 
 " Git
     Plug 'tpope/vim-fugitive'
@@ -92,11 +100,10 @@ call plug#begin(s:bundle_dir)
     Plug 'mbbill/undotree'
 
 " Ale
-    Plug 'w0rp/ale'
+    Plug 'dense-analysis/ale'
     
 " AirLine || lightline
     Plug 'powerline/fonts'
-
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
     Plug 'bling/vim-bufferline'
