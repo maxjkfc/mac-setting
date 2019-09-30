@@ -1,12 +1,21 @@
 # FZF
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 export FZF_DEFAULT_COMMAND='fd  --type file --hidden --follow  --exclude .git' 
+
 export FZF_DEFAULT_OPTS=' --height 40% --layout=reverse --border --ansi
                           --color fg:-1,bg:-1,hl:230,fg+:3,bg+:233,hl+:229
                           --color info:150,prompt:110,spinner:150,pointer:167,marker:174'
-export FZF_CTRL_T_OPTS='--preview '"'"'[[ $(file --mime {}) =~ binary ]] && echo {} is a binary file || (rougify {}  || highlight -O ansi -l {} || coderay {} || cat {}) 2> /dev/null | head -500'"'"
+                          
+export FZF_CTRL_T_OPTS='--preview "[[ $(file --mime {}) =~ binary ]] &&
+                  echo {} is a binary file ||
+                  (bat --style=numbers --color=always {} ||
+                  highlight -O ansi -l {} ||
+                  coderay {} ||
+                  rougify {} ||
+                  cat {}) 2> /dev/null | head -500"'
+
 export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview'"
-export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200'"
 
 export FZF_TMUX=1
 export FZF_TMUX_HEIGHT=40
@@ -24,9 +33,6 @@ _fzf_compgen_dir() {
   fd --type d --hidden --follow --exclude ".git" . "$1"
 }
 
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-export FZF_COMPLETION_TRIGGER=''
-bindkey '^T' fzf-completion
-bindkey '^I' $fzf_default_completion
-
+#export FZF_COMPLETION_TRIGGER=''
+#bindkey '^T' fzf-completion
+#bindkey '^I' $fzf_default_completion

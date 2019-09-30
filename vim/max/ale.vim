@@ -1,6 +1,7 @@
 " Ale
-    "let g:ale_linters = {'golang' : ['gopls']}
-    let g:ale_linters = {'golang' : ['revivs']}
+    let g:ale_linters = { 
+    \ 'golang' : ['gopls'], 
+    \ }
     let g:ale_sign_error = emoji#for('x')
     let g:ale_sign_warning = emoji#for('sos')
     let g:ale_sign_column_always = 1

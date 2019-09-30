@@ -5,17 +5,19 @@
     let g:go_highlight_operators = 1
     let g:go_highlight_build_constraints = 1
     let g:go_fmt_command = 'goimports'
+
     let g:go_test_timeout = '30s'
+
     let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
     let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
     let g:go_auto_sameids = 1
-    let g:go_auto_type_info =1
     let g:go_snippet_engine = 'ultisnips'
+    let g:go_doc_popup_window = 1
+
+    let g:go_metalinter_command='golangci-lint'
     " gopls
-    "let g:go_def_mode='gopls'
-    "let g:go_info_mode='gopls'
-    " use the other source  fo godoc
-    "let g:gocode_propose_source = 1
+    let g:go_def_mode='gopls'
+    let g:go_info_mode='gopls'
     
     augroup golangcmd
         au FileType go nmap <Leader>s <Plug>(go-implements)

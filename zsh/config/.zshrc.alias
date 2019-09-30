@@ -7,11 +7,13 @@ alias ls='ls -G '
 alias lz='ls -ZG '
 alias mv='mv -i'
 alias cp='cp -i'
-alias vim='nvim'
+alias v='nvim'
+alias vdiff='nvim -d'
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 alias lg='lazygit'
+alias lgd='lazydocker'
 
 # tools path
 alias mtr=' sudo /usr/local/sbin/mtr'
@@ -23,7 +25,7 @@ alias sqlite3='/usr/local/opt/sqlite3/bin/sqlite3'
 alias sed="gsed"
 
 # 
-alias -s sh="source "
+alias -s sh="sh "
 alias -s go="go run "
 alias -s zip="unzip"
 alias -s gz="tar -xzvf"

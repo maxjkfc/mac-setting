@@ -32,10 +32,8 @@ install_dev(){
 
     # Install neovim
     brew install neovim
-    
     # Install vim
-    #brew install vim --lua
-    
+    brew install vim --lua
     # Fonts
     brew tap caskroom/fonts
     brew cask install font-hack-nerd-font
@@ -90,15 +88,19 @@ install_tools(){
     brew install ctags-exuberant
     # for fzf and cat
     sudo gem install coderay bundler
-
     # network 
-    #
     brew install mtr
     # install curl
     brew install curl
     # clang-format
     brew install clang-format
+    # git diff 
+    brew install diff-so-fancy
+    # like cat , but faster and colorful
+    brew install bat
 
+    brew install lastpass-cli
+    brew install highlight
 }
 
 

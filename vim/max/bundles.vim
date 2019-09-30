@@ -87,7 +87,7 @@ call plug#begin(s:bundle_dir)
     Plug 'chr4/nginx.vim'
     Plug 'cespare/vim-toml'
     Plug 'chrisbra/csv.vim'
-    Plug 'uarun/vim-protobuf'
+    "Plug 'uber/prototool', { 'rtp':'vim/prototool' }
 
 
 " Git
@@ -101,6 +101,7 @@ call plug#begin(s:bundle_dir)
 
 " Ale
     Plug 'dense-analysis/ale'
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
     
 " AirLine || lightline
     Plug 'powerline/fonts'
@@ -113,7 +114,6 @@ call plug#begin(s:bundle_dir)
     Plug 'hail2u/vim-css3-syntax'
     Plug 'mattn/emmet-vim', { 'for': 'html' }
     Plug 'pangloss/vim-javascript'
-    Plug 'prettier/vim-prettier', { 'for': 'javascript' }
 
 " dev-icons
     Plug 'ryanoasis/vim-devicons'
