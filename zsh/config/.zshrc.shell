@@ -39,7 +39,7 @@ ftpane() {
     tmux select-window -t $target_window
   fi
 }
-
+# fbip - brew install by fzf
 fbip() {
   local inst=$(brew search | fzf -m)
 
@@ -49,6 +49,7 @@ fbip() {
   fi
 }
 
+# fbup - brew upgrade by fzf
 fbup() {
     local upd=$(brew leaves | fzf -m)
 
@@ -57,47 +58,71 @@ fbup() {
       do; brew upgrade $prog; done;
     fi
 }
+# fbcp - brew remove by fzf
+fbcp() {
+  local uninst=$(brew leaves | fzf -m)
 
-# fbr - checkout git branch (including remote branches), sorted by most recent commit, limit 30 last branches
-fbr() {
+  if [[ $uninst ]]; then
+    for prog in $(echo $uninst);
+    do; brew uninstall $prog; done;
+  fi
+}
+
+
+# gbr_fzf - checkout git branch (including remote branches), sorted by most recent commit, limit 30 last branches
+gbr() {
     local branches branch
     branches=$(git for-each-ref --count=30 --sort=-committerdate refs/heads/ --format="%(refname:short)") &&
     branch=$(echo "$branches" |
-             fzf-tmux -d $(( 2 + $(wc -l <<< "$branches") )) +m) &&
+             #fzf-tmux -d $(( 2 + $(wc -l <<< "$branches") )) +m) &&
+             fzf -d $(( 2 + $(wc -l <<< "$branches") )) +m) &&
     git checkout $(echo "$branch" | sed "s/.* //" | sed "s#remotes/[^/]*/##")
 }
 
 
-# fco - checkout git branch/tag, with a preview showing the commits between the tag/branch and HEAD
-fco() {
+# gco_fzf - checkout git branch/tag, with a preview showing the commits between the tag/branch and HEAD
+gco() {
     local tags branches target
-    tags=$(
-      git tag | awk '{print "\x1b[31;1mtag\x1b[m\t" $1}') || return
     branches=$(
-      git branch --all | grep -v HEAD |
-      sed "s/.* //" | sed "s#remotes/[^/]*/##" |
-      sort -u | awk '{print "\x1b[34;1mbranch\x1b[m\t" $1}') || return
+        git --no-pager branch --all \
+          --format="%(if)%(HEAD)%(then)%(else)%(if:equals=HEAD)%(refname:strip=3)%(then)%(else)%1B[0;34;1mbranch%09%1B[m%(refname:short)%(end)%(end)" \
+        | sed '/^$/d') || return
+    tags=$(git --no-pager tag | awk '{print "\x1b[35;1mtag\x1b[m\t" $1}') || return
     target=$(
-      (echo "$tags"; echo "$branches") |
-      fzf --no-hscroll --no-multi --delimiter="\t" -n 2 \
-          --ansi --preview="git log -200 --pretty=format:%s $(echo {+2..} |  sed 's/$/../' )" ) || return
+        (echo "$branches"; echo "$tags") |
+        fzf --no-hscroll --no-multi --delimiter="\t" -n 2 \
+            --ansi --preview="git log -200 --pretty=format:%s $(echo {+2..} |  sed 's/$/../' )" ) || return
     git checkout $(echo "$target" | awk '{print $2}')
+
 }
 
-# fshow - git commit browser
-fshow() {
-    git log --graph --color=always \
-        --format="%C(auto)%h%d %s %C(black)%C(bold)%cr" "$@" |
-    fzf --ansi --no-sort --reverse --tiebreak=index --bind=ctrl-s:toggle-sort \
-        --bind "ctrl-m:execute:
-                  (grep -o '[a-f0-9]\{7\}' | head -1 |
-                  xargs -I % sh -c 'git show --color=always % | less -R') << 'FZF-EOF'
-                  {}
-FZF-EOF"
+alias glGraph='git log --graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr% C(auto)%an" "$@"'
+_gitLogLineToHash="echo {} | grep -o '[a-f0-9]\{7\}' | head -1"
+_viewGitLogLine="$_gitLogLineToHash | xargs -I % sh -c 'git show --color=always % | diff-so-fancy'"
+
+# gcop_fzf - checkout git commit with previews
+gcocp() {
+  local commit
+  commit=$( glGraph |
+    fzf --no-sort --reverse --tiebreak=index --no-multi \
+        --ansi --preview="$_viewGitLogLine" ) &&
+  git checkout $(echo "$commit" | sed "s/ .*//")
+}
+
+
+
+#fshow - git commit browser with previews
+gshow() {
+    glGraph |
+        fzf --no-sort --reverse --tiebreak=index --no-multi \
+            --ansi --preview="$_viewGitLogLine" \
+                --header "enter to view, alt-y to copy hash" \
+                --bind "enter:execute:$_viewGitLogLine   | less -R" \
+                --bind "alt-y:execute:$_gitLogLineToHash | xclip"
 }
 
 # fpush - git push by fzf
-fpush() {
+gpush() {
     local tags branches target
     tags=$(
         git tag | awk '{print "\x1b[31;1mtag\x1b[m\t" $1}') || return
@@ -112,7 +137,7 @@ fpush() {
     git push origin $(echo "$target" | awk '{print $2}')
 }
 
-fpull() {
+gpull() {
 
     local tags branches target
     tags=$(
@@ -137,19 +162,6 @@ vg() {
       ${EDITOR:-vim} "$file"
   fi
 }
-
-
-# fs 
-# fs [FUZZY PATTERN] - Select selected tmux session
-#   - Bypass fuzzy finder if there's only one match (--select-1)
-#   - Exit if there's no match (--exit-0)
-fs() {
-  local session
-  session=$(tmux list-sessions  | \
-    fzf --query="$1" --select-1 --exit-0 | awk '{print $1}') &&
-  tmux switch-client -t "$session"
-}
-
 
 #fkll - kill process
 fkill() {
@@ -201,4 +213,7 @@ gct() {
 }
 
 
+fpass(){
+    lpass show -c --password $(lpass ls  | fzf | awk '{print $(NF)}' | sed 's/\]//g')
+}
 

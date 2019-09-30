@@ -25,7 +25,6 @@ HIST_STAMPS="yyyy-mm-dd"
 
 # You may need to manually set your language environment
 export LANG=en_US.UTF-8
-
 # 
 export EDITOR='nvim'
 
@@ -57,6 +56,7 @@ echo    '   ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝ ╚�
 #source ~/.bash_profile
 
 export myzshconfig="$HOME/.zsh/config"
+export HISTSIZE=1000
 
 test -e "${myzshconfig}/.zshrc.path"       && source "${myzshconfig}/.zshrc.path"
 test -e "${myzshconfig}/.zshrc.alias"      && source "${myzshconfig}/.zshrc.alias"
@@ -77,3 +77,4 @@ if [ -f '/Users/maxjkfc/workplace/google-cloud-sdk/path.zsh.inc' ]; then . '/Use
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/maxjkfc/workplace/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/maxjkfc/workplace/google-cloud-sdk/completion.zsh.inc'; fi
+

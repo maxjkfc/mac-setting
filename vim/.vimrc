@@ -93,10 +93,10 @@
             source ~/.vim/max/autoformat.vim
 	    endif
 
-	    " Load the ale config
-	    if filereadable(expand('~/.vim/max/ale.vim'))
+         "Load the ale config
+        if filereadable(expand('~/.vim/max/ale.vim'))
             source ~/.vim/max/ale.vim
-	    endif
+        endif
 
 	    " Load the startify config
 	    if filereadable(expand('~/.vim/max/startify.vim'))
