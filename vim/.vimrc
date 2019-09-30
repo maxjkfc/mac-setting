@@ -34,11 +34,6 @@
             source ~/.vim/max/multipCursor.vim
 	    endif
 
-	    " Load the deoplete config
-	    if filereadable(expand('~/.vim/max/deoplete.vim'))
-            source ~/.vim/max/deoplete.vim
-	    endif
-
 	    " Load the markdown config
 	    if filereadable(expand('~/.vim/max/markdown.vim'))
             source ~/.vim/max/markdown.vim

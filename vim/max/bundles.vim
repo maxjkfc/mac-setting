@@ -6,30 +6,11 @@ let g:plug_pwindow = 'vertical rightbelow new'
 call plug#begin(s:bundle_dir)
 
 " TabNine
-    "Plug 'zxqfl/tabnine-vim'
-    Plug 'tbodt/deoplete-tabnine' , {'do' : './install.sh'}
+    Plug 'zxqfl/tabnine-vim'
 
 " Golang
     Plug 'fatih/vim-go', { 'for': 'go' ,'tag': '*' }
     Plug 'tweekmonster/hl-goimport.vim', { 'for': 'go' }
-    Plug 'mdempsky/gocode', { 'rtp': 'vim', 'do': '~/.vim/bundle/gocode/vim/symlink.sh' }
-
-" Deoplete  
-
-    if has('nvim')
-      Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-    else
-      Plug 'Shougo/deoplete.nvim'
-      Plug 'roxma/nvim-yarp'
-      Plug 'roxma/vim-hug-neovim-rpc'
-    endif
-
-    Plug 'fszymanski/deoplete-emoji'
-    Plug 'zchee/deoplete-go',{'do':'make'}
-    Plug 'zchee/deoplete-jedi'
-    Plug 'zchee/deoplete-zsh' ,{ 'for': ['zsh' , 'sh'] }
-    Plug 'Shougo/neco-vim'
-    Plug 'Shougo/neco-syntax'
     
 " Snippet
     Plug 'honza/vim-snippets'
