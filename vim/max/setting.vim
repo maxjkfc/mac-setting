@@ -75,6 +75,7 @@
     set nojoinspaces                        " Prevents inserting two spaces after punctuation on a join (J)
     set splitright                          " Puts new vsplit windows to the right of the current
     set splitbelow                          " Puts new split windows to the bottom of the current
+    set autoindent                          
     
     set directory=~/.vimswp/
     set backupdir=~/.vimbackup
