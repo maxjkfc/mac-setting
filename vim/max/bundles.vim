@@ -69,12 +69,12 @@ call plug#begin(s:bundle_dir)
     Plug 'jistr/vim-nerdtree-tabs'
 
 " syntax
-    "Plug 'elzr/vim-json'
-    "Plug 'stephpy/vim-yaml'
-    "Plug 'ekalinin/Dockerfile.vim'
-    "Plug 'chr4/nginx.vim'
-    "Plug 'cespare/vim-toml'
-    "Plug 'chrisbra/csv.vim'
+    Plug 'elzr/vim-json'
+    Plug 'stephpy/vim-yaml'
+    Plug 'ekalinin/Dockerfile.vim'
+    Plug 'chr4/nginx.vim'
+    Plug 'cespare/vim-toml'
+    Plug 'chrisbra/csv.vim'
 
 
 " Git
