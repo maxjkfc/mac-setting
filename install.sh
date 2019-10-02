@@ -1,5 +1,6 @@
 #/bin/bash
 
+
 install_brew(){
     echo "Install Ruby Brew ..."
 if  hash brew 2>/dev/null; then
@@ -27,22 +28,6 @@ setup_zsh_completions_docker-compose() {
     curl -L https://raw.githubusercontent.com/docker/compose/1.24.0/contrib/completion/zsh/_docker-compose > ~/.zsh/completion/_docker-compose
 }
 
-install_dev(){
-
-
-    # Install neovim
-    brew install neovim
-    # Install vim
-    brew install vim --lua
-    # Fonts
-    brew tap caskroom/fonts
-    brew cask install font-hack-nerd-font
-    # Install Node.js
-    brew install npm
-
-
-
-}
 
 
 
@@ -54,12 +39,13 @@ install_tmux(){
 
 
 
-install_golang(){
-    brew install golang
-}
-
-
 install_tools(){
+    # Install golang
+    brew install golang
+    # Install neovim
+    brew install neovim
+    # Install vim
+    brew install vim --lua
     # install git
     brew install git
     # install lazygit
@@ -78,7 +64,7 @@ install_tools(){
     brew install coreutils
     # Install watch
     brew install watch
-    #
+    # awk - linux
     brew install gawk
     # Install fd
     brew install fd
@@ -92,14 +78,10 @@ install_tools(){
     brew install mtr
     # install curl
     brew install curl
-    # clang-format
-    brew install clang-format
     # git diff 
     brew install diff-so-fancy
     # like cat , but faster and colorful
     brew install bat
-
-    brew install lastpass-cli
     brew install highlight
 }
 
@@ -108,19 +90,14 @@ install_tools(){
 run_shell(){
     # run shell to setup zsh
     sh setup-zsh.sh
-
     # run shell to setup nvim
-
     sh setup-vim.sh nvim
-
 }
 
 install_all(){
     install_brew
     install_zsh
-    install_dev
     install_tmux
-    install_golang
     install_tools
     install_app
 }
@@ -133,5 +110,14 @@ case $1 in
     "init" )
         install_all
         run_shell
+        ;;
+    "brew")
+        install_brew
+        ;;
+    "zsh")
+        install_zsh
+        ;;
+    "tools")
+        install_tools
         ;;
 esac

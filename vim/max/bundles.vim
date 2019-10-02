@@ -6,7 +6,7 @@ let g:plug_pwindow = 'vertical rightbelow new'
 call plug#begin(s:bundle_dir)
 
 " TabNine
-    Plug 'zxqfl/tabnine-vim'
+    "Plug 'zxqfl/tabnine-vim'
 
 " Golang
     Plug 'fatih/vim-go', { 'for': 'go' ,'tag': '*' }
@@ -17,9 +17,9 @@ call plug#begin(s:bundle_dir)
     Plug 'SirVer/ultisnips'
 
 " Code fmt 
-    Plug 'google/vim-maktaba'
-    Plug 'google/vim-codefmt'
-    Plug 'google/vim-glaive'
+    "Plug 'google/vim-maktaba'
+    "Plug 'google/vim-codefmt'
+    "Plug 'google/vim-glaive'
 
 " ColorScheme
     Plug 'google/vim-colorscheme-primary'
@@ -30,11 +30,15 @@ call plug#begin(s:bundle_dir)
 
 " Tools
     Plug 'tpope/vim-sensible'
+    " 快速產生對應的括弧
     Plug 'jiangmiao/auto-pairs'
+    " 可視化縮進的插件
     Plug 'nathanaelkane/vim-indent-guides'
+    " 快速選取區塊內容
     Plug 'gcmt/wildfire.vim'
 
 " EasyMotion
+    " 快速移動
     Plug 'easymotion/vim-easymotion'
 
 " Emoji
@@ -42,12 +46,15 @@ call plug#begin(s:bundle_dir)
 
 " GUI
     Plug 'mhinz/vim-startify'
+    " 彩虹括弧
     Plug 'luochen1990/rainbow'
 
 " Importain    
+    " 快速建立雙引號
     Plug 'tpope/vim-surround'   
+    " 快速註解
     Plug 'scrooloose/nerdcommenter'                                     " Easy commenting
-    Plug 'terryma/vim-multiple-cursors'
+    " 快速對齊
     Plug 'junegunn/vim-easy-align', { 'on': '<plug>(EasyAlign)' }
     Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
 
@@ -62,13 +69,12 @@ call plug#begin(s:bundle_dir)
     Plug 'jistr/vim-nerdtree-tabs'
 
 " syntax
-    Plug 'elzr/vim-json'
-    Plug 'stephpy/vim-yaml'
-    Plug 'ekalinin/Dockerfile.vim'
-    Plug 'chr4/nginx.vim'
-    Plug 'cespare/vim-toml'
-    Plug 'chrisbra/csv.vim'
-    "Plug 'uber/prototool', { 'rtp':'vim/prototool' }
+    "Plug 'elzr/vim-json'
+    "Plug 'stephpy/vim-yaml'
+    "Plug 'ekalinin/Dockerfile.vim'
+    "Plug 'chr4/nginx.vim'
+    "Plug 'cespare/vim-toml'
+    "Plug 'chrisbra/csv.vim'
 
 
 " Git
@@ -82,9 +88,8 @@ call plug#begin(s:bundle_dir)
 
 " Ale
     Plug 'dense-analysis/ale'
-    Plug 'neoclide/coc.nvim', {'branch': 'release'}
     
-" AirLine || lightline
+" AirLine 
     Plug 'powerline/fonts'
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
@@ -92,9 +97,9 @@ call plug#begin(s:bundle_dir)
 
 " HTML
     Plug 'gorodinskiy/vim-coloresque'
-    Plug 'hail2u/vim-css3-syntax'
-    Plug 'mattn/emmet-vim', { 'for': 'html' }
-    Plug 'pangloss/vim-javascript'
+    "Plug 'hail2u/vim-css3-syntax'
+    "Plug 'mattn/emmet-vim', { 'for': 'html' }
+    "Plug 'pangloss/vim-javascript'
 
 " dev-icons
     Plug 'ryanoasis/vim-devicons'
@@ -102,5 +107,8 @@ call plug#begin(s:bundle_dir)
 " markdown
     Plug 'plasticboy/vim-markdown'
     Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
+" coc
+"
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 call plug#end()

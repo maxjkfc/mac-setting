@@ -13,15 +13,16 @@
     scriptencoding utf-8
     
     set shortmess+=filmnrxoOtT              " Abbrev. Of messages (avoids 'hit enter')
+    set shortmess+=c
     set viewoptions=folds,options,cursor,unix,slash " Better Unix / Windows compatibility
     set virtualedit=onemore                 " Allow for cursor beyond last character
     set history=1000                        " Store a ton of history (default is 20)
     set hidden                              " Allow buffer switching without saving
     set backup                              " Backups are nice ...
+    set writebackup
     set undofile                            " So is persistent undo ...
     set undolevels=1000                     " Maximum number of changes that can be undone
     set undoreload=10000                    " Maximum number lines to save for undo on a buffer reload
-    set writebackup
 
 " GUI 
     "colorscheme molokai-max         " use vim theme

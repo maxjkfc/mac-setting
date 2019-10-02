@@ -1,4 +1,5 @@
 " Golang
+if isdirectory(expand('~/.vim/bundle/vim-go'))
     let g:go_highlight_functions = 1
     let g:go_highlight_methods = 1
     let g:go_highlight_structs = 1
@@ -18,7 +19,10 @@
     " gopls
     let g:go_def_mode='gopls'
     let g:go_info_mode='gopls'
-    
+
+    " set to use coc.vim -> disable vim-go: GoDef short cut
+    let g:go_def_mapping_enabled = 0 
+
     augroup golangcmd
         au FileType go nmap <Leader>s <Plug>(go-implements)
         au FileType go nmap <Leader>i <Plug>(go-info)
@@ -30,3 +34,4 @@
         au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
         au FileType go nmap <leader>co <Plug>(go-coverage)
     augroup END
+endif
