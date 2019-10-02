@@ -17,7 +17,7 @@ setup_vim(){
         https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     fi
 
-    ln -s $PWD/vim/max $HOME/.vim/max
+    ln -s $PWD/vim/max $HOME/.vim/config
     ln -s $PWD/vim/colors $HOME/.vim/colors
     
     if [ "$vim_type" == 'vim' ]; then 
@@ -26,9 +26,32 @@ setup_vim(){
         vim +GoInstallBinaries
     else
         ln -s $PWD/vim/.vimrc $HOME/.config/nvim/init.vim
+        # coc config
+        ln -s $PWD/vim/config/coc-settings.json $HOME/.config/nvim/coc-settings.json
+
         nvim +PlugInstall
         nvim +GoInstallBinaries
+
+        # coc
+        nvim -c 'CocInstall -sync coc-json coc-css coc-html coc-tsserver coc-yaml coc-rls coc-snippets|q'
     fi
+
+    install_app_for_vim
+}
+
+install_app_for_vim() {
+    # Fonts
+    brew tap caskroom/fonts
+    brew cask install font-hack-nerd-font
+    # Install Node.js
+    brew install npm
+    # install dockerfile lsp
+    npm install -g dockerfile-language-server-nodejs
+    # install bash lsp
+    npm i -g bash-language-server
+    # install python lsp
+    pip install python-language-server
+
 }
 
 check_nvimdir(){
@@ -50,5 +73,3 @@ case $vim_type in
         exit 0
         ;;
 esac
-
-
