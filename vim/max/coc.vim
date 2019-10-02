@@ -37,6 +37,7 @@ if isdirectory(expand('~/.vim/bundle/coc.nvim'))
     nmap <silent> gy <Plug>(coc-type-definition)
     nmap <silent> gi <Plug>(coc-implementation)
     nmap <silent> gr <Plug>(coc-references)
+    nmap <c-]> <Plug>(coc-definiton)
 
     " Use K to show documentation in preview window
     " 展現coc 文件
@@ -120,8 +121,10 @@ if isdirectory(expand('~/.vim/bundle/coc.nvim'))
 
 
     " Multiple cursors support
-    hi CocCursorRange guibg=#b16286 guifg=#ebdbb2
+    hi CocCursorRange guibg=red guifg=blue
+
     " 
+    xmap <silent> <C-d> y/\V<C-r>=escape(@",'/\')<CR><CR>gN<Plug>(coc-cursors-range)gn
     nmap <expr> <silent> <C-d> <SID>select_current_word()
     function! s:select_current_word()
       if !get(g:, 'coc_cursors_activated', 0)
@@ -152,3 +155,18 @@ if isdirectory(expand('~/.vim/bundle/coc.nvim'))
     
     let g:coc_snippet_next = '<tab>'
 endif
+
+
+
+" grep word under cursor
+command! -nargs=+ -complete=custom,s:GrepArgs Rg exe 'CocList grep '.<q-args>
+
+function! s:GrepArgs(...)
+  let list = ['-S', '-smartcase', '-i', '-ignorecase', '-w', '-word',
+        \ '-e', '-regex', '-u', '-skip-vcs-ignores', '-t', '-extension']
+  return join(list, "\n")
+endfunction
+
+" Keymapping for grep word under cursor with interactive mode
+nnoremap <silent> <Leader>cf :exe 'CocList -I --input='.expand('<cword>').' grep'<CR>
+nnoremap <silent> <space>w  :exe 'CocList -I --normal --input='.expand('<cword>').' words'<CR>
