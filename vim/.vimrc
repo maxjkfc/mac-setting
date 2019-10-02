@@ -4,113 +4,108 @@
    endif
 
 " Load the bundles config
-    if filereadable(expand('~/.vim/max/bundles.vim'))
-        source ~/.vim/max/bundles.vim
-        source ~/.vim/max/setting.vim
+    if filereadable(expand('~/.vim/config/bundles.vim'))
+        source ~/.vim/config/bundles.vim
+        source ~/.vim/config/setting.vim
 
 	"Plugin
 	    " Load the fzf config
-	    if filereadable(expand('~/.vim/max/fzf.vim'))
-            source ~/.vim/max/fzf.vim
+	    if filereadable(expand('~/.vim/config/fzf.vim'))
+            source ~/.vim/config/fzf.vim
+	    endif
+
+        " Load the coc config
+	    if filereadable(expand('~/.vim/config/coc.vim'))
+            source ~/.vim/config/coc.vim
 	    endif
 
 	    " Load the golang config
-	    if filereadable(expand('~/.vim/max/golang.vim'))
-            source ~/.vim/max/golang.vim
+	    if filereadable(expand('~/.vim/config/golang.vim'))
+            source ~/.vim/config/golang.vim
 	    endif
 
 	    " Load the signify config
-	    if filereadable(expand('~/.vim/max/vimSignify.vim'))
-            source ~/.vim/max/vimSignify.vim
+	    if filereadable(expand('~/.vim/config/vimSignify.vim'))
+            source ~/.vim/config/vimSignify.vim
 	    endif
 
 	    " Load the rainbow config
-	    if filereadable(expand('~/.vim/max/rainbow.vim'))
-            source ~/.vim/max/rainbow.vim
+	    if filereadable(expand('~/.vim/config/rainbow.vim'))
+            source ~/.vim/config/rainbow.vim
 	    endif
 
-	    " Load the multipCursor config
-	    if filereadable(expand('~/.vim/max/multipCursor.vim'))
-            source ~/.vim/max/multipCursor.vim
-	    endif
-
-	    " Load the deoplete config
-	    if filereadable(expand('~/.vim/max/deoplete.vim'))
-            source ~/.vim/max/deoplete.vim
+        " Load the indent-guides config
+	    if filereadable(expand('~/.vim/config/indent-guides.vim'))
+            source ~/.vim/config/indent-guides.vim
 	    endif
 
 	    " Load the markdown config
-	    if filereadable(expand('~/.vim/max/markdown.vim'))
-            source ~/.vim/max/markdown.vim
+	    if filereadable(expand('~/.vim/config/markdown.vim'))
+            source ~/.vim/config/markdown.vim
 	    endif
 
 	    " Load the nerdtree config
-	    if filereadable(expand('~/.vim/max/nerdtree.vim'))
-            source ~/.vim/max/nerdtree.vim
+	    if filereadable(expand('~/.vim/config/nerdtree.vim'))
+            source ~/.vim/config/nerdtree.vim
 	    endif
 
 	    " Load the easyAlign config
-	    if filereadable(expand('~/.vim/max/easyAlign.vim'))
-            source ~/.vim/max/easyAlign.vim
+	    if filereadable(expand('~/.vim/config/easyAlign.vim'))
+            source ~/.vim/config/easyAlign.vim
 	    endif
 
 	    " Load the tagbar config
-	    if filereadable(expand('~/.vim/max/tagbar.vim'))
-            source ~/.vim/max/tagbar.vim
+	    if filereadable(expand('~/.vim/config/tagbar.vim'))
+            source ~/.vim/config/tagbar.vim
 	    endif
 
 	    " Load the fugitive config
-	    if filereadable(expand('~/.vim/max/fugitive.vim'))
-            source ~/.vim/max/fugitive.vim
+	    if filereadable(expand('~/.vim/config/fugitive.vim'))
+            source ~/.vim/config/fugitive.vim
 	    endif
 
-		if filereadable(expand('~/.vim/max/airline.vim'))
-		    source ~/.vim/max/airline.vim
+		if filereadable(expand('~/.vim/config/airline.vim'))
+		    source ~/.vim/config/airline.vim
 		endif
 
 	    " Load the undotree config
-	    if filereadable(expand('~/.vim/max/undotree.vim'))
-		    source ~/.vim/max/undotree.vim
+	    if filereadable(expand('~/.vim/config/undotree.vim'))
+		    source ~/.vim/config/undotree.vim
 	    endif
 
 	    " Load the wildfire config
-	    if filereadable(expand('~/.vim/max/wildfire.vim'))
-		    source ~/.vim/max/wildfire.vim
+	    if filereadable(expand('~/.vim/config/wildfire.vim'))
+		    source ~/.vim/config/wildfire.vim
 	    endif
 
 	    " Load the easymotion config
-	    if filereadable(expand('~/.vim/max/easymotion.vim'))
-            source ~/.vim/max/easymotion.vim
+	    if filereadable(expand('~/.vim/config/easymotion.vim'))
+            source ~/.vim/config/easymotion.vim
 	    endif
 
 	    " Load the filetype config
-	    if filereadable(expand('~/.vim/max/fileType.vim'))
-            source ~/.vim/max/fileType.vim
-	    endif
-
-	    " Load the autoformat config
-	    if filereadable(expand('~/.vim/max/autoformat.vim'))
-            source ~/.vim/max/autoformat.vim
+	    if filereadable(expand('~/.vim/config/fileType.vim'))
+            source ~/.vim/config/fileType.vim
 	    endif
 
          "Load the ale config
-        if filereadable(expand('~/.vim/max/ale.vim'))
-            source ~/.vim/max/ale.vim
+        if filereadable(expand('~/.vim/config/ale.vim'))
+            source ~/.vim/config/ale.vim
         endif
 
 	    " Load the startify config
-	    if filereadable(expand('~/.vim/max/startify.vim'))
-            source ~/.vim/max/startify.vim
+	    if filereadable(expand('~/.vim/config/startify.vim'))
+            source ~/.vim/config/startify.vim
 	    endif
 
 	    " Load the swap line config
-	    if filereadable(expand('~/.vim/max/swapLine.vim'))
-            source ~/.vim/max/swapLine.vim
+	    if filereadable(expand('~/.vim/config/swapLine.vim'))
+            source ~/.vim/config/swapLine.vim
 	    endif
 
 	    " Load the swap line config
-	    if filereadable(expand('~/.vim/max/ultisnips.vim'))
-            source ~/.vim/max/ultisnips.vim
+	    if filereadable(expand('~/.vim/config/ultisnips.vim'))
+            source ~/.vim/config/ultisnips.vim
 	    endif
     endif
 
