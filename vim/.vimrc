@@ -107,6 +107,11 @@
 	    if filereadable(expand('~/.vim/config/ultisnips.vim'))
             source ~/.vim/config/ultisnips.vim
 	    endif
+
+	    " Load the multiple cursors config
+	    if filereadable(expand('~/.vim/config/multiplecursors.vim'))
+            source ~/.vim/config/multiplecursors.vim
+	    endif
     endif
 
 

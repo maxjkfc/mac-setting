@@ -104,9 +104,9 @@ if isdirectory(expand('~/.vim/bundle/coc.nvim'))
     " 顯示所有的問題診斷
     nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
     " Manage extensions
-    nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
+    "nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
      "Show commands
-    nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
+    "nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
     " Find symbol of current document
     " 取得該檔案的 outline
     nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
@@ -121,17 +121,12 @@ if isdirectory(expand('~/.vim/bundle/coc.nvim'))
 
 
     " Multiple cursors support
-    hi CocCursorRange guibg=red guifg=blue
+    "hi CocCursorRange guibg=red guifg=blue
+    "xmap <silent> <C-d> y/\V<C-r>=escape(@",'/\')<CR><CR>gN<Plug>(coc-cursors-range)gn
+    "nmap <silent> <C-d> <Plug>(coc-cursors-word)*
+    "xmap <silent> <C-d> y/\V<C-r>=escape(@",'/\')<CR><CR>gN<Plug>(coc-cursors-range)gn
+    "xmap <silent> <C-n> <Plug>(coc-cursors-range)
 
-    " 
-    xmap <silent> <C-d> y/\V<C-r>=escape(@",'/\')<CR><CR>gN<Plug>(coc-cursors-range)gn
-    nmap <expr> <silent> <C-d> <SID>select_current_word()
-    function! s:select_current_word()
-      if !get(g:, 'coc_cursors_activated', 0)
-        return "\<Plug>(coc-cursors-word)"
-      endif
-      return "*\<Plug>(coc-cursors-word):nohlsearch\<CR>"
-    endfunc
 
     " coc-snippets
     " Use <C-l> for trigger snippet expand.

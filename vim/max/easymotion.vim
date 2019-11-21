@@ -9,5 +9,5 @@
         map <Leader><Leader>k <Plug>(easymotion-k)
         map <Leader><Leader>h <Plug>(easymotion-linebackward)
         map <Leader><Leader>l <Plug>(easymotion-lineforward)
-        map <Leader><leader>s <Plug>(easymotion-sn)
+        map <Leader><leader>s <Plug>(easymotion-s)
     endif
