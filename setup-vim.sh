@@ -43,6 +43,8 @@ install_app_for_vim() {
     # Fonts
     brew tap caskroom/fonts
     brew cask install font-hack-nerd-font
+    # install clang-format for vim
+    brew install clang-format
     # Install Node.js
     brew install npm
     # install dockerfile lsp

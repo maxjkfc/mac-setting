@@ -1,6 +1,6 @@
 {    
+    "coc.preferences.formatOnSaveFiletypes": ["css", "Markdown" , "yaml" , "javascript" , "json"],
     "snippets.ultisnips.directories": [
-      "UltiSnips",
       "gosnippets/UltiSnips"
     ],
     "languageserver": {

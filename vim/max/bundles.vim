@@ -17,9 +17,9 @@ call plug#begin(s:bundle_dir)
     Plug 'SirVer/ultisnips'
 
 " Code fmt 
-    "Plug 'google/vim-maktaba'
-    "Plug 'google/vim-codefmt'
-    "Plug 'google/vim-glaive'
+    Plug 'google/vim-maktaba'
+    Plug 'google/vim-codefmt'
+    Plug 'google/vim-glaive'
 
 " ColorScheme
     Plug 'google/vim-colorscheme-primary'
@@ -36,6 +36,8 @@ call plug#begin(s:bundle_dir)
     Plug 'nathanaelkane/vim-indent-guides'
     " 快速選取區塊內容
     Plug 'gcmt/wildfire.vim'
+    " 多游標選取
+    Plug 'terryma/vim-multiple-cursors'    
 
 " EasyMotion
     " 快速移動
@@ -69,11 +71,11 @@ call plug#begin(s:bundle_dir)
     Plug 'jistr/vim-nerdtree-tabs'
 
 " syntax
-    Plug 'elzr/vim-json'
-    Plug 'stephpy/vim-yaml'
+    "Plug 'elzr/vim-json'
+    "Plug 'stephpy/vim-yaml'
     Plug 'ekalinin/Dockerfile.vim'
     Plug 'chr4/nginx.vim'
-    Plug 'cespare/vim-toml'
+    "Plug 'cespare/vim-toml'
     Plug 'chrisbra/csv.vim'
 
 
