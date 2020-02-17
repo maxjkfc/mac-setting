@@ -82,6 +82,9 @@
     set undodir=~/.vimundo
 
 
+    set list lcs=tab:\|\ 
+
+
 " Key Mappings
     let mapleader =','          " set the key map leader
     let maplocalleader = '_'

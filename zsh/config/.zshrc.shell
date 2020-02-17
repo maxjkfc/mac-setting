@@ -58,8 +58,8 @@ fbup() {
       do; brew upgrade $prog; done;
     fi
 }
-# fbcp - brew remove by fzf
-fbcp() {
+# fbrm - brew remove by fzf
+fbrm() {
   local uninst=$(brew leaves | fzf -m)
 
   if [[ $uninst ]]; then
@@ -101,7 +101,7 @@ _gitLogLineToHash="echo {} | grep -o '[a-f0-9]\{7\}' | head -1"
 _viewGitLogLine="$_gitLogLineToHash | xargs -I % sh -c 'git show --color=always % | diff-so-fancy'"
 
 # gcop_fzf - checkout git commit with previews
-gcocp() {
+gcop() {
   local commit
   commit=$( glGraph |
     fzf --no-sort --reverse --tiebreak=index --no-multi \
@@ -154,7 +154,7 @@ gpull() {
 }
 
 
-# vg - 
+# vg - vim and rg
 vg() {
   local file
   file="$(rg --no-block-buffered --color=always --no-heading $@ | fzf -0 -1 | awk -F: '{print $1}')" 
@@ -212,8 +212,4 @@ gct() {
 
 }
 
-
-fpass(){
-    lpass show -c --password $(lpass ls  | fzf | awk '{print $(NF)}' | sed 's/\]//g')
-}
 

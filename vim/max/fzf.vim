@@ -66,7 +66,6 @@
 
         " Insert mode completion
         " 查詢字典
-        
         imap <c-f>w <plug>(fzf-complete-word)
         " 查詢路徑
         imap <c-f>f <plug>(fzf-complete-path)
