@@ -34,6 +34,7 @@ call plug#begin(s:bundle_dir)
     Plug 'jiangmiao/auto-pairs'
     " 可視化縮進的插件
     Plug 'nathanaelkane/vim-indent-guides'
+    "Plug 'Yggdroot/indentLine'
     " 快速選取區塊內容
     Plug 'gcmt/wildfire.vim'
     " 多游標選取
