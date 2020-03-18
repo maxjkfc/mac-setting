@@ -85,20 +85,6 @@ if isdirectory(expand('~/.vim/bundle/coc.nvim'))
     command! -nargs=? Fold :call     CocAction('fold', <f-args>)
 
 
-    " Add diagnostic info for https://github.com/itchyny/lightline.vim
-    let g:lightline = {
-          \ 'colorscheme': 'wombat',
-          \ 'active': {
-          \   'left': [ [ 'mode', 'paste' ],
-          \             [ 'cocstatus', 'readonly', 'filename', 'modified' ] ]
-          \ },
-          \ 'component_function': {
-          \   'cocstatus': 'coc#status'
-          \ },
-          \ }
-
-
-
     " Using CocList
     " Show all diagnostics
     " 顯示所有的問題診斷
@@ -118,8 +104,37 @@ if isdirectory(expand('~/.vim/bundle/coc.nvim'))
     "nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
     " Resume latest coc list
     "nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+    
+    " coc-explorer
+    nmap <space>e :CocCommand explorer<cr>
+    let g:coc_explorer_global_presets = {
+    \   '.vim': {
+    \      'root-uri': '~/.vim',
+    \   },
+    \   'floating': {
+    \      'position': 'floating',
+    \   },
+    \   'floatingLeftside': {
+    \      'position': 'floating',
+    \      'floating-position': 'left-center',
+    \      'floating-width': 50,
+    \   },
+    \   'floatingRightside': {
+    \      'position': 'floating',
+    \      'floating-position': 'left-center',
+    \      'floating-width': 50,
+    \   },
+    \   'simplify': {
+    \     'file.child.template': '[git | 2][selection | clip | 1] [icon | 1] [filename omitCenter 1]'
+    \   }
+    \ }
 
-
+    " Use preset argument to open it
+    nmap <space>ed :CocCommand explorer --preset .vim<CR>
+    nmap <space>ef :CocCommand explorer --preset floating<CR>
+    " List all presets
+    nmap <space>el :CocList explPresets
+    
     " Multiple cursors support
     "hi CocCursorRange guibg=red guifg=blue
     "xmap <silent> <C-d> y/\V<C-r>=escape(@",'/\')<CR><CR>gN<Plug>(coc-cursors-range)gn

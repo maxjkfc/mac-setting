@@ -33,7 +33,7 @@ setup_vim(){
         nvim +GoInstallBinaries
 
         # coc
-        nvim -c 'CocInstall -sync coc-json coc-css coc-html coc-tsserver coc-yaml coc-rls coc-snippets|q'
+        nvim -c 'CocInstall -sync coc-json coc-css coc-html coc-tsserver coc-yaml coc-rls coc-snippets coc-explorer|q'
     fi
 
     install_app_for_vim
