@@ -11,7 +11,7 @@ if isdirectory(expand('~/.vim/bundle/vim-go'))
 
     let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
     let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
-    let g:go_auto_sameids = 1
+    "let g:go_auto_sameids = 1
     let g:go_snippet_engine = 'ultisnips'
     let g:go_doc_popup_window = 1
 
@@ -19,6 +19,7 @@ if isdirectory(expand('~/.vim/bundle/vim-go'))
     " gopls
     let g:go_def_mode='gopls'
     let g:go_info_mode='gopls'
+    "let g:go_debug=['lsp']
 
     " set to use coc.vim -> disable vim-go: GoDef short cut
     let g:go_def_mapping_enabled = 0 

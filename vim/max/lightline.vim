@@ -2,7 +2,8 @@
 
     if isdirectory(expand('~/.vim/bundle/lightline/'))
         let g:lightline = {
-            \ 'colorscheme': 'wombat',
+            "\ 'colorscheme': 'wombat',
+            \ 'colorscheme': 'onedark',
             \ 'active': {
             \   'left': [ [ 'mode', 'paste' ],
             \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]

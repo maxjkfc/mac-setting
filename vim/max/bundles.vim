@@ -5,9 +5,6 @@ let g:plug_pwindow = 'vertical rightbelow new'
 
 call plug#begin(s:bundle_dir)
 
-" TabNine
-    "Plug 'zxqfl/tabnine-vim'
-
 " Golang
     Plug 'fatih/vim-go', { 'for': 'go' ,'tag': '*' }
     Plug 'tweekmonster/hl-goimport.vim', { 'for': 'go' }
@@ -24,6 +21,8 @@ call plug#begin(s:bundle_dir)
 " ColorScheme
     Plug 'google/vim-colorscheme-primary'
     Plug 'morhetz/gruvbox'
+    Plug 'sheerun/vim-polyglot'
+    Plug 'joshdick/onedark.vim'
 
 " Dash
     Plug 'rizzatti/dash.vim' , {'on':'Dash'}
@@ -67,15 +66,15 @@ call plug#begin(s:bundle_dir)
     Plug 'junegunn/fzf.vim' 
 
 " NerdTree
-    Plug 'scrooloose/nerdtree'
-    Plug 'Xuyuanp/nerdtree-git-plugin'
-    Plug 'jistr/vim-nerdtree-tabs'
+    "Plug 'scrooloose/nerdtree'
+    "Plug 'Xuyuanp/nerdtree-git-plugin'
+    "Plug 'jistr/vim-nerdtree-tabs'
 
 " syntax
     "Plug 'elzr/vim-json'
     "Plug 'stephpy/vim-yaml'
     Plug 'ekalinin/Dockerfile.vim'
-    Plug 'chr4/nginx.vim'
+    "Plug 'chr4/nginx.vim' // no found
     "Plug 'cespare/vim-toml'
     Plug 'chrisbra/csv.vim'
 
@@ -100,9 +99,6 @@ call plug#begin(s:bundle_dir)
 
 " HTML
     Plug 'gorodinskiy/vim-coloresque'
-    "Plug 'hail2u/vim-css3-syntax'
-    "Plug 'mattn/emmet-vim', { 'for': 'html' }
-    "Plug 'pangloss/vim-javascript'
 
 " dev-icons
     Plug 'ryanoasis/vim-devicons'
@@ -111,7 +107,6 @@ call plug#begin(s:bundle_dir)
     Plug 'plasticboy/vim-markdown'
     Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
 " coc
-"
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 call plug#end()
