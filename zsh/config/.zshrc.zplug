@@ -2,8 +2,8 @@
 source $ZPLUG_HOME/init.zsh
 setopt prompt_subst # Make sure prompt is able to be generated properly.
 
-#zplug "bhilburn/powerlevel9k", use:powerlevel9k.zsh-theme
-zplug "romkatv/powerlevel10k", use:powerlevel10k.zsh-theme
+#zplug "romkatv/powerlevel10k", use:powerlevel10k.zsh-theme
+zplug "romkatv/powerlevel10k", as:theme, depth:1
 zplug "b4b4r07/enhancd", use:init.sh
 
 zplug "plugins/docker" , from:oh-my-zsh 
