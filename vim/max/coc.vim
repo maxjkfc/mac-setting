@@ -106,29 +106,7 @@ if isdirectory(expand('~/.vim/bundle/coc.nvim'))
     "nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
     
     " coc-explorer
-    nmap <space>e :CocCommand explorer<cr>
-    let g:coc_explorer_global_presets = {
-    \   '.vim': {
-    \      'root-uri': '~/.vim',
-    \   },
-    \   'floating': {
-    \      'position': 'floating',
-    \   },
-    \   'floatingLeftside': {
-    \      'position': 'floating',
-    \      'floating-position': 'left-center',
-    \      'floating-width': 50,
-    \   },
-    \   'floatingRightside': {
-    \      'position': 'floating',
-    \      'floating-position': 'left-center',
-    \      'floating-width': 50,
-    \   },
-    \   'simplify': {
-    \     'file.child.template': '[git | 2][selection | clip | 1] [icon | 1] [filename omitCenter 1]'
-    \   }
-    \ }
-
+    nmap <space>e :CocCommand explorer <cr>
     " Use preset argument to open it
     nmap <space>ed :CocCommand explorer --preset .vim<CR>
     nmap <space>ef :CocCommand explorer --preset floating<CR>

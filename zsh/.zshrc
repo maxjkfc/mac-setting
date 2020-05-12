@@ -1,4 +1,3 @@
-#export TERM=xterm-256color
 [[ $TMUX = "" ]] && export TERM="xterm-256color"
 
 # Set name of the theme to load.
@@ -6,7 +5,8 @@
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
 #ZSH_THEME="mymuse"
-ZSH_THEME="bullet-train"
+#ZSH_THEME="bullet-train"
+#ZSH_THEME="powerlevel10k"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -43,13 +43,14 @@ set -o emacs
 #artii $(date +%Y-%m-%d\ %H:%M:%S)
 
 echo $fg[blue]
+#echo    '--------------------------------------------------------------------------------------------'
 echo    '    █████╗ ██╗  ██╗ ██████╗ ██╗      ██████╗ ████████╗██╗        ███╗   ███╗ █████╗ ██╗  ██╗'
 echo    '   ██╔══██╗╚██╗██╔╝██╔═══██╗██║     ██╔═══██╗╚══██╔══╝██║        ████╗ ████║██╔══██╗╚██╗██╔╝'
 echo    '   ███████║ ╚███╔╝ ██║   ██║██║     ██║   ██║   ██║   ██║        ██╔████╔██║███████║ ╚███╔╝ '
 echo    '   ██╔══██║ ██╔██╗ ██║   ██║██║     ██║   ██║   ██║   ██║        ██║╚██╔╝██║██╔══██║ ██╔██╗ '
 echo    '   ██║  ██║██╔╝ ██╗╚██████╔╝███████╗╚██████╔╝   ██║   ███████╗██╗██║ ╚═╝ ██║██║  ██║██╔╝ ██╗'
 echo    '   ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝ ╚══════╝ ╚═════╝    ╚═╝   ╚══════╝╚═╝╚═╝     ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝'
-
+#echo    '--------------------------------------------------------------------------------------------'
 #screenfetch -E
 
 # User configuration
@@ -69,6 +70,7 @@ test -e "${myzshconfig}/.zshrc.theme"      && source "${myzshconfig}/.zshrc.them
 test -e "${myzshconfig}/.zshrc.zplug"      && source "${myzshconfig}/.zshrc.zplug"
 test -e "${myzshconfig}/.zshrc.kubectl"    && source "${myzshconfig}/.zshrc.kubectl"
 test -e "${myzshconfig}/.zshrc.completion" && source "${myzshconfig}/.zshrc.completion"
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
 
 
@@ -77,4 +79,6 @@ if [ -f '/Users/maxjkfc/workplace/google-cloud-sdk/path.zsh.inc' ]; then . '/Use
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/maxjkfc/workplace/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/maxjkfc/workplace/google-cloud-sdk/completion.zsh.inc'; fi
+
+
 

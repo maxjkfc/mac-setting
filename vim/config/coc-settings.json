@@ -1,14 +1,35 @@
 {    
+    "explorer.presets":{
+       ".vim": {
+          "root-uri": "~/.vim",
+       },
+       "floating": {
+           "position":"floating",
+           "floating-width":70,
+       },
+    },
+    "explorer.file.hiddenRules": {
+        "extensions": [
+            "o",
+            "a",
+            "obj",
+            "pyc"
+        ],
+        "filenames": [
+            ".git",
+            ".DS_Store",
+        ],
+        "patternMatches": []
+    },
+    "explorer.width":30,
+    //"explorer.file.showHiddenFiles": true,
     "explorer.icon.enableNerdfont":true,
     "explorer.keyMappings":{
         "i": "unmap", // cancel default mapkey
         "k": "nodePrev",
         "j": "nodeNext",
-        "gk": "expandablePrev",
-        "gj": "expandableNext",
         "*": "toggleSelection",
         "<tab>": "actionMenu",
-        "h": "collapse",
         "l": ["expandable?", "expand", "open"],
         "J": ["toggleSelection", "nodeNext"],
         "K": ["toggleSelection", "nodePrev"],
@@ -22,7 +43,6 @@
         "t": "open:tab",
         "<bs>": "gotoParent",
         "gp": "preview:labeling",
-
         "y": "copyFilepath",
         "Y": "copyFilename",
         "c": "copyFile",
@@ -30,20 +50,15 @@
         "p": "pasteFile",
         "d": "delete",
         "D": "deleteForever",
-
         "a": "addFile",
         "A": "addDirectory",
         "r": "rename",
-
         ".": "toggleHidden",
         "R": "refresh",
-
         "?": "help",
         "q": "quit",
         "<esc>": "esc",
         "X": "systemExecute",
-        "gd": "listDrive",
-
         "f": "search",
         "F": "searchRecursive",
 

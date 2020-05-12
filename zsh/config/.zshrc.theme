@@ -1,49 +1,125 @@
-# 左邊參數
-#POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(os_icon user  ssh dir vcs status )
-# os_icon - 作業系統圖示
-# context - 
-# ssh - 
-# dir - 路徑
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(os_icon ssh dir vcs)
-# 右邊參數
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status command_execution_time kubecontext )
+# 快速啟動
+# Enable Powerlevel10k instant prompt.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+# SETUP
+
+ZLE_RPROMPT_INDENT=0
+POWERLEVEL9K_LEGACY_ICON_SPACING=true
+POWERLEVEL9K_MODE=nerdfont-complete
+POWERLEVEL9K_ICON_PADDING=none
+
+# cmd show
+POWERLEVEL9K_KUBECONTEXT_SHOW_ON_COMMAND='kubectl|helm|kubens|kubectx|oc|istioctl|kogito|k9s'
+POWERLEVEL9K_GCLOUD_SHOW_ON_COMMAND='gcloud'
+POWERLEVEL9K_AZURE_SHOW_ON_COMMAND='ake|az'
+
+# Prompt
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(
+    user 
+    #vpn_ip 
+    #ip
+    #newline 
+    dir 
+    vcs 
+    prompt_chars 
+)
+# 右邊參數_
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(
+    #public_ip
+    #newline
+    status
+    command_execution_time 
+    # --- version
+    go_version
+    rust_version
+    nvm
+    newline 
+    gcloud  
+    azure
+    aws
+    google_app_cred
+    kubecontext 
+)
 # 是否增加新的一行
 POWERLEVEL9K_PROMPT_ADD_NEWLINE=true
-#POWERLEVEL9K_PROMPT_ADD_NEWLINE_COUNT=2
+#POWERLEVEL9K_PROMPT_ADD_NEWLINE_COUNT=3
+
 # 是否將輸入的指令欄放在新的一行
 POWERLEVEL9K_PROMPT_ON_NEWLINE=true
 
-#
-P9K_MULTILINE_FIRST_PROMPT_PREFIX_ICON=$'%K{white}%k'
-P9K_MULTILINE_LAST_PROMPT_PREFIX_ICON=$'%K{green}%F{black} \uf155 %f%F{green}%k\ue0b0 %f '
+# 左右側
+POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX='%242F╭─'
+POWERLEVEL9K_MULTILINE_NEWLINE_PROMPT_PREFIX='%242F├─'
+POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX='%242F╰─'
+POWERLEVEL9K_MULTILINE_FIRST_PROMPT_SUFFIX='%242F─╮'
+POWERLEVEL9K_MULTILINE_NEWLINE_PROMPT_SUFFIX='%242F─┤'
+POWERLEVEL9K_MULTILINE_LAST_PROMPT_SUFFIX='%242F─╯'
+# Separator between same-color segments on the left.
+POWERLEVEL9K_LEFT_SUBSEGMENT_SEPARATOR='\uE0B1'
+# Separator between same-color segments on the right.
+POWERLEVEL9K_RIGHT_SUBSEGMENT_SEPARATOR='\uE0B3'
+# Separator between different-color segments on the left.
+POWERLEVEL9K_LEFT_SEGMENT_SEPARATOR='\uE0B0'
+# Separator between different-color segments on the right.
+POWERLEVEL9K_RIGHT_SEGMENT_SEPARATOR='\uE0B2'
+# The right end of left prompt.
+POWERLEVEL9K_LEFT_PROMPT_LAST_SEGMENT_END_SYMBOL='\uE0B0'
+# The left end of right prompt.
+POWERLEVEL9K_RIGHT_PROMPT_FIRST_SEGMENT_START_SYMBOL='\uE0B2'
+# The left end of left prompt.
+POWERLEVEL9K_LEFT_PROMPT_FIRST_SEGMENT_START_SYMBOL=
+# The right end of right prompt.
+POWERLEVEL9K_RIGHT_PROMPT_LAST_SEGMENT_END_SYMBOL=
+# Left prompt terminator for lines without any segments.
+POWERLEVEL9K_EMPTY_LINE_LEFT_PROMPT_LAST_SEGMENT_END_SYMBOL=
+##
+
+
+
+##
 
 # ip
 POWERLEVEL9K_VPN_IP_INTERFACE="en0"
-
+POWERLEVEL9K_IP_INTERFACE="en0"
 
 #dir 
 POWERLEVEL9K_SHORTEN_DIR_LENGTH=1
 POWERLEVEL9K_SHORTEN_DELIMITER=""
 #POWERLEVEL9K_DIR_PATH_HIGHLIGHT_BOLD=true
 POWERLEVEL9K_SHORTEN_STRATEGY="truncate_from_right"
+#POWERLEVEL9K_SHORTEN_STRATEGY="truncate_to_unique"
+#POWERLEVEL9K_DIR_FOREGROUND=209
+#POWERLEVEL9K_DIR_BACKGROUND=033
+#POWERLEVEL9K_DIR_ANCHOR_FOREGROUND=256
+POWERLEVEL9K_DIR_ANCHOR_BOLD=true
+#POWERLEVEL9K_SHORTEN_FOLDER_MARKER="(${(j:|:)anchor_files})"
+#POWERLEVEL9K_DIR_TRUNCATE_BEFORE_MARKER=false
+#POWERLEVEL9K_DIR_CLASSES=(
+       #'~/workplace(|/*)'  WORK     '(╯°□°）╯︵ ┻━┻'
+       #'~(|/*)'       HOME     '⌂'
+       #'*'            DEFAULT  '')
 
-# ssh
-POWERLEVEL9K_HOST_ICON="\uF109 "
-POWERLEVEL9K_SSH_ICON="\uF489 "
 
 #git
-POWERLEVEL9K_VCS_SHORTEN_STRATEGY="truncate_from_right"
-
-# ICON
+# Don't show Git status in prompt for repositories whose workdir matches this pattern.
+POWERLEVEL9K_VCS_DISABLED_WORKDIR_PATTERN='~'
 POWERLEVEL9K_VCS_BRANCH_ICON=$'\uF126 '
-POWERLEVEL9K_APPLE_ICON="🍎"
-POWERLEVEL9K_HOME_ICON="🏠"
-POWERLEVEL9K_HOME_SUB_ICON="📂"
-POWERLEVEL9K_FOLDER_ICON="📁"
-POWERLEVEL9K_ETC_ICON="⚙️"
+POWERLEVEL9K_VCS_SHORTEN_STRATEGY="truncate_from_right"
+# kubecontext
+POWERLEVEL9K_KUBECONTEXT_DEFAULT_FOREGROUND=208
+POWERLEVEL9K_KUBECONTEXT_DEFAULT_BACKGROUND=81
+# ICON
+#POWERLEVEL9K_APPLE_ICON="🍎"
+#POWERLEVEL9K_HOME_ICON="🏠"
+#POWERLEVEL9K_HOME_SUB_ICON="📂"
+#POWERLEVEL9K_FOLDER_ICON="📁"
+#POWERLEVEL9K_ETC_ICON="⚙️"
 #POWERLEVEL9K_OK_ICON="✅"
 #POWERLEVEL9K_FAIL_ICON="❎"
-POWERLEVEL9K_ROOT_ICON="⚡️"
+#POWERLEVEL9K_ROOT_ICON="⚡️"
 #POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX="🔺"
 #POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX="💎"
 #POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX=""
