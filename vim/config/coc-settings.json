@@ -1,173 +1,160 @@
-{    
-    "explorer.presets":{
-       ".vim": {
-          "root-uri": "~/.vim",
-       },
-       "floating": {
-           "position":"floating",
-           "floating-width":70,
-       },
+{
+  "explorer.presets": {
+    ".vim": {
+      "root-uri": "~/.vim"
     },
-    "explorer.file.hiddenRules": {
-        "extensions": [
-            "o",
-            "a",
-            "obj",
-            "pyc"
-        ],
-        "filenames": [
-            ".git",
-            ".DS_Store",
-        ],
-        "patternMatches": []
-    },
-    "explorer.width":30,
-    //"explorer.file.showHiddenFiles": true,
-    "explorer.icon.enableNerdfont":true,
-    "explorer.keyMappings":{
-        "i": "unmap", // cancel default mapkey
-        "k": "nodePrev",
-        "j": "nodeNext",
-        "*": "toggleSelection",
-        "<tab>": "actionMenu",
-        "l": ["expandable?", "expand", "open"],
-        "J": ["toggleSelection", "nodeNext"],
-        "K": ["toggleSelection", "nodePrev"],
-        "gl": "expandRecursive",
-        "gh": "collapseRecursive",
-        "o": "expandOrCollapse",
-        "<cr>": ["expandable?", "cd", "open"],
-        "e": "open",
-        "s": "open:split",
-        "v": "open:vsplit",
-        "t": "open:tab",
-        "<bs>": "gotoParent",
-        "gp": "preview:labeling",
-        "y": "copyFilepath",
-        "Y": "copyFilename",
-        "c": "copyFile",
-        "x": "cutFile",
-        "p": "pasteFile",
-        "d": "delete",
-        "D": "deleteForever",
-        "a": "addFile",
-        "A": "addDirectory",
-        "r": "rename",
-        ".": "toggleHidden",
-        "R": "refresh",
-        "?": "help",
-        "q": "quit",
-        "<esc>": "esc",
-        "X": "systemExecute",
-        "f": "search",
-        "F": "searchRecursive",
-
-        "gf": "gotoSource:file",
-        "gb": "gotoSource:buffer",
-
-        "[[": "sourcePrev",
-        "]]": "sourceNext",
-
-        "[d": "diagnosticPrev",
-        "]d": "diagnosticNext",
-
-        "[c": "gitPrev",
-        "]c": "gitNext",
-        "<<": "gitStage",
-        ">>": "gitUnstage"
-    },
-    "coc.preferences.formatOnSaveFiletypes": ["css", "Markdown" , "yaml" , "javascript" , "json"],
-    "snippets.ultisnips.directories": [
-      "gosnippets/UltiSnips"
-    ],
-    "languageserver": {
-        "golang": {
-            "command": "gopls",
-            "rootPatterns": ["go.mod" , ".vim/" , ".git/" ,  ".hg/"],
-            "filetypes": ["go"],
-            "initializationOptions": {
-                "gocodeCompletionEnabled": true,
-                "diagnosticsEnabled": true,
-                "lintTool": "golint"
-            }
-        },
-        "dockerfile": {
-            "command": "docker-langserver",
-            "filetypes": ["dockerfile"],
-            "args": ["--stdio"]
-        },
-        "bash": {
-            "command": "bash-language-server",
-            "args": ["start"],
-            "filetypes": ["sh"],
-            "ignoredRootPaths": ["~"]
-        },
-        "python": {
-            "command": "python",
-            "args": [
-                "-mpyls",
-                "-vv",
-                "--log-file",
-                "/tmp/lsp_python.log"
-            ],
-            "trace.server": "verbose",
-            "filetypes": [
-                "python"
-            ],
-            "settings": {
-                "pyls": {
-                    "enable": true,
-                    "trace": {
-                        "server": "verbose"
-                    },
-                    "commandPath": "",
-                    "configurationSources": [
-                        "pycodestyle"
-                    ],
-                    "plugins": {
-                        "jedi_completion": {
-                            "enabled": true
-                        },
-                        "jedi_hover": {
-                            "enabled": true
-                        },
-                        "jedi_references": {
-                            "enabled": true
-                        },
-                        "jedi_signature_help": {
-                            "enabled": true
-                        },
-                        "jedi_symbols": {
-                            "enabled": true,
-                            "all_scopes": true
-                        },
-                        "mccabe": {
-                            "enabled": true,
-                            "threshold": 15
-                        },
-                        "preload": {
-                            "enabled": true
-                        },
-                        "pycodestyle": {
-                            "enabled": true
-                        },
-                        "pydocstyle": {
-                            "enabled": false,
-                            "match": "(?!test_).*\\.py",
-                            "matchDir": "[^\\.].*"
-                        },
-                        "pyflakes": {
-                            "enabled": true
-                        },
-                        "rope_completion": {
-                            "enabled": true
-                        },
-                        "yapf": {
-                            "enabled": true
-                        }
-                    }
-                }
-            }
-        }
+    "floating": {
+      "position": "floating",
+      "floating-width": 70
     }
+  },
+  "explorer.file.hiddenRules": {
+    "extensions": ["o", "a", "obj", "pyc"],
+    "filenames": [".git", ".DS_Store"],
+    "patternMatches": []
+  },
+  "explorer.width": 30,
+  //"explorer.file.showHiddenFiles": true,
+  "explorer.icon.enableNerdfont": true,
+  "explorer.keyMappings": {
+    "i": false, // cancel default mapkey
+    "k": "nodePrev",
+    "j": "nodeNext",
+    "*": "toggleSelection",
+    "<tab>": "actionMenu",
+    "l": ["expandable?", "expand", "open"],
+    "J": ["toggleSelection", "nodeNext"],
+    "K": ["toggleSelection", "nodePrev"],
+    "gl": "expandRecursive",
+    "gh": "collapseRecursive",
+    "o": "expandOrCollapse",
+    "<cr>": ["expandable?", "cd", "open"],
+    "e": "open",
+    "s": "open:split",
+    "v": "open:vsplit",
+    "t": "open:tab",
+    "<bs>": "gotoParent",
+    "gp": "preview:labeling",
+    "y": "copyFilepath",
+    "Y": "copyFilename",
+    "c": "copyFile",
+    "x": "cutFile",
+    "p": "pasteFile",
+    "d": "delete",
+    "D": "deleteForever",
+    "a": "addFile",
+    "A": "addDirectory",
+    "r": "rename",
+    ".": "toggleHidden",
+    "R": "refresh",
+    "?": "help",
+    "q": "quit",
+    "<esc>": "esc",
+    "X": "systemExecute",
+    "f": "search",
+    "F": "searchRecursive",
+
+    "gf": "gotoSource:file",
+    "gb": "gotoSource:buffer",
+
+    "[[": "sourcePrev",
+    "]]": "sourceNext",
+
+    "[d": "diagnosticPrev",
+    "]d": "diagnosticNext",
+
+    "[c": "gitPrev",
+    "]c": "gitNext",
+    "<<": "gitStage",
+    ">>": "gitUnstage"
+  },
+  "coc.preferences.formatOnSaveFiletypes": [
+    "css",
+    "Markdown",
+    "yaml",
+    "javascript",
+    "json"
+  ],
+  "snippets.ultisnips.directories": ["gosnippets/UltiSnips"],
+  "languageserver": {
+    "golang": {
+      "command": "gopls",
+      "rootPatterns": ["go.mod", ".vim/", ".git/", ".hg/"],
+      "filetypes": ["go"],
+      "initializationOptions": {
+        "gocodeCompletionEnabled": true,
+        "diagnosticsEnabled": true,
+        "lintTool": "golint"
+      }
+    },
+    "dockerfile": {
+      "command": "docker-langserver",
+      "filetypes": ["dockerfile"],
+      "args": ["--stdio"]
+    },
+    "bash": {
+      "command": "bash-language-server",
+      "args": ["start"],
+      "filetypes": ["sh"],
+      "ignoredRootPaths": ["~"]
+    },
+    "python": {
+      "command": "python",
+      "args": ["-mpyls", "-vv", "--log-file", "/tmp/lsp_python.log"],
+      "trace.server": "verbose",
+      "filetypes": ["python"],
+      "settings": {
+        "pyls": {
+          "enable": true,
+          "trace": {
+            "server": "verbose"
+          },
+          "commandPath": "",
+          "configurationSources": ["pycodestyle"],
+          "plugins": {
+            "jedi_completion": {
+              "enabled": true
+            },
+            "jedi_hover": {
+              "enabled": true
+            },
+            "jedi_references": {
+              "enabled": true
+            },
+            "jedi_signature_help": {
+              "enabled": true
+            },
+            "jedi_symbols": {
+              "enabled": true,
+              "all_scopes": true
+            },
+            "mccabe": {
+              "enabled": true,
+              "threshold": 15
+            },
+            "preload": {
+              "enabled": true
+            },
+            "pycodestyle": {
+              "enabled": true
+            },
+            "pydocstyle": {
+              "enabled": false,
+              "match": "(?!test_).*\\.py",
+              "matchDir": "[^\\.].*"
+            },
+            "pyflakes": {
+              "enabled": true
+            },
+            "rope_completion": {
+              "enabled": true
+            },
+            "yapf": {
+              "enabled": true
+            }
+          }
+        }
+      }
+    }
+  }
 }
