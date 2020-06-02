@@ -33,7 +33,8 @@ setup_vim(){
         nvim +GoInstallBinaries
 
         # coc
-        nvim -c 'CocInstall -sync coc-json coc-css coc-html coc-tsserver coc-yaml coc-rls coc-snippets coc-explorer|q'
+        nvim -c 'CocInstall -sync coc-highlight  coc-json coc-css coc-html coc-tsserver coc-yaml coc-rls coc-snippets coc-explorer coc-tabnine coc-prettier coc-lists coc-git coc-pairs|q'
+        install_app_for_neovim
     fi
 
     install_app_for_vim
@@ -54,6 +55,11 @@ install_app_for_vim() {
     # install python lsp
     pip install python-language-server
 
+}
+install_app_for_neovim() {
+    pip3 install pynvim
+    sudo gem install neovim
+    npm -i install neovim
 }
 
 check_nvimdir(){
