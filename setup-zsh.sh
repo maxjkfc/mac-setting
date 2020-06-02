@@ -5,6 +5,8 @@ set -e
 
 setup(){
 
+    brew install zplug  gawk git -y
+
     if [ ! -d '~/.zsh' ]; then
         mkdir -p ~/.zsh
     fi
