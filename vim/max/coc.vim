@@ -41,7 +41,7 @@ if isdirectory(expand('~/.vim/bundle/coc.nvim'))
 
     " Use K to show documentation in preview window
     " 展現coc 文件
-    nnoremap <silent> K :call <SID>show_documentation()<CR>
+    nnoremap <silent> gh :call <SID>show_documentation()<CR>
 
     function! s:show_documentation()
       if (index(['vim','help'], &filetype) >= 0)
@@ -142,19 +142,21 @@ if isdirectory(expand('~/.vim/bundle/coc.nvim'))
     endfunction
     
     let g:coc_snippet_next = '<tab>'
+
+    " coc-lists
+    " grep word under cursor
+    command! -nargs=+ -complete=custom,s:GrepArgs Rg exe 'CocList grep '.<q-args>
+
+    function! s:GrepArgs(...)
+      let list = ['-S', '-smartcase', '-i', '-ignorecase', '-w', '-word',
+            \ '-e', '-regex', '-u', '-skip-vcs-ignores', '-t', '-extension']
+      return join(list, "\n")
+    endfunction
+
+    " Keymapping for grep word under cursor with interactive mode
+    "nnoremap <silent> <Leader>cf :exe 'CocList -I --input='.expand('<cword>').' grep'<CR>
+    "nnoremap <silent> <Leader>cfw  :exe 'CocList -I --normal --input='.expand('<cword>').' words'<CR>
+    nnoremap <silent> <space>f :exe 'CocList -I --input='.expand('<cword>').' grep'<CR>
+    nnoremap <silent> <space>w  :exe 'CocList -I --normal --input='.expand('<cword>').' words'<CR>
 endif
 
-
-" coc-lists
-" grep word under cursor
-command! -nargs=+ -complete=custom,s:GrepArgs Rg exe 'CocList grep '.<q-args>
-
-function! s:GrepArgs(...)
-  let list = ['-S', '-smartcase', '-i', '-ignorecase', '-w', '-word',
-        \ '-e', '-regex', '-u', '-skip-vcs-ignores', '-t', '-extension']
-  return join(list, "\n")
-endfunction
-
-" Keymapping for grep word under cursor with interactive mode
-nnoremap <silent> <Leader>cf :exe 'CocList -I --input='.expand('<cword>').' grep'<CR>
-nnoremap <silent> <Leader>cfw  :exe 'CocList -I --normal --input='.expand('<cword>').' words'<CR>

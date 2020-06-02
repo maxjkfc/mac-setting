@@ -74,7 +74,6 @@ call plug#begin(s:bundle_dir)
     "Plug 'elzr/vim-json'
     "Plug 'stephpy/vim-yaml'
     Plug 'ekalinin/Dockerfile.vim'
-    "Plug 'chr4/nginx.vim' // no found
     Plug 'cespare/vim-toml'
     Plug 'chrisbra/csv.vim'
 
