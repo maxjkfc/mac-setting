@@ -36,6 +36,7 @@
 
     " use colorscheme onedark
     colorscheme onedark
+    "colorscheme dracula 
 
     set background=dark             " Assume a dark background
     set tabpagemax=15               " Only show 15 tabs

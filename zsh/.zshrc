@@ -1,20 +1,12 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 [[ $TMUX = "" ]] && export TERM="xterm-256color"
-
-# Set name of the theme to load.
-# Look in ~/.oh-my-zsh/themes/
-# Optionally, if you set this to "random", it'll load a random theme each
-# time that oh-my-zsh is loaded.
-#ZSH_THEME="mymuse"
-#ZSH_THEME="bullet-train"
-#ZSH_THEME="powerlevel10k"
-
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
-
-# Uncomment the following line to use hyphen-insensitive completion. Case
-# sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
-
+ZSH_THEME="powerlevel10k"
 # Uncomment the following line to enable command auto-correction.
 ENABLE_CORRECTION="true"
 
@@ -30,15 +22,6 @@ export EDITOR='nvim'
 
 # set the shell 
 set -o emacs
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-#alias zshconfig="vim ~/.zshrc"
-#alias ohmyzsh="vim ~/.oh-my-zsh"
 
 #artii $(date +%Y-%m-%d\ %H:%M:%S)
 
@@ -79,6 +62,3 @@ if [ -f '/Users/maxjkfc/workplace/google-cloud-sdk/path.zsh.inc' ]; then . '/Use
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/maxjkfc/workplace/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/maxjkfc/workplace/google-cloud-sdk/completion.zsh.inc'; fi
-
-
-

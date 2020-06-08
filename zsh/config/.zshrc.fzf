@@ -3,8 +3,11 @@
 
 export FZF_DEFAULT_COMMAND='fd  --type file --hidden --follow  --exclude .git' 
 
+#export FZF_DEFAULT_OPTS=' --height 40% --layout=reverse --border --ansi
+                          #--color fg:-1,bg:-1,hl:230,fg+:3,bg+:233,hl+:229
+                          #--color info:150,prompt:110,spinner:150,pointer:167,marker:174'
 export FZF_DEFAULT_OPTS=' --height 40% --layout=reverse --border --ansi
-                          --color fg:-1,bg:-1,hl:230,fg+:3,bg+:233,hl+:229
+                          --color fg:-1,bg:-1,hl:230,fg+:3,bg+:-1,hl+:229
                           --color info:150,prompt:110,spinner:150,pointer:167,marker:174'
                           
 export FZF_CTRL_T_OPTS='--preview "[[ $(file --mime {}) =~ binary ]] &&

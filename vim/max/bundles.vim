@@ -76,6 +76,9 @@ call plug#begin(s:bundle_dir)
     Plug 'ekalinin/Dockerfile.vim'
     Plug 'cespare/vim-toml'
     Plug 'chrisbra/csv.vim'
+    Plug 'prettier/vim-prettier', {
+          \ 'do': 'npm install',
+          \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
 
 
 " Git
@@ -88,17 +91,16 @@ call plug#begin(s:bundle_dir)
     Plug 'mbbill/undotree'
 
 " Ale
-    Plug 'dense-analysis/ale'
-    
+    "Plug 'dense-analysis/ale'
 " AirLine 
     Plug 'powerline/fonts'
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
     Plug 'bling/vim-bufferline'
-
-" HTML
+" Theme
+    Plug 'dracula/vim',{'as':'dracula'}
+"HTML
     Plug 'gorodinskiy/vim-coloresque'
-
 " dev-icons
     Plug 'ryanoasis/vim-devicons'
 

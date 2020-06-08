@@ -1,4 +1,5 @@
 {
+  //  "diagnostic.refreshAfterSave": true,
   "explorer.presets": {
     ".vim": {
       "root-uri": "~/.vim"
@@ -14,7 +15,7 @@
     "patternMatches": []
   },
   "explorer.width": 30,
-  //"explorer.file.showHiddenFiles": true,
+  "explorer.file.showHiddenFiles": true,
   "explorer.icon.enableNerdfont": true,
   "explorer.keyMappings": {
     "i": false, // cancel default mapkey
@@ -27,7 +28,7 @@
     "K": ["toggleSelection", "nodePrev"],
     "gl": "expandRecursive",
     "gh": "collapseRecursive",
-    "o": "expandOrCollapse",
+    "o": ["expanded?", "collapse", "expand"],
     "<cr>": ["expandable?", "cd", "open"],
     "e": "open",
     "s": "open:split",
@@ -63,8 +64,8 @@
     "[d": "diagnosticPrev",
     "]d": "diagnosticNext",
 
-    "[c": "gitPrev",
-    "]c": "gitNext",
+    "[g": "gitPrev",
+    "]g": "gitNext",
     "<<": "gitStage",
     ">>": "gitUnstage"
   },
