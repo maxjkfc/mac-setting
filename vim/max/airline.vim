@@ -19,9 +19,11 @@ if isdirectory(expand('~/.vim/bundle/vim-airline/'))
     let g:airline#extensions#csv#enabled = 1
     "fugitive
     let g:airline#extensions#branch#enabled = 1
+    let g:airline#extensions#branch#vcs_priority = ["git"]
     let g:airline#extensions#branch#displayed_head_limit = 10
+    let g:airline#extensions#branch#format = 2
     let g:airline#extensions#branch#sha1_len = 4
-
+    let g:airline#extensions#branch#vcs_checks = ['untracked', 'dirty']
 
 endif
 

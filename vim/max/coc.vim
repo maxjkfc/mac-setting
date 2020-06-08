@@ -24,12 +24,12 @@ if isdirectory(expand('~/.vim/bundle/coc.nvim'))
 
     " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
     " Coc only does snippet and additional edit on confirm.
-    inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+    "inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
-    " Use `[c` and `]c` to navigate diagnostics
+    " Use `[d` and `]d` to navigate diagnostics
     " 進入下一個診斷
-    nmap <silent> [c <Plug>(coc-diagnostic-prev)
-    nmap <silent> ]c <Plug>(coc-diagnostic-next)
+    nmap <silent> [d <Plug>(coc-diagnostic-prev)
+    nmap <silent> ]d <Plug>(coc-diagnostic-next)
 
     " Remap keys for gotos
     " 進入下一個定義
@@ -58,8 +58,8 @@ if isdirectory(expand('~/.vim/bundle/coc.nvim'))
     nmap <leader>rn <Plug>(coc-rename)
 
     " Remap for format selected region
-    vmap <leader>f  <Plug>(coc-format-selected)
-    nmap <leader>f  <Plug>(coc-format-selected)
+    "vmap <leader>f  <Plug>(coc-format-selected)
+    "nmap <leader>f  <Plug>(coc-format-selected)
 
     augroup mygroup
       autocmd!
@@ -76,7 +76,7 @@ if isdirectory(expand('~/.vim/bundle/coc.nvim'))
     " Remap for do codeAction of current line
     "nmap <leader>ac  <Plug>(coc-codeaction)
     " Fix autofix problem of current line
-    "nmap <leader>qf  <Plug>(coc-fix-current)
+    nmap <leader>qf  <Plug>(coc-fix-current)
 
     " Use `:Format` to format current buffer
     command! -nargs=0 Format :call CocAction('format')
@@ -111,10 +111,10 @@ if isdirectory(expand('~/.vim/bundle/coc.nvim'))
     nmap <space>ed :CocCommand explorer --preset .vim<CR>
     nmap <space>ef :CocCommand explorer --preset floating<CR>
     " List all presets
-    nmap <space>el :CocList explPresets
+    "nmap <space>el :CocList explPresets
     
     " Multiple cursors support
-    "hi CocCursorRange guibg=red guifg=blue
+    hi CocCursorRange guibg=red guifg=blue
     "xmap <silent> <C-d> y/\V<C-r>=escape(@",'/\')<CR><CR>gN<Plug>(coc-cursors-range)gn
     "nmap <silent> <C-d> <Plug>(coc-cursors-word)*
     "xmap <silent> <C-d> y/\V<C-r>=escape(@",'/\')<CR><CR>gN<Plug>(coc-cursors-range)gn
@@ -130,18 +130,18 @@ if isdirectory(expand('~/.vim/bundle/coc.nvim'))
     imap <C-j> <Plug>(coc-snippets-expand-jump)
 
     " Make <tab> used for trigger completion, completion confirm, snippet expand and jump like VSCode.
-    inoremap <silent><expr> <TAB>
-          \ pumvisible() ? coc#_select_confirm() :
-          \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
-          \ <SID>check_back_space() ? "\<TAB>" :
-          \ coc#refresh()
+    "inoremap <silent><expr> <TAB>
+          "\ pumvisible() ? coc#_select_confirm() :
+          "\ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+          "\ <SID>check_back_space() ? "\<TAB>" :
+          "\ coc#refresh()
 
-    function! s:check_back_space() abort
-      let col = col('.') - 1
-      return !col || getline('.')[col - 1]  =~# '\s'
-    endfunction
+    "function! s:check_back_space() abort
+      "let col = col('.') - 1
+      "return !col || getline('.')[col - 1]  =~# '\s'
+    "endfunction
     
-    let g:coc_snippet_next = '<tab>'
+    "let g:coc_snippet_next = '<tab>'
 
     " coc-lists
     " grep word under cursor
