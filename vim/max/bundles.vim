@@ -6,12 +6,12 @@ let g:plug_pwindow = 'vertical rightbelow new'
 call plug#begin(s:bundle_dir)
 
 " Golang
-    Plug 'fatih/vim-go', { 'for': 'go' ,'tag': '*' }
+    Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
     Plug 'tweekmonster/hl-goimport.vim', { 'for': 'go' }
     
 " Snippet
     Plug 'honza/vim-snippets'
-    Plug 'SirVer/ultisnips'
+    "Plug 'SirVer/ultisnips'
 
 " Code fmt 
     Plug 'google/vim-maktaba'
@@ -71,8 +71,6 @@ call plug#begin(s:bundle_dir)
     "Plug 'jistr/vim-nerdtree-tabs'
 
 " syntax
-    "Plug 'elzr/vim-json'
-    "Plug 'stephpy/vim-yaml'
     Plug 'ekalinin/Dockerfile.vim'
     Plug 'cespare/vim-toml'
     Plug 'chrisbra/csv.vim'
@@ -109,5 +107,6 @@ call plug#begin(s:bundle_dir)
     Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
 " coc
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
+" other
+    Plug 'wakatime/vim-wakatime'
 call plug#end()

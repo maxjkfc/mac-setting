@@ -20,8 +20,8 @@
 	    endif
 
 	    " Load the golang config
-	    if filereadable(expand('~/.vim/config/golang.vim'))
-            source ~/.vim/config/golang.vim
+	    if filereadable(expand('~/.vim/config/vim-go.vim'))
+            source ~/.vim/config/vim-go.vim
 	    endif
 
 	    " Load the signify config
