@@ -6,6 +6,7 @@ if isdirectory(expand('~/.vim/bundle/coc.nvim'))
     set shortmess+=c
     " always show signcolumns
     set signcolumn=yes
+
     " Use tab for trigger completion with characters ahead and navigate.
     " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
     inoremap <silent><expr> <TAB>
@@ -24,7 +25,7 @@ if isdirectory(expand('~/.vim/bundle/coc.nvim'))
 
     " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
     " Coc only does snippet and additional edit on confirm.
-    "inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+    inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
     " Use `[d` and `]d` to navigate diagnostics
     " 進入下一個診斷
@@ -56,10 +57,6 @@ if isdirectory(expand('~/.vim/bundle/coc.nvim'))
 
     " Remap for rename current word
     nmap <leader>rn <Plug>(coc-rename)
-
-    " Remap for format selected region
-    "vmap <leader>f  <Plug>(coc-format-selected)
-    "nmap <leader>f  <Plug>(coc-format-selected)
 
     augroup mygroup
       autocmd!
@@ -130,18 +127,18 @@ if isdirectory(expand('~/.vim/bundle/coc.nvim'))
     imap <C-j> <Plug>(coc-snippets-expand-jump)
 
     " Make <tab> used for trigger completion, completion confirm, snippet expand and jump like VSCode.
-    "inoremap <silent><expr> <TAB>
-          "\ pumvisible() ? coc#_select_confirm() :
-          "\ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
-          "\ <SID>check_back_space() ? "\<TAB>" :
-          "\ coc#refresh()
+    inoremap <silent><expr> <TAB>
+          \ pumvisible() ? coc#_select_confirm() :
+          \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+          \ <SID>check_back_space() ? "\<TAB>" :
+          \ coc#refresh()
 
-    "function! s:check_back_space() abort
-      "let col = col('.') - 1
-      "return !col || getline('.')[col - 1]  =~# '\s'
-    "endfunction
+    function! s:check_back_space() abort
+      let col = col('.') - 1
+      return !col || getline('.')[col - 1]  =~# '\s'
+    endfunction
     
-    "let g:coc_snippet_next = '<tab>'
+    let g:coc_snippet_next = '<tab>'
 
     " coc-lists
     " grep word under cursor
@@ -158,5 +155,6 @@ if isdirectory(expand('~/.vim/bundle/coc.nvim'))
     "nnoremap <silent> <Leader>cfw  :exe 'CocList -I --normal --input='.expand('<cword>').' words'<CR>
     nnoremap <silent> <space>f :exe 'CocList -I --input='.expand('<cword>').' grep'<CR>
     nnoremap <silent> <space>w  :exe 'CocList -I --normal --input='.expand('<cword>').' words'<CR>
+
 endif
 
