@@ -1,5 +1,7 @@
 {
-  //  "diagnostic.refreshAfterSave": true,
+  "diagnostic.refreshAfterSave": true,
+  "diagnostic.refreshOnInsertMode": true,
+  "diagnostic.signOffset": 99999,
   "explorer.presets": {
     ".vim": {
       "root-uri": "~/.vim"
