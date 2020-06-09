@@ -1,15 +1,16 @@
 #/bin/bash
 
 
+
+
 install_brew(){
     echo "Install Ruby Brew ..."
-if  hash brew 2>/dev/null; then
-    echo "brew is installed"
-else
-     #Install Brew
-    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-fi
-
+    if  hash brew 2>/dev/null; then
+        echo "brew is installed"
+    else
+         #Install Brew
+        /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    fi
 }
 
 
@@ -18,7 +19,6 @@ install_zsh() {
     # zsh
     brew install zsh     
     chsh -s /bin/zsh
-    
     # Install zsh plug 
     brew install zplug
 }
@@ -46,10 +46,8 @@ install_tools(){
     brew install neovim
     # Install vim
     brew install vim --lua
-    # install git
+    # Install git
     brew install git
-    # install lazygit
-    brew install lazygit
     # Install FZF
     brew install fzf
     # Install rg
