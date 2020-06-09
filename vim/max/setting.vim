@@ -82,6 +82,9 @@
     set backupdir=~/.vimbackup
     set undodir=~/.vimundo
 
+    set updatetime=300
+    set signcolumn=auto:2
+
 
     set list lcs=tab:\|\ 
 

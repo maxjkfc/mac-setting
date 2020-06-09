@@ -83,6 +83,8 @@ install_tools(){
     # like cat , but faster and colorful
     brew install bat
     brew install highlight
+    # replace ls
+    brew install exa
 }
 
 
