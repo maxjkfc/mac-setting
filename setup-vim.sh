@@ -53,9 +53,10 @@ install_app_for_vim() {
     # install bash lsp
     npm i -g bash-language-server
     # install python lsp
-    pip install python-language-server
+    pip3 install python-language-server
 
 }
+
 install_app_for_neovim() {
     pip3 install pynvim
     sudo gem install neovim
