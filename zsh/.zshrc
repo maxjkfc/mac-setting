@@ -5,17 +5,11 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-
 ZSH_DISABLE_COMPFIX="true"
+
 [[ $TMUX = "" ]] && export TERM="xterm-256color"
+
 ZSH_THEME="powerlevel10k"
-# Uncomment the following line to enable command auto-correction.
-ENABLE_CORRECTION="true"
-
-# Uncomment the following line to display red dots whilst waiting for completion.
-COMPLETION_WAITING_DOTS="true"
-
-HIST_STAMPS="yyyy-mm-dd"
 
 # You may need to manually set your language environment
 export LANG=en_US.UTF-8
@@ -45,19 +39,18 @@ echo    '   ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝ ╚�
 export myzshconfig="$HOME/.zsh/config"
 export HISTSIZE=1000
 
-test -e "${myzshconfig}/.zshrc.path"       && source "${myzshconfig}/.zshrc.path"
-test -e "${myzshconfig}/.zshrc.alias"      && source "${myzshconfig}/.zshrc.alias"
-test -e "${myzshconfig}/.zshrc.plugin"     && source "${myzshconfig}/.zshrc.plugin"
-test -e "${myzshconfig}/.zshrc.shell"      && source "${myzshconfig}/.zshrc.shell"
-test -e "${myzshconfig}/.zshrc.fzf"        && source "${myzshconfig}/.zshrc.fzf"
-test -e "${myzshconfig}/.zshrc.gcp"        && source "${myzshconfig}/.zshrc.gcp"
-test -e "${myzshconfig}/.zshrc.iterm2"     && source "${myzshconfig}/.zshrc.iterm2"
-test -e "${myzshconfig}/.zshrc.theme"      && source "${myzshconfig}/.zshrc.theme"
-test -e "${myzshconfig}/.zshrc.zplug"      && source "${myzshconfig}/.zshrc.zplug"
-test -e "${myzshconfig}/.zshrc.kubectl"    && source "${myzshconfig}/.zshrc.kubectl"
-test -e "${myzshconfig}/.zshrc.completion" && source "${myzshconfig}/.zshrc.completion"
+test -e "${myzshconfig}/path.zsh"       && source "${myzshconfig}/path.zsh"
+test -e "${myzshconfig}/alias.zsh"      && source "${myzshconfig}/alias.zsh"
+test -e "${myzshconfig}/plugin.zsh"     && source "${myzshconfig}/plugin.zsh"
+test -e "${myzshconfig}/shell.zsh"      && source "${myzshconfig}/shell.zsh"
+test -e "${myzshconfig}/fzf.zsh"        && source "${myzshconfig}/fzf.zsh"
+test -e "${myzshconfig}/gcp.zsh"        && source "${myzshconfig}/gcp.zsh"
+test -e "${myzshconfig}/iterm2.zsh"     && source "${myzshconfig}/iterm2.zsh"
+test -e "${myzshconfig}/theme.zsh"      && source "${myzshconfig}/theme.zsh"
+test -e "${myzshconfig}/zplug.zsh"      && source "${myzshconfig}/zplug.zsh"
+test -e "${myzshconfig}/kubectl.zsh"    && source "${myzshconfig}/kubectl.zsh"
+test -e "${myzshconfig}/completion.zsh" && source "${myzshconfig}/completion.zsh"
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-
 
 
 # The next line updates PATH for the Google Cloud SDK.

@@ -1,5 +1,7 @@
 #/bin/bash
 
+set -e
+
 source $PWD/setup-zsh.sh
 source $PWD/setup-vim.sh
 
@@ -54,10 +56,13 @@ install_dev(){
 install_tools(){
     sudo easy_install pip
     brew install npm
+
     # Install git
     brew install git
     # Install FZF
     brew install fzf
+    $(brew --prefix)/opt/fzf/install
+
     # Install rg
     brew install ripgrep
     # Install clipboard
@@ -98,6 +103,7 @@ install_tools(){
 
 install_all(){
     install_brew
+    install_nvim
     install_zsh
     install_tmux
     install_tools
