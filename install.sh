@@ -70,7 +70,7 @@ install_tools(){
     # Install ccat
     brew install ccat
     # Install sed
-    brew install gnu-sed --with-default-name
+    brew install gnu-sed 
     # Install coreutils
     brew install coreutils
     # Install watch
