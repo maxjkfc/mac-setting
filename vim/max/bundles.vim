@@ -11,7 +11,7 @@ call plug#begin(s:bundle_dir)
     
 " Snippet
     Plug 'honza/vim-snippets'
-    "Plug 'SirVer/ultisnips'
+    Plug 'SirVer/ultisnips'
 
 " Code fmt 
     Plug 'google/vim-maktaba'

@@ -374,6 +374,7 @@
     elif [[ -n $VCS_STATUS_TAG ]]; then
       res+="${meta}#"
       where=${(V)VCS_STATUS_TAG}
+      #where=${(V)VCS_STATUS_LOCAL_BRANCH}${(V)VCS_STATUS_TAG}
     fi
 
     # If local branch name or tag is at most 32 characters long, show it in full.
