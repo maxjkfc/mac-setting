@@ -6,7 +6,6 @@
    "set nocompatible          " VIM 不使用和 VI 相容的模式
     set clipboard=unnamed     " On mac and Windows, use * register for copy-paste
     filetype plugin indent on " Automatically detect file types.
-    syntax on                 " Syntax highlighting
     set mouse=a               " Automatically enable mouse usage
     set mousehide             " Hide the mouse cursor while typing
     set encoding=utf-8
@@ -25,20 +24,16 @@
     set undoreload=10000                    " Maximum number lines to save for undo on a buffer reload
 
 " GUI 
+    syntax on                 " Syntax highlighting
     "colorscheme molokai-max         " use vim theme
     "colorscheme primary             " use google colorscheme
     "set t_Co=256
-    
-    "colorscheme gruvbox             " use gruvbox colorscheme
-    "let g:gruvbox_contrast_dark="hard"
-    "let g:gruvbox_italicize_strings=0                                                                                                                                                        
-    "let g:gruvbox_improved_strings=1   
 
     " use colorscheme onedark
     colorscheme onedark
     "colorscheme dracula 
 
-    set background=dark             " Assume a dark background
+    "set background=dark             " Assume a dark background
     set tabpagemax=15               " Only show 15 tabs
     set showmode                    " Display the current mode
     set cursorline                  " Highlight current line
