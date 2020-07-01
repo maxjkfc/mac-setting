@@ -5,6 +5,8 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+
+ZSH_DISABLE_COMPFIX="true"
 [[ $TMUX = "" ]] && export TERM="xterm-256color"
 ZSH_THEME="powerlevel10k"
 # Uncomment the following line to enable command auto-correction.
@@ -22,6 +24,7 @@ export EDITOR='nvim'
 
 # set the shell 
 set -o emacs
+
 
 #artii $(date +%Y-%m-%d\ %H:%M:%S)
 
