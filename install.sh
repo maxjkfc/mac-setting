@@ -34,7 +34,7 @@ install_nvim() {
     brew install neovim
     # Install vim
     brew install vim
-    setup_vim "nvim"
+    setup_vim
 }
 
 
@@ -101,10 +101,10 @@ install_all(){
     install_zsh
     install_tmux
     install_tools
-    install_app
+    install_cask_app
 }
 
-install_app(){
+install_cask_app(){
     brew cask install iterm2
     brew cask install docker
 }
