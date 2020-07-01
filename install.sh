@@ -1,7 +1,7 @@
 #/bin/bash
 
-
-
+source $PWD/setup-zsh.sh
+source $PWD/setup-vim.sh
 
 install_brew(){
     echo "Install Ruby Brew ..."
@@ -11,9 +11,11 @@ install_brew(){
          #Install Brew
         /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     fi
+
+    brew update
 }
 
-
+# install zsh
 install_zsh() {
     echo "Install Zsh ...."
     # zsh
@@ -21,13 +23,19 @@ install_zsh() {
     chsh -s /bin/zsh
     # Install zsh plug 
     brew install zplug
+
+    setup_zsh
 }
 
-setup_zsh_completions_docker-compose() {
-    mkdir -p ~/.zsh/completion
-    curl -L https://raw.githubusercontent.com/docker/compose/1.24.0/contrib/completion/zsh/_docker-compose > ~/.zsh/completion/_docker-compose
+# install vim
+install_nvim() {
+   
+    # Install neovim
+    brew install neovim
+    # Install vim
+    brew install vim
+    setup_vim "nvim"
 }
-
 
 
 
@@ -37,15 +45,15 @@ install_tmux(){
     git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 }
 
+install_dev(){
+     # Install golang
+    brew install golang
+}
 
 
 install_tools(){
-    # Install golang
-    brew install golang
-    # Install neovim
-    brew install neovim
-    # Install vim
-    brew install vim --lua
+    sudo easy_install pip
+    brew install npm
     # Install git
     brew install git
     # Install FZF
@@ -87,12 +95,6 @@ install_tools(){
 
 
 
-run_shell(){
-    # run shell to setup zsh
-    sh setup-zsh.sh
-    # run shell to setup nvim
-    sh setup-vim.sh nvim
-}
 
 install_all(){
     install_brew
@@ -104,18 +106,21 @@ install_all(){
 
 install_app(){
     brew cask install iterm2
+    brew cask install docker
 }
 
 case $1 in
     "init" )
         install_all
-        run_shell
         ;;
     "brew")
         install_brew
         ;;
     "zsh")
         install_zsh
+        ;;
+    "nvim")
+        install_nvim
         ;;
     "tools")
         install_tools
