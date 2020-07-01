@@ -6,7 +6,7 @@ if isdirectory(expand('~/.vim/bundle/vim-airline/'))
     let g:airline_powerline_fonts=1
     let g:airline#extensions#tabline#enabled = 1
     let g:airline#extensions#tabline#formatter = 'unique_tail'
-    let g:airline_extensions = ['tagbar','coc','git']
+    let g:airline_extensions = ['tagbar','coc','fzf','tabline']
     let g:airline#extensions#ale#enabled = 1
 
     " coc
@@ -20,7 +20,7 @@ if isdirectory(expand('~/.vim/bundle/vim-airline/'))
     let g:airline#extensions#csv#enabled = 1
     "fugitive
     let g:airline#extensions#branch#enabled = 1
-    let g:airline#extensions#branch#vcs_priority = ["git"]
+    " let g:airline#extensions#branch#vcs_priority = ["git"]
     let g:airline#extensions#branch#displayed_head_limit = 10
     let g:airline#extensions#branch#format = 2
     let g:airline#extensions#branch#sha1_len = 4
