@@ -103,10 +103,10 @@ install_tools(){
 
 install_all(){
     install_brew
+    install_tools
     install_nvim
     install_zsh
     install_tmux
-    install_tools
     install_cask_app
 }
 
