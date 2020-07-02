@@ -23,7 +23,7 @@ setup_zsh(){
 
     setup_zsh_completions_docker_compose
 
-    source ~/.zshrc
+    echo "zsh install success , please restart"
 
 }
 
