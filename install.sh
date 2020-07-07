@@ -96,8 +96,14 @@ install_tools(){
     brew install highlight
     # replace ls
     brew install exa
+
+    
 }
 
+install_dev_tools(){
+    # ngrok 
+    brew cask install ngrok
+}
 
 
 
