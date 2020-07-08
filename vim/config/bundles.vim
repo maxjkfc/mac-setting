@@ -10,8 +10,8 @@ call plug#begin(s:bundle_dir)
     Plug 'tweekmonster/hl-goimport.vim', { 'for': 'go' }
     
 " Snippet
-    Plug 'honza/vim-snippets'
-    Plug 'SirVer/ultisnips'
+    "Plug 'honza/vim-snippets'
+    "Plug 'SirVer/ultisnips'
 
 " Code fmt 
     Plug 'google/vim-maktaba'
@@ -64,6 +64,9 @@ call plug#begin(s:bundle_dir)
     Plug '/usr/local/bin/fzf'
     "Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
     Plug 'junegunn/fzf.vim' 
+    Plug 'junegunn/fzf'
+    " use by coc
+    Plug 'antoinemadec/coc-fzf'  
 
 " NerdTree
     "Plug 'scrooloose/nerdtree'

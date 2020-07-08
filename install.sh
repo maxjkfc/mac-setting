@@ -113,7 +113,16 @@ install_tools(){
 
     # replace ls
     brew install exa
+
+    
 }
+
+install_dev_tools(){
+    # ngrok 
+    brew cask install ngrok
+}
+
+
 
 install_all(){
     install_brew

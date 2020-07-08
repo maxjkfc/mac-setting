@@ -7,8 +7,8 @@ if isdirectory(expand('~/.vim/bundle/coc.nvim'))
     " always show signcolumns
     set signcolumn=yes
 
-    " Use tab for trigger completion with characters ahead and navigate.
-    " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
+     "Use tab for trigger completion with characters ahead and navigate.
+     "Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
     inoremap <silent><expr> <TAB>
           \ pumvisible() ? "\<C-n>" :
           \ <SID>check_back_space() ? "\<TAB>" :
@@ -19,6 +19,7 @@ if isdirectory(expand('~/.vim/bundle/coc.nvim'))
       let col = col('.') - 1
       return !col || getline('.')[col - 1]  =~# '\s'
     endfunction
+
 
     " Use <c-space> to trigger completion.
     "inoremap <silent><expr> <c-space> coc#refresh()
@@ -73,7 +74,7 @@ if isdirectory(expand('~/.vim/bundle/coc.nvim'))
     " Remap for do codeAction of current line
     "nmap <leader>ac  <Plug>(coc-codeaction)
     " Fix autofix problem of current line
-    nmap <leader>qf  <Plug>(coc-fix-current)
+    "nmap <leader>qf  <Plug>(coc-fix-current)
 
     " Use `:Format` to format current buffer
     command! -nargs=0 Format :call CocAction('format')
@@ -85,14 +86,14 @@ if isdirectory(expand('~/.vim/bundle/coc.nvim'))
     " Using CocList
     " Show all diagnostics
     " 顯示所有的問題診斷
-    nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
+    "nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
     " Manage extensions
     "nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
      "Show commands
     "nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
     " Find symbol of current document
     " 取得該檔案的 outline
-    nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
+    "nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
     " Search workspace symbols
     "nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
     " Do default action for next item.
@@ -102,6 +103,17 @@ if isdirectory(expand('~/.vim/bundle/coc.nvim'))
     " Resume latest coc list
     "nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
     
+    " coc fzf 
+    nnoremap <silent> <space>a  :<C-u>CocFzfList diagnostics<CR>
+    nnoremap <silent> <space>b  :<C-u>CocFzfList diagnostics --current-buf<CR>
+    "nnoremap <silent> <space>c  :<C-u>CocFzfList commands<CR>
+    "nnoremap <silent> <space>e  :<C-u>CocFzfList extensions<CR>
+    "nnoremap <silent> <space>l  :<C-u>CocFzfList location<CR>
+    nnoremap <silent> <space>o  :<C-u>CocFzfList outline<CR>
+    "nnoremap <silent> <space>s  :<C-u>CocFzfList symbols<CR>
+    "nnoremap <silent> <space>S  :<C-u>CocFzfList services<CR>
+    "nnoremap <silent> <space>p  :<C-u>CocFzfListResume<CR>
+
     " coc-explorer
     nmap <space>e :CocCommand explorer <cr>
     " Use preset argument to open it
@@ -139,6 +151,7 @@ if isdirectory(expand('~/.vim/bundle/coc.nvim'))
     endfunction
     
     let g:coc_snippet_next = '<tab>'
+    let g:coc_snippet_prev = '<c-k>'
 
     " coc-lists
     " grep word under cursor
@@ -153,8 +166,8 @@ if isdirectory(expand('~/.vim/bundle/coc.nvim'))
     " Keymapping for grep word under cursor with interactive mode
     "nnoremap <silent> <Leader>cf :exe 'CocList -I --input='.expand('<cword>').' grep'<CR>
     "nnoremap <silent> <Leader>cfw  :exe 'CocList -I --normal --input='.expand('<cword>').' words'<CR>
-    nnoremap <silent> <space>f :exe 'CocList -I --input='.expand('<cword>').' grep'<CR>
-    nnoremap <silent> <space>w  :exe 'CocList -I --normal --input='.expand('<cword>').' words'<CR>
-
+    "nnoremap <silent> <space>f :exe 'CocList -I --input='.expand('<cword>').' grep'<CR>
+    "nnoremap <silent> <space>w  :exe 'CocList -I --normal --input='.expand('<cword>').' words'<CR>
+    
 endif
 
