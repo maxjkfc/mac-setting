@@ -54,52 +54,66 @@ install_dev(){
 
 
 install_tools(){
-    sudo easy_install pip
-    brew install npm
 
+    sudo easy_install pip
+
+    brew install npm
     # Install git
     brew install git
+
     # Install FZF
     brew install fzf
     $(brew --prefix)/opt/fzf/install
 
-    # Install rg
-    brew install ripgrep
-    # Install clipboard
-    brew install reattach-to-user-namespace
     # Install ccat
     brew install ccat
-    # Install sed
-    brew install gnu-sed 
-    # Install coreutils
-    brew install coreutils
-    # Install watch
-    brew install watch
-    # awk - linux
-    brew install gawk
-    # Install fd
-    brew install fd
-    # gotop
-    brew install gotop
-    # ctags
-    brew install ctags-exuberant
+
     # for fzf and cat
     sudo gem install coderay bundler
+
+    # Install rg
+    brew install ripgrep
+
+    # Install clipboard
+    brew install reattach-to-user-namespace
+
+    # Install sed
+    brew install gnu-sed 
+
+    # Install coreutils
+    brew install coreutils
+
+    # Install watch
+    brew install watch
+
+    # awk - linux
+    brew install gawk
+
+    # Install fd
+    brew install fd
+
+    # gotop
+    brew install gotop
+
+    # ctags
+    brew install ctags-exuberant
+
     # network 
     brew install mtr
+
     # install curl
     brew install curl
+
     # git diff 
     brew install diff-so-fancy
+
     # like cat , but faster and colorful
     brew install bat
     brew install highlight
+
     # replace ls
     brew install exa
 }
-
-
-
 
 install_all(){
     install_brew

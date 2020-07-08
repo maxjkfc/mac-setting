@@ -8,31 +8,37 @@ setup_vim() {
         mkdir -p ~/.vim
     fi
 
+    echo "check vimswp"
     if [ ! -d "$HOME/.vimswp" ]; then
         mkdir -p $HOME/.vimswp
     fi
+    echo "check vimbackup"
     if [ ! -d "$HOME/.vimbackup" ]; then
         mkdir -p $HOME/.vimbackup
     fi
+    echo "check vimundo"
     if [ ! -d "$HOME/.vimundo" ]; then
         mkdir -p $HOME/.vimundo
     fi
 
+    echo "check vim-plug"
     if [ ! -f '~/.vim/autoload/plug.vim' ]; then
         echo "Check the vim-plug no exist , Install vim-plug"
         curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
             https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     fi
 
+    echo "check config"
     if [ -d "$HOME/.vim/config" ]; then
         rm -rf $HOME/.vim/config
     fi
 
+    ln -s $PWD/vim/config $HOME/.vim/config
+
+    echo "check color"
     if [ -d "$HOME/.vim/colors" ]; then
         rm -rf $HOME/.vim/colors
     fi
-
-    ln -s $PWD/vim/max $HOME/.vim/config
     ln -s $PWD/vim/colors $HOME/.vim/colors
 
     if [ ! -d "$HOME/.config/nvim" ]; then
@@ -43,11 +49,12 @@ setup_vim() {
         rm -rf $HOME/.config/nvim/init.vim
     fi
     ln -s $PWD/vim/.vimrc $HOME/.config/nvim/init.vim
+
     # coc config
     if [ -f "$HOME/.config/nvim/coc-settings.json" ]; then
         rm -rf $HOME/.config/nvim/coc-settings.json
     fi
-    ln -s $PWD/vim/config/coc-settings.json $HOME/.config/nvim/coc-settings.json
+    ln -s $PWD/vim/coc/coc-settings.json $HOME/.config/nvim/coc-settings.json
 
     install_app_for_neovim
 

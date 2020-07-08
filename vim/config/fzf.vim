@@ -60,9 +60,9 @@
           \ 'header':  ['fg', 'Comment'] }
 
 
-        nmap <leader><tab> <plug>(fzf-maps-n)
-        xmap <leader><tab> <plug>(fzf-maps-x)
-        omap <leader><tab> <plug>(fzf-maps-o)
+        "nmap <leader><tab> <plug>(fzf-maps-n)
+        "xmap <leader><tab> <plug>(fzf-maps-x)
+        "omap <leader><tab> <plug>(fzf-maps-o)
 
         " Insert mode completion
         " 查詢字典
