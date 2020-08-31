@@ -86,33 +86,23 @@ if isdirectory(expand('~/.vim/bundle/coc.nvim'))
     " Using CocList
     " Show all diagnostics
     " 顯示所有的問題診斷
-    "nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
+    nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
     " Manage extensions
     "nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
      "Show commands
     "nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
     " Find symbol of current document
     " 取得該檔案的 outline
-    "nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
+    nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
     " Search workspace symbols
-    "nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
+    nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
     " Do default action for next item.
     "nnoremap <silent> <space>j  :<C-u>CocNext<CR>
     " Do default action for previous item.
     "nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
     " Resume latest coc list
     "nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
-    
-    " coc fzf 
-    nnoremap <silent> <space>a  :<C-u>CocFzfList diagnostics<CR>
-    nnoremap <silent> <space>b  :<C-u>CocFzfList diagnostics --current-buf<CR>
-    "nnoremap <silent> <space>c  :<C-u>CocFzfList commands<CR>
-    "nnoremap <silent> <space>e  :<C-u>CocFzfList extensions<CR>
-    "nnoremap <silent> <space>l  :<C-u>CocFzfList location<CR>
-    nnoremap <silent> <space>o  :<C-u>CocFzfList outline<CR>
-    "nnoremap <silent> <space>s  :<C-u>CocFzfList symbols<CR>
-    "nnoremap <silent> <space>S  :<C-u>CocFzfList services<CR>
-    "nnoremap <silent> <space>p  :<C-u>CocFzfListResume<CR>
+    nnoremap <silent> <space>g :<C-u>CocList --normal gstatus<CR> 
 
     " coc-explorer
     nmap <space>e :CocCommand explorer <cr>

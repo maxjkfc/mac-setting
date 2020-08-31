@@ -61,12 +61,12 @@ call plug#begin(s:bundle_dir)
     Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
 
 " FZF
-    Plug '/usr/local/bin/fzf'
-    "Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+    "Plug '/usr/local/bin/fzf'
+    Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
     Plug 'junegunn/fzf.vim' 
     Plug 'junegunn/fzf'
     " use by coc
-    Plug 'antoinemadec/coc-fzf'  
+    "Plug 'antoinemadec/coc-fzf'  
 
 " NerdTree
     "Plug 'scrooloose/nerdtree'
@@ -92,7 +92,7 @@ call plug#begin(s:bundle_dir)
     Plug 'mbbill/undotree'
 
 " Ale
-    "Plug 'dense-analysis/ale'
+    Plug 'dense-analysis/ale'
 " AirLine 
     Plug 'powerline/fonts'
     Plug 'vim-airline/vim-airline'
