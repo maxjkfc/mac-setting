@@ -26,5 +26,6 @@ if isdirectory(expand('~/.vim/bundle/vim-airline/'))
     let g:airline#extensions#branch#sha1_len = 4
     let g:airline#extensions#branch#vcs_checks = ['untracked', 'dirty']
 
+
 endif
 
