@@ -47,6 +47,7 @@ call plug#begin(s:bundle_dir)
     Plug 'junegunn/vim-emoji'
 
 " GUI
+    " vim 登入起始畫面
     Plug 'mhinz/vim-startify'
     " 彩虹括弧
     Plug 'luochen1990/rainbow'
@@ -58,6 +59,7 @@ call plug#begin(s:bundle_dir)
     Plug 'scrooloose/nerdcommenter'                                     " Easy commenting
     " 快速對齊
     Plug 'junegunn/vim-easy-align', { 'on': '<plug>(EasyAlign)' }
+    " 標籤視窗
     Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
 
 " FZF
@@ -80,7 +82,6 @@ call plug#begin(s:bundle_dir)
     Plug 'prettier/vim-prettier', {
           \ 'do': 'npm install',
           \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
-
 
 " Git
     Plug 'tpope/vim-fugitive'
