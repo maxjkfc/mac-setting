@@ -72,7 +72,7 @@
   "coc.preferences.formatOnSaveFiletypes": [
     "css",
     "Markdown",
-    "yaml",
+    // "yaml",
     "javascript",
     "json",
     "go",
