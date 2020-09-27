@@ -82,13 +82,11 @@
   "languageserver": {
     "golang": {
       "command": "gopls",
-      "rootPatterns": ["go.mod"],
+      "rootPatterns": ["go.mod", ".vim/", ".git/"],
       "filetypes": ["go"],
       "initializationOptions": {
-        "gocodeCompletionEnabled": true,
-        "diagnosticsEnabled": true,
         "usePlaceholders": true,
-        "lintTool": "golint"
+        "completeUnimported": true
       }
     },
     "dockerfile": {
