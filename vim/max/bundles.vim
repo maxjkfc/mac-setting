@@ -83,6 +83,8 @@ call plug#begin(s:bundle_dir)
           \ 'do': 'npm install',
           \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
 
+    Plug 'towolf/vim-helm'
+
 " Git
     Plug 'tpope/vim-fugitive'
     Plug 'junegunn/gv.vim'
