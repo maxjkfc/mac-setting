@@ -1,5 +1,4 @@
 {
-  "diagnostic.signOffset": 9999999,
   "explorer.presets": {
     ".vim": {
       "root-uri": "~/.vim"
@@ -17,7 +16,7 @@
   "explorer.width": 30,
   "explorer.file.showHiddenFiles": true,
   "explorer.icon.enableNerdfont": true,
-  "explorer.keyMappings": {
+  "explorer.keyMappings.global": {
     "i": false, // cancel default mapkey
     "k": "nodePrev",
     "j": "nodeNext",
