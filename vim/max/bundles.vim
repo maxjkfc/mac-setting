@@ -84,6 +84,8 @@ call plug#begin(s:bundle_dir)
           \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
     Plug 'towolf/vim-helm'
 
+    Plug 'towolf/vim-helm'
+
 " Git
     Plug 'tpope/vim-fugitive'
     Plug 'junegunn/gv.vim'
