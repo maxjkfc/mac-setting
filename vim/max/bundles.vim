@@ -79,11 +79,9 @@ call plug#begin(s:bundle_dir)
     Plug 'ekalinin/Dockerfile.vim'
     Plug 'cespare/vim-toml'
     Plug 'chrisbra/csv.vim'
-    Plug 'prettier/vim-prettier', {
-          \ 'do': 'npm install',
-          \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
-    Plug 'towolf/vim-helm'
-
+    "Plug 'prettier/vim-prettier', {
+          "\ 'do': 'npm install',
+          "\ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
     Plug 'towolf/vim-helm'
 
 " Git

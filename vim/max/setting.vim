@@ -36,7 +36,7 @@
     "set background=dark             " Assume a dark background
     set tabpagemax=15               " Only show 15 tabs
     set showmode                    " Display the current mode
-    set cursorline                  " Highlight current line
+    "set cursorline                  " Highlight current line
     set cursorcolumn
     highlight clear SignColumn      " Sign Column should match background
     highlight clear LineNr          " Current line number row will have same background color in relative mode
@@ -64,7 +64,7 @@
 " Formatting
     set nowrap                              " Do not wrap long lines
     set smartindent
-    set shiftwidth=4                        " Use indents of 4 spaces
+    set shiftwidth=2                        " Use indents of 4 spaces
     set expandtab                           " Tabs are spaces, not tabs
     set tabstop=4                           " An indentation every four columns
     set softtabstop=4                       " Let backspace delete indent
