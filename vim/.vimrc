@@ -112,6 +112,9 @@
 	    if filereadable(expand('~/.vim/config/multiplecursors.vim'))
             source ~/.vim/config/multiplecursors.vim
 	    endif
+	    if filereadable(expand('~/.vim/config/theme.vim'))
+            source ~/.vim/config/theme.vim
+	    endif
     endif
 
 
