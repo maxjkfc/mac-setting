@@ -1,4 +1,7 @@
 {
+  "json.enable": true,
+  "json.format.enable": true,
+  "yaml.format.enable": true,
   "explorer.presets": {
     ".vim": {
       "root-uri": "~/.vim"
@@ -71,7 +74,7 @@
   "coc.preferences.formatOnSaveFiletypes": [
     "css",
     "Markdown",
-    // "yaml",
+    "yaml",
     "javascript",
     "json",
     "go",
