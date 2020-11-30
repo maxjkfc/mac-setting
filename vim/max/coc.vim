@@ -113,7 +113,7 @@ if isdirectory(expand('~/.vim/bundle/coc.nvim'))
     "nmap <space>el :CocList explPresets
     
     " Multiple cursors support
-    hi CocCursorRange guibg=red guifg=white
+    "hi CocCursorRange guibg=red guifg=white
     "xmap <silent> <C-d> y/\V<C-r>=escape(@",'/\')<CR><CR>gN<Plug>(coc-cursors-range)gn
     "nmap <silent> <C-d> <Plug>(coc-cursors-word)*
     "xmap <silent> <C-d> y/\V<C-r>=escape(@",'/\')<CR><CR>gN<Plug>(coc-cursors-range)gn

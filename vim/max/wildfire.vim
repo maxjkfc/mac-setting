@@ -4,4 +4,8 @@
         \ '*' : ["i'", 'i"', 'i)', 'i]', 'i}', 'ip'],
         \ 'html,xml' : ['at'],
         \ }
+
+
+        nmap <leader>s <Plug>(wildfire-quick-select)
     endif
+

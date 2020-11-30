@@ -25,15 +25,9 @@
 
 " GUI 
     syntax on                 " Syntax highlighting
-    "colorscheme molokai-max         " use vim theme
-    "colorscheme primary             " use google colorscheme
-    "set t_Co=256
-
-    " use colorscheme onedark
-    "colorscheme onedark
     colorscheme dracula 
 
-    "set background=dark             " Assume a dark background
+    set background=dark             " Assume a dark background
     set tabpagemax=15               " Only show 15 tabs
     set showmode                    " Display the current mode
     "set cursorline                  " Highlight current line

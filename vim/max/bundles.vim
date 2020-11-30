@@ -19,10 +19,11 @@ call plug#begin(s:bundle_dir)
     Plug 'google/vim-glaive'
 
 " ColorScheme
-    Plug 'google/vim-colorscheme-primary'
-    Plug 'morhetz/gruvbox'
-    Plug 'sheerun/vim-polyglot'
-    Plug 'joshdick/onedark.vim'
+    "Plug 'google/vim-colorscheme-primary'
+    "Plug 'morhetz/gruvbox'
+    "Plug 'sheerun/vim-polyglot'
+    "Plug 'joshdick/onedark.vim'
+    Plug 'dracula/vim',{'as':'dracula'}
 
 " Dash
     Plug 'rizzatti/dash.vim' , {'on':'Dash'}
@@ -64,16 +65,11 @@ call plug#begin(s:bundle_dir)
 
 " FZF
     "Plug '/usr/local/bin/fzf'
-    Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+    "Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
     Plug 'junegunn/fzf.vim' 
     Plug 'junegunn/fzf'
     " use by coc
     "Plug 'antoinemadec/coc-fzf'  
-
-" NerdTree
-    "Plug 'scrooloose/nerdtree'
-    "Plug 'Xuyuanp/nerdtree-git-plugin'
-    "Plug 'jistr/vim-nerdtree-tabs'
 
 " syntax
     Plug 'ekalinin/Dockerfile.vim'
@@ -100,16 +96,14 @@ call plug#begin(s:bundle_dir)
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
     Plug 'bling/vim-bufferline'
-" Theme
-    Plug 'dracula/vim',{'as':'dracula'}
 "HTML
     Plug 'gorodinskiy/vim-coloresque'
 " dev-icons
     Plug 'ryanoasis/vim-devicons'
-
 " markdown
     Plug 'plasticboy/vim-markdown'
     Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
+
 " coc
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " other
