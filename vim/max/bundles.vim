@@ -19,10 +19,6 @@ call plug#begin(s:bundle_dir)
     Plug 'google/vim-glaive'
 
 " ColorScheme
-    "Plug 'google/vim-colorscheme-primary'
-    "Plug 'morhetz/gruvbox'
-    "Plug 'sheerun/vim-polyglot'
-    "Plug 'joshdick/onedark.vim'
     Plug 'dracula/vim',{'as':'dracula'}
 
 " Dash
@@ -64,8 +60,6 @@ call plug#begin(s:bundle_dir)
     Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
 
 " FZF
-    "Plug '/usr/local/bin/fzf'
-    "Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
     Plug 'junegunn/fzf.vim' 
     Plug 'junegunn/fzf'
     " use by coc
@@ -84,8 +78,8 @@ call plug#begin(s:bundle_dir)
     Plug 'tpope/vim-fugitive'
     Plug 'junegunn/gv.vim'
     Plug 'rhysd/conflict-marker.vim'
-    Plug 'mhinz/vim-signify'
-
+    "Plug 'mhinz/vim-signify'
+    Plug 'airblade/vim-gitgutter'
 " UndoTree
     Plug 'mbbill/undotree'
 
