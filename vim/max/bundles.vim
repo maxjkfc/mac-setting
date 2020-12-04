@@ -6,7 +6,7 @@ let g:plug_pwindow = 'vertical rightbelow new'
 call plug#begin(s:bundle_dir)
 
 " Golang
-    Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+    Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' , 'for':'go'}
     Plug 'tweekmonster/hl-goimport.vim', { 'for': 'go' }
     
 " Snippet
@@ -21,16 +21,12 @@ call plug#begin(s:bundle_dir)
 " ColorScheme
     Plug 'dracula/vim',{'as':'dracula'}
 
-" Dash
-    Plug 'rizzatti/dash.vim' , {'on':'Dash'}
-
 " Tools
     Plug 'tpope/vim-sensible'
     " 快速產生對應的括弧
     Plug 'jiangmiao/auto-pairs'
     " 可視化縮進的插件
     Plug 'nathanaelkane/vim-indent-guides'
-    "Plug 'Yggdroot/indentLine'
     " 快速選取區塊內容
     Plug 'gcmt/wildfire.vim'
     " 多游標選取
@@ -53,7 +49,7 @@ call plug#begin(s:bundle_dir)
     " 快速建立雙引號
     Plug 'tpope/vim-surround'   
     " 快速註解
-    Plug 'scrooloose/nerdcommenter'                                     " Easy commenting
+    Plug 'scrooloose/nerdcommenter' 
     " 快速對齊
     Plug 'junegunn/vim-easy-align', { 'on': '<plug>(EasyAlign)' }
     " 標籤視窗
@@ -62,44 +58,44 @@ call plug#begin(s:bundle_dir)
 " FZF
     Plug 'junegunn/fzf.vim' 
     Plug 'junegunn/fzf'
-    " use by coc
-    "Plug 'antoinemadec/coc-fzf'  
 
 " syntax
-    Plug 'ekalinin/Dockerfile.vim'
-    Plug 'cespare/vim-toml'
-    Plug 'chrisbra/csv.vim'
-    "Plug 'prettier/vim-prettier', {
-          "\ 'do': 'npm install',
-          "\ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
-    Plug 'towolf/vim-helm'
+    Plug 'ekalinin/Dockerfile.vim' , {'for': 'dockerfile' }
+    Plug 'cespare/vim-toml' , {'for': 'toml'}
+    Plug 'chrisbra/csv.vim' , {'for': 'csv'}
+    Plug 'towolf/vim-helm', {'for':'yaml,yml' }
 
 " Git
     Plug 'tpope/vim-fugitive'
     Plug 'junegunn/gv.vim'
     Plug 'rhysd/conflict-marker.vim'
     "Plug 'mhinz/vim-signify'
-    Plug 'airblade/vim-gitgutter'
+    "Plug 'airblade/vim-gitgutter'
 " UndoTree
     Plug 'mbbill/undotree'
 
 " Ale
     Plug 'dense-analysis/ale'
-" AirLine 
+" StatusLine (AirLine  , LightLine)
     Plug 'powerline/fonts'
-    Plug 'vim-airline/vim-airline'
-    Plug 'vim-airline/vim-airline-themes'
-    Plug 'bling/vim-bufferline'
+    Plug 'itchyny/lightline.vim'
+    Plug 'itchyny/vim-gitbranch'
+    Plug 'josa42/vim-lightline-coc'
 "HTML
     Plug 'gorodinskiy/vim-coloresque'
 " dev-icons
     Plug 'ryanoasis/vim-devicons'
 " markdown
-    Plug 'plasticboy/vim-markdown'
+    Plug 'plasticboy/vim-markdown' , {'for':'md'}
     Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
 
 " coc
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " other
     Plug 'wakatime/vim-wakatime'
+"
+    "Plug 'tweekmonster/startuptime.vim'
+    Plug 'dstein64/vim-startuptime'
+
+
 call plug#end()

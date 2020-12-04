@@ -1,4 +1,4 @@
-" UndoTree
+" UndoTree 還原樹
     if isdirectory(expand('~/.vim/bundle/undotree/'))
         nnoremap <Leader>u :UndotreeToggle<CR>
         " If undotree is opened, it is likely one wants to interact with it.
