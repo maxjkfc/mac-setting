@@ -2,8 +2,8 @@
 if isdirectory(expand('~/.vim/bundle/dracula'))
 
   let g:dracula_italic=0
-  " airline theme
-  let g:airline_theme='dracula' 
+   "airline theme
+  "let g:airline_theme='dracula' 
   " 開啟真彩色
   set termguicolors
   " visual highlight 反白顏色

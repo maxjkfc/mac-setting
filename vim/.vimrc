@@ -3,11 +3,11 @@
 	    let &packpath = &runtimepath
    endif
 
+
 " Load the bundles config
     if filereadable(expand('~/.vim/config/bundles.vim'))
         source ~/.vim/config/bundles.vim
         source ~/.vim/config/setting.vim
-
 	"Plugin
 	    " Load the fzf config
 	    if filereadable(expand('~/.vim/config/fzf.vim'))
@@ -42,11 +42,6 @@
 	    " Load the markdown config
 	    if filereadable(expand('~/.vim/config/markdown.vim'))
             source ~/.vim/config/markdown.vim
-	    endif
-
-	    " Load the nerdtree config
-	    if filereadable(expand('~/.vim/config/nerdtree.vim'))
-            source ~/.vim/config/nerdtree.vim
 	    endif
 
 	    " Load the easyAlign config
@@ -112,9 +107,15 @@
 	    if filereadable(expand('~/.vim/config/multiplecursors.vim'))
             source ~/.vim/config/multiplecursors.vim
 	    endif
+
 	    if filereadable(expand('~/.vim/config/theme.vim'))
             source ~/.vim/config/theme.vim
 	    endif
+
+	    if filereadable(expand('~/.vim/config/lightline.vim'))
+            source ~/.vim/config/lightline.vim
+	    endif
+
     endif
 
 

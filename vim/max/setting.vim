@@ -26,12 +26,13 @@
 " GUI 
     syntax on                 " Syntax highlighting
     colorscheme dracula 
-
+    "
     set background=dark             " Assume a dark background
     set tabpagemax=15               " Only show 15 tabs
     set showmode                    " Display the current mode
-    "set cursorline                  " Highlight current line
-    set cursorcolumn
+    " 加速移動
+    set lazyredraw
+    "
     highlight clear SignColumn      " Sign Column should match background
     highlight clear LineNr          " Current line number row will have same background color in relative mode
     set ruler                       " Show the ruler

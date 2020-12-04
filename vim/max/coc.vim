@@ -1,14 +1,14 @@
 " Coc.vim
 if isdirectory(expand('~/.vim/bundle/coc.nvim'))
     " better display for message
-    set cmdheight=2
+    "set cmdheight=2
     " Smaller updatetime for CursorHold & CursorHoldI
     set updatetime=300
     " don't give |ins-completion-menu| messages.
     set shortmess+=c
     " always show signcolumns
-    "set signcolumn=yes
-    set signcolumn=auto:2
+    set signcolumn=yes
+    "set signcolumn=auto:2
 
      "Use tab for trigger completion with characters ahead and navigate.
      "Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
