@@ -56,16 +56,12 @@
     "X": "systemExecute",
     "f": "search",
     "F": "searchRecursive",
-
     "gf": "gotoSource:file",
     "gb": "gotoSource:buffer",
-
     "[[": "sourcePrev",
     "]]": "sourceNext",
-
     "[d": "diagnosticPrev",
     "]d": "diagnosticNext",
-
     "[g": "gitPrev",
     "]g": "gitNext",
     "<<": "gitStage",
