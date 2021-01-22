@@ -1,7 +1,6 @@
 {
   "json.enable": true,
   "json.format.enable": true,
-  "yaml.format.enable": true,
   "explorer.presets": {
     ".vim": {
       "root-uri": "~/.vim"
@@ -77,16 +76,21 @@
     "proto"
   ],
   "snippets.ultisnips.directories": ["gosnippets/UltiSnips"],
+  // coc-go
+  "go.goplsOptions": {
+    "completeUnimported": true,
+    "usePlaceholders": true
+  },
   "languageserver": {
-    "golang": {
-      "command": "gopls",
-      "rootPatterns": ["go.mod", ".vim/", ".git/"],
-      "filetypes": ["go"],
-      "initializationOptions": {
-        "usePlaceholders": true,
-        "completeUnimported": true
-      }
-    },
+    // "golang": {
+    //   "command": "gopls",
+    //   "rootPatterns": ["go.mod", ".vim/", ".git/"],
+    //   "filetypes": ["go"],
+    //   "initializationOptions": {
+    //     "usePlaceholders": true,
+    //     "completeUnimported": true
+    //   }
+    //  },
     "dockerfile": {
       "command": "docker-langserver",
       "filetypes": ["dockerfile"],
