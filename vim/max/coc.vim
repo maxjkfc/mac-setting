@@ -41,6 +41,9 @@ if isdirectory(expand('~/.vim/bundle/coc.nvim'))
     nmap <silent> gy <Plug>(coc-type-definition)
     nmap <silent> gi <Plug>(coc-implementation)
     nmap <silent> gr <Plug>(coc-references)
+  
+
+
 
     " Use gh to show documentation in preview window
     " 展現coc 文件
@@ -67,29 +70,21 @@ if isdirectory(expand('~/.vim/bundle/coc.nvim'))
       autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
     augroup end
 
-    " Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
-    "vmap <leader>a  <Plug>(coc-codeaction-selected)
-    "nmap <leader>a  <Plug>(coc-codeaction-selected)
-
-    " Remap for do codeAction of current line
-    "nmap <leader>ac  <Plug>(coc-codeaction)
-    " Fix autofix problem of current line
-    "nmap <leader>qf  <Plug>(coc-fix-current)
     " Use `:Format` to format current buffer
     command! -nargs=0 Format :call CocAction('format')
     " Use `:Fold` to fold current buffer
-    command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+    command! -nargs=? Fold :call CocAction('fold', <f-args>)
 
 
     " Using CocList
     " 顯示所有的問題診斷
-    nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
+    "nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
     " 顯示所有coc 插件
     "nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
     " 顯示所有指令
-    nnoremap <silent> <space>cc  :<C-u>CocList commands<cr>
+    "nnoremap <silent> <space>cc  :<C-u>CocList commands<cr>
     " 取得該檔案的 outline
-    nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
+    "nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
     " Search workspace symbols
     "nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
     " Do default action for next item.
@@ -99,14 +94,33 @@ if isdirectory(expand('~/.vim/bundle/coc.nvim'))
     " Resume latest coc list
     "nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
     " 取得目前 git 狀態
-    nnoremap <silent> <space>g :<C-u>CocList --normal gstatus<CR> 
+    "nnoremap <silent> <space>g :<C-u>CocList --normal gstatus<CR> 
+
+
+    " Using CocFzFList
+    nnoremap <silent> <space><space> :<C-u>CocFzfList<CR>
+    " 顯示所有的問題診斷
+    nnoremap <silent> <space>a       :<C-u>CocFzfList diagnostics <CR>
+    " 顯示所有的問題診斷 在這個檔案
+    nnoremap <silent> <space>b       :<C-u>CocFzfList diagnostics --current-buf<CR>
+    " 顯示所有指令
+    nnoremap <silent> <space>cc       :<C-u>CocFzfList commands<CR>
+    " 顯示所有插件
+    nnoremap <silent> <space>ee       :<C-u>CocFzfList extensions<CR>
+    "nnoremap <silent> <space>l       :<C-u>CocFzfList location<CR>
+    " 取得該檔案的 outline
+    nnoremap <silent> <space>o       :<C-u>CocFzfList outline<CR>
+    "nnoremap <silent> <space>s       :<C-u>CocFzfList symbols<CR>
+    nnoremap <silent> <space>g       :<C-u>CocFzfList --normal gstatus<CR>
+    " Resume latest coc list
+    "nnoremap <silent> <space>p       :<C-u>CocFzfListResume<CR>
+
+
 
     " coc-explorer
     " 啟動檔案管理器
     nmap <space>e :CocCommand explorer <cr>
     " Use preset argument to open it
-    " 啟動檔案管理列在 .vim 內
-    "nmap <space>ed :CocCommand explorer --preset .vim<CR>
     " 啟動浮動視窗的 檔案管理列
     nmap <space>ef :CocCommand explorer --preset floating<CR>
     " List all presets
@@ -148,7 +162,6 @@ if isdirectory(expand('~/.vim/bundle/coc.nvim'))
     " coc-lists
     " grep word under cursor
     command! -nargs=+ -complete=custom,s:GrepArgs Rg exe 'CocList grep '.<q-args>
-
     function! s:GrepArgs(...)
       let list = ['-S', '-smartcase', '-i', '-ignorecase', '-w', '-word',
             \ '-e', '-regex', '-u', '-skip-vcs-ignores', '-t', '-extension']
@@ -156,9 +169,6 @@ if isdirectory(expand('~/.vim/bundle/coc.nvim'))
     endfunction
 
     " Keymapping for grep word under cursor with interactive mode
-    "nnoremap <silent> <Leader>cf :exe 'CocList -I --input='.expand('<cword>').' grep'<CR>
-    "nnoremap <silent> <Leader>cfw  :exe 'CocList -I --normal --input='.expand('<cword>').' words'<CR>
-    
     " 依據此行去列出有相關 單字的行數
     nnoremap <silent> <space>f :exe 'CocList -I --input='.expand('<cword>').' grep'<CR>
     " 依據此單字去列出有相關 單字

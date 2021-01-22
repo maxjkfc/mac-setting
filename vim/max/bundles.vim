@@ -8,6 +8,7 @@ call plug#begin(s:bundle_dir)
 " Golang
     Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' , 'for':'go'}
     Plug 'tweekmonster/hl-goimport.vim', { 'for': 'go' }
+    Plug 'sebdah/vim-delve'
     
 " Snippet
     "Plug 'honza/vim-snippets'
@@ -58,6 +59,7 @@ call plug#begin(s:bundle_dir)
 " FZF
     Plug 'junegunn/fzf.vim' 
     Plug 'junegunn/fzf'
+    Plug 'antoinemadec/coc-fzf', {'branch': 'release'}
 
 " syntax
     Plug 'ekalinin/Dockerfile.vim' , {'for': 'dockerfile' }
@@ -69,14 +71,13 @@ call plug#begin(s:bundle_dir)
     Plug 'tpope/vim-fugitive'
     Plug 'junegunn/gv.vim'
     Plug 'rhysd/conflict-marker.vim'
-    "Plug 'mhinz/vim-signify'
-    "Plug 'airblade/vim-gitgutter'
+
 " UndoTree
     Plug 'mbbill/undotree'
 
 " Ale
     Plug 'dense-analysis/ale'
-" StatusLine (AirLine  , LightLine)
+" StatusLine (LightLine)
     Plug 'powerline/fonts'
     Plug 'itchyny/lightline.vim'
     Plug 'itchyny/vim-gitbranch'
@@ -93,9 +94,7 @@ call plug#begin(s:bundle_dir)
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " other
     Plug 'wakatime/vim-wakatime'
-"
-    "Plug 'tweekmonster/startuptime.vim'
     Plug 'dstein64/vim-startuptime'
-
+" tmux
 
 call plug#end()
