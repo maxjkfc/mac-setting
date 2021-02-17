@@ -117,3 +117,5 @@
 
     nmap w- :resize -3<CR>
     nmap w= :resize +3<CR>
+
+
