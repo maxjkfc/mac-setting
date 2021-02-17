@@ -12,7 +12,7 @@ if isdirectory(expand('~/.vim/bundle/lightline.vim/'))
       \ },
       \ 'component_function': {
       \   'gitbranch': 'FugitiveHead',
-      \   'menthod': 'NearestMethodOrFunction'
+      \   'menthod': 'NearestMethodOrFunction',
       \ },
       \ }
 
