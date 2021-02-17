@@ -81,16 +81,15 @@
     "completeUnimported": true,
     "usePlaceholders": true
   },
+  "diagnostic-languageserver.filetypes": {
+    "go": "revive",
+    "markdown": "markdownlint",
+    "sh": "shellcheck"
+  },
+  "diagnostic-languageserver.formatFiletypes": {
+    "go": "goimports"
+  },
   "languageserver": {
-    // "golang": {
-    //   "command": "gopls",
-    //   "rootPatterns": ["go.mod", ".vim/", ".git/"],
-    //   "filetypes": ["go"],
-    //   "initializationOptions": {
-    //     "usePlaceholders": true,
-    //     "completeUnimported": true
-    //   }
-    //  },
     "dockerfile": {
       "command": "docker-langserver",
       "filetypes": ["dockerfile"],

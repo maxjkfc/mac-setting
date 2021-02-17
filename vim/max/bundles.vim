@@ -54,12 +54,12 @@ call plug#begin(s:bundle_dir)
     " 快速對齊
     Plug 'junegunn/vim-easy-align', { 'on': '<plug>(EasyAlign)' }
     " 標籤視窗
-    Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
+    Plug 'liuchengxu/vista.vim'
 
 " FZF
     Plug 'junegunn/fzf.vim' 
     Plug 'junegunn/fzf'
-    Plug 'antoinemadec/coc-fzf', {'branch': 'release'}
+    "Plug 'antoinemadec/coc-fzf', {'branch': 'release'}
 
 " syntax
     Plug 'ekalinin/Dockerfile.vim' , {'for': 'dockerfile' }
@@ -76,7 +76,7 @@ call plug#begin(s:bundle_dir)
     Plug 'mbbill/undotree'
 
 " Ale
-    Plug 'dense-analysis/ale'
+    "Plug 'dense-analysis/ale'
 " StatusLine (LightLine)
     Plug 'powerline/fonts'
     Plug 'itchyny/lightline.vim'
