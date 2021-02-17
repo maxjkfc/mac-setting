@@ -2,7 +2,6 @@
 if isdirectory(expand('~/.vim/bundle/lightline.vim/'))
   set noshowmode
 
-
     let g:lightline = {
       \ 'colorscheme': 'dracula',
       \ 'active': {
@@ -12,8 +11,10 @@ if isdirectory(expand('~/.vim/bundle/lightline.vim/'))
       \ ]
       \ },
       \ 'component_function': {
-      \   'gitbranch': 'FugitiveHead'
+      \   'gitbranch': 'FugitiveHead',
+      \   'menthod': 'NearestMethodOrFunction'
       \ },
       \ }
+
     call lightline#coc#register()
 endif

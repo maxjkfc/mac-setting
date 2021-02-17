@@ -1,5 +1,17 @@
 " Coc.vim
 if isdirectory(expand('~/.vim/bundle/coc.nvim'))
+    " 安裝插件
+    let g:coc_global_extensions = [
+    \ 'coc-json', 
+    \ 'coc-git', 
+    \ 'coc-explorer',
+    \ 'coc-go',
+    \ 'coc-fzf-preview',
+    \ 'coc-tabnine',
+    \ 'coc-diagnostic' 
+    \ ]
+
+
     " better display for message
     "set cmdheight=2
     " Smaller updatetime for CursorHold & CursorHoldI
@@ -84,38 +96,40 @@ if isdirectory(expand('~/.vim/bundle/coc.nvim'))
     " 顯示所有指令
     "nnoremap <silent> <space>cc  :<C-u>CocList commands<cr>
     " 取得該檔案的 outline
-    "nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
-    " Search workspace symbols
-    "nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
-    " Do default action for next item.
-    "nnoremap <silent> <space>j  :<C-u>CocNext<CR>
-    " Do default action for previous item.
-    "nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
-    " Resume latest coc list
-    "nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+    nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
     " 取得目前 git 狀態
     "nnoremap <silent> <space>g :<C-u>CocList --normal gstatus<CR> 
+    
 
-
-    " Using CocFzFList
-    nnoremap <silent> <space><space> :<C-u>CocFzfList<CR>
-    " 顯示所有的問題診斷
-    nnoremap <silent> <space>a       :<C-u>CocFzfList diagnostics <CR>
-    " 顯示所有的問題診斷 在這個檔案
-    nnoremap <silent> <space>b       :<C-u>CocFzfList diagnostics --current-buf<CR>
-    " 顯示所有指令
-    nnoremap <silent> <space>cc       :<C-u>CocFzfList commands<CR>
-    " 顯示所有插件
-    nnoremap <silent> <space>ee       :<C-u>CocFzfList extensions<CR>
-    "nnoremap <silent> <space>l       :<C-u>CocFzfList location<CR>
-    " 取得該檔案的 outline
-    nnoremap <silent> <space>o       :<C-u>CocFzfList outline<CR>
-    "nnoremap <silent> <space>s       :<C-u>CocFzfList symbols<CR>
-    nnoremap <silent> <space>g       :<C-u>CocFzfList --normal gstatus<CR>
-    " Resume latest coc list
-    "nnoremap <silent> <space>p       :<C-u>CocFzfListResume<CR>
-
-
+    " 列出有哪些錯誤
+    nnoremap <silent> <space>a     :<C-u>CocCommand fzf-preview.CocDiagnostics <CR>
+    nnoremap <silent> <space>aa     :<C-u>CocCommand fzf-preview.CocCurrentDiagnostics <CR>
+    " 找尋檔案
+    nnoremap <silent> <space>p     :<C-u>CocCommand fzf-preview.FromResources project_mru git<CR>
+    " 查詢此 Git 狀態
+    nnoremap <silent> <space>gs    :<C-u>CocCommand fzf-preview.GitStatus<CR>
+    " 調用 Git 命令列
+    nnoremap <silent> <space>ga    :<C-u>CocCommand fzf-preview.GitActions<CR>
+    " 調用 Git Log
+    nnoremap <silent> <space>gl    :<C-u>CocCommand fzf-preview.GitLogs<CR>
+    " 取得 目前 Buffers 清單
+    nnoremap <silent> <space>b     :<C-u>CocCommand fzf-preview.Buffers<CR>
+    " 取得 目前所有 Buffers 
+    nnoremap <silent> <space>B     :<C-u>CocCommand fzf-preview.AllBuffers<CR>
+    " 跳轉列表
+    nnoremap <silent> <space><C-o> :<C-u>CocCommand fzf-preview.Jumps<CR>
+    " 查看最近修改內容
+    nnoremap <silent> <space>g;    :<C-u>CocCommand fzf-preview.Changes<CR>
+    " 搜尋此檔案
+    nnoremap <silent> <space>/     :<C-u>CocCommand fzf-preview.Lines --add-fzf-arg=--no-sort --add-fzf-arg=--query="'"<CR>
+    " 搜尋此單字 在此檔案
+    nnoremap <silent> <space>*     :<C-u>CocCommand fzf-preview.Lines --add-fzf-arg=--no-sort --add-fzf-arg=--query="'<C-r>=expand('<cword>')<CR>"<CR>
+    " 搜尋所有檔案
+    nnoremap          <space>gr    :<C-u>CocCommand fzf-preview.ProjectGrep<Space>
+    " 查詢 PullRequest
+    nnoremap <silent> <space>pr    :<C-u>CocCommand fzf-preview.BlamePR<CR>
+    " 查詢實做
+    nnoremap <silent> <space>i    :<C-u>CocCommand fzf-preview.CocImplementations<CR>
 
     " coc-explorer
     " 啟動檔案管理器
@@ -126,15 +140,6 @@ if isdirectory(expand('~/.vim/bundle/coc.nvim'))
     " List all presets
     "nmap <space>el :CocList explPresets
     
-    " 多個浮標支援
-    " Multiple cursors support
-    "hi CocCursorRange guibg=red guifg=white
-    "xmap <silent> <C-d> y/\V<C-r>=escape(@",'/\')<CR><CR>gN<Plug>(coc-cursors-range)gn
-    "nmap <silent> <C-d> <Plug>(coc-cursors-word)*
-    "xmap <silent> <C-d> y/\V<C-r>=escape(@",'/\')<CR><CR>gN<Plug>(coc-cursors-range)gn
-    "xmap <silent> <C-n> <Plug>(coc-cursors-range)
-
-
     " coc-snippets
     " Use <C-l> for trigger snippet expand.
     imap <C-l> <Plug>(coc-snippets-expand)

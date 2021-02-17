@@ -49,10 +49,9 @@
             source ~/.vim/config/easyAlign.vim
 	    endif
 
-	    " Load the tagbar config
-	    if filereadable(expand('~/.vim/config/tagbar.vim'))
-            source ~/.vim/config/tagbar.vim
-	    endif
+        if filereadable(expand('~/.vim/config/vista.vim'))
+            source ~/.vim/config/vista.vim
+        endif
 
 	    " Load the fugitive config
 	    if filereadable(expand('~/.vim/config/fugitive.vim'))
