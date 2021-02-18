@@ -17,6 +17,7 @@ if isdirectory(expand('~/.vim/bundle/vista.vim'))
               \ 'cpp': 'nvim_lsp',
               \ 'php': 'coc',
               \ 'go': 'coc',
+              \ 'sh': 'coc',
               \ }
   let g:vista_ctags_cmd = {
               \ 'haskell': 'hasktags -x -o - -c',
@@ -31,7 +32,6 @@ if isdirectory(expand('~/.vim/bundle/vista.vim'))
               \   "function": "\uf794",
               \   "variable": "\uf71b",
               \  }
-
 
   nnoremap <silent><nowait> <space>m :<C-u>Vista!!<cr>
 

@@ -1,6 +1,7 @@
 {
   "json.enable": true,
   "json.format.enable": true,
+  "tabnine.triggers": ["tab"],
   "explorer.presets": {
     ".vim": {
       "root-uri": "~/.vim"

@@ -22,13 +22,12 @@ if isdirectory(expand('~/.vim/bundle/coc.nvim'))
     set signcolumn=yes
     "set signcolumn=auto:2
 
-     "Use tab for trigger completion with characters ahead and navigate.
-     "Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
+     " 使用 <tab> 觸發 輸入參數
     inoremap <silent><expr> <TAB>
-          \ pumvisible() ? "\<C-n>" :
+          \ pumvisible() ? coc#_select_confirm() :
+          \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
           \ <SID>check_back_space() ? "\<TAB>" :
           \ coc#refresh()
-    inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
     function! s:check_back_space() abort
       let col = col('.') - 1
@@ -37,15 +36,9 @@ if isdirectory(expand('~/.vim/bundle/coc.nvim'))
 
 
 
-    " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
-    " Coc only does snippet and additional edit on confirm.
-    inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-
-    " Use `[d` and `]d` to navigate diagnostics
-    " 進入下一個診斷
-    nmap <silent> [d <Plug>(coc-diagnostic-prev)
-    " 上一個診斷
-    nmap <silent> ]d <Plug>(coc-diagnostic-next)
+     " 使用 enter 觸發提交提示列表
+    inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
     " Remap keys for gotos
     " 進入下一個定義
@@ -86,6 +79,8 @@ if isdirectory(expand('~/.vim/bundle/coc.nvim'))
     command! -nargs=0 Format :call CocAction('format')
     " Use `:Fold` to fold current buffer
     command! -nargs=? Fold :call CocAction('fold', <f-args>)
+     " Add `:OR` command for organize imports of the current buffer.
+    command! -nargs=0 OR   :call CocAction('runCommand', 'editor.action.organizeImport')
 
 
     " Using CocList
@@ -94,42 +89,55 @@ if isdirectory(expand('~/.vim/bundle/coc.nvim'))
     " 顯示所有coc 插件
     "nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
     " 顯示所有指令
-    "nnoremap <silent> <space>cc  :<C-u>CocList commands<cr>
+    nnoremap <silent> <space>cc  :<C-u>CocList commands<cr>
     " 取得該檔案的 outline
-    nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
+    "nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
     " 取得目前 git 狀態
     "nnoremap <silent> <space>g :<C-u>CocList --normal gstatus<CR> 
     
 
     " 列出有哪些錯誤
-    nnoremap <silent> <space>a     :<C-u>CocCommand fzf-preview.CocDiagnostics <CR>
+    nnoremap <silent> <space>a      :<C-u>CocCommand fzf-preview.CocDiagnostics <CR>
     nnoremap <silent> <space>aa     :<C-u>CocCommand fzf-preview.CocCurrentDiagnostics <CR>
     " 找尋檔案
-    nnoremap <silent> <space>p     :<C-u>CocCommand fzf-preview.FromResources project_mru git<CR>
+    nnoremap <silent> <space>p      :<C-u>CocCommand fzf-preview.FromResources project  buffer project_mru git<CR>
     " 查詢此 Git 狀態
-    nnoremap <silent> <space>gs    :<C-u>CocCommand fzf-preview.GitStatus<CR>
+    nnoremap <silent> <space>gs     :<C-u>CocCommand fzf-preview.GitStatus<CR>
     " 調用 Git 命令列
-    nnoremap <silent> <space>ga    :<C-u>CocCommand fzf-preview.GitActions<CR>
+    nnoremap <silent> <space>ga     :<C-u>CocCommand fzf-preview.GitActions<CR>
     " 調用 Git Log
-    nnoremap <silent> <space>gl    :<C-u>CocCommand fzf-preview.GitLogs<CR>
+    nnoremap <silent> <space>gl     :<C-u>CocCommand fzf-preview.GitLogs<CR>
     " 取得 目前 Buffers 清單
-    nnoremap <silent> <space>b     :<C-u>CocCommand fzf-preview.Buffers<CR>
+    nnoremap <silent> <space>b      :<C-u>CocCommand fzf-preview.Buffers<CR>
     " 取得 目前所有 Buffers 
-    nnoremap <silent> <space>B     :<C-u>CocCommand fzf-preview.AllBuffers<CR>
+    nnoremap <silent> <space>B      :<C-u>CocCommand fzf-preview.AllBuffers<CR>
     " 跳轉列表
-    nnoremap <silent> <space><C-o> :<C-u>CocCommand fzf-preview.Jumps<CR>
+    nnoremap <silent> <space><C-o>  :<C-u>CocCommand fzf-preview.Jumps<CR>
     " 查看最近修改內容
-    nnoremap <silent> <space>g;    :<C-u>CocCommand fzf-preview.Changes<CR>
+    nnoremap <silent> <space>g;     :<C-u>CocCommand fzf-preview.Changes<CR>
     " 搜尋此檔案
-    nnoremap <silent> <space>/     :<C-u>CocCommand fzf-preview.Lines --add-fzf-arg=--no-sort --add-fzf-arg=--query="'"<CR>
+    nnoremap <silent> <space>/      :<C-u>CocCommand fzf-preview.Lines --add-fzf-arg=--no-sort --add-fzf-arg=--query="'"<CR>
     " 搜尋此單字 在此檔案
-    nnoremap <silent> <space>*     :<C-u>CocCommand fzf-preview.Lines --add-fzf-arg=--no-sort --add-fzf-arg=--query="'<C-r>=expand('<cword>')<CR>"<CR>
+    nnoremap <silent> <space>*      :<C-u>CocCommand fzf-preview.Lines --add-fzf-arg=--no-sort --add-fzf-arg=--query="'<C-r>=expand('<cword>')<CR>"<CR>
     " 搜尋所有檔案
-    nnoremap          <space>gr    :<C-u>CocCommand fzf-preview.ProjectGrep<Space>
+    nnoremap          <space>gr     :<C-u>CocCommand fzf-preview.ProjectGrep<Space>
+    nnoremap <silent> <space>t      :<C-u> CocCommand fzf-preview.VistaCtags <CR>
     " 查詢 PullRequest
-    nnoremap <silent> <space>pr    :<C-u>CocCommand fzf-preview.BlamePR<CR>
-    " 查詢實做
-    nnoremap <silent> <space>i    :<C-u>CocCommand fzf-preview.CocImplementations<CR>
+    nnoremap <silent> <space>pr     :<C-u>CocCommand fzf-preview.BlamePR<CR>
+    "
+    nnoremap <silent> <space>q      :<C-u>CocCommand fzf-preview.QuickFix<CR>
+    nnoremap <silent> <space>ll     :<C-u>CocCommand fzf-preview.LocationList<CR>
+
+    let g:fzf_preview_floating_window_rate = 0.8
+    let g:fzf_preview_filelist_command = 'rg --files --hidden --follow --no-messages -g \!.git ' " Installed ripgrep
+    let g:fzf_preview_lines_command = 'bat --color=always --plain --number' " Installed bat
+    let g:fzf_preview_preview_key_bindings = 'ctrl-d:preview-page-down,ctrl-u:preview-page-up,?:toggle-preview'
+    let g:fzf_preview_grep_cmd = 'rg --column --line-number --no-heading --color=always --smart-case'
+    let g:fzf_preview_fzf_preview_window_option = 'right:50%'  " 設定 preview 視窗
+    let g:fzf_preview_default_fzf_options = { '--reverse': v:true, '--preview-window': 'wrap' }
+    let g:fzf_preview_use_dev_icons = 1
+
+  
 
     " coc-explorer
     " 啟動檔案管理器
@@ -137,30 +145,15 @@ if isdirectory(expand('~/.vim/bundle/coc.nvim'))
     " Use preset argument to open it
     " 啟動浮動視窗的 檔案管理列
     nmap <space>ef :CocCommand explorer --preset floating<CR>
-    " List all presets
-    "nmap <space>el :CocList explPresets
     
     " coc-snippets
     " Use <C-l> for trigger snippet expand.
     imap <C-l> <Plug>(coc-snippets-expand)
     " Use <C-j> for select text for visual placeholder of snippet.
     vmap <C-j> <Plug>(coc-snippets-select)
-    " Use <C-j> for both expand and jump (make expand higher priority.)
-    imap <C-j> <Plug>(coc-snippets-expand-jump)
 
-    " Make <tab> used for trigger completion, completion confirm, snippet expand and jump like VSCode.
-    inoremap <silent><expr> <TAB>
-          \ pumvisible() ? coc#_select_confirm() :
-          \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
-          \ <SID>check_back_space() ? "\<TAB>" :
-          \ coc#refresh()
-
-    function! s:check_back_space() abort
-      let col = col('.') - 1
-      return !col || getline('.')[col - 1]  =~# '\s'
-    endfunction
     " coc-snippet  使用 tab 去觸發下一個要輸入的參數
-    let g:coc_snippet_next = '<tab>'
+    let g:coc_snippet_next = '<c-j>'
     " coc-snippet 使用<ctrl-k> 去出發上一個要輸入的參數
     let g:coc_snippet_prev = '<c-k>'
 
