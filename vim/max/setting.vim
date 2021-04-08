@@ -55,6 +55,8 @@
     set scrolljump=5                " Lines to scroll when cursor leaves screen
     set scrolloff=3                 " Minimum lines to keep above and below cursor
     set foldenable                  " Auto fold code
+    "set foldmethod=syntax
+    "set foldnestmax=1
 
 " Formatting
     set nowrap                              " Do not wrap long lines

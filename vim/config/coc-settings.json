@@ -74,7 +74,8 @@
     "javascript",
     "json",
     "go",
-    "proto"
+    "proto",
+    "sh"
   ],
   "snippets.ultisnips.directories": ["gosnippets/UltiSnips"],
   // coc-go
@@ -88,7 +89,7 @@
     "sh": "shellcheck"
   },
   "diagnostic-languageserver.formatFiletypes": {
-    "go": "goimports"
+    "go": "gofmt"
   },
   "languageserver": {
     "dockerfile": {

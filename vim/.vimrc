@@ -22,6 +22,7 @@
 	    " Load the golang config
 	    if filereadable(expand('~/.vim/config/vim-go.vim'))
             source ~/.vim/config/vim-go.vim
+            source ~/.vim/config/proto.vim
 	    endif
 
 	    " Load the signify config
