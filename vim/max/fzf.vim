@@ -19,8 +19,25 @@
 
         " Default fzf layout
         " - down / up / left / right
-        let g:fzf_layout = { 'down': '~40%' }
+        "let g:fzf_layout = { 'down': '~40%' }
         "let g:fzf_layout = { 'window': {'width': 0.9 , 'height' : 0.6}  }
+        let g:fzf_preview_window = ['right:50%', 'ctrl-/']
+        let g:fzf_layout = { 'window': 'call FloatingFZF()'  }
+        function! FloatingFZF()
+            let width = float2nr(&columns * 0.9)
+            let height = float2nr(&lines * 0.6)
+            let opts = { 
+                   \ 'relative': 'editor',
+                   \ 'row': (&lines - height) / 2,
+                   \ 'col': (&columns - width) / 2,
+                   \ 'width': width,
+                   \ 'height': height,
+                   \ 'style': 'minimal'
+                   \}
+
+            let win = nvim_open_win(nvim_create_buf(v:false, v:true), v:true, opts)
+            call setwinvar(win, '&winhighlight', 'NormalFloat:TabLine')
+        endfunction
 
         " Enable per-command history.
         let g:fzf_history_dir = '~/.local/share/fzf-history'
@@ -46,9 +63,9 @@
           \ 'header':  ['fg', 'Comment'] }
 
 
-        nmap <leader><tab> <plug>(fzf-maps-n)
-        xmap <leader><tab> <plug>(fzf-maps-x)
-        omap <leader><tab> <plug>(fzf-maps-o)
+        "nmap <leader><tab> <plug>(fzf-maps-n)
+        "xmap <leader><tab> <plug>(fzf-maps-x)
+        "omap <leader><tab> <plug>(fzf-maps-o)
 
         " Insert mode completion
         " 查詢字典
@@ -89,7 +106,7 @@
 
         nnoremap <C-f>l :FzfLines<CR>
         nnoremap <C-f>b :FzfBuffers<CR>
-        nnoremap <C-f>r :FzfRg<CR>
+        nnoremap <space>r :FzfRg<CR>
         nnoremap <C-f>t :FzfTags<CR>
         nnoremap <C-f>p :call FzfOmniFiles()<CR>
         nnoremap <C-f>f :FzfFilesP<CR>

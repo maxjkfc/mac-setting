@@ -89,18 +89,30 @@ if isdirectory(expand('~/.vim/bundle/coc.nvim'))
     " 顯示所有coc 插件
     "nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
     " 顯示所有指令
-    nnoremap <silent> <space>cc  :<C-u>CocList commands<cr>
+    "nnoremap <silent> <space>cc  :<C-u>CocList commands<cr>
     " 取得該檔案的 outline
     "nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
     " 取得目前 git 狀態
     "nnoremap <silent> <space>g :<C-u>CocList --normal gstatus<CR> 
-    
+   
+    "coc-fzf
+    " mappings
+    nnoremap <silent> <space><space> :<C-u>CocFzfList<CR>
+    nnoremap <silent> <space>a       :<C-u>CocFzfList diagnostics<CR>
+    nnoremap <silent> <space>ab       :<C-u>CocFzfList diagnostics --current-buf<CR>
+    "nnoremap <silent> <space>c       :<C-u>CocFzfList commands<CR>
+    "nnoremap <silent> <space>e       :<C-u>CocFzfList extensions<CR>
+    "nnoremap <silent> <space>l       :<C-u>CocFzfList location<CR>
+    nnoremap <silent> <space>o       :<C-u>CocFzfList outline<CR>
+    nnoremap <silent> <space>s       :<C-u>CocFzfList symbols<CR>
+    nnoremap <silent> <space>p       :<C-u>CocFzfListResume<CR> 
 
+    " coc-fzf-preview
     " 列出有哪些錯誤
-    nnoremap <silent> <space>a      :<C-u>CocCommand fzf-preview.CocDiagnostics <CR>
-    nnoremap <silent> <space>aa     :<C-u>CocCommand fzf-preview.CocCurrentDiagnostics <CR>
+    "nnoremap <silent> <space>a      :<C-u>CocCommand fzf-preview.CocDiagnostics <CR>
+    "nnoremap <silent> <space>aa     :<C-u>CocCommand fzf-preview.CocCurrentDiagnostics <CR>
     " 找尋檔案
-    nnoremap <silent> <space>p      :<C-u>CocCommand fzf-preview.FromResources project  buffer project_mru git<CR>
+    "nnoremap <silent> <space>p      :<C-u>CocCommand fzf-preview.FromResources project  buffer project_mru git<CR>
     " 查詢此 Git 狀態
     nnoremap <silent> <space>gs     :<C-u>CocCommand fzf-preview.GitStatus<CR>
     " 調用 Git 命令列
@@ -110,15 +122,17 @@ if isdirectory(expand('~/.vim/bundle/coc.nvim'))
     " 取得 目前 Buffers 清單
     nnoremap <silent> <space>b      :<C-u>CocCommand fzf-preview.Buffers<CR>
     " 取得 目前所有 Buffers 
-    nnoremap <silent> <space>B      :<C-u>CocCommand fzf-preview.AllBuffers<CR>
+    "nnoremap <silent> <space>B      :<C-u>CocCommand fzf-preview.AllBuffers<CR>
     " 跳轉列表
-    nnoremap <silent> <space><C-o>  :<C-u>CocCommand fzf-preview.Jumps<CR>
+    "nnoremap <silent> <space><C-o>  :<C-u>CocCommand fzf-preview.Jumps<CR>
     " 查看最近修改內容
-    nnoremap <silent> <space>g;     :<C-u>CocCommand fzf-preview.Changes<CR>
+    "nnoremap <silent> <space>g;     :<C-u>CocCommand fzf-preview.Changes<CR>
     " 搜尋此檔案
     nnoremap <silent> <space>/      :<C-u>CocCommand fzf-preview.Lines --add-fzf-arg=--no-sort --add-fzf-arg=--query="'"<CR>
     " 搜尋此單字 在此檔案
-    nnoremap <silent> <space>*      :<C-u>CocCommand fzf-preview.Lines --add-fzf-arg=--no-sort --add-fzf-arg=--query="'<C-r>=expand('<cword>')<CR>"<CR>
+    "nnoremap <silent> <space>*      :<C-u>CocCommand fzf-preview.Lines --add-fzf-arg=--no-sort --add-fzf-arg=--query="'<C-r>=expand('<cword>')<CR>"<CR>
+    " 使用 vista 列出方法名稱
+    nnoremap <silent> <space>t      :<C-u>CocCommand fzf-preview.VistaCtags <CR>
     " 搜尋所有檔案
     nnoremap          <space>gr     :<C-u>CocCommand fzf-preview.ProjectGrep<Space>
     nnoremap <silent> <space>t      :<C-u> CocCommand fzf-preview.VistaCtags <CR>
@@ -128,14 +142,14 @@ if isdirectory(expand('~/.vim/bundle/coc.nvim'))
     nnoremap <silent> <space>q      :<C-u>CocCommand fzf-preview.QuickFix<CR>
     nnoremap <silent> <space>ll     :<C-u>CocCommand fzf-preview.LocationList<CR>
 
-    let g:fzf_preview_floating_window_rate = 0.8
-    let g:fzf_preview_filelist_command = 'rg --files --hidden --follow --no-messages -g \!.git ' " Installed ripgrep
-    let g:fzf_preview_lines_command = 'bat --color=always --plain --number' " Installed bat
-    let g:fzf_preview_preview_key_bindings = 'ctrl-d:preview-page-down,ctrl-u:preview-page-up,?:toggle-preview'
-    let g:fzf_preview_grep_cmd = 'rg --column --line-number --no-heading --color=always --smart-case'
-    let g:fzf_preview_fzf_preview_window_option = 'right:50%'  " 設定 preview 視窗
-    let g:fzf_preview_default_fzf_options = { '--reverse': v:true, '--preview-window': 'wrap' }
-    let g:fzf_preview_use_dev_icons = 1
+    "let g:fzf_preview_floating_window_rate = 0.8
+    "let g:fzf_preview_filelist_command = 'rg --files --hidden --follow --no-messages -g \!.git ' " Installed ripgrep
+    "let g:fzf_preview_lines_command = 'bat --color=always --plain --number' " Installed bat
+    "let g:fzf_preview_preview_key_bindings = 'ctrl-d:preview-page-down,ctrl-u:preview-page-up,?:toggle-preview'
+    "let g:fzf_preview_grep_cmd = 'rg --column --line-number --no-heading --color=always --smart-case'
+    "let g:fzf_preview_fzf_preview_window_option = 'right:50%'  " 設定 preview 視窗
+    "let g:fzf_preview_default_fzf_options = { '--reverse': v:true, '--preview-window': 'wrap' }
+    "let g:fzf_preview_use_dev_icons = 1
 
   
 

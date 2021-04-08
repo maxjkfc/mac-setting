@@ -14,7 +14,7 @@ call plug#begin(s:bundle_dir)
     "Plug 'honza/vim-snippets'
     "Plug 'SirVer/ultisnips'
 
-" Code fmt 
+" Code fmt  為了使用 proto
     Plug 'google/vim-maktaba'
     Plug 'google/vim-codefmt'
     Plug 'google/vim-glaive'
@@ -31,7 +31,7 @@ call plug#begin(s:bundle_dir)
     " 快速選取區塊內容
     Plug 'gcmt/wildfire.vim'
     " 多游標選取
-    Plug 'terryma/vim-multiple-cursors'    
+    Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 
 " EasyMotion
     " 快速移動
@@ -59,7 +59,7 @@ call plug#begin(s:bundle_dir)
 " FZF
     Plug 'junegunn/fzf.vim' 
     Plug 'junegunn/fzf'
-    "Plug 'antoinemadec/coc-fzf', {'branch': 'release'}
+    Plug 'antoinemadec/coc-fzf', {'branch': 'release'}
 
 " syntax
     Plug 'ekalinin/Dockerfile.vim' , {'for': 'dockerfile' }

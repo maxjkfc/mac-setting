@@ -92,7 +92,15 @@ gco() {
         (echo "$branches"; echo "$tags") |
         fzf --no-hscroll --no-multi --delimiter="\t" -n 2 \
             --ansi --preview="git log -200 --pretty=format:%s $(echo {+2..} |  sed 's/$/../' )" ) || return
-    git checkout  $(echo "$target" | awk '{print $2}')
+    branch=$(echo "$target" | awk '{print $2}')
+
+    echo $branch
+
+    if [[ "$branch" = origin/* ]] ; then 
+        git checkout -t  $(echo "$target" | awk '{print $2}')
+    else 
+        git checkout  $(echo "$target" | awk '{print $2}')
+    fi
 }
 
 alias glGraph='git log --graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr% C(auto)%an" "$@"'
@@ -105,7 +113,7 @@ gcop() {
   commit=$( glGraph |
     fzf --no-sort --reverse --tiebreak=index --no-multi \
         --ansi --preview="$_viewGitLogLine" ) &&
-  git checkout $(echo "$commit" | sed "s/ .*//")
+  git checkout -t $(echo "$commit" | sed "s/ .*//")
 }
 
 
