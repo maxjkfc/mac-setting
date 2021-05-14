@@ -9,7 +9,7 @@ zplug "b4b4r07/enhancd", use:init.sh
 #zplug "plugins/docker" , from:oh-my-zsh 
 #zplug "plugins/golang" , from:oh-my-zsh 
 #zplug "plugins/docker-compose" , from:oh-my-zsh 
-
+# 
 zplug "wfxr/forgit"
 
 zplug "zsh-users/zsh-syntax-highlighting", defer:2
