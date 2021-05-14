@@ -8,7 +8,8 @@ if isdirectory(expand('~/.vim/bundle/coc.nvim'))
     \ 'coc-go',
     \ 'coc-fzf-preview',
     \ 'coc-tabnine',
-    \ 'coc-diagnostic' 
+    \ 'coc-diagnostic',
+    \ 'coc-spell-checker'
     \ ]
 
 
@@ -40,7 +41,7 @@ if isdirectory(expand('~/.vim/bundle/coc.nvim'))
     inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
-    " Remap keys for gotos
+    " Remap keys for goto
     " 進入下一個定義
     nmap <silent> gd <Plug>(coc-definition)
     nmap <silent> gy <Plug>(coc-type-definition)
@@ -49,6 +50,10 @@ if isdirectory(expand('~/.vim/bundle/coc.nvim'))
   
 
 
+    " coc-spell-checker
+    vmap <leader>a <Plug>(coc-codeaction-selected) 
+    nmap <leader>a <Plug>(coc-codeaction-selected) 
+    
 
     " Use gh to show documentation in preview window
     " 展現coc 文件
