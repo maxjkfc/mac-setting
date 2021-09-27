@@ -50,7 +50,7 @@
   "explorer.file.showHiddenFiles": true,
   "explorer.icon.enableNerdfont": true,
   "explorer.keyMappings.global": {
-    "i": false, // cancel default mapkey
+    "i": false, // cancel default map key
     "k": "nodePrev",
     "j": "nodeNext",
     "*": "toggleSelection",
@@ -193,7 +193,9 @@
     }
   },
   "cSpell.userWords": [
+    "Nerdfont",
     "bson",
+    "maxjkfc",
     "tabnine"
   ]
 }
