@@ -1,7 +1,5 @@
 #!/bin/bash
-
 set -e
-
 
 setup_tmux() {
 	echo "setup [tmux] config"
@@ -26,6 +24,13 @@ setup_zsh() {
 	fi
 
 	ln -s $PWD/zsh/.zshrc $HOME/.zshrc
+
+	if [ -f "$HOME/.zshshell" ]; then
+		rm -rf $HOME/.zshshell
+	fi
+
+	ln -s $PWD/zsh/.zshshell $HOME/.zshshell
+	
 
 	# TODO check zsh install?
 	echo "setup [zsh] config finish"
