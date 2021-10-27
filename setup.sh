@@ -4,9 +4,7 @@ set -e
 
 
 setup_tmux() {
-
-	
-	echo "setup tmux config"
+	echo "setup [tmux] config"
 
 	if [ -f "$HOME/.tmux.conf" ]; then
 		rm -rf $HOME/.tmux.conf
@@ -16,12 +14,30 @@ setup_tmux() {
 
 	# TODO check tpm install?
 	echo "setup tmux config finish"
+
+	# TODO reload tmux and install plugin
+}
+
+setup_zsh() {
+	echo "setup [zsh] config"
+
+	if [ -f "$HOME/.zshrc" ]; then
+		rm -rf $HOME/.zshrc
+	fi
+
+	ln -s $PWD/zsh/.zshrc $HOME/.zshrc
+
+	# TODO check zsh install?
+	echo "setup [zsh] config finish"
 }
 
 
 case $1 in 
 	"tmux") 
 		setup_tmux
+		;;
+	"zsh") 
+		setup_zsh
 		;;
 	*)
 		echo "not match any pkg"
