@@ -33,13 +33,10 @@ fi
 	export GOPATH="$HOME/go"
 
 	# export coreutils path
-	export COREPATH="/usr/local/opt/coreutils/libexec/gnubin"
-	# export MANPATH="/usr/local/man:$MANPATH"
-	export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
-	export ZPLUGHOME="/usr/local/opt/zplug"
-	export RUBYPATH="/usr/local/opt/ruby/bin"
-	export SEDPATH="/opt/homebrew/opt/gnu-sed/libexec/gunbin"
-	export PATH="$PATH:$GOROOT/bin:$GOPATH/bin:$COREPATH:$RUBYPATH:$SEDPATH"
+	export COREPATH="/opt/homebrew/opt/coreutils/libexec/gnubin"
+	export MANPATH="/opt/homebrew/opt/coreutils/libexec/gnuman:$MANPATH"
+	export ZPLUG_HOME="/opt/homebrew/opt/zplug"
+	export PATH="$PATH:$GOROOT/bin:$GOPATH/bin:$COREPATH:$ZPLUG_HOME"
 
 
 
@@ -63,11 +60,9 @@ fi
 
 	# tools path
 	alias mtr=' sudo /usr/local/sbin/mtr'
-	alias vim='/usr/local/bin/vim'
-	alias git='/usr/local/bin/git'
-	alias cat='ccat'
-	alias curl='/usr/local/opt/curl/bin/curl'
-	alias sqlite3='/usr/local/opt/sqlite3/bin/sqlite3'
+	alias git='/opt/homebrew/bin/git'
+	alias cat='bat'
+	alias curl='/opt/homebrew/opt/curl/bin/curl'
 	alias sed="gsed"
 
 	# zsh part 
@@ -88,11 +83,15 @@ fi
 	source /opt/homebrew/opt/powerlevel10k/powerlevel10k.zsh-theme
 	# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 	[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+	# quiet warning message from p10k
+	typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
+
 # Customer Shell
 	# 	
-	[[ ! -f $HOME/.zshshell]] || source $HOME/.zshshell
+	[[ ! -f $HOME/.zshshell ]] || source $HOME/.zshshell
 # ZPlug 
-	source $ZPLUG_HOME/init.zsh
+	source "$ZPLUG_HOME/init.zsh"
 	setopt prompt_subst # Make sure prompt is able to be generated properly.
 	zplug "b4b4r07/enhancd", use:init.sh
 	zplug "wfxr/forgit"
@@ -102,16 +101,15 @@ fi
 	zplug "zsh-users/zsh-history-substring-search"
 	zplug "supercrabtree/k"
 
-
 	# zplug check returns true if all packages are installed
 	# Therefore, when it returns false, run zplug install
 	if ! zplug check; then
 	    zplug install
 	fi
+
 	# source plugins and add commands to the PATH
 	zplug load
 
-	autoload -Uz compinit && compinit -i
 	# zplug check returns true if the given repository exists
 	if zplug check b4b4r07/enhancd; then
 	    # setting if enhancd is available
