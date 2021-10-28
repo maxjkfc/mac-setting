@@ -74,7 +74,11 @@ fi
 	alias -s bz2="tar -xjvf"
 # Completion
 	# 	
-	fpath=(~/.zsh/completion $fpath)
+	fpath=(
+		~/.zsh/completion 
+		/opt/homebrew/share/zsh/site-functions
+		$fpath
+	)
 	autoload -Uz compinit && compinit -i
 	# Kubectl completion
 	source <(kubectl completion zsh)
@@ -161,8 +165,6 @@ fi
 	_fzf_compgen_dir() {
 	  fd --type d --hidden --follow --exclude ".git" . "$1"
 	}
-
-
 
 	# Iterm2 Plugin
 	test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
