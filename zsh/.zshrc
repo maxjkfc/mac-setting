@@ -97,7 +97,9 @@ fi
 # ZPlug 
 	source "$ZPLUG_HOME/init.zsh"
 	setopt prompt_subst # Make sure prompt is able to be generated properly.
+
 	zplug "b4b4r07/enhancd", use:init.sh
+	zplug "b4b4r07/emoji-cli"
 	zplug "wfxr/forgit"
 	zplug "zsh-users/zsh-syntax-highlighting", defer:2
 	zplug "zsh-users/zsh-autosuggestions"
