@@ -38,24 +38,13 @@ setup_zsh() {
 
 setup_nvim(){
 	echo "setup [nvim] config"
-	NVIM_PATH="$HOME/.config/nvim"
+	NVIM_PATH="$HOME/.config"
 
-	if [ -d "$NVIM_PATH" ]; then
-		rm -rf $NVIM_PATH
+	if [ -d "$NVIM_PATH/nvim" ]; then
+		rm -rf $NVIM_PATH/nvim
 	fi
-	mkdir -p $NVIM_PATH
 
-	ln -s $PWD/nvim/* $NVIM_PATH
-
-	if [ ! -d "$HOME/.vimswp" ]; then
-       		mkdir -p $HOME/.vimswp
-	fi
-	if [ ! -d "$HOME/.vimbackup" ]; then
-		mkdir -p $HOME/.vimbackup
-	fi
-	if [ ! -d "$HOME/.vimundo" ]; then
-		mkdir -p $HOME/.vimundo
-	fi
+	ln -s $PWD/nvim $NVIM_PATH
 
 	echo "setup [nvim] config finish"
 }

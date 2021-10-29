@@ -84,6 +84,7 @@ fi
 	source <(kubectl completion zsh)
 
 # Theme P10K
+    #   
 	source /opt/homebrew/opt/powerlevel10k/powerlevel10k.zsh-theme
 	# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 	[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
@@ -95,6 +96,7 @@ fi
 	# 	
 	[[ ! -f $HOME/.zshshell ]] || source $HOME/.zshshell
 # ZPlug 
+    #   
 	source "$ZPLUG_HOME/init.zsh"
 	setopt prompt_subst # Make sure prompt is able to be generated properly.
 
