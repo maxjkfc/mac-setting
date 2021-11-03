@@ -13,10 +13,11 @@ call plug#begin(s:bundle_dir)
   Plug 'junegunn/vim-emoji'
   " 彩虹括弧
   Plug 'luochen1990/rainbow'
-  " 檔案管理工具
+  
+" 檔案管理工具
+  " nvim-tree
   Plug 'kyazdani42/nvim-web-devicons' " for file icons
   Plug 'kyazdani42/nvim-tree.lua'
-  Plug 'jiangmiao/auto-pairs'
 
 " 小工具
   " 可視化色塊工具
@@ -33,16 +34,17 @@ call plug#begin(s:bundle_dir)
   Plug 'gcmt/wildfire.vim'
   " 快速註解
   Plug 'scrooloose/nerdcommenter'
-  " 快速建立相應區塊
-  Plug 'rstacruz/vim-closer'
   " 快速對齊
   Plug 'junegunn/vim-easy-align'
+  " 自動產生對應符號
+  Plug 'jiangmiao/auto-pairs'
+
 
 " 核心工具
   " 多游標選取
   Plug 'mg979/vim-visual-multi', {'branch': 'master'}
   " 快速移動
-  Plug 'justinmk/vim-sneak'
+  Plug 'easymotion/vim-easymotion'
 
 " tressiter 工具套組
   " 核心 - Syntax highlighting 語法高亮
@@ -54,7 +56,23 @@ call plug#begin(s:bundle_dir)
   Plug 'junegunn/fzf'
 
 " lsp
+  " lsp tools
+  Plug 'neovim/nvim-lspconfig'
+  Plug 'glepnir/lspsaga.nvim' 
+
+  " coq-nvim
+  Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
+  " 9000+ Snippets
+  Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
+
+  " lua & third party sources -- See https://github.com/ms-jpq/coq.thirdparty
+  " Need to **configure separately**
+  Plug 'ms-jpq/coq.thirdparty', {'branch': '3p'}
+
+
+" develop
   " golang
-  Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' , 'for':'go'} 
+  Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' , 'for':'go'}
+
 
 call plug#end()

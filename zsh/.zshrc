@@ -24,12 +24,12 @@ fi
 	echo    '    ██║    ╚████╔╝ ██████╔╝   ██╔████╔██║███████║ ╚███╔╝   '
 	echo    '    ██║     ╚██╔╝  ██╔══██╗   ██║╚██╔╝██║██╔══██║ ██╔██╗   '
 	echo    '    ██║      ██║   ██║  ██║██╗██║ ╚═╝ ██║██║  ██║██╔╝ ██╗  '
-	echo    '     ╚═╝      ╚═╝   ╚═╝  ╚═╝╚═╝╚═╝     ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝ '
+	echo    '    ╚═╝      ╚═╝   ╚═╝  ╚═╝╚═╝╚═╝     ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝  '
 
 
 # Path Part
 	# Golang setting
-	export GOROOT="/usr/local/opt/go/libexec"
+	export GOROOT="/opt/homebrew/opt/go/libexec"
 	export GOPATH="$HOME/go"
 
 	# export coreutils path
