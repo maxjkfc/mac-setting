@@ -94,7 +94,7 @@
   " Yank from the cursor to the end of the line, to be consistent with C and D.
   nnoremap Y y$
   "To clear search highlighting rather than toggle
-  nmap <silent> <leader>/ :nohlsearch<CR>
+  nmap <silent> <leader>/n :nohlsearch<CR>
 
    " Find merge conflict markers
   map <leader>fc /\v^[<\|=>]{7}( .*\|$)<CR>
@@ -124,6 +124,7 @@
   vnoremap <c-j> :m '>+1<CR>gv=gv 
   " move left and right
   vnoremap > >gv 
+  vnoremap <Tab> >gv 
   vnoremap < <gv
   
 " HighLight

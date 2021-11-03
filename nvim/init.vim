@@ -16,11 +16,6 @@ if filereadable(expand("$HOME/.config/nvim/visual_multi.vim"))
   source $HOME/.config/nvim/visual_multi.vim
 endif
 
-" vim_sneak config
-if filereadable(expand("$HOME/.config/nvim/vim_sneak.vim"))
-  source $HOME/.config/nvim/vim_sneak.vim
-endif
-
 " vim_emoji config
 if filereadable(expand("$HOME/.config/nvim/vim_emoji.vim"))
   source $HOME/.config/nvim/vim_emoji.vim
@@ -60,3 +55,33 @@ endif
 if filereadable(expand("$HOME/.config/nvim/easy_align.vim"))
   source $HOME/.config/nvim/easy_align.vim
 endif
+
+" nerdcomment config
+if filereadable(expand("$HOME/.config/nvim/nerdcomment.vim"))
+  source $HOME/.config/nvim/nerdcomment.vim
+endif
+
+" coq config
+if filereadable(expand("$HOME/.config/nvim/coq.vim"))
+  source $HOME/.config/nvim/coq.vim
+endif
+
+" lspsaga config
+if filereadable(expand("$HOME/.config/nvim/lspsaga.vim"))
+  source $HOME/.config/nvim/lspsaga.vim
+endif
+
+" lspconfig config
+if filereadable(expand("$HOME/.config/nvim/lspconfig.vim"))
+  source $HOME/.config/nvim/lspconfig.vim
+endif
+
+" vim_go config
+if filereadable(expand("$HOME/.config/nvim/vim_go.vim"))
+  source $HOME/.config/nvim/vim_go.vim
+endif
+" easymotion config
+if filereadable(expand("$HOME/.config/nvim/easymotion.vim"))
+  source $HOME/.config/nvim/easymotion.vim
+endif
+
