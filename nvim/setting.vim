@@ -96,8 +96,8 @@
   "To clear search highlighting rather than toggle
   nmap <silent> <leader>/n :nohlsearch<CR>
 
-   " Find merge conflict markers
-  map <leader>fc /\v^[<\|=>]{7}( .*\|$)<CR>
+  " Find merge conflict markers
+  " map <leader>fc /\v^[<\|=>]{7}( .*\|$)<CR>
 
    " Some helpers to edit mode
   cnoremap %% <C-R>=fnameescape(expand('%:h')).'/'<cr>
