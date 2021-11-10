@@ -84,4 +84,12 @@ endif
 if filereadable(expand("$HOME/.config/nvim/easymotion.vim"))
   source $HOME/.config/nvim/easymotion.vim
 endif
+" telescope config
+if filereadable(expand("$HOME/.config/nvim/telescope.vim"))
+  source $HOME/.config/nvim/telescope.vim
+endif
 
+" copilot config
+if filereadable(expand("$HOME/.config/nvim/copilot.vim"))
+  source $HOME/.config/nvim/copilot.vim
+endif

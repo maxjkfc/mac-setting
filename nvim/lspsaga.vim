@@ -23,7 +23,7 @@ lua<<EOF
     finder_reference_icon = '  ',
     max_preview_lines = 20, -- preview lines of lsp_finder and definition preview
     finder_action_keys = {
-      open = 'l', vsplit = 'v',split = 's',quit = 'q',scroll_down = '<C-f>', scroll_up = '<C-b>' -- quit can be a table
+      open = '<CR>', vsplit = 'v',split = 's',quit = 'q',scroll_down = '<C-f>', scroll_up = '<C-b>' -- quit can be a table
     },
     code_action_keys = {
       quit = 'q',exec = '<CR>'

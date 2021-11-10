@@ -54,6 +54,9 @@ call plug#begin(s:bundle_dir)
   " FZF
   Plug 'junegunn/fzf.vim' 
   Plug 'junegunn/fzf'
+  " Telescope
+  Plug 'nvim-lua/plenary.nvim'
+  Plug 'nvim-telescope/telescope.nvim'
 
 " lsp
   " lsp tools
@@ -73,6 +76,7 @@ call plug#begin(s:bundle_dir)
 " develop
   " golang
   Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' , 'for':'go'}
-
+  " github copilot 輔助系統
+  Plug 'github/copilot.vim'
 
 call plug#end()
