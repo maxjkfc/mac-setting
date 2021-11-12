@@ -30,9 +30,7 @@ lua << EOF
     }
   end
 
-   -- lsp.bashls.setup{}
-   -- lsp.solargraph.setup{}
-   -- lsp.tsserver.setup{}
+   -- nvim_lsp.bashls.setup{}
 
    nvim_lsp.gopls.setup{
       coq.lsp_ensure_capabilities{
@@ -49,9 +47,7 @@ lua << EOF
         }
       }
    }
-  nvim_lsp.vimls.setup{}
-  -- lsp.yamlls.setup{}
-  -- lsp.graphql.setup{}
+  -- nvim_lsp.vimls.setup{}
 EOF
 
 endif
