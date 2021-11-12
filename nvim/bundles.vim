@@ -57,6 +57,7 @@ call plug#begin(s:bundle_dir)
   " Telescope
   Plug 'nvim-lua/plenary.nvim'
   Plug 'nvim-telescope/telescope.nvim'
+  Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 
 " lsp
   " lsp tools
@@ -67,16 +68,17 @@ call plug#begin(s:bundle_dir)
   Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
   " 9000+ Snippets
   Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
-
   " lua & third party sources -- See https://github.com/ms-jpq/coq.thirdparty
   " Need to **configure separately**
   Plug 'ms-jpq/coq.thirdparty', {'branch': '3p'}
-
 
 " develop
   " golang
   Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' , 'for':'go'}
   " github copilot 輔助系統
   Plug 'github/copilot.vim'
+" git
+  Plug 'tpope/vim-fugitive'
+  Plug 'APZelos/blamer.nvim'
 
 call plug#end()
