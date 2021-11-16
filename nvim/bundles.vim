@@ -13,6 +13,9 @@ call plug#begin(s:bundle_dir)
   Plug 'junegunn/vim-emoji'
   " 彩虹括弧
   Plug 'luochen1990/rainbow'
+  " statusline
+  Plug 'nvim-lualine/lualine.nvim'
+  " If you want to have icons in your statusline choose one of these
   
 " 檔案管理工具
   " nvim-tree
@@ -77,8 +80,14 @@ call plug#begin(s:bundle_dir)
   Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' , 'for':'go'}
   " github copilot 輔助系統
   Plug 'github/copilot.vim'
-" git
+  " flutter SDK
+  Plug 'nvim-lua/plenary.nvim'
+  Plug 'akinsho/flutter-tools.nvim' 
+  " git 擴充指令插件
   Plug 'tpope/vim-fugitive'
+  " git 擴充插件工具
+  Plug 'lewis6991/gitsigns.nvim'
+  " git 單行顯示commit 紀錄工具
   Plug 'APZelos/blamer.nvim'
 
 call plug#end()

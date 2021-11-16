@@ -46,8 +46,8 @@ EOF
 
   nnoremap <silent> gd :Lspsaga lsp_finder<CR>
   " have bug in neovim 0.5.1
-  " nnoremap <silent><leader>la :Lspsaga code_action<CR>
-  " vnoremap <silent><leader>la :<C-U>Lspsaga range_code_action<CR>
+  nnoremap <silent><leader>la :Lspsaga code_action<CR>
+  vnoremap <silent><leader>la :<C-U>Lspsaga range_code_action<CR>
   nnoremap <silent> K :Lspsaga hover_doc<CR>
 
   "-- scroll down hover doc or scroll in definition preview

@@ -98,3 +98,15 @@ endif
 if filereadable(expand("$HOME/.config/nvim/blamer.vim"))
   source $HOME/.config/nvim/blamer.vim
 endif
+" flutter config
+if filereadable(expand("$HOME/.config/nvim/flutter.vim"))
+  source $HOME/.config/nvim/flutter.vim
+endif
+" lualine config
+if filereadable(expand("$HOME/.config/nvim/lualine.vim"))
+  source $HOME/.config/nvim/lualine.vim
+endif
+" gitsigns config
+if filereadable(expand("$HOME/.config/nvim/gitsigns.vim"))
+  source $HOME/.config/nvim/gitsigns.vim
+endif
