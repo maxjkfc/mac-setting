@@ -110,3 +110,9 @@ endif
 if filereadable(expand("$HOME/.config/nvim/gitsigns.vim"))
   source $HOME/.config/nvim/gitsigns.vim
 endif
+
+" lsp_signature config
+if filereadable(expand("$HOME/.config/nvim/lsp_signature.vim"))
+  source $HOME/.config/nvim/lsp_signature.vim
+endif
+

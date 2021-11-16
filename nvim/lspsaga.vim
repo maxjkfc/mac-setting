@@ -45,30 +45,23 @@ EOF
 
 
   nnoremap <silent> gd :Lspsaga lsp_finder<CR>
-  " have bug in neovim 0.5.1
-  nnoremap <silent><leader>la :Lspsaga code_action<CR>
-  vnoremap <silent><leader>la :<C-U>Lspsaga range_code_action<CR>
-  nnoremap <silent> K :Lspsaga hover_doc<CR>
-
-  "-- scroll down hover doc or scroll in definition preview
-  nnoremap <silent> <C-f> <cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<CR>
-  "-- scroll up hover doc
-  nnoremap <silent> <C-b> <cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<CR>
-
-  nnoremap <silent> gs :Lspsaga signature_help<CR>
   nnoremap <silent> gr :Lspsaga rename<CR>
   nnoremap <silent> gh :Lspsaga preview_definition<CR>
 
-  nnoremap <silent> <space>al :Lspsaga show_line_diagnostics<CR>
-  nnoremap <silent> <space>ac <cmd>lua require'lspsaga.diagnostic'.show_cursor_diagnostics()<CR>
-
-  "jump diagnostic
-  nnoremap <silent> [d :Lspsaga diagnostic_jump_next<CR>
-  nnoremap <silent> ]d :Lspsaga diagnostic_jump_prev<CR>
-
-
-  nnoremap <silent> <space>t :Lspsaga open_floaterm<CR>
-  tnoremap <silent> <space>t <C-\><C-n>:Lspsaga close_floaterm<CR>
+  " have bug in neovim 0.5.1
+  " nnoremap <silent><leader>la :Lspsaga code_action<CR>
+  " vnoremap <silent><leader>la :<C-U>Lspsaga range_code_action<CR>
+  " nnoremap <silent> K :Lspsaga hover_doc<CR>
+  " nnoremap <silent> gs :Lspsaga signature_help<CR>
+  "-- scroll down hover doc or scroll in definition preview
+  " nnoremap <silent> <C-f> <cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<CR>
+  "-- scroll up hover doc
+  " nnoremap <silent> <C-b> <cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<CR>
+  " nnoremap <silent> <space>al :Lspsaga show_line_diagnostics<CR>
+  " nnoremap <silent> <space>ac <cmd>lua require'lspsaga.diagnostic'.show_cursor_diagnostics()<CR>
+  "jump diagnostic bug in v0.5.1
+  " nnoremap <silent> [d :Lspsaga diagnostic_jump_next<CR>
+  " nnoremap <silent> ]d :Lspsaga diagnostic_jump_prev<CR>
 
   highlight link LspSagaFinderSelection Search
 

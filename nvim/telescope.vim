@@ -3,45 +3,68 @@ if isdirectory(expand('~/.vim/bundle/telescope.nvim'))
 lua << EOF
   local actions = require('telescope.actions')
   local previewers = require('telescope.previewers')
--- 禁用以下檔案的預覽 
-  local _bad = { '.*%.csv', '.*%.lua' } -- 將不要預覽的檔案類型放入此處
-  local bad_files = function(filepath)
-    for _, v in ipairs(_bad) do
-      if filepath:match(v) then
-        return false
-      end
-    end
-
-    return true
-  end
-
-  local new_maker = function(filepath, bufnr, opts)
-    opts = opts or {}
-    if opts.use_ft_detect == nil then opts.use_ft_detect = true end
-    opts.use_ft_detect = opts.use_ft_detect == false and false or bad_files(filepath)
-    previewers.buffer_previewer_maker(filepath, bufnr, opts)
-  end
 
 
 
   require('telescope').setup{
     defaults = {
       layout_config = {
-          vertical = { width = 0.8 },
+          vertical = { width = 0.5 },
         },
-      buffer_previewer_maker = new_maker,
       mappings = {
           i = {
               ["<esc>"] = actions.close
             },
-        },
-    },
-  pickers = {
-      find_files = {
-        prompt = "Find Files: ",
-        preview_maker = new_maker,
-        theme = "dropdown",
       },
+    },
+    pickers = {
+        find_files = {
+          prompt = "Find Files: ",
+          theme = "dropdown",
+        },
+        live_grep = {
+          prompt = "Grep: ",
+          theme = "dropdown",
+        },
+        grep_string = {
+          prompt = "Grep String: ",
+          theme = "dropdown",
+        },
+        treesitter = {
+          prompt = "Treesitter: ",
+          theme = "dropdown",
+        },
+        current_buffer_fuzzy_find = {
+          prompt = "Fuzzy Find: ",
+          theme = "dropdown",
+        },
+        lsp_workspace_diagnostics = {
+          prompt = "Diagnostics: ",
+          theme = "dropdown",
+        },
+        lsp_workspace_symbols = {
+          prompt = "Symbols: ",
+          theme = "dropdown",
+        },
+        lsp_code_actions = {
+          prompt = "Code Actions: ",
+          theme = "cursor",
+        },
+        help_tags = {
+          prompt = "Help Tags: ",
+          theme = "dropdown",
+        },
+        command = {
+          prompt = "Command: ",
+          theme = "dropdown",
+        },
+        buffers = {
+          prompt = "Buffers: ",
+          theme = "dropdown",
+        },
+
+
+
     },
     extensions = {
       fzf = {
@@ -69,10 +92,10 @@ EOF
   nnoremap <space>ft    <cmd>Telescope treesitter<cr>
   nnoremap <space>fb    <cmd>Telescope buffers<cr>
   nnoremap <space>fh    <cmd>Telescope help_tags<cr>
-  nnoremap <space>fe    <cmd>Telescope file_browser<cr>
+  " nnoremap <space>fe    <cmd>Telescope file_browser<cr>
   nnoremap <space>a     <cmd>Telescope lsp_workspace_diagnostics<cr>
   nnoremap <space>fc    <cmd>Telescope flutter commands<cr>
   nnoremap <space>c     <cmd>Telescope commands<cr>
-
-
+  " add command to toggle  extensions for lsp
+  " nnoremap <silent>ga   <cmd>Telescope lsp_code_actions<cr>
 endif
