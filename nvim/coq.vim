@@ -1,4 +1,3 @@
-
 if isdirectory(expand('~/.vim/bundle/coq_nvim/'))
 lua<<EOF
   require("coq_3p"){

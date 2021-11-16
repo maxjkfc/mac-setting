@@ -25,6 +25,8 @@ call plug#begin(s:bundle_dir)
 " 小工具
   " 可視化色塊工具
   Plug 'norcalli/nvim-colorizer.lua'
+  " terminal tools
+  Plug 'akinsho/toggleterm.nvim' 
 
 " Startup
   " 美化登入起始畫面
@@ -63,9 +65,12 @@ call plug#begin(s:bundle_dir)
   Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 
 " lsp
-  " lsp tools
+  " nvim officel lsp tools
   Plug 'neovim/nvim-lspconfig'
+  " 強化視覺效果的Lsp 插件  
   Plug 'glepnir/lspsaga.nvim' 
+  " 強化提供提示訊息的Lsp 插件
+  Plug 'ray-x/lsp_signature.nvim'
 
   " coq-nvim
   Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
