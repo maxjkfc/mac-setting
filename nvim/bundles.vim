@@ -92,7 +92,5 @@ call plug#begin(s:bundle_dir)
   Plug 'tpope/vim-fugitive'
   " git 擴充插件工具
   Plug 'lewis6991/gitsigns.nvim'
-  " git 單行顯示commit 紀錄工具
-  Plug 'APZelos/blamer.nvim'
 
 call plug#end()
