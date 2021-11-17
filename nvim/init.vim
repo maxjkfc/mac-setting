@@ -88,15 +88,9 @@ endif
 if filereadable(expand("$HOME/.config/nvim/telescope.vim"))
   source $HOME/.config/nvim/telescope.vim
 endif
-
 " copilot config
 if filereadable(expand("$HOME/.config/nvim/copilot.vim"))
   source $HOME/.config/nvim/copilot.vim
-endif
-
-" blamer config
-if filereadable(expand("$HOME/.config/nvim/blamer.vim"))
-  source $HOME/.config/nvim/blamer.vim
 endif
 " flutter config
 if filereadable(expand("$HOME/.config/nvim/flutter.vim"))
