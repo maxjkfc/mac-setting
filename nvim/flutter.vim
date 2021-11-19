@@ -11,7 +11,7 @@ lua << EOF
       }
     },
     debugger = {
-      endabled = false,
+      endabled = true,
     },
     fvm = false,
     widget_guides = { 
@@ -25,8 +25,8 @@ lua << EOF
       auto_open_browser = true
     },
     outline = {
-      open_cmd = "30vnew", -- command to use to open the outline buffer
-      auto_open = false -- if true this will open the outline automatically when it is first populated
+      open_cmd = "40vnew", -- command to use to open the outline buffer
+      auto_open = true -- if true this will open the outline automatically when it is first populated
     },
   } -- use defaults
 EOF

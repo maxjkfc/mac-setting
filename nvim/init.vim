@@ -96,6 +96,10 @@ endif
 if filereadable(expand("$HOME/.config/nvim/flutter.vim"))
   source $HOME/.config/nvim/flutter.vim
 endif
+" dart config
+if filereadable(expand("$HOME/.config/nvim/dart.vim"))
+  source $HOME/.config/nvim/dart.vim
+endif
 " lualine config
 if filereadable(expand("$HOME/.config/nvim/lualine.vim"))
   source $HOME/.config/nvim/lualine.vim
@@ -104,9 +108,12 @@ endif
 if filereadable(expand("$HOME/.config/nvim/gitsigns.vim"))
   source $HOME/.config/nvim/gitsigns.vim
 endif
-
 " lsp_signature config
 if filereadable(expand("$HOME/.config/nvim/lsp_signature.vim"))
   source $HOME/.config/nvim/lsp_signature.vim
 endif
 
+" nvim-dap config
+if filereadable(expand("$HOME/.config/nvim/nvim-dap.vim"))
+  source $HOME/.config/nvim/nvim-dap.vim
+endif

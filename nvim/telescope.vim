@@ -74,10 +74,13 @@ lua << EOF
         case_mode = "smart_case",        -- or "ignore_case" or "respect_case"
       },
       flutter = {},
+     -- dap = {},
     },
   }
   require('telescope').load_extension('fzf')
   require('telescope').load_extension('flutter')
+ -- close the dap because need study next time
+ -- require('telescope').load_extension('dap')
 
 EOF
 
@@ -95,7 +98,12 @@ EOF
   " nnoremap <space>fe    <cmd>Telescope file_browser<cr>
   nnoremap <space>a     <cmd>Telescope lsp_workspace_diagnostics<cr>
   nnoremap <space>fc    <cmd>Telescope flutter commands<cr>
+  " nnoremap <space>d     <cmd>Telescope dap commands<cr>
   nnoremap <space>c     <cmd>Telescope commands<cr>
   " add command to toggle  extensions for lsp
-  " nnoremap <silent>ga   <cmd>Telescope lsp_code_actions<cr>
+  nnoremap <silent>ga   <cmd>Telescope lsp_code_actions<cr>
+
+
+
+
 endif

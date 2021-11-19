@@ -63,6 +63,7 @@ call plug#begin(s:bundle_dir)
   Plug 'nvim-lua/plenary.nvim'
   Plug 'nvim-telescope/telescope.nvim'
   Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
+  Plug 'nvim-telescope/telescope-dap.nvim'
 
 " lsp
   " nvim officel lsp tools
@@ -82,15 +83,23 @@ call plug#begin(s:bundle_dir)
 
 " develop
   " golang
-  Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' , 'for':'go'}
+    Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' , 'for':'go'}
+    " debug golang for dap 
+    " Plug 'leoluz/nvim-dap-go'
+  " debug tools
+    " Plug 'mfussenegger/nvim-dap'
+    " Plug 'rcarriga/nvim-dap-ui'
   " github copilot 輔助系統
-  Plug 'github/copilot.vim'
-  " flutter SDK
-  Plug 'nvim-lua/plenary.nvim'
-  Plug 'akinsho/flutter-tools.nvim' 
-  " git 擴充指令插件
-  Plug 'tpope/vim-fugitive'
-  " git 擴充插件工具
-  Plug 'lewis6991/gitsigns.nvim'
+    Plug 'github/copilot.vim'
+  " flutter
+    " flutter SDK
+    Plug 'nvim-lua/plenary.nvim'
+    Plug 'akinsho/flutter-tools.nvim' , { 'for': 'dart' }
+    Plug 'dart-lang/dart-vim-plugin' ,{ 'for':'dart' }
+  " git
+    " git 擴充指令插件
+    Plug 'tpope/vim-fugitive'
+    " git 擴充插件工具
+    Plug 'lewis6991/gitsigns.nvim'
 
 call plug#end()
