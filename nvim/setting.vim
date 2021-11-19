@@ -49,13 +49,13 @@
   set ignorecase                  " Case insensitive search
   set smartcase
   set wildmenu                    " Show list instead of just completing
-  set wildmode=list:longest,full  " Command <Tab> completion, list matches, then longest common part, then all.
+  " set wildmode=list:longest,full  " Command <Tab> completion, list matches, then longest common part, then all.
   set whichwrap=b,s,h,l,<,>,[,]   " Backspace and cursor keys wrap too
   set scrolljump=5                " Lines to scroll when cursor leaves screen
   set scrolloff=3                 " Minimum lines to keep above and below cursor
   set foldenable                  " Auto fold code
-  "set foldmethod=indent " 折疊的方式
-  "set foldnestmax=1
+  " set foldmethod=indent " 折疊的方式
+  " set foldnestmax=2
 
 " Formatting
   set nowrap                              " Do not wrap long lines
@@ -126,6 +126,7 @@
   vnoremap > >gv 
   vnoremap <Tab> >gv 
   vnoremap < <gv
+
   
 " HighLight
   "複製一行時會有高量顯示是哪一行
