@@ -96,7 +96,7 @@ EOF
   nnoremap <space>fb    <cmd>Telescope buffers<cr>
   nnoremap <space>fh    <cmd>Telescope help_tags<cr>
   " nnoremap <space>fe    <cmd>Telescope file_browser<cr>
-  nnoremap <space>a     <cmd>Telescope lsp_workspace_diagnostics<cr>
+  nnoremap <space>a     <cmd>Telescope diagnostics<cr>
   nnoremap <space>fc    <cmd>Telescope flutter commands<cr>
   " nnoremap <space>d     <cmd>Telescope dap commands<cr>
   nnoremap <space>c     <cmd>Telescope commands<cr>

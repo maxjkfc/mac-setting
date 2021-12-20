@@ -114,8 +114,6 @@ lua << EOF
 EOF
   " 要忽略的檔案,不顯示
   " let g:nvim_tree_ignore = [] "empty by default
-  " 是否要忽略 .gitignore 內的檔案
-  let g:nvim_tree_gitignore = 1 "0 by default
   " 是否在文件夾後面加入斜槓
   let g:nvim_tree_add_trailing = 1 "0 by default, append a trailing slash to folder names
   let g:nvim_tree_show_icons = {

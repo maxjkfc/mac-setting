@@ -11,7 +11,7 @@ lua << EOF
       }
     },
     debugger = {
-      endabled = true,
+      endabled = false,
     },
     fvm = false,
     widget_guides = { 
