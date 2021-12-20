@@ -101,5 +101,6 @@ call plug#begin(s:bundle_dir)
     Plug 'tpope/vim-fugitive'
     " git 擴充插件工具
     Plug 'lewis6991/gitsigns.nvim'
-
+  " tag
+    Plug 'liuchengxu/vista.vim'   
 call plug#end()

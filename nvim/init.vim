@@ -117,3 +117,7 @@ endif
 if filereadable(expand("$HOME/.config/nvim/nvim-dap.vim"))
   source $HOME/.config/nvim/nvim-dap.vim
 endif
+" vista config
+if filereadable(expand("$HOME/.config/nvim/vista.vim"))
+  source $HOME/.config/nvim/vista.vim
+endif
