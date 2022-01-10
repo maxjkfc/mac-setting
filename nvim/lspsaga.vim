@@ -44,9 +44,9 @@ lua<<EOF
 EOF
 
 
-  nnoremap <silent> gd :Lspsaga lsp_finder<CR>
-  nnoremap <silent> gr :Lspsaga rename<CR>
-  nnoremap <silent> gh :Lspsaga preview_definition<CR>
+  " nnoremap <silent> gd :Lspsaga lsp_finder<CR>
+  " nnoremap <silent> gr :Lspsaga rename<CR>
+  " nnoremap <silent> gh :Lspsaga preview_definition<CR>
 
   " have bug in neovim 0.5.1
   " nnoremap <silent><leader>la :Lspsaga code_action<CR>

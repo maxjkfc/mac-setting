@@ -68,8 +68,8 @@ call plug#begin(s:bundle_dir)
 " lsp
   " nvim officel lsp tools
   Plug 'neovim/nvim-lspconfig'
-  " 強化視覺效果的Lsp 插件  
-  Plug 'glepnir/lspsaga.nvim' 
+  " 強化視覺效果的Lsp 插件  over date
+  " Plug 'glepnir/lspsaga.nvim'
   " 強化提供提示訊息的Lsp 插件
   Plug 'ray-x/lsp_signature.nvim'
 

@@ -3,7 +3,7 @@ lua<<EOF
   require("coq_3p"){
     { src = "nvimlua",  short_name = "nlua" },
     { src = "vimtex",   short_name = "vTEX" },
-    { src = "copilot",  short_name = "COP" , tmp_accept_key = "<c-r>"  },
+    { src = "copilot",  short_name = "COP" , accept_key = "<C-f>"  },
     { src = "nvimlua",  short_name = "nLUA", conf_only = true },
     { src = "bc",       short_name = "MATH", precision = 6 },
   }
@@ -26,6 +26,7 @@ EOF
   ino <silent><expr> <CR>    pumvisible() ? (complete_info().selected == -1 ? "\<C-e><CR>" : "\<C-y>") : "\<CR>"
   ino <silent><expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
   ino <silent><expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<BS>"
+
 
 endif
 
