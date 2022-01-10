@@ -42,6 +42,7 @@
   set backspace=indent,eol,start  " Backspace for dummies
   set linespace=0                 " No extra spaces between rows
   set number                      " Line numbers on
+  set rnu                         " Line numbers on with relative numbers
   set showmatch                   " Show matching brackets/parenthesis
   set incsearch                   " Find as you type search
   set hlsearch                    " Highlight search terms
@@ -113,21 +114,28 @@
   map zh zH
 
   " settings for resize splitted window
-  nmap w[ :vertical resize -3<CR>
-  nmap w] :vertical resize +3<CR>
+  " nmap w[ :vertical resize -3<CR>
+  " nmap w] :vertical resize +3<CR>
 
-  nmap w- :resize -3<CR>
-  nmap w= :resize +3<CR>
+  " nmap w- :resize -3<CR>
+  " nmap w= :resize +3<CR>
 
   " swap line
   vnoremap <c-k> :m '<-2<CR>gv=gv
   vnoremap <c-j> :m '>+1<CR>gv=gv 
-  " move left and right
+ " move left and right
   vnoremap > >gv 
   vnoremap <Tab> >gv 
   vnoremap < <gv
+  " 快速移動到這一行的前面
+  nmap hh ^
+  " 快速移動到這一行的後面
+  nmap ll $
+  " 預設貼上複製所用值
+  nmap <c-p> "0p  
+  " 跳出insert mode
+  " imap jj <Esc>
 
-  
-" HighLight
+  " HighLight
   "複製一行時會有高量顯示是哪一行
   autocmd TextYankPost * silent! lua vim.highlight.on_yank{higroup="IncSearch", timeout=300}
