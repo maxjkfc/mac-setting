@@ -109,10 +109,6 @@
   " Adjust viewports to the same size
   map <Leader>= <C-w>=
 
-  " Easier horizontal scrolling
-  map zl zL
-  map zh zH
-
   " settings for resize splitted window
   " nmap w[ :vertical resize -3<CR>
   " nmap w] :vertical resize +3<CR>
@@ -121,20 +117,21 @@
   " nmap w= :resize +3<CR>
 
   " swap line
+  "
   vnoremap <c-k> :m '<-2<CR>gv=gv
   vnoremap <c-j> :m '>+1<CR>gv=gv 
  " move left and right
   vnoremap > >gv 
   vnoremap <Tab> >gv 
   vnoremap < <gv
+  vnoremap <S-Tab> <gv
   " 快速移動到這一行的前面
-  nmap hh ^
+  nmap zh ^
   " 快速移動到這一行的後面
-  nmap ll $
+  nmap zl $
   " 預設貼上複製所用值
   nmap <c-p> "0p  
   " 跳出insert mode
-  " imap jj <Esc>
 
   " HighLight
   "複製一行時會有高量顯示是哪一行

@@ -68,10 +68,11 @@ call plug#begin(s:bundle_dir)
 " lsp
   " nvim officel lsp tools
   Plug 'neovim/nvim-lspconfig'
-  " 強化視覺效果的Lsp 插件  over date
-  " Plug 'glepnir/lspsaga.nvim'
   " 強化提供提示訊息的Lsp 插件
   Plug 'ray-x/lsp_signature.nvim'
+  " 強化lsp工具
+  Plug 'folke/lsp-colors.nvim'
+  Plug 'folke/trouble.nvim'
 
   " coq-nvim
   Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
@@ -80,6 +81,7 @@ call plug#begin(s:bundle_dir)
   " lua & third party sources -- See https://github.com/ms-jpq/coq.thirdparty
   " Need to **configure separately**
   Plug 'ms-jpq/coq.thirdparty', {'branch': '3p'}
+
 
 " develop
   " golang

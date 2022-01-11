@@ -4,18 +4,30 @@ lua << EOF
   local actions = require('telescope.actions')
   local previewers = require('telescope.previewers')
 
-
-
   require('telescope').setup{
     defaults = {
+      prompt_prefix = "🔭 ",
+      selection_caret = " ",
       layout_config = {
-          vertical = { width = 0.5 },
+          -- vertical = { width = 0.5 },
+          horizontal = { prompt_position = "bottom", results_width = 0.6 },
+          vertical = { mirror = false }
         },
       mappings = {
           i = {
               ["<esc>"] = actions.close
             },
       },
+      file_ignore_patterns = {},
+      path_display = {"absolute"},
+      winblend = 0,
+      border = {},
+      borderchars = {
+          "─", "│", "─", "│", "╭", "╮", "╯", "╰"
+      },
+      color_devicons = true,
+      use_less = true,
+      set_env = {["COLORTERM"] = "truecolor"}
     },
     pickers = {
         find_files = {
@@ -38,17 +50,17 @@ lua << EOF
           prompt = "Fuzzy Find: ",
           theme = "dropdown",
         },
-        lsp_workspace_diagnostics = {
+        diagnostics = {
           prompt = "Diagnostics: ",
-          theme = "dropdown",
-        },
-        lsp_workspace_symbols = {
-          prompt = "Symbols: ",
           theme = "dropdown",
         },
         lsp_code_actions = {
           prompt = "Code Actions: ",
           theme = "cursor",
+        },
+        lsp_references = {
+          prompt = "References: ",
+          theme = "dropdown",
         },
         help_tags = {
           prompt = "Help Tags: ",
@@ -62,9 +74,6 @@ lua << EOF
           prompt = "Buffers: ",
           theme = "dropdown",
         },
-
-
-
     },
     extensions = {
       fzf = {
@@ -88,20 +97,21 @@ EOF
 
 
   " Find files using Telescope command-line sugar.
-  nnoremap <space>f     <cmd>Telescope find_files<cr>
-  nnoremap <space>r     <cmd>Telescope live_grep<cr>
-  nnoremap <space>rb    <cmd>Telescope current_buffer_fuzzy_find<cr>
-  nnoremap <space>rs    <cmd>Telescope grep_string<cr>
+  nnoremap <space>ff     <cmd>Telescope find_files<cr>
+  nnoremap <space>l     <cmd>Telescope live_grep<cr>
+  nnoremap <space>fn    <cmd>Telescope current_buffer_fuzzy_find<cr>
   nnoremap <space>ft    <cmd>Telescope treesitter<cr>
   nnoremap <space>fb    <cmd>Telescope buffers<cr>
   nnoremap <space>fh    <cmd>Telescope help_tags<cr>
-  " nnoremap <space>fe    <cmd>Telescope file_browser<cr>
-  nnoremap <space>a     <cmd>Telescope diagnostics<cr>
+  nnoremap <space>a     <cmd>Telescope diagnostics <cr>
   nnoremap <space>fc    <cmd>Telescope flutter commands<cr>
-  " nnoremap <space>d     <cmd>Telescope dap commands<cr>
-  nnoremap <space>c     <cmd>Telescope commands<cr>
+  nnoremap <space>cc     <cmd>Telescope commands<cr>
+  nnoremap <space>j     <cmd>Telescope jumplist<cr>
   " add command to toggle  extensions for lsp
-  nnoremap <silent>ga   <cmd>Telescope lsp_code_actions<cr>
+  nnoremap <silent>ga   <cmd>Telescope lsp_range_code_actions<cr>
+  nnoremap <silent>gd   <cmd>Telescope lsp_definitions<cr>
+  nnoremap <silent>gr   <cmd>Telescope lsp_references<cr>
+  nnoremap <silent>gi   <cmd>Telescope lsp_implementations<cr>
 
 
 
