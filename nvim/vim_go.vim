@@ -14,8 +14,9 @@ if isdirectory(expand('~/.vim/bundle/vim-go'))
   " 關閉初始快捷鍵
   let g:go_def_mapping_enabled = 0
   let g:go_doc_keywordprg_enabled = 0
-  let g:go_gopls_enabled = 0
+  let g:go_gopls_enabled = 1
   let g:go_gopls_options = ['-remote=auto']
+  let g:go_fmt_autosave = 1
 
   augroup golangcmd
     au FileType go nmap <leader>r <Plug>(go-run)

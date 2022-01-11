@@ -121,3 +121,7 @@ endif
 if filereadable(expand("$HOME/.config/nvim/vista.vim"))
   source $HOME/.config/nvim/vista.vim
 endif
+" trouble config
+if filereadable(expand("$HOME/.config/nvim/trouble.vim"))
+  source $HOME/.config/nvim/trouble.vim
+endif

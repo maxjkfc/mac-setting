@@ -18,6 +18,8 @@ lua << EOF
     -- buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
     -- buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
 
+
+
   end
   -- Use a loop to conveniently call 'setup' on multiple servers and
   -- map buffer local keybindings when the language server attaches
@@ -36,6 +38,7 @@ lua << EOF
    nvim_lsp.gopls.setup{
       coq.lsp_ensure_capabilities{
         cmd = { "gopls" };
+        options = { "-remote=auto" };
         filetypes = { "go", "gomod" };
         root_dir = nvim_lsp.util.root_pattern('go.mod' , '.git');
         settings = {
@@ -49,6 +52,9 @@ lua << EOF
       }
    }
   -- nvim_lsp.vimls.setup{}
+
 EOF
+    nnoremap <silent>[d <cmd>lua vim.diagnostic.goto_prev()<CR>
+    nnoremap <silent>]d <cmd>lua vim.diagnostic.goto_next()<CR>
 
 endif
