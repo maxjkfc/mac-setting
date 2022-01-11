@@ -35,8 +35,6 @@ call plug#begin(s:bundle_dir)
 " 文本工具
   " 快速建立/替換/移除對應的括弧或雙引號等符號
   Plug 'tpope/vim-surround'   
-  " 快速選取區塊內容
-  Plug 'gcmt/wildfire.vim'
   " 快速註解
   Plug 'scrooloose/nerdcommenter'
   " 快速對齊
