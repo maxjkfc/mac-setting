@@ -169,6 +169,7 @@ fi
 	_fzf_compgen_dir() {
 	  fd --type d --hidden --follow --exclude ".git" . "$1"
 	}
+    eval "$(zoxide init zsh)"
 
 	# Iterm2 Plugin
 	test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"

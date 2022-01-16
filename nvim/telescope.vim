@@ -100,13 +100,13 @@ EOF
   nnoremap <space>ff     <cmd>Telescope find_files<cr>
   nnoremap <space>l     <cmd>Telescope live_grep<cr>
   nnoremap <space>fn    <cmd>Telescope current_buffer_fuzzy_find<cr>
-  nnoremap <space>ft    <cmd>Telescope treesitter<cr>
+  nnoremap <space>t    <cmd>Telescope treesitter<cr>
   nnoremap <space>fb    <cmd>Telescope buffers<cr>
-  nnoremap <space>fh    <cmd>Telescope help_tags<cr>
   nnoremap <space>a     <cmd>Telescope diagnostics <cr>
   nnoremap <space>fc    <cmd>Telescope flutter commands<cr>
   nnoremap <space>cc     <cmd>Telescope commands<cr>
   nnoremap <space>j     <cmd>Telescope jumplist<cr>
+
   " add command to toggle  extensions for lsp
   nnoremap <silent>ga   <cmd>Telescope lsp_range_code_actions<cr>
   nnoremap <silent>gd   <cmd>Telescope lsp_definitions<cr>
