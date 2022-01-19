@@ -44,7 +44,20 @@ setup_nvim(){
 		rm -rf $NVIM_PATH/nvim
 	fi
 
-	ln -s $PWD/nvim $NVIM_PATH
+	ln -s $PWD/nvim $NVIM_PATH/nvim
+
+	echo "setup [nvim] config finish"
+}
+
+setup_nvim_lua(){
+	echo "setup [nvim] config"
+	NVIM_PATH="$HOME/.config"
+
+	if [ -d "$NVIM_PATH/nvim" ]; then
+		rm -rf $NVIM_PATH/nvim
+	fi
+
+	ln -s $PWD/new_nvim $NVIM_PATH/nvim
 
 	echo "setup [nvim] config finish"
 }
@@ -59,6 +72,9 @@ case $1 in
 		;;
 	"nvim") 
 		setup_nvim
+		;;
+	"nvim_lua") 
+		setup_nvim_lua
 		;;
 	*)
 		echo "not match any pkg"
