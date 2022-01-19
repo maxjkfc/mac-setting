@@ -57,7 +57,7 @@ setup_nvim_lua(){
 		rm -rf $NVIM_PATH/nvim
 	fi
 
-	ln -s $PWD/new_nvim $NVIM_PATH/nvim
+	ln -s $PWD/nvim_lua $NVIM_PATH/nvim
 
 	echo "setup [nvim] config finish"
 }
