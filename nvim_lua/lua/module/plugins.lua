@@ -78,10 +78,10 @@ return packer.startup(function(use)
 
     -- Telescope
     use "nvim-telescope/telescope.nvim"             -- 搜尋工具
-    use "tami5/sqlite.lua"                          -- Telescop 使用
-    use "nvim-telescope/telescope-fzy-native.nvim"  -- 模糊搜尋套件
     use "nvim-telescope/telescope-project.nvim" 	-- Manage projects with telescope
     use "nvim-telescope/telescope-frecency.nvim"	-- Frequent and recent file cache
+    use 'nvim-telescope/telescope-media-files.nvim' -- Media file
+    use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
     use "folke/trouble.nvim"	                    -- Show code troubles etc
 
     -- Treesitter

@@ -3,7 +3,6 @@ if not status_ok then
     return
 end
 
-telescope.load_extension('media_files')
 
 local actions = require "telescope.actions"
 
@@ -33,7 +32,7 @@ telescope.setup {
         ["<C-t>"] = actions.select_tab,
 
         ["<C-u>"] = actions.preview_scrolling_up,
-        ["<C-d>"] = actions.preview_scrolling_own,
+        ["<C-d>"] = actions.preview_scrolling_down,
 
         ["<PageUp>"] = actions.results_scrolling_up,
         ["<PageDown>"] = actions.results_scrolling_down,
@@ -87,6 +86,50 @@ telescope.setup {
     -- }
     -- Now the picker_config_key will be applied every time you call this
     -- builtin picker
+   find_files = {
+      prompt = "Find Files: ",
+      theme = "dropdown",
+    },
+    live_grep = {
+      prompt = "Grep: ",
+      theme = "dropdown",
+    },
+    grep_string = {
+      prompt = "Grep String: ",
+      theme = "dropdown",
+    },
+    treesitter = {
+      prompt = "Treesitter: ",
+      theme = "dropdown",
+    },
+    current_buffer_fuzzy_find = {
+      prompt = "Fuzzy Find: ",
+      theme = "dropdown",
+    },
+    diagnostics = {
+      prompt = "Diagnostics: ",
+      theme = "dropdown",
+    },
+    lsp_code_actions = {
+      prompt = "Code Actions: ",
+      theme = "cursor",
+    },
+    lsp_references = {
+      prompt = "References: ",
+      theme = "dropdown",
+    },
+    help_tags = {
+      prompt = "Help Tags: ",
+      theme = "dropdown",
+    },
+    command = {
+      prompt = "Command: ",
+      theme = "dropdown",
+    },
+    buffers = {
+      prompt = "Buffers: ",
+      theme = "dropdown",
+    },
   },
   extensions = {
     media_files = {
@@ -94,11 +137,30 @@ telescope.setup {
         -- defaults to {"png", "jpg", "mp4", "webm", "pdf"}
         filetypes = {"png", "webp", "jpg", "jpeg"},
         find_cmd = "rg" -- find command (defaults to `fd`)
-      }
-    -- Your extension configuration goes here:
-    -- extension_name = {
-    --   extension_config_key = value,
-    -- }
-    -- please take a look at the readme of the extension you want to configure
+      },
+    fzf = {
+        fuzzy = true,                    -- false will only do exact matching
+        override_generic_sorter = true,  -- override the generic sorter
+        override_file_sorter = true,     -- override the file sorter
+        case_mode = "smart_case",        -- or "ignore_case" or "respect_case"
+    },
+    flutter = {},
   },
 }
+
+telescope.load_extension('media_files')
+telescope.load_extension('fzf')
+-- telescope.load_extension('flutter')
+
+-- KeyMaps
+local opts = { noremap = true , silent = true }
+local keymap = vim.api.nvim_set_keymap
+
+keymap("n", "<leader>f", ":Telescope find_files<CR>", opts)
+keymap("n", "<leader>l", ":Telescope live_grep<CR>", opts)
+keymap("n", "<leader>fn", ":Telescope current_buffer_fuzzy_find<CR>", opts)
+keymap("n", "<leader>t", ":Telescope <CR>", opts)
+keymap("n", "<leader>tt", ":Telescope treesitter<CR>", opts)
+keymap("n", "<leader>d", ":Telescope diagnostics<CR>", opts)
+keymap("n", "<leader>fc", ":Telescope flutter commands<CR>", opts)
+
