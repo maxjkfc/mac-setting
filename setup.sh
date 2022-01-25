@@ -1,12 +1,11 @@
 #!/bin/bash
 set -e
-
 setup_tmux() {
 	echo "setup [tmux] config"
 
 	if [ -f "$HOME/.tmux.conf" ]; then
 		rm -rf $HOME/.tmux.conf
-	fi
+    fi
 
 	ln -s $PWD/tmux/.tmux.conf $HOME/.tmux.conf
 
