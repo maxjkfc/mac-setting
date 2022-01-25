@@ -1,1 +1,6 @@
-require "user.options"
+require "module.options"
+require "module.keymaps"
+require "module.plugins"
+require "module.colorscheme"
+require "module.lsp"
+require "module.autocmd"
