@@ -12,8 +12,7 @@ if fn.empty(fn.glob(install_path)) > 0 then
         install_path, }
 
     print "Installing packer close and reopen nvim"
-    vim.cmd [[packadd packer.nvim]]
-end
+    vim.cmd [[packadd packer.nvim]] end
 -- 設定檔確認是否存在
 local status_ok, packer = pcall(require, "packer")
 if not status_ok then
@@ -77,11 +76,16 @@ return packer.startup(function(use)
     use "rafamadriz/friendly-snippets"              -- a bunch of snippets to use
 
     -- Telescope
-    use "nvim-telescope/telescope.nvim"             -- 搜尋工具
-    use "nvim-telescope/telescope-project.nvim" 	-- Manage projects with telescope
-    use "nvim-telescope/telescope-frecency.nvim"	-- Frequent and recent file cache
-    use 'nvim-telescope/telescope-media-files.nvim' -- Media file
-    use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
+    use {
+        "nvim-telescope/telescope.nvim",
+        requires = {
+            "nvim-lua/plenary.nvim",                     -- 大量Lua 方法覆用工具
+            "nvim-telescope/telescope-project.nvim", 	-- Manage projects with telescope
+            "nvim-telescope/telescope-frecency.nvim",	-- Frequent and recent file cache
+            "nvim-telescope/telescope-media-files.nvim", -- Media file
+            {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
+        },
+    }             -- 搜尋工具
     use "folke/trouble.nvim"	                    -- Show code troubles etc
 
     -- Treesitter
@@ -105,14 +109,18 @@ return packer.startup(function(use)
     use "jose-elias-alvarez/null-ls.nvim"	        -- Null LSP
 
     -- CMP
-    use "hrsh7th/nvim-cmp"                          -- The completion plugin
-    use "hrsh7th/cmp-buffer"                        -- buffer completions
-    use "hrsh7th/cmp-nvim-lsp"                      -- LSP completions
-    use "hrsh7th/cmp-path"                          -- path completions
-    use "hrsh7th/cmp-cmdline"                       -- cmdline completions
-    use "hrsh7th/cmp-nvim-lua"                      -- cmp-nvim-lua
-    use "saadparwaiz1/cmp_luasnip"                  -- snippet completions
-    -- use "hrsh7th/cmp-copilot"                       -- cmp-copilot
+    use {
+        "hrsh7th/nvim-cmp",
+        requires = {
+            "hrsh7th/cmp-buffer",                        -- buffer completions
+            "hrsh7th/cmp-nvim-lsp",                      -- LSP completions
+            "hrsh7th/cmp-path",                          -- path completions
+            "hrsh7th/cmp-cmdline",                       -- cmdline completions
+            "hrsh7th/cmp-nvim-lua",                      -- cmp-nvim-lua
+            "saadparwaiz1/cmp_luasnip",                  -- snippet completions
+            -- "hrsh7th/cmp-copilot"                       -- cmp-copilot
+        }
+    }                          -- The completion plugin
     -- use "github/copilot.vim"                        -- Copilot LSP
 
 
