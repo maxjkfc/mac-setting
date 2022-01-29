@@ -12,5 +12,10 @@ configs.setup{
         disable = { "" }, -- list of language that will be disabled
         additional_vim_regex_highlighting = true,
     },
-  indent = { enable = true, disable = { "yaml" } },
+    rainbow = {
+        enable = true,
+        extended_mod = true,
+        max_file_lines = nil,
+    },
+    indent = { enable = true, disable = { "yaml" } },
 }

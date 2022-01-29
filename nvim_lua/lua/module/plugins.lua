@@ -94,7 +94,7 @@ return packer.startup(function(use)
          run = ":TSUpdate",
     }
     use "JoosepAlviste/nvim-ts-context-commentstring"
-    use "p00f/nvim-ts-ranbow"
+    use "p00f/nvim-ts-rainbow"
 
     -- Git
     use "lewis6991/gitsigns.nvim"                   -- git 狀態信號燈
