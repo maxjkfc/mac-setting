@@ -90,10 +90,11 @@ return packer.startup(function(use)
 
     -- Treesitter
     use {
-    "nvim-treesitter/nvim-treesitter",
-    run = ":TSUpdate",
+        "nvim-treesitter/nvim-treesitter",
+         run = ":TSUpdate",
     }
     use "JoosepAlviste/nvim-ts-context-commentstring"
+    use "p00f/nvim-ts-ranbow"
 
     -- Git
     use "lewis6991/gitsigns.nvim"                   -- git 狀態信號燈

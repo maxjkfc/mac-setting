@@ -152,20 +152,5 @@ telescope.load_extension('media_files')
 telescope.load_extension('fzf')
 -- telescope.load_extension('flutter')
 
--- KeyMaps
-local opts = { noremap = true , silent = true }
-local keymap = vim.api.nvim_set_keymap
-
-keymap("n", "<leader>ff",   ":Telescope find_files<CR>", opts)
-keymap("n", "<leader>fg",   ":Telescope live_grep<CR>", opts)
-keymap("n", "<leader>/",    ":Telescope current_buffer_fuzzy_find<CR>", opts)
-keymap("n", "<leader>ft",   ":Telescope <CR>", opts)
-keymap("n", "<leader>tt",   ":Telescope treesitter<CR>", opts)
-keymap("n", "<leader>d",    ":Telescope diagnostics<CR>", opts)
-keymap("n", "<leader>b",    ":Telescope buffers<CR>", opts)
-keymap("n", "<leader>cc",   ":Telescope commands<CR>", opts)
--- keymap("n", "<leader>fc",   ":Telescope flutter commands<CR>", opts)
--- lsp keymaps
-keymap("n" , "<leader>ca", ":Telescope lsp_code_actions<CR>",opts)
 
 

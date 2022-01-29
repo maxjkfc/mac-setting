@@ -204,6 +204,11 @@ _G.packer_plugins = {
     path = "/Users/maxjkfc/.local/share/nvim/site/pack/packer/start/nvim-ts-context-commentstring",
     url = "https://github.com/JoosepAlviste/nvim-ts-context-commentstring"
   },
+  ["nvim-ts-ranbow"] = {
+    loaded = true,
+    path = "/Users/maxjkfc/.local/share/nvim/site/pack/packer/start/nvim-ts-ranbow",
+    url = "https://github.com/p00f/nvim-ts-ranbow"
+  },
   ["nvim-web-devicons"] = {
     loaded = true,
     path = "/Users/maxjkfc/.local/share/nvim/site/pack/packer/start/nvim-web-devicons",
