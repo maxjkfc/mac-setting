@@ -17,5 +17,8 @@ configs.setup{
         extended_mod = true,
         max_file_lines = nil,
     },
+    autopairs = {
+        enable = true,
+    },
     indent = { enable = true, disable = { "yaml" } },
 }
