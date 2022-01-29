@@ -79,13 +79,13 @@ return packer.startup(function(use)
     use {
         "nvim-telescope/telescope.nvim",
         requires = {
-            "nvim-lua/plenary.nvim",                     -- 大量Lua 方法覆用工具
-            "nvim-telescope/telescope-project.nvim", 	-- Manage projects with telescope
-            "nvim-telescope/telescope-frecency.nvim",	-- Frequent and recent file cache
-            "nvim-telescope/telescope-media-files.nvim", -- Media file
+            "nvim-lua/plenary.nvim",                        -- 大量Lua 方法覆用工具
+            "nvim-telescope/telescope-project.nvim", 	    -- Manage projects with telescope
+            "nvim-telescope/telescope-frecency.nvim",	    -- Frequent and recent file cache
+            "nvim-telescope/telescope-media-files.nvim",    -- Media file
             {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
         },
-    }             -- 搜尋工具
+    } 
     use "folke/trouble.nvim"	                    -- Show code troubles etc
 
     -- Treesitter
@@ -94,7 +94,7 @@ return packer.startup(function(use)
          run = ":TSUpdate",
     }
     use "JoosepAlviste/nvim-ts-context-commentstring"
-    use "p00f/nvim-ts-rainbow"
+    use "p00f/nvim-ts-rainbow"                      -- 括弧彩色對應
 
     -- Git
     use "lewis6991/gitsigns.nvim"                   -- git 狀態信號燈
