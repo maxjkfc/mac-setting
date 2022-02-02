@@ -59,8 +59,8 @@ keymap("v", "<S-Tab>", "<gv", opts)
 keymap("x", "<C-j>", ":move '>+1<CR>gv-gv", opts)
 keymap("x", "<C-k>", ":move '<-2<CR>gv-gv", opts)
 
---
-keymap("n","<leader>e",":Lex 25<CR>",opts)
+-- Nvimtree
+keymap("n", "<leader>e", ":NvimTreeToggle<cr>", opts)
 
 -- Terminal --
 -- Better terminal navigation
