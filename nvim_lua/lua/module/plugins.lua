@@ -85,7 +85,7 @@ return packer.startup(function(use)
             "nvim-telescope/telescope-media-files.nvim",    -- Media file
             {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
         },
-    } 
+    }
     use "folke/trouble.nvim"	                    -- Show code troubles etc
 
     -- Treesitter
@@ -97,7 +97,13 @@ return packer.startup(function(use)
     use "p00f/nvim-ts-rainbow"                      -- 括弧彩色對應
 
     -- Git
-    use "lewis6991/gitsigns.nvim"                   -- git 狀態信號燈
+    use {
+      'lewis6991/gitsigns.nvim',
+      requires = {
+        'nvim-lua/plenary.nvim'
+      },
+      -- tag = 'release' -- To use the latest release
+    }
     -- EasyMotion
     use "phaazon/hop.nvim"                          -- 更先進的快速移動插件
 
@@ -108,6 +114,8 @@ return packer.startup(function(use)
     use "ray-x/lsp_signature.nvim"	                -- Show signature when completing function parameters
     use "windwp/nvim-autopairs"	                    -- Completion pairs
     use "jose-elias-alvarez/null-ls.nvim"	        -- Null LSP
+    -- Comment
+    use "numToStr/Comment.nvim"                     -- quick comment
 
     -- CMP
     use {
