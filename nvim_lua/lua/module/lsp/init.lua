@@ -6,4 +6,5 @@ end
 require "module.lsp.lsp_installer"
 require ("module.lsp.handlers").setup()
 require "module.lsp.cmp"
+require "module.lsp.null-ls"
 
