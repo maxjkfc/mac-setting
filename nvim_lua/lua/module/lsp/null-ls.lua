@@ -21,8 +21,7 @@ null_ls.setup({
 		diagnostics.flake8,
         diagnostics.protoc_gen_lint,
         diagnostics.gitlint,
-        -- TODO: fix the refactoring issues
-        -- code_actions.refactoring,
+        diagnostics.revive, -- golang lint
         hover.dictionary,
 	},
 })

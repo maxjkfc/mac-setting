@@ -28,7 +28,6 @@ keymap("n", "<C-Up>", ":resize -2<CR>", opts)
 keymap("n", "<C-Down>", ":resize +2<CR>", opts)
 keymap("n", "<C-Left>", ":vertical resize -2<CR>", opts)
 keymap("n", "<C-Right>", ":vertical resize +2<CR>", opts)
-keymap("n", "<leader>=", "<C-w>=", opts)
 
 -- 切換不同buffer
 keymap("n", "<S-l>", ":bnext<CR>", opts)
@@ -59,6 +58,3 @@ keymap("v", "<S-Tab>", "<gv", opts)
 keymap("x", "<C-j>", ":move '>+1<CR>gv-gv", opts)
 keymap("x", "<C-k>", ":move '<-2<CR>gv-gv", opts)
 
--- Gitsigns
-keymap("n", "[c", ":Gitsigns next_hunk<CR>", opts)
-keymap("n", "]c", ":Gitsigns prev_hunk<CR>", opts)

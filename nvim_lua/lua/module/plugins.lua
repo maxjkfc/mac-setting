@@ -47,15 +47,15 @@ return packer.startup(function(use)
 
 	-- Colorschems
 	use({ "dracula/vim", as = "dracula" }) -- 主題
-	use "lunarvim/darkplus.nvim"
-    -- use "yong1le/darkplus.nvim"
-    use "folke/tokyonight.nvim"
+	use("lunarvim/darkplus.nvim")
+	-- use "yong1le/darkplus.nvim"
+	use("folke/tokyonight.nvim")
 	-- GUI
 	use("lukas-reineke/indent-blankline.nvim") -- 段落縮進線
 	use("gelguy/wilder.nvim") -- More useful wild menu
 	use("folke/which-key.nvim") -- Help you learn keybindings
-    use "goolord/alpha-nvim" -- 歡迎頁面
-    use "antoinemadec/FixCursorHold.nvim" -- This is needed to fix lsp doc highlight
+	use("goolord/alpha-nvim") -- 歡迎頁面
+	use("antoinemadec/FixCursorHold.nvim") -- This is needed to fix lsp doc highlight
 
 	-- Explor
 	use("kyazdani42/nvim-web-devicons") -- nvim-tree所用icons
@@ -87,7 +87,7 @@ return packer.startup(function(use)
 			"nvim-telescope/telescope-frecency.nvim", -- Frequent and recent file cache
 			"nvim-telescope/telescope-media-files.nvim", -- Media file
 			{ "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
-	        "ahmedkhalf/project.nvim" -- 專案管理工具
+			"ahmedkhalf/project.nvim", -- 專案管理工具
 		},
 	})
 	use("folke/trouble.nvim") -- Show code troubles etc
@@ -97,6 +97,8 @@ return packer.startup(function(use)
 		"nvim-treesitter/nvim-treesitter",
 		run = ":TSUpdate",
 	})
+	use("nvim-treesitter/nvim-treesitter-textobjects")
+	use("nvim-treesitter/nvim-treesitter-refactor")
 	use("JoosepAlviste/nvim-ts-context-commentstring")
 	use("p00f/nvim-ts-rainbow") -- 括弧彩色對應
 
@@ -110,24 +112,19 @@ return packer.startup(function(use)
 	})
 	-- EasyMotion
 	use("phaazon/hop.nvim") -- 更先進的快速移動插件
-
 	-- LSP
 	use("neovim/nvim-lspconfig") -- Neovim native LSP configuration
 	use("williamboman/nvim-lsp-installer") -- Manage each LSP engine
 	use("tami5/lspsaga.nvim") -- LSP saga
 	use("ray-x/lsp_signature.nvim") -- Show signature when completing function parameters
+	-- use("ray-x/navigator.lua")
 	use("windwp/nvim-autopairs") -- Completion pairs
 	use("jose-elias-alvarez/null-ls.nvim") -- 用來擴充formatting 與 linter 使用
-    use {
-        "ThePrimeagen/refactoring.nvim",
-        requires = {
-            {"nvim-lua/plenary.nvim"},
-            {"nvim-treesitter/nvim-treesitter"}
-        }
-    }
+
 	-- Comment
 	use("numToStr/Comment.nvim") -- quick comment
-
+	-- Surround
+	use("blackCauldron7/surround.nvim")
 	-- CMP
 	use({
 		"hrsh7th/nvim-cmp",
@@ -142,6 +139,14 @@ return packer.startup(function(use)
 		},
 	}) -- The completion plugin
 	-- use "github/copilot.vim"                        -- Copilot LSP
+	-- Golang
+	use({
+		"ray-x/go.nvim",
+		run = ":GoInstallBinaries",
+		requires = {
+			{ "ray-x/guihua.lua", run = "cd lua/fzy && make" },
+		},
+	})
 
 	if PACKER_BOOTSTRAP then
 		require("packer").sync()

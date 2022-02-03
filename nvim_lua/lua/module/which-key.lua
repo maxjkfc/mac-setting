@@ -19,8 +19,8 @@ local setup = {
 			text_objects = false, -- help for text objects triggered after entering an operator
 			windows = true, -- default bindings on <c-w>
 			nav = true, -- misc bindings to work with windows
-			z = true, -- bindings for folds, spelling and others prefixed with z
-			g = true, -- bindings for prefixed with g
+			z = false, -- bindings for folds, spelling and others prefixed with z
+			g= false, -- bindings for prefixed with g
 		},
 	},
 	-- add operators that will trigger motion and text object completion
@@ -53,7 +53,7 @@ local setup = {
 		height = { min = 4, max = 25 }, -- min and max height of the columns
 		width = { min = 20, max = 50 }, -- min and max width of the columns
 		spacing = 3, -- spacing between columns
-		align = "left", -- align columns left, center or right
+		align = "center", -- align columns left, center or right
 	},
 	ignore_missing = true, -- enable this to hide mappings for which you didn't specify a label
 	hidden = { "<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ " }, -- hide mapping boilerplate
@@ -80,17 +80,21 @@ local opts = {
 
 local mappings = {
 	["/"] = { '<cmd>lua require("Comment.api").toggle_current_linewise()<CR>', "Comment" },
-	-- ["a"] = { "<cmd>Alpha<cr>", "Alpha" },
-	["b"] = {
-		"<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{previewer = false})<cr>",
-		"Buffers",
-	},
 	["e"] = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
 	["w"] = { "<cmd>w!<CR>", "Save" },
 	["q"] = { "<cmd>q!<CR>", "Quit" },
-	["c"] = { "<cmd>Bdelete!<CR>", "Close Buffer" },
 	["h"] = { "<cmd>nohlsearch<CR>", "No Highlight" },
 	["P"] = { "<cmd>Telescope projects<cr>", "Projects" },
+
+    b = {
+        name = "Buffers",
+        l = {
+            "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{previewer = false})<cr>",
+            "Buffers",
+	    },
+        c = { "<cmd>Bdelete!<CR>", "Close Buffer" },
+    },
+
 	f = {
 		name = "Find",
 		f = { "<cmd>Telescope find_files<cr>", "Find File" },
@@ -138,10 +142,7 @@ local mappings = {
 			"<cmd>Telescope diagnostics<cr>",
 			"Diagnostics",
 		},
-		w = {
-			"<cmd>Telescope lsp_workspace_diagnostics<cr>",
-			"Workspace Diagnostics",
-		},
+        z = { "<cmd>lua vim.diagnostic.open_float()<cr>" , "DiagnosticFloat"},
 		f = { "<cmd>lua vim.lsp.buf.formatting()<cr>", "Format" },
 		i = { "<cmd>LspInfo<cr>", "Info" },
 		I = { "<cmd>LspInstallInfo<cr>", "Installer Info" },
@@ -162,9 +163,9 @@ local mappings = {
 			"Workspace Symbols",
 		},
 	},
+
 	s = {
 		name = "Search",
-		b = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
 		c = { "<cmd>Telescope colorscheme<cr>", "Colorscheme" },
 		h = { "<cmd>Telescope help_tags<cr>", "Find Help" },
 		M = { "<cmd>Telescope man_pages<cr>", "Man Pages" },
@@ -183,10 +184,27 @@ local mappings = {
 		h = { "<cmd>ToggleTerm size=10 direction=horizontal<cr>", "Horizontal" },
 		v = { "<cmd>ToggleTerm size=80 direction=vertical<cr>", "Vertical" },
 	},
-    z = {
-        name = "Nvim",
-        r = { "<cmd>source ~/.config/nvim/init.lua<cr>" , "ReloadConfig"},
-    }
+
+	z = {
+		name = "LanguageTools",
+        g = {
+            name = "Golang",
+            t = {
+                name = "Test",
+                ["."] = { "<cmd>GoTestFile<cr>" , "Test File"},
+                a = { "<cmd>GoTest<cr>" , "Test All File"},
+                f = { "<cmd>GoTestFunc<cr>", "Test Func"},
+                p = { "<cmd>GoTestPkg<cr>" , "Test Package"},
+            },
+            l = {
+                name = "LSP",
+            },
+            r = { "<cmd>GoRun<cr>" , "Run"},
+        },
+        f = {
+            name = "Flutter",
+        }
+	},
 }
 
 local vopts = {
@@ -197,14 +215,34 @@ local vopts = {
 	noremap = true, -- use `noremap` when creating keymaps
 	nowait = true, -- use `nowait` when creating keymaps
 }
+
 local vmappings = {
 	["/"] = { '<ESC><CMD>lua require("Comment.api").toggle_linewise_op(vim.fn.visualmode())<CR>', "Comment" },
-    l = {
+	l = {
 		name = "LSP",
 		a = { "<cmd>Telescope lsp_range_code_actions<cr>", "Code Action" },
-    }
+	},
+}
+
+local gopts = {
+	mode = "n",
+	prefix = "g",
+	buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
+	silent = true, -- use `silent` when creating keymaps
+	noremap = true, -- use `noremap` when creating keymaps
+	nowait = true, -- use `nowait` when creating keymaps
+}
+
+local gmappings = {
+	["D"] = { "<cmd>lua vim.lsp.buf.declaration()<cr>", "Declaration" },
+    ["d"] = { "<cmd>lua vim.lsp.buf.definition()<cr>" , "Definition"},
+    ["K"] = { "<cmd>lua vim.lsp.buf.hover()<cr>" , "Hover"},
+    ["k"] = { "<cmd>lua vim.lsp.buf.signature_help()<cr>","Signature Help"},
+    ["r"] = { "<cmd>lua vim.lsp.buf.references()<cr>" , "References"},
+    ["i"] = { "<cmd>lua vim.lsp.buf.implementation()<CR>" , "Implementation"},
 }
 
 which_key.setup(setup)
 which_key.register(mappings, opts)
 which_key.register(vmappings, vopts)
+which_key.register(gmappings, gopts)
