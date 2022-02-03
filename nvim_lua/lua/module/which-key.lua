@@ -56,7 +56,7 @@ local setup = {
 		align = "center", -- align columns left, center or right
 	},
 	ignore_missing = true, -- enable this to hide mappings for which you didn't specify a label
-	hidden = { "<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ " }, -- hide mapping boilerplate
+	hidden = { "<silent>", "<cmd>", "<Cmd>", "<cr>", "call", "lua", "^:", "^ " }, -- hide mapping boilerplate
 	show_help = true, -- show help message on the command line when the popup is visible
 	triggers = "auto", -- automatically setup triggers
 	-- triggers = {"<leader>"} -- or specify a list manually
@@ -79,11 +79,11 @@ local opts = {
 }
 
 local mappings = {
-	["/"] = { '<cmd>lua require("Comment.api").toggle_current_linewise()<CR>', "Comment" },
+	["/"] = { '<cmd>lua require("Comment.api").toggle_current_linewise()<cr>', "Comment" },
 	["e"] = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
-	["w"] = { "<cmd>w!<CR>", "Save" },
-	["q"] = { "<cmd>q!<CR>", "Quit" },
-	["h"] = { "<cmd>nohlsearch<CR>", "No Highlight" },
+	["w"] = { "<cmd>w!<cr>", "Save" },
+	["q"] = { "<cmd>q!<cr>", "Quit" },
+	["\\"] = { "<cmd>nohlsearch<cr>", "No Highlight" },
 	["P"] = { "<cmd>Telescope projects<cr>", "Projects" },
 
     b = {
@@ -92,7 +92,7 @@ local mappings = {
             "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{previewer = false})<cr>",
             "Buffers",
 	    },
-        c = { "<cmd>Bdelete!<CR>", "Close Buffer" },
+        c = { "<cmd>Bdelete!<cr>", "Close Buffer" },
     },
 
 	f = {
@@ -103,18 +103,10 @@ local mappings = {
 		["/"] = { "<cmd>Telescope current_buffer_fuzzy_find<cr>", "Search" },
 	},
 
-	p = {
-		name = "Packer",
-		c = { "<cmd>PackerCompile<cr>", "Compile" },
-		i = { "<cmd>PackerInstall<cr>", "Install" },
-		s = { "<cmd>PackerSync<cr>", "Sync" },
-		S = { "<cmd>PackerStatus<cr>", "Status" },
-		u = { "<cmd>PackerUpdate<cr>", "Update" },
-	},
 
 	g = {
 		name = "Git",
-		g = { "<cmd>lua _LAZYGIT_TOGGLE()<CR>", "Lazygit" },
+		g = { "<cmd>lua _LAZYGIT_TOGGLE()<cr>", "Lazygit" },
 		j = { "<cmd>lua require 'gitsigns'.next_hunk()<cr>", "Next Hunk" },
 		k = { "<cmd>lua require 'gitsigns'.prev_hunk()<cr>", "Prev Hunk" },
 		l = { "<cmd>lua require 'gitsigns'.blame_line()<cr>", "Blame" },
@@ -135,6 +127,17 @@ local mappings = {
 		},
 	},
 
+    h = {
+        name = "Hop",
+        l = { "<cmd>HopLine<cr>" , "Line"},
+        w = { "<cmd>HopWord<cr>" , "Word"},
+        s = { "<cmd>HopChar2<cr>" , "Char2"},
+        f = { "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<cr>", "f" },
+        F = { "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true })<cr>","F" },
+        t = { "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<cr>","t" },
+        T = { "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true })<cr>","T" },
+    },
+
 	l = {
 		name = "LSP",
 		a = { "<cmd>Telescope lsp_code_actions<cr>", "Code Action" },
@@ -147,7 +150,7 @@ local mappings = {
 		i = { "<cmd>LspInfo<cr>", "Info" },
 		I = { "<cmd>LspInstallInfo<cr>", "Installer Info" },
 		j = {
-			"<cmd>lua vim.lsp.diagnostic.goto_next()<CR>",
+			"<cmd>lua vim.lsp.diagnostic.goto_next()<cr>",
 			"Next Diagnostic",
 		},
 		k = {
@@ -162,6 +165,15 @@ local mappings = {
 			"<cmd>Telescope lsp_dynamic_workspace_symbols<cr>",
 			"Workspace Symbols",
 		},
+	},
+
+	p = {
+		name = "Packer",
+		c = { "<cmd>PackerCompile<cr>", "Compile" },
+		i = { "<cmd>PackerInstall<cr>", "Install" },
+		s = { "<cmd>PackerSync<cr>", "Sync" },
+		S = { "<cmd>PackerStatus<cr>", "Status" },
+		u = { "<cmd>PackerUpdate<cr>", "Update" },
 	},
 
 	s = {
@@ -218,7 +230,7 @@ local vopts = {
 }
 
 local vmappings = {
-	["/"] = { '<ESC><CMD>lua require("Comment.api").toggle_linewise_op(vim.fn.visualmode())<CR>', "Comment" },
+	["/"] = { '<ESC><CMD>lua require("Comment.api").toggle_linewise_op(vim.fn.visualmode())<cr>', "Comment" },
 	l = {
 		name = "LSP",
 		a = { "<cmd>Telescope lsp_range_code_actions<cr>", "Code Action" },
@@ -240,8 +252,10 @@ local gmappings = {
     ["K"] = { "<cmd>lua vim.lsp.buf.hover()<cr>" , "Hover"},
     ["k"] = { "<cmd>lua vim.lsp.buf.signature_help()<cr>","Signature Help"},
     ["r"] = { "<cmd>lua vim.lsp.buf.references()<cr>" , "References"},
-    ["i"] = { "<cmd>lua vim.lsp.buf.implementation()<CR>" , "Implementation"},
+    ["i"] = { "<cmd>lua vim.lsp.buf.implementation()<cr>" , "Implementation"},
+    -- f = { "<cmd>Lspsaga lsp_finder<cr>" , "Finder"},
 }
+
 
 which_key.setup(setup)
 which_key.register(mappings, opts)

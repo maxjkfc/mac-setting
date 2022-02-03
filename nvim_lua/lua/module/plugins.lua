@@ -111,13 +111,23 @@ return packer.startup(function(use)
 		-- tag = 'release' -- To use the latest release
 	})
 	-- EasyMotion
-	use("phaazon/hop.nvim") -- 更先進的快速移動插件
+    use {
+        'phaazon/hop.nvim',
+        branch = 'v1', -- optional but strongly recommended
+        config = function()
+            require'hop'.setup { keys = 'etovxqpdygfblzhckisuran' }
+        end
+    }
+
 	-- LSP
 	use("neovim/nvim-lspconfig") -- Neovim native LSP configuration
 	use("williamboman/nvim-lsp-installer") -- Manage each LSP engine
-	use("tami5/lspsaga.nvim") -- LSP saga
+
+	-- use("tami5/lspsaga.nvim") -- LSP saga
+
 	use("ray-x/lsp_signature.nvim") -- Show signature when completing function parameters
-	-- use("ray-x/navigator.lua")
+	use("ray-x/navigator.lua")
+
 	use("windwp/nvim-autopairs") -- Completion pairs
 	use("jose-elias-alvarez/null-ls.nvim") -- 用來擴充formatting 與 linter 使用
 
@@ -135,6 +145,7 @@ return packer.startup(function(use)
 			"hrsh7th/cmp-cmdline", -- cmdline completions
 			"hrsh7th/cmp-nvim-lua", -- cmp-nvim-lua
 			"saadparwaiz1/cmp_luasnip", -- snippet completions
+            "hrsh7th/cmp-nvim-lsp-signature-help",
 			-- "hrsh7th/cmp-copilot"                       -- cmp-copilot
 		},
 	}) -- The completion plugin
