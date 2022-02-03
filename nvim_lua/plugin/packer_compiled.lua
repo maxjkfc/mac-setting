@@ -144,6 +144,16 @@ _G.packer_plugins = {
     path = "/Users/maxjkfc/.local/share/nvim/site/pack/packer/start/gitsigns.nvim",
     url = "https://github.com/lewis6991/gitsigns.nvim"
   },
+  ["go.nvim"] = {
+    loaded = true,
+    path = "/Users/maxjkfc/.local/share/nvim/site/pack/packer/start/go.nvim",
+    url = "https://github.com/ray-x/go.nvim"
+  },
+  ["guihua.lua"] = {
+    loaded = true,
+    path = "/Users/maxjkfc/.local/share/nvim/site/pack/packer/start/guihua.lua",
+    url = "https://github.com/ray-x/guihua.lua"
+  },
   ["hop.nvim"] = {
     loaded = true,
     path = "/Users/maxjkfc/.local/share/nvim/site/pack/packer/start/hop.nvim",
@@ -209,6 +219,16 @@ _G.packer_plugins = {
     path = "/Users/maxjkfc/.local/share/nvim/site/pack/packer/start/nvim-treesitter",
     url = "https://github.com/nvim-treesitter/nvim-treesitter"
   },
+  ["nvim-treesitter-refactor"] = {
+    loaded = true,
+    path = "/Users/maxjkfc/.local/share/nvim/site/pack/packer/start/nvim-treesitter-refactor",
+    url = "https://github.com/nvim-treesitter/nvim-treesitter-refactor"
+  },
+  ["nvim-treesitter-textobjects"] = {
+    loaded = true,
+    path = "/Users/maxjkfc/.local/share/nvim/site/pack/packer/start/nvim-treesitter-textobjects",
+    url = "https://github.com/nvim-treesitter/nvim-treesitter-textobjects"
+  },
   ["nvim-ts-context-commentstring"] = {
     loaded = true,
     path = "/Users/maxjkfc/.local/share/nvim/site/pack/packer/start/nvim-ts-context-commentstring",
@@ -244,10 +264,10 @@ _G.packer_plugins = {
     path = "/Users/maxjkfc/.local/share/nvim/site/pack/packer/start/project.nvim",
     url = "https://github.com/ahmedkhalf/project.nvim"
   },
-  ["refactoring.nvim"] = {
+  ["surround.nvim"] = {
     loaded = true,
-    path = "/Users/maxjkfc/.local/share/nvim/site/pack/packer/start/refactoring.nvim",
-    url = "https://github.com/ThePrimeagen/refactoring.nvim"
+    path = "/Users/maxjkfc/.local/share/nvim/site/pack/packer/start/surround.nvim",
+    url = "https://github.com/blackCauldron7/surround.nvim"
   },
   ["telescope-frecency.nvim"] = {
     loaded = true,

@@ -11,7 +11,7 @@ npairs.setup({
 		javascript = { "string", "template_string" },
 		java = false,
 	},
-	disable_filetype = { "TelescopePrompt", "spectre_panel" }, -- 禁止啟用的類型
+	disable_filetype = { "TelescopePrompt", "spectre_panel"  , "guihua", "guihua_rust" , "clap_input"}, -- 禁止啟用的類型
 	fast_wrap = {
 		map = "<M-e>",
 		chars = { "{", "[", "(", '"', "'" },
@@ -28,6 +28,10 @@ local cmp_autopairs = require("nvim-autopairs.completion.cmp")
 local cmp_status_ok, cmp = pcall(require, "cmp")
 if not cmp_status_ok then
 	return
+end
+
+if vim.o.ft == 'clap_input' and vim.o.ft == 'guihua' and vim.o.ft == 'guihua_rust' then
+  cmp.setup.buffer { completion = {enable = false} }
 end
 
 cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done({ map_char = { tex = "" } }))
