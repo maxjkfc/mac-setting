@@ -44,6 +44,10 @@ return packer.startup(function(use)
 	use("wbthomason/packer.nvim") -- 安裝插件管理工具
 	use("nvim-lua/popup.nvim") -- 控管懸浮視窗的插件
 	use("nvim-lua/plenary.nvim") -- 大量Lua 方法覆用工具
+	use("lewis6991/impatient.nvim") -- 加速導入lua 模組工具
+
+	-- VisualMulti
+	use("mg979/vim-visual-multi") -- 可以多重選取並同時操作
 
 	-- Colorschems
 	use({ "dracula/vim", as = "dracula" }) -- 主題
@@ -70,9 +74,6 @@ return packer.startup(function(use)
 
 	-- Ternmail
 	use("akinsho/toggleterm.nvim") -- 內建ternmail 工具
-
-	-- Core
-	use("lewis6991/impatient.nvim") -- 加速導入lua 模組工具
 
 	-- Snippets
 	use("L3MON4D3/LuaSnip") -- snippet engine
@@ -111,13 +112,13 @@ return packer.startup(function(use)
 		-- tag = 'release' -- To use the latest release
 	})
 	-- EasyMotion
-    use {
-        'phaazon/hop.nvim',
-        branch = 'v1', -- optional but strongly recommended
-        config = function()
-            require'hop'.setup { keys = 'etovxqpdygfblzhckisuran' }
-        end
-    }
+	use({
+		"phaazon/hop.nvim",
+		branch = "v1", -- optional but strongly recommended
+		config = function()
+			require("hop").setup({ keys = "etovxqpdygfblzhckisuran" })
+		end,
+	})
 
 	-- LSP
 	use("neovim/nvim-lspconfig") -- Neovim native LSP configuration
@@ -145,7 +146,7 @@ return packer.startup(function(use)
 			"hrsh7th/cmp-cmdline", -- cmdline completions
 			"hrsh7th/cmp-nvim-lua", -- cmp-nvim-lua
 			"saadparwaiz1/cmp_luasnip", -- snippet completions
-            "hrsh7th/cmp-nvim-lsp-signature-help",
+			"hrsh7th/cmp-nvim-lsp-signature-help",
 			-- "hrsh7th/cmp-copilot"                       -- cmp-copilot
 		},
 	}) -- The completion plugin

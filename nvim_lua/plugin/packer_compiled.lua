@@ -320,6 +320,11 @@ _G.packer_plugins = {
     path = "/Users/maxjkfc/.local/share/nvim/site/pack/packer/start/vim-bbye",
     url = "https://github.com/moll/vim-bbye"
   },
+  ["vim-visual-multi"] = {
+    loaded = true,
+    path = "/Users/maxjkfc/.local/share/nvim/site/pack/packer/start/vim-visual-multi",
+    url = "https://github.com/mg979/vim-visual-multi"
+  },
   ["which-key.nvim"] = {
     loaded = true,
     path = "/Users/maxjkfc/.local/share/nvim/site/pack/packer/start/which-key.nvim",
