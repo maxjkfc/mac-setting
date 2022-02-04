@@ -5,6 +5,8 @@ if not status_ok then
 end
 
 npairs.setup({
+    map_bs = false,
+    map_c_h = true,
 	check_ts = true, -- 是否要依靠 ts 來檢查
 	ts_config = {
 		lua = { "string", "source" },
@@ -14,7 +16,7 @@ npairs.setup({
 	disable_filetype = { "TelescopePrompt", "spectre_panel"  , "guihua", "guihua_rust" , "clap_input"}, -- 禁止啟用的類型
 	fast_wrap = {
 		map = "<M-e>",
-		chars = { "{", "[", "(", '"', "'" },
+        chars = { "{", "[", "(", '"', "'" },
 		pattern = string.gsub([[ [%'%"%)%>%]%)%}%,] ]], "%s+", ""),
 		offset = 0, -- Offset from pattern match
 		end_key = "$",
