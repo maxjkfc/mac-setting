@@ -70,7 +70,7 @@ cmp.setup({
 		["<Tab>"] = cmp.mapping(function(fallback)
 			if cmp.visible() then
 				-- cmp.select_next_item()
-				cmp.confirm()
+				cmp.confirm({ select = true })
 			elseif luasnip.expandable() then
 				luasnip.expand()
 			elseif luasnip.expand_or_jumpable() then
@@ -109,6 +109,7 @@ cmp.setup({
 				luasnip = "[Snippet]",
 				buffer = "[Buffer]",
 				path = "[Path]",
+                emoji = "[Emoji]"
 			})[entry.source.name]
 			return vim_item
 		end,
@@ -121,6 +122,7 @@ cmp.setup({
 		{ name = "buffer" },
 		{ name = "path" },
 		{ name = "cmdline" },
+        { name = "emoji"},
 	},
 	confirm_opts = {
 		behavior = cmp.ConfirmBehavior.Replace,
