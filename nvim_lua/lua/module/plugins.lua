@@ -46,7 +46,6 @@ return packer.startup(function(use)
 	use("nvim-lua/plenary.nvim") -- 大量Lua 方法覆用工具
 	use("lewis6991/impatient.nvim") -- 加速導入lua 模組工具
 
-	-- VisualMulti
 	use("mg979/vim-visual-multi") -- 可以多重選取並同時操作
 
 	-- Colorschems
@@ -54,12 +53,25 @@ return packer.startup(function(use)
 	use("lunarvim/darkplus.nvim")
 	-- use "yong1le/darkplus.nvim"
 	use("folke/tokyonight.nvim")
+    -- todo comments
+    use {
+      "folke/todo-comments.nvim",
+      requires = "nvim-lua/plenary.nvim",
+    }
+    -- Notify
+    use "rcarriga/nvim-notify"
 	-- GUI
 	use("lukas-reineke/indent-blankline.nvim") -- 段落縮進線
 	use("gelguy/wilder.nvim") -- More useful wild menu
 	use("folke/which-key.nvim") -- Help you learn keybindings
 	use("goolord/alpha-nvim") -- 歡迎頁面
 	use("antoinemadec/FixCursorHold.nvim") -- This is needed to fix lsp doc highlight
+	use("folke/twilight.nvim") -- 讓你編寫中的代碼高亮
+	use("folke/zen-mode.nvim")
+    use {
+      "folke/trouble.nvim",
+      requires = "kyazdani42/nvim-web-devicons",
+    }
 
 	-- Explor
 	use("kyazdani42/nvim-web-devicons") -- nvim-tree所用icons
@@ -91,8 +103,6 @@ return packer.startup(function(use)
 			"ahmedkhalf/project.nvim", -- 專案管理工具
 		},
 	})
-	use("folke/trouble.nvim") -- Show code troubles etc
-
 	-- Treesitter
 	use({
 		"nvim-treesitter/nvim-treesitter",
@@ -145,6 +155,7 @@ return packer.startup(function(use)
 			"hrsh7th/cmp-path", -- path completions
 			"hrsh7th/cmp-cmdline", -- cmdline completions
 			"hrsh7th/cmp-nvim-lua", -- cmp-nvim-lua
+            "hrsh7th/cmp-emoji",
 			"saadparwaiz1/cmp_luasnip", -- snippet completions
 			"hrsh7th/cmp-nvim-lsp-signature-help",
 			-- "hrsh7th/cmp-copilot"                       -- cmp-copilot

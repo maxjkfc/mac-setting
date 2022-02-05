@@ -20,7 +20,7 @@ local setup = {
 			windows = true, -- default bindings on <c-w>
 			nav = true, -- misc bindings to work with windows
 			z = false, -- bindings for folds, spelling and others prefixed with z
-			g= false, -- bindings for prefixed with g
+			g = false, -- bindings for prefixed with g
 		},
 	},
 	-- add operators that will trigger motion and text object completion
@@ -84,29 +84,40 @@ local mappings = {
 	["w"] = { "<cmd>w!<cr>", "Save" },
 	["q"] = { "<cmd>q!<cr>", "Quit" },
 	["\\"] = { "<cmd>nohlsearch<cr>", "No Highlight" },
-	["P"] = { "<cmd>Telescope projects<cr>", "Projects" },
+	["Z"] = { "<cmd>ZenMode<cr>", "Into ZenMode" },
 
-    b = {
-        name = "Buffers",
-        l = {
-            "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{previewer = false})<cr>",
-            "Buffers",
-	    },
-        c = { "<cmd>Bdelete!<cr>", "Close Buffer" },
-    },
-
-	f = {
-		name = "Find",
-		f = { "<cmd>Telescope find_files<cr>", "Find File" },
-		g = { "<cmd>Telescope live_grep<cr>", "Find Text" },
-		t = { "<cmd>Telescope treesitter<cr>", "Tressitter" },
-		["/"] = { "<cmd>Telescope current_buffer_fuzzy_find<cr>", "Search" },
+	b = {
+		name = "Buffers",
+		l = {
+			"<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{previewer = false})<cr>",
+			"Buffers",
+		},
+		c = { "<cmd>Bdelete!<cr>", "Close Buffer" },
 	},
 
+	f = {
+		name = "+Find 🔭",
+		f = { "<cmd>Telescope find_files<cr>", "Find File" },
+		l = { "<cmd>Telescope live_grep<cr>", "Find Text" },
+		t = { "<cmd>Telescope treesitter<cr>", "Tressitter" },
+		["/"] = { "<cmd>Telescope current_buffer_fuzzy_find<cr>", "Search" },
+		h = { "<cmd>Telescope help_tags<cr>", "Find Help" },
+		M = { "<cmd>Telescope man_pages<cr>", "Man Pages" },
+		k = { "<cmd>Telescope keymaps<cr>", "Keymaps" },
+		C = { "<cmd>Telescope commands<cr>", "Commands" },
+		T = { "<cmd>TodoTelescope<cr>", "TodoComments" },
+		P = { "<cmd>Telescope projects<cr>", "Projects" },
+		g = {
+			name = "+GIT",
+			o = { "<cmd>Telescope git_status<cr>", "Open changed file" },
+		},
+	},
 
 	g = {
-		name = "Git",
+		name = "Git ♐",
 		g = { "<cmd>lua _LAZYGIT_TOGGLE()<cr>", "Lazygit" },
+        b = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
+        c = { "<cmd>Telescope git_commits<cr>", "Checkout commit" },
 		j = { "<cmd>lua require 'gitsigns'.next_hunk()<cr>", "Next Hunk" },
 		k = { "<cmd>lua require 'gitsigns'.prev_hunk()<cr>", "Prev Hunk" },
 		l = { "<cmd>lua require 'gitsigns'.blame_line()<cr>", "Blame" },
@@ -118,34 +129,44 @@ local mappings = {
 			"<cmd>lua require 'gitsigns'.undo_stage_hunk()<cr>",
 			"Undo Stage Hunk",
 		},
-		o = { "<cmd>Telescope git_status<cr>", "Open changed file" },
-		b = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
-		c = { "<cmd>Telescope git_commits<cr>", "Checkout commit" },
 		d = {
 			"<cmd>Gitsigns diffthis HEAD<cr>",
 			"Diff",
 		},
+        a = { "<cmd>Gitsigns toggle_current_line_blame"},
 	},
 
-    h = {
-        name = "Hop",
-        l = { "<cmd>HopLine<cr>" , "Line"},
-        w = { "<cmd>HopWord<cr>" , "Word"},
-        s = { "<cmd>HopChar2<cr>" , "Char2"},
-        f = { "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<cr>", "f" },
-        F = { "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true })<cr>","F" },
-        t = { "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<cr>","t" },
-        T = { "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true })<cr>","T" },
-    },
+	h = {
+		name = "Hop 🚗",
+		l = { "<cmd>HopLine<cr>", "Line" },
+		w = { "<cmd>HopWord<cr>", "Word" },
+		s = { "<cmd>HopChar2<cr>", "Char2" },
+		f = {
+			"<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<cr>",
+			"f",
+		},
+		F = {
+			"<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true })<cr>",
+			"F",
+		},
+		t = {
+			"<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<cr>",
+			"t",
+		},
+		T = {
+			"<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true })<cr>",
+			"T",
+		},
+	},
 
 	l = {
-		name = "LSP",
+		name = "LSP 🔈",
 		a = { "<cmd>Telescope lsp_code_actions<cr>", "Code Action" },
 		d = {
 			"<cmd>Telescope diagnostics<cr>",
 			"Diagnostics",
 		},
-        z = { "<cmd>lua vim.diagnostic.open_float()<cr>" , "DiagnosticFloat"},
+		z = { "<cmd>lua vim.diagnostic.open_float()<cr>", "DiagnosticFloat" },
 		f = { "<cmd>lua vim.lsp.buf.formatting()<cr>", "Format" },
 		i = { "<cmd>LspInfo<cr>", "Info" },
 		I = { "<cmd>LspInstallInfo<cr>", "Installer Info" },
@@ -165,10 +186,11 @@ local mappings = {
 			"<cmd>Telescope lsp_dynamic_workspace_symbols<cr>",
 			"Workspace Symbols",
 		},
+		T = { "<cmd> TroubleToggle<cr>", "Trouble Diagnostic" },
 	},
 
-	p = {
-		name = "Packer",
+	P = {
+		name = "Packer 📦",
 		c = { "<cmd>PackerCompile<cr>", "Compile" },
 		i = { "<cmd>PackerInstall<cr>", "Install" },
 		s = { "<cmd>PackerSync<cr>", "Sync" },
@@ -176,19 +198,8 @@ local mappings = {
 		u = { "<cmd>PackerUpdate<cr>", "Update" },
 	},
 
-	s = {
-		name = "Search",
-		c = { "<cmd>Telescope colorscheme<cr>", "Colorscheme" },
-		h = { "<cmd>Telescope help_tags<cr>", "Find Help" },
-		M = { "<cmd>Telescope man_pages<cr>", "Man Pages" },
-		r = { "<cmd>Telescope oldfiles<cr>", "Open Recent File" },
-		R = { "<cmd>Telescope registers<cr>", "Registers" },
-		k = { "<cmd>Telescope keymaps<cr>", "Keymaps" },
-		C = { "<cmd>Telescope commands<cr>", "Commands" },
-	},
-
-	t = {
-		name = "Terminal",
+	T = {
+		name = "Terminal 💻",
 		u = { "<cmd>lua _NCDU_TOGGLE()<cr>", "NCDU" },
 		t = { "<cmd>lua _GOTOP_TOGGLE()<cr>", "Top" },
 		p = { "<cmd>lua _PYTHON_TOGGLE()<cr>", "Python" },
@@ -197,26 +208,33 @@ local mappings = {
 		h = { "<cmd>ToggleTerm size=10 direction=horizontal<cr>", "Horizontal" },
 		v = { "<cmd>ToggleTerm size=80 direction=vertical<cr>", "Vertical" },
 	},
+    X = {
+        name = "+TROUBLE 🚑",
+        d = { "<cmd>TroubleToggle document_diagnostics<cr>", "Document Diagnostics" },
+        q = { "<cmd>TroubleToggle quickfix<cr>", "Quick Fix" },
+        l = { "<cmd>TroubleToggle loclist<cr>", "Loc List" },
+        t = { "<cmd>TodoTrouble<cr>" , "Todo"}
+    },
 
 	z = {
-		name = "LanguageTools",
-        g = {
-            name = "Golang",
-            t = {
-                name = "Test",
-                ["."] = { "<cmd>GoTestFile<cr>" , "Test File"},
-                a = { "<cmd>GoTest<cr>" , "Test All File"},
-                f = { "<cmd>GoTestFunc<cr>", "Test Func"},
-                p = { "<cmd>GoTestPkg<cr>" , "Test Package"},
-            },
-            l = {
-                name = "LSP",
-            },
-            r = { "<cmd>GoRun<cr>" , "Run"},
-        },
-        f = {
-            name = "Flutter",
-        }
+		name = "LanguageTools 🧰",
+		g = {
+			name = "Golang",
+			t = {
+				name = "Test",
+				["."] = { "<cmd>GoTestFile<cr>", "Test File" },
+				a = { "<cmd>GoTest<cr>", "Test All File" },
+				f = { "<cmd>GoTestFunc<cr>", "Test Func" },
+				p = { "<cmd>GoTestPkg<cr>", "Test Package" },
+			},
+			l = {
+				name = "LSP",
+			},
+			r = { "<cmd>GoRun<cr>", "Run" },
+		},
+		f = {
+			name = "Flutter",
+		},
 	},
 }
 
@@ -248,14 +266,16 @@ local gopts = {
 
 local gmappings = {
 	["D"] = { "<cmd>lua vim.lsp.buf.declaration()<cr>", "Declaration" },
-    ["d"] = { "<cmd>lua vim.lsp.buf.definition()<cr>" , "Definition"},
-    ["K"] = { "<cmd>lua vim.lsp.buf.hover()<cr>" , "Hover"},
-    ["k"] = { "<cmd>lua vim.lsp.buf.signature_help()<cr>","Signature Help"},
-    ["r"] = { "<cmd>lua vim.lsp.buf.references()<cr>" , "References"},
-    ["i"] = { "<cmd>lua vim.lsp.buf.implementation()<cr>" , "Implementation"},
-    -- f = { "<cmd>Lspsaga lsp_finder<cr>" , "Finder"},
+	-- ["d"] = { "<cmd>lua vim.lsp.buf.definition()<cr>", "Definition" },
+	["d"] = { "<cmd>Telescope lsp_definition<cr>", "Definition" },
+	["K"] = { "<cmd>lua vim.lsp.buf.hover()<cr>", "Hover" },
+	["k"] = { "<cmd>lua vim.lsp.buf.signature_help()<cr>", "Signature Help" },
+	-- ["r"] = { "<cmd>lua vim.lsp.buf.references()<cr>", "References" },
+	["r"] = { "<cmd>Telescope lsp_references<cr>", "References" },
+	-- ["i"] = { "<cmd>lua vim.lsp.buf.implementation()<cr>", "Implementation" },
+	["i"] = { "<cmd>Telescope lsp_implementation<cr>", "Implementation" },
+	-- f = { "<cmd>Lspsaga lsp_finder<cr>" , "Finder"},
 }
-
 
 which_key.setup(setup)
 which_key.register(mappings, opts)
