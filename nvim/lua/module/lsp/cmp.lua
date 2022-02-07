@@ -109,7 +109,8 @@ cmp.setup({
 				luasnip = "[Snippet]",
 				buffer = "[Buffer]",
 				path = "[Path]",
-                emoji = "[Emoji]"
+                emoji = "[Emoji]",
+                -- coplit = "[COPLIT]"
 			})[entry.source.name]
 			return vim_item
 		end,
@@ -123,6 +124,7 @@ cmp.setup({
 		{ name = "path" },
 		{ name = "cmdline" },
         { name = "emoji"},
+        -- { name = "coplit"},
 	},
 	confirm_opts = {
 		behavior = cmp.ConfirmBehavior.Replace,

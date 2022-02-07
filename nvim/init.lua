@@ -25,4 +25,5 @@ require "module.todo-comment"
 require "module.trouble"
 require "module.nvim-notify"
 require "module.neogen"
+require "module.undotree"
 

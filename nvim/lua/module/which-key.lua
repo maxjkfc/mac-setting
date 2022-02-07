@@ -85,6 +85,8 @@ local mappings = {
 	["q"] = { "<cmd>q!<cr>", "Quit" },
 	["\\"] = { "<cmd>nohlsearch<cr>", "No Highlight" },
 	["Z"] = { "<cmd>ZenMode<cr>", "Into ZenMode" },
+    ["U"] = {"<cmd>UndotreeToggle<cr>" , "UndoTree"},
+    ["V"] = {"<cmd>Vista!!<cr>" , "Vista"},
 
 	b = {
 		name = "Buffers",
