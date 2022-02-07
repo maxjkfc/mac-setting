@@ -211,9 +211,10 @@ local mappings = {
     X = {
         name = "+TROUBLE 🚑",
         d = { "<cmd>TroubleToggle document_diagnostics<cr>", "Document Diagnostics" },
+        w = { "<cmd>TroubleToggle Workspace_document_diagnostics<cr>", "Workspace Diagnostics" },
         q = { "<cmd>TroubleToggle quickfix<cr>", "Quick Fix" },
         l = { "<cmd>TroubleToggle loclist<cr>", "Loc List" },
-        t = { "<cmd>TodoTrouble<cr>" , "Todo"}
+        t = { "<cmd>TodoTrouble<cr>" , "ToDo"}
     },
 
 	z = {
@@ -267,7 +268,7 @@ local gopts = {
 local gmappings = {
 	["D"] = { "<cmd>lua vim.lsp.buf.declaration()<cr>", "Declaration" },
 	-- ["d"] = { "<cmd>lua vim.lsp.buf.definition()<cr>", "Definition" },
-	["d"] = { "<cmd>Telescope lsp_definition<cr>", "Definition" },
+	["d"] = { "<cmd>Telescope lsp_definitions<cr>", "Definition" },
 	["K"] = { "<cmd>lua vim.lsp.buf.hover()<cr>", "Hover" },
 	["k"] = { "<cmd>lua vim.lsp.buf.signature_help()<cr>", "Signature Help" },
 	-- ["r"] = { "<cmd>lua vim.lsp.buf.references()<cr>", "References" },
