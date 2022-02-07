@@ -274,7 +274,7 @@ local gmappings = {
 	-- ["r"] = { "<cmd>lua vim.lsp.buf.references()<cr>", "References" },
 	["r"] = { "<cmd>Telescope lsp_references<cr>", "References" },
 	-- ["i"] = { "<cmd>lua vim.lsp.buf.implementation()<cr>", "Implementation" },
-	["i"] = { "<cmd>Telescope lsp_implementation<cr>", "Implementation" },
+	["i"] = { "<cmd>Telescope lsp_implementations<cr>", "Implementation" },
 	-- f = { "<cmd>Lspsaga lsp_finder<cr>" , "Finder"},
 }
 
