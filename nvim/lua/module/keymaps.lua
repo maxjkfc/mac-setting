@@ -18,10 +18,16 @@ vim.g.maplocalleader = " "
 
 -- Normal Mode
 -- 視窗移動
-keymap("n", "<C-h>", "<C-w>h", opts)
-keymap("n", "<C-j>", "<C-w>j", opts)
-keymap("n", "<C-k>", "<C-w>k", opts)
-keymap("n", "<C-l>", "<C-w>l", opts)
+-- keymap("n", "<C-h>", "<C-w>h", opts)
+-- keymap("n", "<C-j>", "<C-w>j", opts)
+-- keymap("n", "<C-k>", "<C-w>k", opts)
+-- keymap("n", "<C-l>", "<C-w>l", opts)
+
+keymap('n', "<C-h>", "<CMD>lua require('Navigator').left()<CR>", opts)
+keymap('n', "<C-k>", "<CMD>lua require('Navigator').up()<CR>", opts)
+keymap('n', "<C-l>", "<CMD>lua require('Navigator').right()<CR>", opts)
+keymap('n', "<C-j>", "<CMD>lua require('Navigator').down()<CR>", opts)
+keymap('n', "<C-p>", "<CMD>lua require('Navigator').previous()<CR>", opts)
 
 -- 調整視窗大小
 keymap("n", "<C-Up>", ":resize -2<CR>", opts)

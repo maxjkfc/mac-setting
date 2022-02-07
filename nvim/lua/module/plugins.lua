@@ -53,13 +53,13 @@ return packer.startup(function(use)
 	use("lunarvim/darkplus.nvim")
 	-- use "yong1le/darkplus.nvim"
 	use("folke/tokyonight.nvim")
-    -- todo comments
-    use {
-      "folke/todo-comments.nvim",
-      requires = "nvim-lua/plenary.nvim",
-    }
-    -- Notify
-    use "rcarriga/nvim-notify"
+	-- todo comments
+	use({
+		"folke/todo-comments.nvim",
+		requires = "nvim-lua/plenary.nvim",
+	})
+	-- Notify
+	use("rcarriga/nvim-notify")
 	-- GUI
 	use("lukas-reineke/indent-blankline.nvim") -- 段落縮進線
 	use("gelguy/wilder.nvim") -- More useful wild menu
@@ -68,10 +68,10 @@ return packer.startup(function(use)
 	use("antoinemadec/FixCursorHold.nvim") -- This is needed to fix lsp doc highlight
 	use("folke/twilight.nvim") -- 讓你編寫中的代碼高亮
 	use("folke/zen-mode.nvim")
-    use {
-      "folke/trouble.nvim",
-      requires = "kyazdani42/nvim-web-devicons",
-    }
+	use({
+		"folke/trouble.nvim",
+		requires = "kyazdani42/nvim-web-devicons",
+	})
 
 	-- Explor
 	use("kyazdani42/nvim-web-devicons") -- nvim-tree所用icons
@@ -129,24 +129,32 @@ return packer.startup(function(use)
 			require("hop").setup({ keys = "etovxqpdygfblzhckisuran" })
 		end,
 	})
+    -- Windows Move
+    use {
+        'numToStr/Navigator.nvim',
+        config = function()
+            require('Navigator').setup()
+        end
+    }
 
 	-- LSP
 	use("neovim/nvim-lspconfig") -- Neovim native LSP configuration
 	use("williamboman/nvim-lsp-installer") -- Manage each LSP engine
 
-	-- use("tami5/lspsaga.nvim") -- LSP saga
+	use("tami5/lspsaga.nvim") -- LSP saga
 
 	use("ray-x/lsp_signature.nvim") -- Show signature when completing function parameters
-	use("ray-x/navigator.lua")
 
 	use("windwp/nvim-autopairs") -- Completion pairs
 	use("jose-elias-alvarez/null-ls.nvim") -- 用來擴充formatting 與 linter 使用
 
 	-- Comment
 	use("numToStr/Comment.nvim") -- quick comment
-    use {"danymat/neogen" , requires = "nvim-treesitter/nvim-treesitter"}
+	use({ "danymat/neogen", requires = "nvim-treesitter/nvim-treesitter" })
 	-- Surround
 	use("blackCauldron7/surround.nvim")
+	-- Undotree
+    use "mbbill/undotree"
 	-- CMP
 	use({
 		"hrsh7th/nvim-cmp",
@@ -156,7 +164,7 @@ return packer.startup(function(use)
 			"hrsh7th/cmp-path", -- path completions
 			"hrsh7th/cmp-cmdline", -- cmdline completions
 			"hrsh7th/cmp-nvim-lua", -- cmp-nvim-lua
-            "hrsh7th/cmp-emoji",
+			"hrsh7th/cmp-emoji",
 			"saadparwaiz1/cmp_luasnip", -- snippet completions
 			"hrsh7th/cmp-nvim-lsp-signature-help",
 			-- "hrsh7th/cmp-copilot"                       -- cmp-copilot
@@ -171,6 +179,9 @@ return packer.startup(function(use)
 			{ "ray-x/guihua.lua", run = "cd lua/fzy && make" },
 		},
 	})
+    -- tag
+    use ("liuchengxu/vista.vim")
+
 
 	if PACKER_BOOTSTRAP then
 		require("packer").sync()
