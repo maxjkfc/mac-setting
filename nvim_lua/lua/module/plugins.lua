@@ -144,6 +144,7 @@ return packer.startup(function(use)
 
 	-- Comment
 	use("numToStr/Comment.nvim") -- quick comment
+    use {"danymat/neogen" , requires = "nvim-treesitter/nvim-treesitter"}
 	-- Surround
 	use("blackCauldron7/surround.nvim")
 	-- CMP
