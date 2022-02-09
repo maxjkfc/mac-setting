@@ -2,7 +2,7 @@
 	"message": {
 		"items": [
 			{
-				"name": "類型",
+				"name": "type",
 				"desc": "選擇你要使用來提交的類型",
 				"form": "select",
 				"options": [
