@@ -272,6 +272,7 @@ local gmappings = {
 	-- ["d"] = { "<cmd>lua vim.lsp.buf.definition()<cr>", "Definition" },
 	["d"] = { "<cmd>Telescope lsp_definitions<cr>", "Definition" },
 	["K"] = { "<cmd>lua vim.lsp.buf.hover()<cr>", "Hover" },
+	["h"] = { "<cmd>lua vim.lsp.buf.hover()<cr>", "Hover" },
 	["k"] = { "<cmd>lua vim.lsp.buf.signature_help()<cr>", "Signature Help" },
 	-- ["r"] = { "<cmd>lua vim.lsp.buf.references()<cr>", "References" },
 	["r"] = { "<cmd>Telescope lsp_references<cr>", "References" },

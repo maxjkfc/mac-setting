@@ -1,6 +1,14 @@
 #!/bin/bash
 set -e
 
+setup_install_depend(){
+    if ! command -v zplug &> /dev/null
+    then
+        brew install zplug
+    fi
+
+}
+
 setup_tmux() {
 	echo "setup [tmux] config"
 
@@ -10,10 +18,10 @@ setup_tmux() {
 
 	ln -s $PWD/tmux/.tmux.conf $HOME/.tmux.conf
 
-	# TODO check tpm install?
+	# TODO: check tpm install?
 	echo "setup tmux config finish"
 
-	# TODO reload tmux and install plugin
+	# TODO: reload tmux and install plugin
 }
 
 setup_zsh() {
@@ -32,7 +40,7 @@ setup_zsh() {
 	ln -s $PWD/zsh/.zshshell $HOME/.zshshell
 	
 
-	# TODO check zsh install?
+	# TODO: check zsh install?
 	echo "setup [zsh] config finish"
 }
 
