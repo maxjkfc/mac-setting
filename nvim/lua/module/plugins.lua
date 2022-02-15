@@ -16,8 +16,7 @@ if fn.empty(fn.glob(install_path)) > 0 then
 	vim.cmd([[packadd packer.nvim]])
 end
 -- 設定檔確認是否存在
-local status_ok, packer = pcall(require, "packer")
-if not status_ok then
+local status_ok, packer = pcall(require, "packer") if not status_ok then
 	return
 end
 
@@ -181,6 +180,8 @@ return packer.startup(function(use)
 	})
     -- tag
     use ("liuchengxu/vista.vim")
+    -- markdown
+    use { 'iamcco/markdown-preview.nvim', ft = 'markdown', run = 'cd app && yarn install' }
 
 
 	if PACKER_BOOTSTRAP then

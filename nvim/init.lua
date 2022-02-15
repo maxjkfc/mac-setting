@@ -26,4 +26,4 @@ require "module.trouble"
 require "module.nvim-notify"
 require "module.neogen"
 require "module.undotree"
-
+require "module.markdown"

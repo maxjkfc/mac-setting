@@ -53,6 +53,10 @@ local options = {
     sidescrolloff = 8,                          -- side scroll offset
     ruler = true,                               -- ruler
     rulerformat = " %l : %c %p%% %m %t",        -- ruler format
+    -- fold
+    -- foldmethod = 'expr',
+    -- foldexpr   = "nvim_treesitter#foldexpr()",
+    -- foldenable = false,
 }
 
 -- 將所有設定變數轉為設定
