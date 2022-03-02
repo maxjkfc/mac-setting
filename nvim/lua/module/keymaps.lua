@@ -51,7 +51,8 @@ keymap("n", "k", "gk", opts)
 keymap("v", "<C-k>", ":m '<-2<CR>gv=gv", opts)
 keymap("v", "<C-j>", ":m '<+1<CR>gv=gv", opts)
 -- 貼上所複製的內容，而不會被替換的暫存所取代
-keymap("v", "p", '"_dP', opts)
+-- keymap("v", "p", '"_dP', opts)
+keymap("n" , "<c-p>" , '"0p' , opts)
 
 -- 移動文字左右
 keymap("v", ">", ">gv", opts)
