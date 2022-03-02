@@ -1,0 +1,60 @@
+{
+	"message": {
+		"items": [
+			{
+				"name": "type",
+				"desc": "選擇你要使用來提交的類型",
+				"form": "select",
+				"options": [
+					{ "name": "feat", "desc": " 🆕 新功能" },
+					{ "name": "fix", "desc": " 🐛 修復Bug" },
+					{ "name": "docs", "desc": " 📄 文件類型" },
+					{
+					  "name": "style",
+					  "desc":
+						" 🧥 修改風格"
+					},
+					{
+					  "name": "refactor",
+					  "desc": " 🙄 重構"
+					},
+					{
+					  "name": "perf",
+					  "desc": " ⬆️  提高效能"
+					},
+					{ "name": "test", "desc": " 🧪 測試" },
+					{
+					  "name": "chore",
+					  "desc":
+						" 🧰 建置相關"
+					},
+					{ "name": "revert", "desc": " ❌ 恢復分支" },
+					{ "name": "WIP", "desc": " 🔏 暫存" }
+				],
+				"required": true
+			},
+			{
+				"name": "scope",
+				"desc": "影響範圍: ",
+				"form": "input"
+			},
+			{
+				"name": "subject",
+				"desc": "副標題",
+				"form": "input",
+				"required": true
+			},
+			{
+				"name": "body",
+				"desc": "內文",
+				"form": "multiline"
+			},
+			{
+				"name": "footer",
+				"desc": "註腳：（可以填寫卡片編號)",
+				"form": "multiline"
+			}
+		],
+		"template": "{{.type}}{{with .scope}}({{.}}){{end}}: {{.subject}}{{with .body}}\n\n{{.}}{{end}}{{with .footer}}\n\n{{.}}{{end}}"
+	}
+}
