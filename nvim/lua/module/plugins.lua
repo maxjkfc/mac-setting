@@ -151,7 +151,8 @@ return packer.startup(function(use)
 	use("numToStr/Comment.nvim") -- quick comment
 	use({ "danymat/neogen", requires = "nvim-treesitter/nvim-treesitter" })
 	-- Surround
-	use("blackCauldron7/surround.nvim")
+	-- use("blackCauldron7/surround.nvim")
+    use("tpope/vim-surround")
 	-- Undotree
     use "mbbill/undotree"
 	-- CMP
