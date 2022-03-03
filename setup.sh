@@ -9,8 +9,7 @@ setup_install_depend(){
 
 }
 
-setup_tmux() {
-	echo "setup [tmux] config"
+setup_tmux() { echo "setup [tmux] config"
 
 	if [ -f "$HOME/.tmux.conf" ]; then
 		rm -rf $HOME/.tmux.conf
