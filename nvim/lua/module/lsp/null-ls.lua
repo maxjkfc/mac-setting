@@ -10,7 +10,7 @@ local diagnostics = null_ls.builtins.diagnostics
 -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/code_actions
 -- local code_actions = null_ls.builtins.code_actions
 -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/hover
-local hover = null_ls.builtins.hover
+-- local hover = null_ls.builtins.hover
 
 null_ls.setup({
 	debug = false,
@@ -22,6 +22,6 @@ null_ls.setup({
         diagnostics.protoc_gen_lint,
         diagnostics.gitlint,
         diagnostics.revive, -- golang lint
-        hover.dictionary,
+        -- hover.dictionary,
 	},
 })

@@ -15,7 +15,7 @@ configs.setup({
 	rainbow = {
 		-- enable = true,
 		-- TODO: wait for fix by https://github.com/p00f/nvim-ts-rainbow/issues/97
-		enable = false,
+        enable = true,
 		extended_mod = false,
 		max_file_lines = 300,
 	},
