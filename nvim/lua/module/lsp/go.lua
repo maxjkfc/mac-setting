@@ -42,7 +42,7 @@ go.setup({
 	dap_debug_vt = true, -- set to true to enable dap virtual text
 	build_tags = "tag1,tag2", -- set default build tags
 	textobjects = true, -- enable default text jobects through treesittter-text-objects
-	test_runner = "go", -- richgo, go test, richgo, dlv, ginkgo
+	test_runner = "richgo", -- richgo, go test, richgo, dlv, ginkgo
 	run_in_floaterm = true, -- set to true to run in float window.
 	--float term recommand if you use richgo/ginkgo with terminal color
 })

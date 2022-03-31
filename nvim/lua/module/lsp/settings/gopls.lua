@@ -1,6 +1,6 @@
 return {
-    cmd = { "gopls" , "serve"},
-    -- cmd = { "gopls" , "-remote=auto" },
+    -- cmd = { "gopls" , "serve"},
+    cmd = { "gopls" , "-remote=auto" },
     filetype = { "go", "gomod","gohtmltmpl","gotexttmpl"},
     root_dir = require('lspconfig').util.root_pattern('go.mod','.git'),
     -- on_attach = function(client)  -- on_attach for gopls
@@ -22,10 +22,10 @@ return {
             usePlaceholders = true,
             completeUnimported = true,
             staticcheck = true,
-            matcher = "fuzzy",
-            diagnosticsDelay = "500ms",
-            experimentalWatchedFileDelay = "100ms",
-            symbolMatcher = "fuzzy",
+            matcher = 'fuzzy',
+            diagnosticsDelay = '500ms',
+            experimentalWatchedFileDelay = '100ms',
+            symbolMatcher = 'fuzzy',
             gofumpt = false, -- true, -- turn on for new repos, gofmpt is good but also create code turmoils
             buildFlags = {"-tags", "integration"}
             -- buildFlags = {"-tags", "functional"}
