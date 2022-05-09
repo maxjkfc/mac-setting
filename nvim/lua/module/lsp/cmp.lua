@@ -70,7 +70,7 @@ cmp.setup({
 		["<Tab>"] = cmp.mapping(function(fallback)
 			if cmp.visible() then
 				-- cmp.select_next_item()
-				cmp.mapping.confirm({ select = true })
+				cmp.confirm({ select = true })
 			elseif luasnip.expandable() then
 				luasnip.expand()
 			elseif luasnip.expand_or_jumpable() then
@@ -130,9 +130,13 @@ cmp.setup({
 		behavior = cmp.ConfirmBehavior.Replace,
 		select = false,
 	},
-	documentation = {
-		border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
-	},
+    window = {
+        -- documentation = "native",
+        documentation = {
+            border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+        },
+    },
+
 	experimental = {
 		ghost_text = true,
 		native_menu = false,

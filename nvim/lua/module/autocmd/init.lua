@@ -39,6 +39,8 @@ vim.cmd([[
         autocmd BufWritePre *.go :silent! lua require('go.format').goimport()
     augroup end
 ]])
+
+-- Remove nvim_tree autoclose autocmd
 vim.cmd([[
     augroup _nvim_tree
         autocmd!
