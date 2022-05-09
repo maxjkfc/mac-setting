@@ -237,6 +237,13 @@ local mappings = {
 		},
 		f = {
 			name = "Flutter",
+            r = {"<cmd>FlutterRun<cr>" , "Run"},
+            e = {"<cmd>FlutterEmulators<cr>","Emulators"},
+            l = {"<cmd>FlutterReload<cr>" , "Reload"},
+            s = {"<cmd>FlutterRestart<cr>" , "Restart"},
+            q = {"<cmd>FlutterQuit<cr>" , "Quit"},
+            t = {"<cmd>FlutterOutlineToggle<cr>" , "Outline Toggle"},
+            d = {"<cmd>FlutterDevTools<cr>" , "DevTools"},
 		},
 	},
 }

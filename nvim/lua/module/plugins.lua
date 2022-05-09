@@ -179,6 +179,8 @@ return packer.startup(function(use)
 			{ "ray-x/guihua.lua", run = "cd lua/fzy && make" },
 		},
 	})
+    -- Flutter
+    use {"akinsho/flutter-tools.nvim", requires = "nvim-lua/plenary.nvim"}
     -- tag
     use ("liuchengxu/vista.vim")
     -- markdown

@@ -65,3 +65,4 @@ for k , v in pairs(options) do
 end
 
 vim.api.nvim_command('filetype plugin indent on')
+vim.api.nvim_exec([[let g:loaded_perl_provider = 0]],false)
