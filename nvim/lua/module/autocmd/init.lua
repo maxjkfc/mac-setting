@@ -41,9 +41,9 @@ vim.cmd([[
 ]])
 
 -- Remove nvim_tree autoclose autocmd
-vim.cmd([[
-    augroup _nvim_tree
-        autocmd!
-        autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif
-    augroup end
-]])
+-- vim.cmd([[
+--     augroup _nvim_tree
+--         autocmd!
+--         autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif
+--     augroup end
+-- ]])
