@@ -153,6 +153,7 @@ return packer.startup(function(use)
 	-- Surround
 	-- use("blackCauldron7/surround.nvim")
     use("tpope/vim-surround")
+    use("tpope/vim-repeat")
 	-- Undotree
     use "mbbill/undotree"
 	-- CMP
