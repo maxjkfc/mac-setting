@@ -1,12 +1,14 @@
 -- 讀取Plugin cmp 並確保該檔案存在
 local cmp_status_ok, cmp = pcall(require, "cmp")
 if not cmp_status_ok then
+    vim.notify("cmp not ready!!")
 	return
 end
 
 -- 讀取Plugin cmp 並確保該檔案存在
 local snip_lua_status_ok, luasnip = pcall(require, "luasnip")
 if not snip_lua_status_ok then
+    vim.notify("luasnip not ready!!")
 	return
 end
 -- 啟動luasnip

@@ -1,5 +1,6 @@
 local status_ok , sig = pcall(require , "lsp_signature")
 if not status_ok then
+    vim.notify("lsp_signature not ready")
     return
 end
 
