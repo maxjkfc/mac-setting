@@ -85,8 +85,8 @@ local mappings = {
 	["q"] = { "<cmd>q!<cr>", "Quit" },
 	["\\"] = { "<cmd>nohlsearch<cr>", "No Highlight" },
 	["Z"] = { "<cmd>ZenMode<cr>", "Into ZenMode" },
-    ["U"] = {"<cmd>UndotreeToggle<cr>" , "UndoTree"},
-    ["V"] = {"<cmd>Vista!!<cr>" , "Vista"},
+	["U"] = { "<cmd>UndotreeToggle<cr>", "UndoTree" },
+	["V"] = { "<cmd>Vista!!<cr>", "Vista" },
 
 	b = {
 		name = "Buffers",
@@ -118,8 +118,8 @@ local mappings = {
 	g = {
 		name = "Git ♐",
 		g = { "<cmd>lua _LAZYGIT_TOGGLE()<cr>", "Lazygit" },
-        b = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
-        c = { "<cmd>Telescope git_commits<cr>", "Checkout commit" },
+		b = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
+		c = { "<cmd>Telescope git_commits<cr>", "Checkout commit" },
 		j = { "<cmd>lua require 'gitsigns'.next_hunk()<cr>", "Next Hunk" },
 		k = { "<cmd>lua require 'gitsigns'.prev_hunk()<cr>", "Prev Hunk" },
 		l = { "<cmd>lua require 'gitsigns'.blame_line()<cr>", "Blame" },
@@ -135,7 +135,7 @@ local mappings = {
 			"<cmd>Gitsigns diffthis HEAD<cr>",
 			"Diff",
 		},
-        a = { "<cmd>Gitsigns toggle_current_line_blame"},
+		a = { "<cmd>Gitsigns toggle_current_line_blame" },
 	},
 
 	h = {
@@ -210,14 +210,14 @@ local mappings = {
 		h = { "<cmd>ToggleTerm size=10 direction=horizontal<cr>", "Horizontal" },
 		v = { "<cmd>ToggleTerm size=80 direction=vertical<cr>", "Vertical" },
 	},
-    X = {
-        name = "+TROUBLE 🚑",
-        d = { "<cmd>TroubleToggle document_diagnostics<cr>", "Document Diagnostics" },
-        w = { "<cmd>TroubleToggle Workspace_document_diagnostics<cr>", "Workspace Diagnostics" },
-        q = { "<cmd>TroubleToggle quickfix<cr>", "Quick Fix" },
-        l = { "<cmd>TroubleToggle loclist<cr>", "Loc List" },
-        t = { "<cmd>TodoTrouble<cr>" , "ToDo"}
-    },
+	X = {
+		name = "+TROUBLE 🚑",
+		d = { "<cmd>TroubleToggle document_diagnostics<cr>", "Document Diagnostics" },
+		w = { "<cmd>TroubleToggle Workspace_document_diagnostics<cr>", "Workspace Diagnostics" },
+		q = { "<cmd>TroubleToggle quickfix<cr>", "Quick Fix" },
+		l = { "<cmd>TroubleToggle loclist<cr>", "Loc List" },
+		t = { "<cmd>TodoTrouble<cr>", "ToDo" },
+	},
 
 	z = {
 		name = "LanguageTools 🧰",
@@ -237,13 +237,13 @@ local mappings = {
 		},
 		f = {
 			name = "Flutter",
-            r = {"<cmd>FlutterRun<cr>" , "Run"},
-            e = {"<cmd>FlutterEmulators<cr>","Emulators"},
-            l = {"<cmd>FlutterReload<cr>" , "Reload"},
-            s = {"<cmd>FlutterRestart<cr>" , "Restart"},
-            q = {"<cmd>FlutterQuit<cr>" , "Quit"},
-            t = {"<cmd>FlutterOutlineToggle<cr>" , "Outline Toggle"},
-            d = {"<cmd>FlutterDevTools<cr>" , "DevTools"},
+			r = { "<cmd>FlutterRun<cr>", "Run" },
+			e = { "<cmd>FlutterEmulators<cr>", "Emulators" },
+			l = { "<cmd>FlutterReload<cr>", "Reload" },
+			s = { "<cmd>FlutterRestart<cr>", "Restart" },
+			q = { "<cmd>FlutterQuit<cr>", "Quit" },
+			t = { "<cmd>FlutterOutlineToggle<cr>", "Outline Toggle" },
+			d = { "<cmd>FlutterDevTools<cr>", "DevTools" },
 		},
 	},
 }

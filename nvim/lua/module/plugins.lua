@@ -129,12 +129,12 @@ return packer.startup(function(use)
 		end,
 	})
     -- Windows Move
-    use {
-        'numToStr/Navigator.nvim',
-        config = function()
-            require('Navigator').setup()
-        end
-    }
+    -- use {
+    --     'numToStr/Navigator.nvim',
+    --     config = function()
+    --         require('Navigator').setup()
+    --     end
+    -- }
 
 	-- LSP
 	use("neovim/nvim-lspconfig") -- Neovim native LSP configuration

@@ -125,7 +125,7 @@ cmp.setup({
 		{ name = "buffer" },
 		{ name = "path" },
 		{ name = "cmdline" },
-        { name = "emoji"},
+        { name = "emoji" },
         -- { name = "coplit"},
 	},
 	confirm_opts = {
