@@ -1,5 +1,6 @@
 local status_ok, go = pcall(require, "go")
 if not status_ok then
+    vim.notify("go not loading")
 	return
 end
 
@@ -13,7 +14,7 @@ go.setup({
 	tag_transform = false, -- tag_transfer  check gomodifytags for details
 	test_template = "", -- default to testify if not set; g:go_nvim_tests_template  check gotests for details
 	test_template_dir = "", -- default to nil if not set; g:go_nvim_tests_template_dir  check gotests for details
-	comment_placeholder = "", -- comment_placeholder your cool placeholder e.g. ﳑ       
+	comment_placeholder = "ﳑ", -- comment_placeholder your cool placeholder e.g. ﳑ       
 	icons = { breakpoint = "🧘", currentpos = "🏃" },
 	verbose = false, -- output loginf in messages
 	lsp_cfg = false, -- true: use non-default gopls setup specified in go/lsp.lua

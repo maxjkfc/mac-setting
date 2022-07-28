@@ -11,6 +11,7 @@ if not snip_lua_status_ok then
     vim.notify("luasnip not ready!!")
 	return
 end
+
 -- 啟動luasnip
 require("luasnip.loaders.from_vscode").lazy_load()
 
