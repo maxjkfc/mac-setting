@@ -135,6 +135,8 @@ fi
 	if [ -f "$HOME/google-cloud-sdk/completion.zsh.inc" ]; then 
 		. "$HOME/google-cloud-sdk/completion.zsh.inc"; 
 	fi
+    export USE_GKE_GCLOUD_AUTH_PLUGIN=True
+
 
 	# FZF
 	[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
