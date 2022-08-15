@@ -79,7 +79,7 @@ local opts = {
 }
 
 local mappings = {
-	["/"] = { '<cmd>lua require("Comment.api").toggle_current_linewise()<cr>', "Comment" },
+--	["/"] = { '<cmd>lua require("Comment.api").toggle_current_linewise()<cr>', "Comment" },
 	["e"] = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
 	["w"] = { "<cmd>w!<cr>", "Save" },
 	["q"] = { "<cmd>q!<cr>", "Quit" },
@@ -99,8 +99,9 @@ local mappings = {
 
 	f = {
 		name = "+Find 🔭",
+        b = {"<cmd>Telescope buffers<cr>" , "Buffers"},
 		f = { "<cmd>Telescope find_files<cr>", "Find File" },
-		l = { "<cmd>Telescope live_grep<cr>", "Find Text" },
+		l = { "<cmd>Telescope live_grep<cr>", "Live Grep" },
 		t = { "<cmd>Telescope treesitter<cr>", "Tressitter" },
 		["/"] = { "<cmd>Telescope current_buffer_fuzzy_find<cr>", "Search" },
 		h = { "<cmd>Telescope help_tags<cr>", "Find Help" },
@@ -258,11 +259,11 @@ local vopts = {
 }
 
 local vmappings = {
-	["/"] = { '<ESC><CMD>lua require("Comment.api").toggle_linewise_op(vim.fn.visualmode())<cr>', "Comment" },
-	l = {
-		name = "LSP",
-		a = { "<cmd>Telescope lsp_range_code_actions<cr>", "Code Action" },
-	},
+	-- ["/"] = { '<ESC><CMD>lua require("Comment.api").toggle_linewise_op(vim.fn.visualmode())<cr>', "Comment" },
+	-- l = {
+	-- 	name = "LSP",
+	-- 	a = { "<cmd>Telescope lsp_range_code_actions<cr>", "Code Action" },
+	-- },
 }
 
 local gopts = {

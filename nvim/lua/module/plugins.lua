@@ -50,6 +50,8 @@ return packer.startup(function(use)
 	-- Colorschems
 	use({ "dracula/vim", as = "dracula" }) -- 主題
 	use("lunarvim/darkplus.nvim")
+    use("vim-scripts/peaksea")
+    use("sheerun/vim-wombat-scheme")
 	-- use "yong1le/darkplus.nvim"
 	use("folke/tokyonight.nvim")
 	-- todo comments
