@@ -201,7 +201,7 @@ local mappings = {
 		u = { "<cmd>PackerUpdate<cr>", "Update" },
 	},
 
-	T = {
+	t = {
 		name = "Terminal 💻",
 		u = { "<cmd>lua _NCDU_TOGGLE()<cr>", "NCDU" },
 		t = { "<cmd>lua _GOTOP_TOGGLE()<cr>", "Top" },
@@ -211,6 +211,7 @@ local mappings = {
 		h = { "<cmd>ToggleTerm size=10 direction=horizontal<cr>", "Horizontal" },
 		v = { "<cmd>ToggleTerm size=80 direction=vertical<cr>", "Vertical" },
 	},
+
 	X = {
 		name = "+TROUBLE 🚑",
 		d = { "<cmd>TroubleToggle document_diagnostics<cr>", "Document Diagnostics" },
@@ -231,10 +232,18 @@ local mappings = {
 				f = { "<cmd>GoTestFunc<cr>", "Test Func" },
 				p = { "<cmd>GoTestPkg<cr>", "Test Package" },
 			},
+            a = {
+                name = "Add",
+                t = {
+
+
+                },
+            },
 			l = {
 				name = "LSP",
 			},
 			r = { "<cmd>GoRun<cr>", "Run" },
+            c = {"<cmd>GoCmt<cr>" , "Func Comment"},
 		},
 		f = {
 			name = "Flutter",

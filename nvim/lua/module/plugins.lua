@@ -16,7 +16,8 @@ if fn.empty(fn.glob(install_path)) > 0 then
 	vim.cmd([[packadd packer.nvim]])
 end
 -- 設定檔確認是否存在
-local status_ok, packer = pcall(require, "packer") if not status_ok then
+local status_ok, packer = pcall(require, "packer")
+if not status_ok then
 	return
 end
 
@@ -50,10 +51,11 @@ return packer.startup(function(use)
 	-- Colorschems
 	use({ "dracula/vim", as = "dracula" }) -- 主題
 	use("lunarvim/darkplus.nvim")
-    use("vim-scripts/peaksea")
-    use("sheerun/vim-wombat-scheme")
+	use("vim-scripts/peaksea")
+	use("sheerun/vim-wombat-scheme")
 	-- use "yong1le/darkplus.nvim"
 	use("folke/tokyonight.nvim")
+
 	-- todo comments
 	use({
 		"folke/todo-comments.nvim",
@@ -130,19 +132,31 @@ return packer.startup(function(use)
 			require("hop").setup({ keys = "etovxqpdygfblzhckisuran" })
 		end,
 	})
-    -- Windows Move
-    -- use {
-    --     'numToStr/Navigator.nvim',
-    --     config = function()
-    --         require('Navigator').setup()
-    --     end
-    -- }
+	-- Windows Move
+	-- use {
+	--     'numToStr/Navigator.nvim',
+	--     config = function()
+	--         require('Navigator').setup()
+	--     end
+	-- }
 
 	-- LSP
 	use("neovim/nvim-lspconfig") -- Neovim native LSP configuration
 	use("williamboman/nvim-lsp-installer") -- Manage each LSP engine
 
-	use("tami5/lspsaga.nvim") -- LSP saga
+    -- TODO: 研究 lspsaga
+	-- use("tami5/lspsaga.nvim") -- LSP saga
+	-- use({
+	-- 	"glepnir/lspsaga.nvim",
+	-- 	branch = "main",
+	-- 	config = function()
+	-- 		local saga = require("lspsaga")
+
+	-- 		saga.init_lsp_saga({
+	-- 			-- your configuration
+	-- 		})
+	-- 	end,
+	-- })
 
 	use("ray-x/lsp_signature.nvim") -- Show signature when completing function parameters
 
@@ -153,11 +167,10 @@ return packer.startup(function(use)
 	use("numToStr/Comment.nvim") -- quick comment
 	use({ "danymat/neogen", requires = "nvim-treesitter/nvim-treesitter" })
 	-- Surround
-	-- use("blackCauldron7/surround.nvim")
-    use("tpope/vim-surround")
-    use("tpope/vim-repeat")
+	use("tpope/vim-surround")
+	use("tpope/vim-repeat")
 	-- Undotree
-    use "mbbill/undotree"
+	use("mbbill/undotree")
 	-- CMP
 	use({
 		"hrsh7th/nvim-cmp",
@@ -182,13 +195,12 @@ return packer.startup(function(use)
 			{ "ray-x/guihua.lua", run = "cd lua/fzy && make" },
 		},
 	})
-    -- Flutter
-    use {"akinsho/flutter-tools.nvim", requires = "nvim-lua/plenary.nvim"}
-    -- tag
-    use ("liuchengxu/vista.vim")
-    -- markdown
-    use { 'iamcco/markdown-preview.nvim', ft = 'markdown', run = 'cd app && yarn install' }
-
+	-- Flutter
+	use({ "akinsho/flutter-tools.nvim", requires = "nvim-lua/plenary.nvim" })
+	-- tag
+	use("liuchengxu/vista.vim")
+	-- markdown
+	use({ "iamcco/markdown-preview.nvim", ft = "markdown", run = "cd app && yarn install" })
 
 	if PACKER_BOOTSTRAP then
 		require("packer").sync()
