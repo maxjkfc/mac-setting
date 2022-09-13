@@ -19,6 +19,7 @@ fi
 	set -o emacs
 	# set Title 
 	echo $fg[blue]
+
 	echo    '  ███████╗██╗   ██╗██████╗    ███╗   ███╗ █████╗ ██╗  ██╗  '
 	echo    '  ══██╔══╝╚██╗ ██╔╝██╔══██╗   ████╗ ████║██╔══██╗╚██╗██╔╝  '
 	echo    '    ██║    ╚████╔╝ ██████╔╝   ██╔████╔██║███████║ ╚███╔╝   '
@@ -28,14 +29,15 @@ fi
 
 
 # Path Part
+    export HOMEBREWOPT="/opt/homebrew"
 	# Golang setting
-	export GOROOT="/opt/homebrew/opt/go/libexec"
+	export GOROOT="$HOMEBREWOPT/opt/go/libexec"
 	export GOPATH="$HOME/go"
 
 	# export coreutils path
-	export COREPATH="/opt/homebrew/opt/coreutils/libexec/gnubin"
-	export MANPATH="/opt/homebrew/opt/coreutils/libexec/gnuman:$MANPATH"
-	export ZPLUG_HOME="/opt/homebrew/opt/zplug"
+	export COREPATH="$HOMEBREWOPT/opt/coreutils/libexec/gnubin"
+	export MANPATH="$HOMEBREWOPT/opt/coreutils/libexec/gnuman:$MANPATH"
+	export ZPLUG_HOME="$HOMEBREWOPT/opt/zplug"
 	export PATH="$PATH:$GOROOT/bin:$GOPATH/bin:$COREPATH:$ZPLUG_HOME"
 
 
@@ -60,10 +62,10 @@ fi
 
 	# tools path
 	alias mtr=' sudo /usr/local/sbin/mtr'
-	alias git='/opt/homebrew/bin/git'
-	alias cat='bat'
-	alias curl='/opt/homebrew/opt/curl/bin/curl'
-	alias sed="gsed"
+	alias git='$HOMEBREWOPT/bin/git'
+	alias cat='bat' 
+	alias curl='$HOMEBREWOPT/opt/curl/bin/curl'
+	alias sed="gsed" 
 
 	# zsh part 
 	alias -s sh="sh "
@@ -76,8 +78,8 @@ fi
 	# 	
 	fpath=(
 		~/.zsh/completion 
-		/opt/homebrew/share/zsh/site-functions
-		$fpath
+		$HOMEBREWOPT/share/zsh/site-functions
+		$fpath 
 	)
 	autoload -Uz compinit && compinit -i
 	# Kubectl completion
@@ -85,7 +87,7 @@ fi
 
 # Theme P10K
     #   
-	source /opt/homebrew/opt/powerlevel10k/powerlevel10k.zsh-theme
+	source $HOMEBREWOPT/opt/powerlevel10k/powerlevel10k.zsh-theme
 	# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 	[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
