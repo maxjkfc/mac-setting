@@ -7,6 +7,18 @@ setup_install_depend(){
         brew install zplug
     fi
 
+    brew install exa
+    brew install bat
+    brew install romkatv/powerlevel10k/powerlevel10k
+    brew install ripgrep
+    brew install fzf
+    brew install wget
+    brew install gnu-sed
+    brew install git
+
+    ## install git-cz
+    # npm install -g git-cz
+    # npm install -g commitizen
 }
 
 setup_tmux() { 
@@ -18,10 +30,12 @@ setup_tmux() {
 
 	ln -s $PWD/tmux/.tmux.conf $HOME/.tmux.conf
 
-	# TODO: check tpm install?
-	echo "setup tmux config finish"
+    ## install tpm if not exist
+    if "test ! -d ~/.tmux/plugins/tpm" \
+        "run 'git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm && ~/.tmux/plugins/tpm/bin/install_plugins'"
 
-	# TODO: reload tmux and install plugin
+	echo "setup tmux config finish"
+    
 }
 
 setup_zsh() {
@@ -39,6 +53,7 @@ setup_zsh() {
 
 	ln -s $PWD/zsh/.zshshell $HOME/.zshshell
 	
+    setup_install_depend
 
 	# TODO: check zsh install?
 	echo "setup [zsh] config finish"
