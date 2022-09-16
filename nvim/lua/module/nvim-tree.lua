@@ -45,7 +45,7 @@ nvim_tree.setup({
     },
     git = {
         enable = true,
-        ignore = true,
+        ignore = false,
         timeout = 500,
     },
     view = {
@@ -110,7 +110,7 @@ nvim_tree.setup({
         },
     },
     filters = {
-        dotfiles = false,
+        dotfiles = true,
     },
     hijack_directories = {
         enable = true,

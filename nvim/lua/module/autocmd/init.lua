@@ -7,6 +7,7 @@ vim.cmd([[
     autocmd FileType qf set nobuflisted
   augroup end
 ]])
+
 vim.cmd([[
     augroup _git
         autocmd!
@@ -14,6 +15,7 @@ vim.cmd([[
         autocmd FileType gitcommit setlocal spell
     augroup end
 ]])
+
 vim.cmd([[
     augroup _markdown
         autocmd!
@@ -21,12 +23,14 @@ vim.cmd([[
         autocmd FileType markdown setlocal spell
     augroup end
 ]])
+
 vim.cmd([[
     augroup _auto_resize
         autocmd!
         autocmd VimResized * tabdo wincmd = 
     augroup end
 ]])
+
 vim.cmd([[
     augroup _alpha
         autocmd!
@@ -39,6 +43,10 @@ vim.cmd([[
         autocmd!
         autocmd BufWritePre *.go :silent! lua require('go.format').goimport()
     augroup end
+]])
+
+vim.cmd([[
+    autocmd BufWritePre * lua vim.lsp.buf.formatting_sync()
 ]])
 
 -- Remove nvim_tree autoclose autocmd
