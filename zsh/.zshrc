@@ -53,7 +53,7 @@ fi
 	alias ll='exa -lbF --git'
 
 	alias mv='mv -i'
-	alias cp='cp -i'
+	alias cp='cp'
 	alias v='nvim'
 	alias vdiff='nvim -d'
 	alias grep='grep --color=auto'
@@ -173,6 +173,20 @@ fi
 	_fzf_compgen_dir() {
 	  fd --type d --hidden --follow --exclude ".git" . "$1"
 	}
+
+    # ssh fzf
+    _fzf_complete_ssh() {
+        _fzf_complete '+m' "$@" < <(
+        cat ~/.ssh/config ~/.ssh/config.d/* /etc/ssh/ssh_config 2> /dev/null | grep -i -e '^host ' -e 'hostname' -e '#Desc' | grep -v '[*?]' | \
+            awk '/^Host/{if (NR!=1)print ""; printf $2} /Hostname/{printf "  [%s]",$2} /#Desc/{printf "  [%s]",$2}' | sort -u
+      )
+    }
+
+    _fzf_complete_ssh_post() {
+      awk '{printf $1}'
+    }
+
+    complete -F _fzf_complete_ssh -o default -o bashdefault ssh
 
 	# Iterm2 Plugin
 	test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
