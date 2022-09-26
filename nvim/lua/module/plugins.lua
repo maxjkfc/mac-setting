@@ -56,6 +56,9 @@ return packer.startup(function(use)
     -- use "yong1le/darkplus.nvim"
     use("folke/tokyonight.nvim")
 
+    -- Transparent Background
+    use("xiyaowong/nvim-transparent")
+
     -- todo comments
     use({
         "folke/todo-comments.nvim",
