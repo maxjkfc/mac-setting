@@ -147,19 +147,6 @@ return packer.startup(function(use)
     use("neovim/nvim-lspconfig") -- Neovim native LSP configuration
     use("williamboman/nvim-lsp-installer") -- Manage each LSP engine
 
-    -- TODO: 研究 lspsaga
-    -- use("tami5/lspsaga.nvim") -- LSP saga
-    -- use({
-    -- 	"glepnir/lspsaga.nvim",
-    -- 	branch = "main",
-    -- 	config = function()
-    -- 		local saga = require("lspsaga")
-
-    -- 		saga.init_lsp_saga({
-    -- 			-- your configuration
-    -- 		})
-    -- 	end,
-    -- })
 
     use("ray-x/lsp_signature.nvim") -- Show signature when completing function parameters
 
@@ -189,7 +176,7 @@ return packer.startup(function(use)
             -- "hrsh7th/cmp-copilot"                       -- cmp-copilot
         },
     }) -- The completion plugin
-    -- use "github/copilot.vim"                        -- Copilot LSP
+
     -- Golang
     use({
         "ray-x/go.nvim",
@@ -204,6 +191,12 @@ return packer.startup(function(use)
     use("liuchengxu/vista.vim")
     -- markdown
     use({ "iamcco/markdown-preview.nvim", ft = "markdown", run = "cd app && yarn install" })
+
+    -- breadcrumbs
+    use{
+        "SmiteshP/nvim-navic",
+        requires = "neovim/nvim-lspconfig"
+    }
 
     if PACKER_BOOTSTRAP then
         require("packer").sync()

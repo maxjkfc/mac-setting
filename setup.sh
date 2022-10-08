@@ -55,7 +55,6 @@ setup_zsh() {
 	
     setup_install_depend
 
-	# TODO: check zsh install?
 	echo "setup [zsh] config finish"
 }
 
@@ -72,6 +71,11 @@ setup_nvim(){
 	echo "setup [nvim] config finish"
 
 
+    # install depand plugins
+    brew tap yoheimuta/protolint
+    brew install protolint
+    brew install shellcheck
+    go get github.com/ckaznocha/protoc-gen-lint
 }
 
 
