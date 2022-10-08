@@ -286,16 +286,12 @@ local gopts = {
 
 local gmappings = {
 	["D"] = { "<cmd>lua vim.lsp.buf.declaration()<cr>", "Declaration" },
-	-- ["d"] = { "<cmd>lua vim.lsp.buf.definition()<cr>", "Definition" },
-	["d"] = { "<cmd>Telescope lsp_definitions<cr>", "Definition" },
+	["d"] = { "<cmd>lua vim.lsp.buf.definition()<cr>", "Definition" },
 	["K"] = { "<cmd>lua vim.lsp.buf.hover()<cr>", "Hover" },
 	["h"] = { "<cmd>lua vim.lsp.buf.hover()<cr>", "Hover" },
-	["k"] = { "<cmd>lua vim.lsp.buf.signature_help()<cr>", "Signature Help" },
-	-- ["r"] = { "<cmd>lua vim.lsp.buf.references()<cr>", "References" },
+	["s"] = { "<cmd>lua vim.lsp.buf.signature_help()<cr>", "Signature Help" },
 	["r"] = { "<cmd>Telescope lsp_references<cr>", "References" },
-	-- ["i"] = { "<cmd>lua vim.lsp.buf.implementation()<cr>", "Implementation" },
 	["i"] = { "<cmd>Telescope lsp_implementations<cr>", "Implementation" },
-	-- f = { "<cmd>Lspsaga lsp_finder<cr>" , "Finder"},
 }
 
 which_key.setup(setup)
