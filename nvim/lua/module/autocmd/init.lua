@@ -21,6 +21,7 @@ vim.cmd([[
         autocmd!
         autocmd FileType markdown setlocal wrap
         autocmd FileType markdown setlocal spell
+        autocmd BufWritePre *.md lua vim.lsp.buf.formatting_sync()
     augroup end
 ]])
 
@@ -46,13 +47,12 @@ vim.cmd([[
 ]])
 
 vim.cmd([[
-    autocmd BufWritePre * lua vim.lsp.buf.formatting_sync()
+    augroup _proto
+        autocmd!
+        autocmd BufWritePre *.proto lua vim.lsp.buf.format(async=true)
+    augroup end
 ]])
 
--- Remove nvim_tree autoclose autocmd
 -- vim.cmd([[
---     augroup _nvim_tree
---         autocmd!
---         autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif
---     augroup end
+--     autocmd BufWritePre * lua vim.lsp.buf.formatting_sync()
 -- ]])

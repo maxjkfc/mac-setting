@@ -27,10 +27,8 @@ comment.setup({
 		basic = true,
 		---Extra mapping
 		---Includes `gco`, `gcO`, `gcA`
+
 		extra = true,
-		---Extended mapping
-		---Includes `g>`, `g<`, `g>[count]{motion}` and `g<[count]{motion}`
-		extended = true,
 	},
 
 	---LHS of toggle mappings in NORMAL mode
@@ -61,8 +59,9 @@ comment.setup({
 		-- Add comment on the line below
 		below = "<leader>/o",
 		-- Add comment at the end of line
-		eol = "<leaser>/a",
+		eol = "<leader>/a",
 	},
+
 
 	-- @param ctx CommentCtx
 	pre_hook = function(ctx)
