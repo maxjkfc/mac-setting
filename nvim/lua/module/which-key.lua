@@ -14,9 +14,9 @@ local setup = {
 		-- the presets plugin, adds help for a bunch of default keybindings in Neovim
 		-- No actual key bindings are created
 		presets = {
-			operators = false, -- adds help for operators like d, y, ... and registers them for motion / text object completion
+			operators = true, -- adds help for operators like d, y, ... and registers them for motion / text object completion
 			motions = false, -- adds help for motions
-			text_objects = false, -- help for text objects triggered after entering an operator
+			text_objects = true, -- help for text objects triggered after entering an operator
 			windows = true, -- default bindings on <c-w>
 			nav = true, -- misc bindings to work with windows
 			z = false, -- bindings for folds, spelling and others prefixed with z
@@ -170,17 +170,9 @@ local mappings = {
 			"Diagnostics",
 		},
 		z = { "<cmd>lua vim.diagnostic.open_float()<cr>", "DiagnosticFloat" },
-		f = { "<cmd>lua vim.lsp.buf.formatting()<cr>", "Format" },
+		-- f = { "<cmd>lua vim.lsp.buf.formatting()<cr>", "Format" },
 		i = { "<cmd>LspInfo<cr>", "Info" },
 		I = { "<cmd>LspInstallInfo<cr>", "Installer Info" },
-		j = {
-			"<cmd>lua vim.lsp.diagnostic.goto_next()<cr>",
-			"Next Diagnostic",
-		},
-		k = {
-			"<cmd>lua vim.lsp.diagnostic.goto_prev()<cr>",
-			"Prev Diagnostic",
-		},
 		l = { "<cmd>lua vim.lsp.codelens.run()<cr>", "CodeLens Action" },
 		q = { "<cmd>lua vim.lsp.diagnostic.set_loclist()<cr>", "Quickfix" },
 		r = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename" },
@@ -235,13 +227,18 @@ local mappings = {
             a = {
                 name = "Add",
                 t = {
-
-
+                    name = "Tag",
+                    j = {"<cmd>GoAddTag json<cr>" , "Add JSON Tag"},
+                    b = {"<cmd>GoAddTag bson<cr>" , "Add BSON Tag"},
+                    y = {"<cmd>GoAddTag bson<cr>" , "Add YAML Tag"},
                 },
+                e = {
+                    name = "Test",
+                    a = {"<cmd>GoAddAllTest<cr>" , "Add All Test"},
+                    f = {"<cmd>GoAddTest<cr>" , "Add Func Test"},
+                }
             },
-			l = {
-				name = "LSP",
-			},
+            n = {"<cmd>GoRename<cr>" , "Rename"},
 			r = { "<cmd>GoRun<cr>", "Run" },
             c = {"<cmd>GoCmt<cr>" , "Func Comment"},
 		},
@@ -286,14 +283,16 @@ local gopts = {
 
 local gmappings = {
 	["D"] = { "<cmd>lua vim.lsp.buf.declaration()<cr>", "Declaration" },
-	-- ["d"] = { "<cmd>lua vim.lsp.buf.definition()<cr>", "Definition" },
 	["d"] = { "<cmd>Telescope lsp_definitions<cr>", "Definition" },
 	["K"] = { "<cmd>lua vim.lsp.buf.hover()<cr>", "Hover" },
 	["h"] = { "<cmd>lua vim.lsp.buf.hover()<cr>", "Hover" },
 	["s"] = { "<cmd>lua vim.lsp.buf.signature_help()<cr>", "Signature Help" },
 	["r"] = { "<cmd>Telescope lsp_references<cr>", "References" },
 	["i"] = { "<cmd>Telescope lsp_implementations<cr>", "Implementation" },
+	["f"] = { "<cmd>lua vim.lsp.buf.formatting()<cr>", "Format" },
+    ["n"] = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename" },
 }
+
 
 which_key.setup(setup)
 which_key.register(mappings, opts)
