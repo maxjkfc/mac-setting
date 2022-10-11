@@ -113,7 +113,7 @@ cmp.setup({
                 buffer = "[Buffer]",
                 path = "[Path]",
                 emoji = "[Emoji]",
-                -- coplit = "[COPLIT]"
+                tmux = "[TMUX]",
             })[entry.source.name]
             return vim_item
         end,
@@ -126,9 +126,22 @@ cmp.setup({
         { name = "luasnip" },
         { name = "buffer" },
         { name = "path" },
-        -- { name = "cmdline" },
         { name = "emoji" },
-        -- { name = "coplit"},
+        { name = "tmux",
+            option = {
+                -- Source from all panes in session instead of adjacent panes
+                all_panes = false,
+                -- Completion popup label
+                label = '[tmux]',
+                -- Trigger character
+                trigger_characters = { '.' },
+                -- Specify trigger characters for filetype(s)
+                -- { filetype = { '.' } }
+                trigger_characters_ft = {},
+                -- Keyword patch mattern
+                keyword_pattern = [[\w\+]],
+            }
+        },
     },
     confirm_opts = {
         behavior = cmp.ConfirmBehavior.Replace,

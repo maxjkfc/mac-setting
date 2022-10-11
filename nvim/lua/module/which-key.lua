@@ -286,7 +286,8 @@ local gopts = {
 
 local gmappings = {
 	["D"] = { "<cmd>lua vim.lsp.buf.declaration()<cr>", "Declaration" },
-	["d"] = { "<cmd>lua vim.lsp.buf.definition()<cr>", "Definition" },
+	-- ["d"] = { "<cmd>lua vim.lsp.buf.definition()<cr>", "Definition" },
+	["d"] = { "<cmd>Telescope lsp_definitions<cr>", "Definition" },
 	["K"] = { "<cmd>lua vim.lsp.buf.hover()<cr>", "Hover" },
 	["h"] = { "<cmd>lua vim.lsp.buf.hover()<cr>", "Hover" },
 	["s"] = { "<cmd>lua vim.lsp.buf.signature_help()<cr>", "Signature Help" },
