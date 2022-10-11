@@ -173,6 +173,7 @@ return packer.startup(function(use)
             "hrsh7th/cmp-emoji",
             "saadparwaiz1/cmp_luasnip", -- snippet completions
             "hrsh7th/cmp-nvim-lsp-signature-help",
+            "andersevenrud/cmp-tmux", -- tmux buffer
             -- "hrsh7th/cmp-copilot"                       -- cmp-copilot
         },
     }) -- The completion plugin
