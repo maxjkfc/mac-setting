@@ -170,7 +170,6 @@ local mappings = {
 			"Diagnostics",
 		},
 		z = { "<cmd>lua vim.diagnostic.open_float()<cr>", "DiagnosticFloat" },
-		-- f = { "<cmd>lua vim.lsp.buf.formatting()<cr>", "Format" },
 		i = { "<cmd>LspInfo<cr>", "Info" },
 		I = { "<cmd>LspInstallInfo<cr>", "Installer Info" },
 		l = { "<cmd>lua vim.lsp.codelens.run()<cr>", "CodeLens Action" },
@@ -289,7 +288,7 @@ local gmappings = {
 	["s"] = { "<cmd>lua vim.lsp.buf.signature_help()<cr>", "Signature Help" },
 	["r"] = { "<cmd>Telescope lsp_references<cr>", "References" },
 	["i"] = { "<cmd>Telescope lsp_implementations<cr>", "Implementation" },
-	["f"] = { "<cmd>lua vim.lsp.buf.formatting()<cr>", "Format" },
+	["f"] = { "<cmd>lua vim.lsp.buf.format( async = true )<cr>", "Format" },
     ["n"] = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename" },
 }
 
