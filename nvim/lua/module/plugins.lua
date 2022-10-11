@@ -135,17 +135,12 @@ return packer.startup(function(use)
             require("hop").setup({ keys = "etovxqpdygfblzhckisuran" })
         end,
     })
-    -- Windows Move
-    -- use {
-    --     'numToStr/Navigator.nvim',
-    --     config = function()
-    --         require('Navigator').setup()
-    --     end
-    -- }
 
     -- LSP
     use("neovim/nvim-lspconfig") -- Neovim native LSP configuration
-    use("williamboman/nvim-lsp-installer") -- Manage each LSP engine
+    use("williamboman/mason.nvim")
+    use("williamboman/mason-lspconfig.nvim")
+    use("b0o/schemastore.nvim")
 
 
     use("ray-x/lsp_signature.nvim") -- Show signature when completing function parameters
@@ -156,11 +151,14 @@ return packer.startup(function(use)
     -- Comment
     use("numToStr/Comment.nvim") -- quick comment
     use({ "danymat/neogen", requires = "nvim-treesitter/nvim-treesitter" })
+
     -- Surround
     use("tpope/vim-surround")
     use("tpope/vim-repeat")
+
     -- Undotree
     use("mbbill/undotree")
+
     -- CMP
     use({
         "hrsh7th/nvim-cmp",
@@ -186,6 +184,7 @@ return packer.startup(function(use)
             { "ray-x/guihua.lua", run = "cd lua/fzy && make" },
         },
     })
+
     -- Flutter
     use({ "akinsho/flutter-tools.nvim", requires = "nvim-lua/plenary.nvim" })
     -- tag

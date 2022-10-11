@@ -1,6 +1,6 @@
 local status_ok, navic = pcall(require, "nvim-navic")
 if not status_ok then
-    vim.notify("loading nvim-navic error")
+    vim.notify("nvim-navic loading failed")
     return
 end
 
