@@ -38,7 +38,8 @@ fi
 	export COREPATH="$HOMEBREWOPT/opt/coreutils/libexec/gnubin"
 	export MANPATH="$HOMEBREWOPT/opt/coreutils/libexec/gnuman:$MANPATH"
 	export ZPLUG_HOME="$HOMEBREWOPT/opt/zplug"
-	export PATH="$PATH:$GOROOT/bin:$GOPATH/bin:$COREPATH:$ZPLUG_HOME"
+    export GCLOUD_HOME="$HOME/google-cloud-sdk"
+	export PATH="$PATH:$GOROOT/bin:$GOPATH/bin:$COREPATH:$ZPLUG_HOME:$GCLOUD_HOME/bin"
 
 
 
@@ -66,6 +67,7 @@ fi
 	alias cat='bat' 
 	alias curl='$HOMEBREWOPT/opt/curl/bin/curl'
 	alias sed="gsed" 
+    alias kubectl='$GCLOUD_HOME/bin/kubectl'
 
 	# zsh part 
 	alias -s sh="sh "
