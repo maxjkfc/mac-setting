@@ -11,8 +11,8 @@ mason_lspconfig.setup({
 
 -- lspconfig setting
 
-local status_ok, lspconfig = pcall(require, "lspconfig")
-if not status_ok then
+local status_ok_2, lspconfig = pcall(require, "lspconfig")
+if not status_ok_2 then
     vim.notify("lspconfig not ready!!!")
     return
 end

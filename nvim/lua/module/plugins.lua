@@ -119,6 +119,14 @@ return packer.startup(function(use)
     use("JoosepAlviste/nvim-ts-context-commentstring")
     use("p00f/nvim-ts-rainbow") -- 括弧彩色對應
 
+    use {
+        "ThePrimeagen/refactoring.nvim",
+        requires = {
+            { "nvim-lua/plenary.nvim" },
+            { "nvim-treesitter/nvim-treesitter" }
+        }
+    }
+
     -- Git
     use({
         "lewis6991/gitsigns.nvim",
@@ -193,7 +201,7 @@ return packer.startup(function(use)
     use({ "iamcco/markdown-preview.nvim", ft = "markdown", run = "cd app && yarn install" })
 
     -- breadcrumbs
-    use{
+    use {
         "SmiteshP/nvim-navic",
         requires = "neovim/nvim-lspconfig"
     }

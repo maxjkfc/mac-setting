@@ -53,6 +53,6 @@ vim.cmd([[
     augroup end
 ]])
 
--- vim.cmd([[
---     autocmd BufWritePre * lua vim.lsp.buf.formatting_sync()
--- ]])
+vim.cmd([[
+    autocmd BufWritePre * lua vim.lsp.buf.formatting_sync()
+]])

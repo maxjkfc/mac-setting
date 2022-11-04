@@ -62,7 +62,7 @@ fi
 	alias egrep='egrep --color=auto'
 
 	# tools path
-	alias mtr=' sudo /usr/local/sbin/mtr'
+	alias mtr=' sudo mtr'
 	alias git='$HOMEBREWOPT/bin/git'
 	alias cat='bat' 
 	alias curl='$HOMEBREWOPT/opt/curl/bin/curl'
