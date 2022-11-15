@@ -1,9 +1,9 @@
 # Enabl Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
+    if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+      source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+    fi
 
 # Defualt Setting Part
 	ZSH_DISABLE_COMPFIX="true"
@@ -39,7 +39,7 @@ fi
 	export MANPATH="$HOMEBREWOPT/opt/coreutils/libexec/gnuman:$MANPATH"
 	export ZPLUG_HOME="$HOMEBREWOPT/opt/zplug"
     export GCLOUD_HOME="$HOME/google-cloud-sdk"
-	export PATH="$PATH:$GOROOT/bin:$GOPATH/bin:$COREPATH:$ZPLUG_HOME:$GCLOUD_HOME/bin"
+	export PATH="$PATH:$GOROOT/bin:$GOPATH/bin:$COREPATH:$ZPLUG_HOME:$GCLOUD_HOME/bin:~/.local/bin"
 
 
 
@@ -67,7 +67,7 @@ fi
 	alias cat='bat' 
 	alias curl='$HOMEBREWOPT/opt/curl/bin/curl'
 	alias sed="gsed" 
-    alias kubectl='$GCLOUD_HOME/bin/kubectl'
+    # alias kubectl='$GCLOUD_HOME/bin/kubectl'
 
 	# zsh part 
 	alias -s sh="sh "
@@ -109,6 +109,7 @@ fi
 	zplug "wfxr/forgit"
 	zplug "zsh-users/zsh-syntax-highlighting", defer:2
 	zplug "zsh-users/zsh-autosuggestions"
+    zplug "chitoku-k/fzf-zsh-completions"
 	zplug "zsh-users/zsh-completions"
 	zplug "zsh-users/zsh-history-substring-search"
 	zplug "supercrabtree/k"
@@ -176,19 +177,6 @@ fi
 	  fd --type d --hidden --follow --exclude ".git" . "$1"
 	}
 
-    # ssh fzf
-    _fzf_complete_ssh() {
-        _fzf_complete '+m' "$@" < <(
-        cat ~/.ssh/config ~/.ssh/config.d/* /etc/ssh/ssh_config 2> /dev/null | grep -i -e '^host ' -e 'hostname' -e '#Desc' | grep -v '[*?]' | \
-            awk '/^Host/{if (NR!=1)print ""; printf $2} /Hostname/{printf "  [%s]",$2} /#Desc/{printf "  [%s]",$2}' | sort -u
-      )
-    }
-
-    _fzf_complete_ssh_post() {
-      awk '{printf $1}'
-    }
-
-    complete -F _fzf_complete_ssh -o default -o bashdefault ssh
-
 	# Iterm2 Plugin
 	test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
