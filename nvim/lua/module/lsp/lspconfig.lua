@@ -5,8 +5,8 @@ if not status_ok then
 end
 
 mason_lspconfig.setup({
-    ensure_installed = { "sumneko_lua", "rust_analyzer" , "gopls" , "yamlls" },
-    automatic_installation = false,
+    ensure_installed = { "sumneko_lua", "rust_analyzer", "gopls", "yamlls" },
+    automatic_installation = true,
 })
 
 -- lspconfig setting
@@ -52,7 +52,7 @@ mason_lspconfig.setup_handlers({
                     buildFlags = { "-tags", "integration" }
                 }
             },
-            on_attach = opts.on_attach ,
+            on_attach = opts.on_attach,
             capabilities = opts.capabilities,
         }
     end,

@@ -26,7 +26,7 @@ vg() {
   local file
   file="$(rg --no-block-buffered --color=always --no-heading $@ | fzf 1 -1 | awk -F: '{print $1}')" 
   if [[ -n $file ]]; then
-      ${EDITOR:-vim} "$file"
+      ${EDITOR:-nvim} "$file"
   fi
 }
 
