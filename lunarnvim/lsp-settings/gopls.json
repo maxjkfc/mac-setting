@@ -1,0 +1,25 @@
+{
+  "gopls": {
+    "usePlaceholders": true,
+    "codelenses": {
+      "generate": false,
+      "gc_details": true,
+      "tidy": true,
+      "upgrade_dependency": true,
+      "vendor": true
+    },
+    "staticcheck": true,
+    "gofumpt": true,
+    "analyses": {
+      "unreachable": false,
+      "unsedparams": true
+    },
+    "completeUnimported": true,
+    "hints": {
+      "constantValues": true,
+      "compositeLiteralTypes": true,
+      "assignVariableTypes": true,
+      "rangeVariableTypes": true
+    }
+  }
+}
