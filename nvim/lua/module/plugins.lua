@@ -54,7 +54,7 @@ return packer.startup(function(use)
     use("vim-scripts/peaksea")
     use("sheerun/vim-wombat-scheme")
     -- use "yong1le/darkplus.nvim"
-    use("folke/tokyonight.nvim")
+    use 'folke/tokyonight.nvim'
 
     -- Transparent Background
     use("xiyaowong/nvim-transparent")
@@ -135,15 +135,16 @@ return packer.startup(function(use)
         },
         -- tag = 'release' -- To use the latest release
     })
-    -- EasyMotion
-    use({
-        "phaazon/hop.nvim",
-        branch = "v1", -- optional but strongly recommended
-        config = function()
-            require("hop").setup({ keys = "etovxqpdygfblzhckisuran" })
-        end,
-    })
+    -- -- EasyMotion
+    -- use({
+    --     "phaazon/hop.nvim",
+    --     branch = "v1", -- optional but strongly recommended
+    --     config = function()
+    --         require("hop").setup({ keys = "etovxqpdygfblzhckisuran" })
+    --     end,
+    -- })
 
+    use("ggandor/lightspeed.nvim")
     -- LSP
     use("neovim/nvim-lspconfig") -- Neovim native LSP configuration
     use("williamboman/mason.nvim")
@@ -161,7 +162,16 @@ return packer.startup(function(use)
     use({ "danymat/neogen", requires = "nvim-treesitter/nvim-treesitter" })
 
     -- Surround
-    use("tpope/vim-surround")
+    -- use("tpope/vim-surround")
+    use({
+        "kylechui/nvim-surround",
+        tag = "*", -- Use for stability; omit to use `main` branch for the latest features
+        config = function()
+            require("nvim-surround").setup({
+                -- Configuration here, or leave empty to use defaults
+            })
+        end
+    })
     use("tpope/vim-repeat")
 
     -- Undotree
@@ -204,6 +214,18 @@ return packer.startup(function(use)
     use {
         "SmiteshP/nvim-navic",
         requires = "neovim/nvim-lspconfig"
+    }
+
+    use {
+        'nacro90/numb.nvim', config = function()
+            require('numb').setup {
+                show_numbers = true, -- Enable 'number' for the window while peeking
+                show_cursorline = true, -- Enable 'cursorline' for the window while peeking
+                hide_relativenumbers = true, -- Enable turning off 'relativenumber' for the window while peeking
+                number_only = false, -- Peek only when the command is only a number instead of when it starts with a number
+                centered_peeking = true, -- Peeked line will be centered relative to window
+            }
+        end
     }
 
     if PACKER_BOOTSTRAP then

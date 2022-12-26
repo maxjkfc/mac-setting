@@ -41,7 +41,6 @@ mason_lspconfig.setup_handlers({
                         test = true,
                         tidy = true
                     },
-                    usePlaceholders = true,
                     completeUnimported = true,
                     staticcheck = true,
                     matcher = 'fuzzy',
@@ -49,7 +48,12 @@ mason_lspconfig.setup_handlers({
                     experimentalWatchedFileDelay = '100ms',
                     symbolMatcher = 'fuzzy',
                     gofumpt = true, -- true, -- turn on for new repos, gofmpt is good but also create code turmoils
-                    buildFlags = { "-tags", "integration" }
+                    buildFlags = { "-tags", "integration" },
+                    hints = {
+                        assignVariableTypes = true,
+                        compositeLiteralFields = true,
+                        rangeVariableTypes = true
+                    }
                 }
             },
             on_attach = opts.on_attach,

@@ -30,6 +30,40 @@ lvim.keys.normal_mode["[d"] = "<cmd>lua vim.diagnostic.goto_prev({ border = 'rou
 lvim.keys.normal_mode["]d"] = "<cmd>lua vim.diagnostic.goto_next({ border = 'rounded' })<CR>"
 
 lvim.lsp.buffer_mappings.normal_mode["gi"] = lvim.lsp.buffer_mappings.normal_mode["gI"]
+lvim.builtin.gitsigns.opts.current_line_blame = false
+
+-- telescope config
+lvim.builtin.telescope.on_config_done = function(telescope)
+	pcall(telescope.load_extension, "fzf")
+	-- any other extensions loading
+end
+
+local _, actions = pcall(require, "telescope.actions")
+lvim.builtin.telescope.defaults.mappings = {
+	i = {
+		["<C-j>"] = actions.move_selection_next,
+		["<C-k>"] = actions.move_selection_previous,
+
+		["<C-n>"] = actions.cycle_history_next,
+		["<C-p>"] = actions.cycle_history_prev,
+
+		["<C-c>"] = actions.close,
+		["<C-[>"] = actions.close,
+
+		["<CR>"] = actions.select_default,
+
+		["<C-x>"] = actions.select_horizontal,
+		["<C-v>"] = actions.select_vertical,
+		["<C-t>"] = actions.select_tab,
+
+		["<C-_>"] = actions.which_key, -- keys from pressing <C-/>
+	},
+	n = {
+		["<C-j>"] = actions.move_selection_next,
+		["<C-k>"] = actions.move_selection_previous,
+		["q"] = actions.close,
+	},
+}
 
 -- -- Use which-key to add extra bindings with the leader-key prefix
 -- lvim.builtin.which_key.mappings["W"] = { "<cmd>noautocmd w<cr>", "Save without formatting" }
@@ -42,7 +76,7 @@ lvim.builtin.which_key.mappings["t"] = {
 	d = { "<cmd>Trouble document_diagnostics<cr>", "Diagnostics" },
 	q = { "<cmd>Trouble quickfix<cr>", "QuickFix" },
 	l = { "<cmd>Trouble loclist<cr>", "LocationList" },
-	w = { "<cmd>Trouble lsp_workspace_diagnostics<cr>", "Diagnostics" },
+	w = { "<cmd>Trouble workspace_diagnostics<cr>", "Workspace Diagnostics" },
 }
 
 -- -- Change theme settings
@@ -57,6 +91,7 @@ lvim.builtin.nvimtree.setup.renderer.icons.show.git = false
 
 -- Automatically install missing parsers when entering buffer
 lvim.builtin.treesitter.auto_install = true
+lvim.builtin.treesitter.highlight.enable = true
 
 -- lvim.builtin.treesitter.ignore_install = { "haskell" }
 
@@ -143,6 +178,7 @@ lvim.plugins = {
 		end,
 	},
 	{
+		-- 更豐富的QuickFix套件
 		"kevinhwang91/nvim-bqf",
 		event = { "BufRead", "BufNew" },
 		config = function()
@@ -199,13 +235,64 @@ lvim.plugins = {
 		run = "make",
 		event = "BufRead",
 	},
+	-- {
+	-- 	-- 顯示目前此行Git 紀錄
+	-- 	"f-person/git-blame.nvim",
+	-- 	event = "BufRead",
+	-- 	config = function()
+	-- 		vim.cmd("highlight default link gitblame SpecialComment")
+	-- 		vim.g.gitblame_enabled = 0
+	-- 	end,
+	-- },
 	{
-		-- 顯示目前此行Git 紀錄
-		"f-person/git-blame.nvim",
-		event = "BufRead",
+		-- Golang 擴充套件
+		"ray-x/go.nvim",
 		config = function()
-			vim.cmd("highlight default link gitblame SpecialComment")
-			vim.g.gitblame_enabled = 0
+			local opt = {
+				-- disable_defaults = true,
+				-- gopls_remote_auto = true, -- add -remote=auto to gopls
+				textobjects = true, -- enable default text jobects through treesittter-text-objects
+				test_runner = "richgo", -- richgo, go test, richgo, dlv, ginkgo
+				lsp_inlay_hints = {
+					enable = true,
+					-- Only show inlay hints for the current line
+					only_current_line = false,
+					-- Event which triggers a refersh of the inlay hints.
+					-- You can make this "CursorMoved" or "CursorMoved,CursorMovedI" but
+					-- not that this may cause higher CPU usage.
+					-- This option is only respected when only_current_line and
+					-- autoSetHints both are true.
+					only_current_line_autocmd = "CursorHold",
+					-- whether to show variable name before type hints with the inlay hints or not
+					-- default: false
+					show_variable_name = true,
+					-- prefix for parameter hints
+					parameter_hints_prefix = " ",
+					show_parameter_hints = true,
+					-- prefix for all the other hints (type, chaining)
+					other_hints_prefix = "=> ",
+					-- whether to align to the lenght of the longest line in the file
+					max_len_align = false,
+					-- padding from the left if max_len_align is true
+					max_len_align_padding = 1,
+					-- whether to align to the extreme right or not
+					right_align = false,
+					-- padding from the right if right_align is true
+					right_align_padding = 6,
+					-- The color of the hints
+					highlight = "Comment",
+				},
+				trouble = true,
+				tag_options = "json=omitempty", -- sets options sent to gomodifytags, i.e., json=omitempty
+				fillstruct = "gopls", -- can be nil (use fillstruct, slower) and gopls
+			}
+			require("go").setup(opt)
+		end,
+	},
+	{
+		"kylechui/nvim-surround",
+		config = function()
+			require("nvim-surround").setup({})
 		end,
 	},
 }
