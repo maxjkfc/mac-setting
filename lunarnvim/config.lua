@@ -26,6 +26,7 @@ lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 lvim.keys.normal_mode["<S-l>"] = ":BufferLineCycleNext<CR>"
 lvim.keys.normal_mode["<S-h>"] = ":BufferLineCyclePrev<CR>"
 lvim.keys.normal_mode["<S-x"] = ":BufferKill<CR>"
+
 lvim.keys.normal_mode["[d"] = "<cmd>lua vim.diagnostic.goto_prev({ border = 'rounded' })<CR>"
 lvim.keys.normal_mode["]d"] = "<cmd>lua vim.diagnostic.goto_next({ border = 'rounded' })<CR>"
 
@@ -134,6 +135,8 @@ formatters.setup({
 	},
 	{
 		command = "goimports",
+		-- command = "goimports-reviser",
+		-- extra_args = { "-format", "-rm-unused", "-output", "file" },
 		filetypes = { "go", "go.mod" },
 	},
 })
@@ -154,6 +157,9 @@ local code_actions = require("lvim.lsp.null-ls.code_actions")
 code_actions.setup({
 	{
 		command = "proselint",
+	},
+	{
+		command = "refactoring",
 	},
 })
 
@@ -232,7 +238,7 @@ lvim.plugins = {
 	},
 	{
 		"nvim-telescope/telescope-fzy-native.nvim",
-		run = "make",
+		build = "make",
 		event = "BufRead",
 	},
 	-- {

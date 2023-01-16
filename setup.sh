@@ -29,9 +29,6 @@ setup_tmux() {
 
 	ln -s "$PWD"/tmux/.tmux.conf "$HOME"/.tmux.conf
 
-	## install tpm if not exist
-	# if "test ! -d ~/.tmux/plugins/tpm" \
-	#     "run 'git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm && ~/.tmux/plugins/tpm/bin/install_plugins'"
 
 	echo "setup tmux config finish"
 
@@ -62,7 +59,7 @@ setup_nvim() {
 	NVIM_PATH="$HOME/.config"
 
 	if [ -d "$NVIM_PATH/nvim" ]; then
-		rm -rf $NVIM_PATH/nvim
+		rm -rf "$NVIM_PATH/nvim"
 	fi
 
 	ln -s "$PWD"/nvim "$NVIM_PATH"/nvim
