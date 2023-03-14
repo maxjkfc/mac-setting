@@ -9,7 +9,7 @@
       "vendor": true
     },
     "staticcheck": true,
-    "gofumpt": true,
+    "gofumpt": false,
     "analyses": {
       "unreachable": false,
       "unsedparams": true

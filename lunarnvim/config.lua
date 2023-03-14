@@ -2,7 +2,6 @@
  THESE ARE EXAMPLE CONFIGS FEEL FREE TO CHANGE TO WHATEVER YOU WANT
  `lvim` is the global options object
 ]]
-
 -- vim options
 vim.opt.shiftwidth = 2
 vim.opt.tabstop = 2
@@ -28,10 +27,11 @@ lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 
 lvim.keys.normal_mode["<S-l>"] = ":BufferLineCycleNext<CR>"
 lvim.keys.normal_mode["<S-h>"] = ":BufferLineCyclePrev<CR>"
-lvim.keys.normal_mode["<S-x"] = ":BufferKill<CR>"
 
-lvim.keys.normal_mode["[d"] = ":TroubleToggle document_diagnostics<CR>"
-lvim.keys.normal_mode["]d"] = ":TroubleToggle workspace_diagnostics<CR>"
+-- lvim.keys.normal_mode["[d"] = ":TroubleToggle document_diagnostics<CR>"
+-- lvim.keys.normal_mode["]d"] = ":TroubleToggle workspace_diagnostics<CR>"
+lvim.keys.normal_mode["[d"] = "<cmd>lua vim.diagnostic.goto_prev({border='rounded'})<CR>"
+lvim.keys.normal_mode["]d"] = "<cmd>lua vim.diagnostic.goto_next({border='rounded'})<CR>"
 -- lvim.keys.normal_mode["]d"] = "<cmd>lua vim.diagnostic.goto_next({ border = 'rounded' })<CR>"
 
 lvim.lsp.buffer_mappings.normal_mode["gi"] = lvim.lsp.buffer_mappings.normal_mode["gI"]
@@ -48,24 +48,20 @@ lvim.builtin.telescope.defaults.mappings = {
 	i = {
 		["<C-j>"] = actions.move_selection_next,
 		["<C-k>"] = actions.move_selection_previous,
-
 		["<C-n>"] = actions.cycle_history_next,
 		["<C-p>"] = actions.cycle_history_prev,
-
 		["<C-c>"] = actions.close,
 		["<C-[>"] = actions.close,
-
 		["<CR>"] = actions.select_default,
-
 		["<C-x>"] = actions.select_horizontal,
 		["<C-v>"] = actions.select_vertical,
 		["<C-t>"] = actions.select_tab,
-
 		["<C-_>"] = actions.which_key, -- keys from pressing <C-/>
 	},
 	n = {
-		["<C-j>"] = actions.move_selection_next,
-		["<C-k>"] = actions.move_selection_previous,
+		["j"] = actions.move_selection_next,
+		["k"] = actions.move_selection_previous,
+		["v"] = actions.select_vertical,
 		["q"] = actions.close,
 	},
 }
@@ -74,16 +70,24 @@ lvim.builtin.telescope.defaults.mappings = {
 -- lvim.builtin.which_key.mappings["W"] = { "<cmd>noautocmd w<cr>", "Save without formatting" }
 -- lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
 --
+--
+
+lvim.builtin.which_key.mappings["e"] = { "<cmd>NeoTreeFocusToggle<cr>", "Explorer" }
+lvim.builtin.which_key.mappings["E"] = { "<cmd>NeoTreeFloatToggle<cr>", "Float Explorer" }
+lvim.builtin.which_key.mappings["cs"] = { "<cmd>SymbolsOutline<cr>", "Outline" }
+--
 lvim.builtin.which_key.mappings["t"] = {
 	name = "Trouble",
-	r = { "<cmd>Trouble lsp_references<cr>", "References" },
-	f = { "<cmd>Trouble lsp_definitions<cr>", "Definitions" },
-	d = { "<cmd>Trouble document_diagnostics<cr>", "Diagnostics" },
-	q = { "<cmd>Trouble quickfix<cr>", "QuickFix" },
-	l = { "<cmd>Trouble loclist<cr>", "LocationList" },
-	w = { "<cmd>Trouble workspace_diagnostics<cr>", "Workspace Diagnostics" },
+	r = { "<cmd>TroubleToggle lsp_references<cr>", "References" },
+	f = { "<cmd>TroubleToggle lsp_definitions<cr>", "Definitions" },
+	d = { "<cmd>TroubleToggle document_diagnostics<cr>", "Diagnostics" },
+	w = { "<cmd>TroubleToggle workspace_diagnostics<cr>", "Workspace Diagnostics" },
+	q = { "<cmd>TroubleToggle quickfix<cr>", "QuickFix" },
+	l = { "<cmd>TroubleToggle loclist<cr>", "LocationList" },
 	t = { "<cmd>TodoQuickFix<cr>", "TodoList" },
 }
+
+lvim.builtin.which_key.mappings["bx"] = { "<cmd>BufferKill<CR>", "Buffer Kill" }
 lvim.builtin.which_key.mappings["gh"] = {
 	name = "+Github",
 	c = {
@@ -139,9 +143,11 @@ lvim.builtin.alpha.mode = "dashboard"
 lvim.builtin.terminal.active = true
 lvim.builtin.nvimtree.setup.view.side = "left"
 lvim.builtin.nvimtree.setup.renderer.icons.show.git = false
+lvim.builtin.nvimtree.active = false -- NOTE: using neo-tree
 
 -- Automatically install missing parsers when entering buffer
 lvim.builtin.treesitter.auto_install = true
+lvim.builtin.treesitter.rainbow.enable = true
 lvim.builtin.treesitter.highlight.enable = true
 
 -- lvim.builtin.treesitter.ignore_install = { "haskell" }
@@ -154,8 +160,8 @@ lvim.builtin.treesitter.highlight.enable = true
 -- ---configure a server manually. IMPORTANT: Requires `:LvimCacheReset` to take effect
 -- ---see the full default list `:lua =lvim.lsp.automatic_configuration.skipped_servers`
 -- vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "pyright" })
--- local opts = {} -- check the lspconfig documentation for a list of all possible options
--- require("lvim.lsp.manager").setup("pyright", opts)
+local opts = {} -- check the lspconfig documentation for a list of all possible options
+require("lvim.lsp.manager").setup("buf-language-server", opts)
 
 -- ---remove a server from the skipped list, e.g. eslint, or emmet_ls. IMPORTANT: Requires `:LvimCacheReset` to take effect
 -- ---`:LvimInfo` lists which server(s) are skipped for the current filetype
@@ -186,12 +192,11 @@ formatters.setup({
 		command = "goimports",
 		-- command = "goimports-reviser",
 		-- extra_args = { "-format", "-rm-unused", "-output", "file" },
+		-- extra_args = { "-format", "-rm-unused", "-file-path", "$FilePath$" },
 		filetypes = { "go", "go.mod" },
 	},
 	{
 		command = "buf",
-		-- command = "goimports-reviser",
-		-- extra_args = { "-format", "-rm-unused", "-output", "file" },
 		filetypes = { "proto" },
 	},
 })
@@ -217,9 +222,9 @@ code_actions.setup({
 	{
 		command = "proselint",
 	},
-	{
-		command = "refactoring",
-	},
+	-- {
+	-- 	command = "refactoring",
+	-- },
 })
 
 -- -- Additional Plugins <https://www.lunarvim.org/docs/plugins#user-plugins>
@@ -227,6 +232,10 @@ lvim.plugins = {
 	{
 		"folke/trouble.nvim",
 		cmd = "TroubleToggle",
+	},
+	{
+		"sindrets/diffview.nvim",
+		event = "BufRead",
 	},
 	{
 		"folke/todo-comments.nvim",
@@ -313,6 +322,135 @@ lvim.plugins = {
 		end,
 	},
 	{
+		"nvim-neo-tree/neo-tree.nvim",
+		branch = "v2.x",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"nvim-tree/nvim-web-devicons",
+			"MunifTanjim/nui.nvim",
+		},
+		config = function()
+			require("neo-tree").setup({
+				source_selector = {
+					winbar = true,
+					statusline = true,
+				},
+				close_if_last_window = true,
+				buffers = {
+					follow_current_file = true,
+				},
+				filesystem = {
+					follow_current_file = true,
+					filtered_items = {
+						hide_dotfiles = false,
+						hide_gitignored = false,
+						hide_by_name = {
+							"node_modules",
+						},
+						never_show = {
+							".DS_Store",
+							"thumbs.db",
+						},
+					},
+				},
+				window = {
+					width = 30,
+					mapping_options = {
+						noremap = true,
+						nowait = true,
+					},
+					mappings = {
+						["<cr>"] = "open",
+						["o"] = "open",
+						["<esc>"] = "revert_preview",
+						["P"] = { "toggle_preview", config = { use_float = true } },
+						["l"] = "focus_preview",
+						-- ["s"] = "open_split",
+						-- ["v"] = "open_vsplit",
+						["s"] = "split_with_window_picker",
+						["v"] = "vsplit_with_window_picker",
+						["t"] = "open_tabnew",
+						-- ["<cr>"] = "open_drop",
+						-- ["t"] = "open_tab_drop",
+						["w"] = "open_with_window_picker",
+						--["P"] = "toggle_preview", -- enter preview mode, which shows the current node without focusing
+						["C"] = "close_node",
+						-- ['C'] = 'close_all_subnodes',
+						["z"] = "close_all_nodes",
+						["Z"] = "expand_all_nodes",
+						["a"] = {
+							"add",
+							-- this command supports BASH style brace expansion ("x{a,b,c}" -> xa,xb,xc). see `:h neo-tree-file-actions` for details
+							-- some commands may take optional config options, see `:h neo-tree-mappings` for details
+							config = {
+								show_path = "none", -- "none", "relative", "absolute"
+							},
+						},
+						["A"] = "add_directory", -- also accepts the optional config.show_path option like "add". this also supports BASH style brace expansion.
+						["d"] = "delete",
+						["r"] = "rename",
+						["y"] = "copy_to_clipboard",
+						["x"] = "cut_to_clipboard",
+						["p"] = "paste_from_clipboard",
+						["c"] = "copy", -- takes text input for destination, also accepts the optional config.show_path option like "add":
+						["m"] = "move", -- takes text input for destination, also accepts the optional config.show_path option like "add".
+						["q"] = "close_window",
+						["R"] = "refresh",
+						["?"] = "show_help",
+						["<"] = "prev_source",
+						[">"] = "next_source",
+					},
+				},
+			})
+		end,
+	},
+	{
+		"s1n7ax/nvim-window-picker",
+		version = "1.*",
+		config = function()
+			require("window-picker").setup({
+				autoselect_one = true,
+				include_current = false,
+				selection_chars = "hjkl",
+				filter_rules = {
+					-- filter using buffer options
+					bo = {
+						-- if the file type is one of following, the window will be ignored
+						filetype = { "neo-tree", "neo-tree-popup", "notify", "quickfix" },
+						-- if the buffer type is one of following, the window will be ignored
+						buftype = { "terminal" },
+					},
+				},
+				other_win_hl_color = "#e35e4f",
+			})
+
+			-- example mappings you can place in some other place
+			-- An awesome method to jump to windows
+			local picker = require("window-picker")
+
+			vim.keymap.set("n", ",w", function()
+				local picked_window_id = picker.pick_window({
+					include_current_win = true,
+				}) or vim.api.nvim_get_current_win()
+				vim.api.nvim_set_current_win(picked_window_id)
+			end, { desc = "Pick a window" })
+
+			-- Swap two windows using the awesome window picker
+			local function swap_windows()
+				local window = picker.pick_window({
+					include_current_win = false,
+				})
+				local target_buffer = vim.fn.winbufnr(window)
+				-- Set the target window to contain current buffer
+				vim.api.nvim_win_set_buf(window, 0)
+				-- Set current window to contain target buffer
+				vim.api.nvim_win_set_buf(0, target_buffer)
+			end
+
+			vim.keymap.set("n", ",W", swap_windows, { desc = "Swap windows" })
+		end,
+	},
+	{
 		-- 更豐富的QuickFix套件
 		"kevinhwang91/nvim-bqf",
 		event = { "BufRead", "BufNew" },
@@ -371,14 +509,24 @@ lvim.plugins = {
 		event = "BufRead",
 	},
 	{
+		"ray-x/lsp_signature.nvim",
+		event = "BufRead",
+		config = function()
+			require("lsp_signature").on_attach()
+		end,
+	},
+	{
 		-- Golang 擴充套件
 		"ray-x/go.nvim",
+		dependencies = "ray-x/guihua.lua",
 		config = function()
 			local opt = {
+				-- cmd = { "gopls", "-remote=auto" },
+				-- filetype = { "go", "gomod", "gohtmltmpl", "gotexttmpl" },
 				-- disable_defaults = true,
-				gopls_remote_auto = true, -- add -remote=auto to gopls
+				-- gopls_remote_auto = true, -- add -remote=auto to gopls
 				textobjects = true, -- enable default text jobects through treesittter-text-objects
-				test_runner = "richgo", -- richgo, go test, richgo, dlv, ginkgo
+				-- test_runner = "richgo", -- richgo, go test, richgo, dlv, ginkgo
 				lsp_inlay_hints = {
 					enable = true,
 					-- Only show inlay hints for the current line
@@ -419,6 +567,123 @@ lvim.plugins = {
 		"kylechui/nvim-surround",
 		config = function()
 			require("nvim-surround").setup({})
+		end,
+	},
+	{
+		"simrat39/symbols-outline.nvim",
+		config = function()
+			require("symbols-outline").setup()
+		end,
+	},
+	{
+		"tzachar/cmp-tabnine",
+		build = "./install.sh",
+		dependencies = "hrsh7th/nvim-cmp",
+		event = "InsertEnter",
+	},
+	{
+		"jackMort/ChatGPT.nvim",
+		dependencies = {
+			"MunifTanjim/nui.nvim",
+			"nvim-lua/plenary.nvim",
+			"nvim-telescope/telescope.nvim",
+		},
+		config = function()
+			require("chatgpt").setup({
+				-- welcome_message = "WELCOME_MESSAGE", -- set to "" if you don't like the fancy godot robot
+				loading_text = "loading",
+				question_sign = "", -- you can use emoji if you want e.g. 🙂
+				answer_sign = "ﮧ", -- 🤖
+				max_line_length = 120,
+				yank_register = "+",
+				chat_layout = {
+					relative = "editor",
+					position = "50%",
+					size = {
+						height = "80%",
+						width = "80%",
+					},
+				},
+				settings_window = {
+					border = {
+						style = "rounded",
+						text = {
+							top = " Settings ",
+						},
+					},
+				},
+				chat_window = {
+					filetype = "chatgpt",
+					border = {
+						highlight = "FloatBorder",
+						style = "rounded",
+						text = {
+							top = " ChatGPT ",
+						},
+					},
+				},
+				chat_input = {
+					prompt = "  ",
+					border = {
+						highlight = "FloatBorder",
+						style = "rounded",
+						text = {
+							top_align = "center",
+							top = " Prompt ",
+						},
+					},
+				},
+				openai_params = {
+					model = "text-davinci-003",
+					frequency_penalty = 0,
+					presence_penalty = 0,
+					max_tokens = 300,
+					temperature = 0,
+					top_p = 1,
+					n = 1,
+				},
+				openai_edit_params = {
+					model = "code-davinci-edit-001",
+					temperature = 0,
+					top_p = 1,
+					n = 1,
+				},
+				keymaps = {
+					close = { "<C-c>", "<Esc>" },
+					yank_last = "<C-y>",
+					scroll_up = "<C-k>",
+					scroll_down = "<C-j>",
+					toggle_settings = "<C-o>",
+					new_session = "<C-n>",
+					cycle_windows = "<C-l>",
+				},
+			})
+		end,
+	},
+	{
+		"windwp/nvim-spectre",
+		event = "BufRead",
+		config = function()
+			require("spectre").setup()
+		end,
+	},
+	{
+		"rmagatti/goto-preview",
+		config = function()
+			require("goto-preview").setup({
+				width = 120, -- Width of the floating window
+				height = 25, -- Height of the floating window
+				-- default_mappings = false, -- Bind default mappings
+				default_mappings = true, -- Bind default mappings
+				debug = false, -- Print debug information
+				opacity = nil, -- 0-100 opacity level of the floating window where 100 is fully transparent.
+				post_open_hook = nil, -- A function taking two arguments, a buffer and a window to be ran as a hook.
+				-- You can use "default_mappings = true" setup option
+				-- Or explicitly set keybindings
+				-- vim.cmd("nnoremap gpd <cmd>lua require('goto-preview').goto_preview_definition()<CR>"),
+				-- vim.cmd("nnoremap gpi <cmd>lua require('goto-preview').goto_preview_implementation()<CR>"),
+				-- vim.cmd("nnoremap gP <cmd>lua require('goto-preview').close_all_win()<CR>"),
+			})
 		end,
 	},
 	{
@@ -472,13 +737,31 @@ lvim.plugins = {
 			})
 		end,
 	},
+
+	{
+		"zbirenbaum/copilot.lua",
+		event = { "VimEnter" },
+		config = function()
+			vim.defer_fn(function()
+				require("copilot").setup({
+					plugin_manager_path = get_runtime_dir() .. "/site/pack/packer",
+				})
+			end, 100)
+		end,
+	},
+	{ "zbirenbaum/copilot-cmp", after = { "copilot.lua", "nvim-cmp" } },
 }
 
+-- for copilot
+-- Can not be placed into the config method of the plugins.
+lvim.builtin.cmp.formatting.source_names["copilot"] = "(Copilot)"
+table.insert(lvim.builtin.cmp.sources, 1, { name = "copilot" })
+
 -- -- Autocommands (`:help autocmd`) <https://neovim.io/doc/user/autocmd.html>
--- vim.api.nvim_create_autocmd("FileType", {
---   pattern = "zsh",
---   callback = function()
---     -- let treesitter use bash highlight for zsh files as well
---     require("nvim-treesitter.highlight").attach(0, "bash")
---   end,
--- })
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "zsh",
+	callback = function()
+		-- let treesitter use bash highlight for zsh files as well
+		require("nvim-treesitter.highlight").attach(0, "bash")
+	end,
+})
