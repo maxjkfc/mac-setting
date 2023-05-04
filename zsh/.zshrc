@@ -177,5 +177,11 @@
 	  fd --type d --hidden --follow --exclude ".git" . "$1"
 	}
 
+  # ChatGPT
+  export OPENAI_API_KEY="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"
+
+  # nsc
+  export PATH="$PATH:/Users/maxjkfc/.nsccli/bin" 
+
 	# Iterm2 Plugin
 	test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"

@@ -12,10 +12,10 @@ lvim.log.level = "info"
 lvim.format_on_save = {
 	enabled = true,
 	-- pattern = "*.lua",
-	timeout = 1000,
+	-- timeout = 100,
 }
 
--- vim.env.PATH = "/opt/homebrew/opt/fzf" .. vim.env.PATH
+vim.env.PATH = "/opt/homebrew/opt/fzf" .. vim.env.PATH
 
 -- to disable icons and use a minimalist setup, uncomment the following
 -- lvim.use_icons = false
@@ -160,8 +160,9 @@ lvim.builtin.treesitter.highlight.enable = true
 -- ---configure a server manually. IMPORTANT: Requires `:LvimCacheReset` to take effect
 -- ---see the full default list `:lua =lvim.lsp.automatic_configuration.skipped_servers`
 -- vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "pyright" })
-local opts = {} -- check the lspconfig documentation for a list of all possible options
-require("lvim.lsp.manager").setup("buf-language-server", opts)
+local buf_opts = {} -- check the lspconfig documentation for a list of all possible options
+require("lvim.lsp.manager").setup("buf-language-server", buf_opts)
+-- $LUNARVIM_CONFIG_DIR/ftplugin/lua.lua
 
 -- ---remove a server from the skipped list, e.g. eslint, or emmet_ls. IMPORTANT: Requires `:LvimCacheReset` to take effect
 -- ---`:LvimInfo` lists which server(s) are skipped for the current filetype
@@ -188,13 +189,10 @@ formatters.setup({
 		extra_args = { "--print-width", "100" },
 		filetypes = { "typescript", "typescriptreact" },
 	},
-	{
-		command = "goimports",
-		-- command = "goimports-reviser",
-		-- extra_args = { "-format", "-rm-unused", "-output", "file" },
-		-- extra_args = { "-format", "-rm-unused", "-file-path", "$FilePath$" },
-		filetypes = { "go", "go.mod" },
-	},
+	-- {
+	-- 	command = "goimports",
+	-- 	filetypes = { "go", "go.mod" },
+	-- },
 	{
 		command = "buf",
 		filetypes = { "proto" },
@@ -411,7 +409,7 @@ lvim.plugins = {
 			require("window-picker").setup({
 				autoselect_one = true,
 				include_current = false,
-				selection_chars = "hjkl",
+				selection_chars = "123456",
 				filter_rules = {
 					-- filter using buffer options
 					bo = {
@@ -509,21 +507,15 @@ lvim.plugins = {
 		event = "BufRead",
 	},
 	{
-		"ray-x/lsp_signature.nvim",
-		event = "BufRead",
-		config = function()
-			require("lsp_signature").on_attach()
-		end,
-	},
-	{
 		-- Golang 擴充套件
 		"ray-x/go.nvim",
 		dependencies = "ray-x/guihua.lua",
 		config = function()
 			local opt = {
-				-- cmd = { "gopls", "-remote=auto" },
+				-- cmd = { "gopls" },
 				-- filetype = { "go", "gomod", "gohtmltmpl", "gotexttmpl" },
-				-- disable_defaults = true,
+				lsp_document_formattings = true,
+				disable_defaults = true,
 				-- gopls_remote_auto = true, -- add -remote=auto to gopls
 				textobjects = true, -- enable default text jobects through treesittter-text-objects
 				-- test_runner = "richgo", -- richgo, go test, richgo, dlv, ginkgo
@@ -563,10 +555,31 @@ lvim.plugins = {
 			require("go").setup(opt)
 		end,
 	},
+	-- {
+	-- 	"kylechui/nvim-surround",
+	-- 	version = "*", -- Use for stability; omit to use `main` branch for the latest features
+	-- 	event = "VeryLazy",
+	-- 	config = function()
+	-- 		require("nvim-surround").setup({
+	--      })
+	-- 	end,
+	-- },
+	--
 	{
-		"kylechui/nvim-surround",
+		"echasnovski/mini.surround",
+		version = false,
 		config = function()
-			require("nvim-surround").setup({})
+			require("mini.surround").setup({
+				mappings = {
+					add = "gza", -- Add surrounding in Normal and Visual modes
+					delete = "gzd", -- Delete surrounding
+					find = "gzf", -- Find surrounding (to the right)
+					find_left = "gzF", -- Find surrounding (to the left)
+					highlight = "gzh", -- Highlight surrounding
+					replace = "gzr", -- Replace surrounding
+					update_n_lines = "gzn", -- Update `n_lines`
+				},
+			})
 		end,
 	},
 	{
@@ -583,6 +596,7 @@ lvim.plugins = {
 	},
 	{
 		"jackMort/ChatGPT.nvim",
+		event = "VeryLazy",
 		dependencies = {
 			"MunifTanjim/nui.nvim",
 			"nvim-lua/plenary.nvim",
@@ -590,13 +604,49 @@ lvim.plugins = {
 		},
 		config = function()
 			require("chatgpt").setup({
-				-- welcome_message = "WELCOME_MESSAGE", -- set to "" if you don't like the fancy godot robot
-				loading_text = "loading",
-				question_sign = "", -- you can use emoji if you want e.g. 🙂
-				answer_sign = "ﮧ", -- 🤖
-				max_line_length = 120,
 				yank_register = "+",
-				chat_layout = {
+				edit_with_instructions = {
+					diff = false,
+					keymaps = {
+						accept = "<C-y>",
+						toggle_diff = "<C-d>",
+						toggle_settings = "<C-o>",
+						cycle_windows = "<Tab>",
+						use_output_as_input = "<C-i>",
+					},
+				},
+				chat = {
+					welcome_message = WELCOME_MESSAGE,
+					loading_text = "Loading, please wait ...",
+					question_sign = "", -- 🙂
+					answer_sign = "ﮧ", -- 🤖
+					max_line_length = 120,
+					sessions_window = {
+						border = {
+							style = "rounded",
+							text = {
+								top = " Sessions ",
+							},
+						},
+						win_options = {
+							winhighlight = "Normal:Normal,FloatBorder:FloatBorder",
+						},
+					},
+					keymaps = {
+						close = { "<C-c>" },
+						yank_last = "<C-y>",
+						yank_last_code = "<C-k>",
+						scroll_up = "<C-u>",
+						scroll_down = "<C-d>",
+						toggle_settings = "<C-o>",
+						new_session = "<C-n>",
+						cycle_windows = "<Tab>",
+						select_session = "<Space>",
+						rename_session = "r",
+						delete_session = "d",
+					},
+				},
+				popup_layout = {
 					relative = "editor",
 					position = "50%",
 					size = {
@@ -604,15 +654,7 @@ lvim.plugins = {
 						width = "80%",
 					},
 				},
-				settings_window = {
-					border = {
-						style = "rounded",
-						text = {
-							top = " Settings ",
-						},
-					},
-				},
-				chat_window = {
+				popup_window = {
 					filetype = "chatgpt",
 					border = {
 						highlight = "FloatBorder",
@@ -621,8 +663,11 @@ lvim.plugins = {
 							top = " ChatGPT ",
 						},
 					},
+					win_options = {
+						winhighlight = "Normal:Normal,FloatBorder:FloatBorder",
+					},
 				},
-				chat_input = {
+				popup_input = {
 					prompt = "  ",
 					border = {
 						highlight = "FloatBorder",
@@ -632,9 +677,24 @@ lvim.plugins = {
 							top = " Prompt ",
 						},
 					},
+					win_options = {
+						winhighlight = "Normal:Normal,FloatBorder:FloatBorder",
+					},
+					submit = "<C-Enter>",
+				},
+				settings_window = {
+					border = {
+						style = "rounded",
+						text = {
+							top = " Settings ",
+						},
+					},
+					win_options = {
+						winhighlight = "Normal:Normal,FloatBorder:FloatBorder",
+					},
 				},
 				openai_params = {
-					model = "text-davinci-003",
+					model = "gpt-3.5-turbo",
 					frequency_penalty = 0,
 					presence_penalty = 0,
 					max_tokens = 300,
@@ -648,15 +708,8 @@ lvim.plugins = {
 					top_p = 1,
 					n = 1,
 				},
-				keymaps = {
-					close = { "<C-c>", "<Esc>" },
-					yank_last = "<C-y>",
-					scroll_up = "<C-k>",
-					scroll_down = "<C-j>",
-					toggle_settings = "<C-o>",
-					new_session = "<C-n>",
-					cycle_windows = "<C-l>",
-				},
+				actions_paths = {},
+				predefined_chat_gpt_prompts = "https://raw.githubusercontent.com/f/awesome-chatgpt-prompts/main/prompts.csv",
 			})
 		end,
 	},
@@ -683,6 +736,24 @@ lvim.plugins = {
 				-- vim.cmd("nnoremap gpd <cmd>lua require('goto-preview').goto_preview_definition()<CR>"),
 				-- vim.cmd("nnoremap gpi <cmd>lua require('goto-preview').goto_preview_implementation()<CR>"),
 				-- vim.cmd("nnoremap gP <cmd>lua require('goto-preview').close_all_win()<CR>"),
+			})
+		end,
+	},
+	-- Packer
+	{
+		"folke/noice.nvim",
+		dependencies = {
+			-- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+			"MunifTanjim/nui.nvim",
+			-- OPTIONAL:
+			--   `nvim-notify` is only needed, if you want to use the notification view.
+			--   If not available, we use `mini` as the fallback
+			"rcarriga/nvim-notify",
+		},
+		config = function()
+			require("noice").setup({
+				-- add any options here
+				--
 			})
 		end,
 	},
@@ -737,25 +808,7 @@ lvim.plugins = {
 			})
 		end,
 	},
-
-	{
-		"zbirenbaum/copilot.lua",
-		event = { "VimEnter" },
-		config = function()
-			vim.defer_fn(function()
-				require("copilot").setup({
-					plugin_manager_path = get_runtime_dir() .. "/site/pack/packer",
-				})
-			end, 100)
-		end,
-	},
-	{ "zbirenbaum/copilot-cmp", after = { "copilot.lua", "nvim-cmp" } },
 }
-
--- for copilot
--- Can not be placed into the config method of the plugins.
-lvim.builtin.cmp.formatting.source_names["copilot"] = "(Copilot)"
-table.insert(lvim.builtin.cmp.sources, 1, { name = "copilot" })
 
 -- -- Autocommands (`:help autocmd`) <https://neovim.io/doc/user/autocmd.html>
 vim.api.nvim_create_autocmd("FileType", {
@@ -764,4 +817,13 @@ vim.api.nvim_create_autocmd("FileType", {
 		-- let treesitter use bash highlight for zsh files as well
 		require("nvim-treesitter.highlight").attach(0, "bash")
 	end,
+})
+
+local format_sync_grp = vim.api.nvim_create_augroup("GoImport", {})
+vim.api.nvim_create_autocmd("BufWritePre", {
+	pattern = "*.go",
+	callback = function()
+		require("go.format").goimport()
+	end,
+	group = format_sync_grp,
 })
