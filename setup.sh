@@ -14,7 +14,8 @@ setup_install_depend() {
 	brew install wget
 	brew install gnu-sed
 	brew install git
-
+	brew install fd
+	brew install tmux
 	## install git-cz
 	# npm install -g git-cz
 	# npm install -g commitizen
@@ -70,10 +71,6 @@ setup_nvim() {
 	echo "setup [nvim] config finish"
 
 	# install depand plugins
-	brew tap yoheimuta/protolint
-	brew install protolint
-	brew install shellcheck
-	go get github.com/ckaznocha/protoc-gen-lint
 }
 
 case $1 in
