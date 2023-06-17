@@ -2,6 +2,7 @@
 set -e
 
 setup_install_depend() {
+
 	if ! command -v zplug &>/dev/null; then
 		brew install zplug
 	fi
@@ -16,6 +17,7 @@ setup_install_depend() {
 	brew install git
 	brew install fd
 	brew install tmux
+	brew install reattach-to-user-namespace
 	## install git-cz
 	# npm install -g git-cz
 	# npm install -g commitizen
@@ -24,15 +26,13 @@ setup_install_depend() {
 setup_tmux() {
 	echo "setup [tmux] config"
 
+	git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+
 	if [ -f "$HOME/.tmux.conf" ]; then
 		rm -rf "$HOME"/.tmux.conf
 	fi
 
 	ln -s "$PWD"/tmux/.tmux.conf "$HOME"/.tmux.conf
-
-	## install tpm if not exist
-	# if "test ! -d ~/.tmux/plugins/tpm" \
-	#     "run 'git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm && ~/.tmux/plugins/tpm/bin/install_plugins'"
 
 	echo "setup tmux config finish"
 

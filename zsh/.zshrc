@@ -1,9 +1,29 @@
 # Enabl Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
-    if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-      source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-    fi
+  if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+    source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+  fi
+# Path Part
+  export HOMEBREWOPT="/opt/homebrew"
+	# Golang setting
+	export GOROOT="$HOMEBREWOPT/opt/go/libexec"
+	export GOPATH="$HOME/go"
+  export OPENJAVA_PATH="$HOMEBREWOPT/opt/openjdk/bin"
+	# export coreutils path
+	export COREPATH="$HOMEBREWOPT/opt/coreutils/libexec/gnubin"
+	export MANPATH="$HOMEBREWOPT/opt/coreutils/libexec/gnuman:$MANPATH"
+	export ZPLUG_HOME="$HOMEBREWOPT/opt/zplug"
+  export GCLOUD_HOME="$HOME/code/google-cloud-sdk"
+  export PODMAN_COMPOSE="$HOME/.local/share/containers/podman-desktop/extensions-storage/podman-desktop.compose/bin"
+	export PATH="$PATH:$GOROOT/bin:$GOPATH/bin:$COREPATH:$ZPLUG_HOME:$GCLOUD_HOME/bin:~/.local/bin:$OPENJAVA_PATH:$PODMAN_COMPOSE"
+
+  # Theme P10K
+	source $HOMEBREWOPT/opt/powerlevel10k/powerlevel10k.zsh-theme
+	# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+	[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+	# quiet warning message from p10k
+	typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
 
 # Defualt Setting Part
 	ZSH_DISABLE_COMPFIX="true"
@@ -19,29 +39,12 @@
 	set -o emacs
 	# set Title 
 	echo $fg[blue]
-
-	echo    '  ███████╗██╗   ██╗██████╗    ███╗   ███╗ █████╗ ██╗  ██╗  '
-	echo    '  ══██╔══╝╚██╗ ██╔╝██╔══██╗   ████╗ ████║██╔══██╗╚██╗██╔╝  '
-	echo    '    ██║    ╚████╔╝ ██████╔╝   ██╔████╔██║███████║ ╚███╔╝   '
-	echo    '    ██║     ╚██╔╝  ██╔══██╗   ██║╚██╔╝██║██╔══██║ ██╔██╗   '
-	echo    '    ██║      ██║   ██║  ██║██╗██║ ╚═╝ ██║██║  ██║██╔╝ ██╗  '
-	echo    '    ╚═╝      ╚═╝   ╚═╝  ╚═╝╚═╝╚═╝     ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝  '
-
-
-# Path Part
-    export HOMEBREWOPT="/opt/homebrew"
-	# Golang setting
-	export GOROOT="$HOMEBREWOPT/opt/go/libexec"
-	export GOPATH="$HOME/go"
-
-	# export coreutils path
-	export COREPATH="$HOMEBREWOPT/opt/coreutils/libexec/gnubin"
-	export MANPATH="$HOMEBREWOPT/opt/coreutils/libexec/gnuman:$MANPATH"
-	export ZPLUG_HOME="$HOMEBREWOPT/opt/zplug"
-    export GCLOUD_HOME="$HOME/google-cloud-sdk"
-	export PATH="$PATH:$GOROOT/bin:$GOPATH/bin:$COREPATH:$ZPLUG_HOME:$GCLOUD_HOME/bin:~/.local/bin"
-
-
+	echo    ' ███╗   ███╗ █████╗ ██╗  ██╗  '
+	echo    ' ████╗ ████║██╔══██╗╚██╗██╔╝  '
+	echo    ' ██╔████╔██║███████║ ╚███╔╝   '
+	echo    ' ██║╚██╔╝██║██╔══██║ ██╔██╗   '
+	echo    ' ██║ ╚═╝ ██║██║  ██║██╔╝ ██╗  '
+	echo    ' ╚═╝     ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝  '
 
 # Alias Part
 	alias zshconfig="nvim ~/.zshrc"
@@ -76,58 +79,6 @@
 	alias -s gz="tar -xzvf"
 	alias -s tgz="tar -xzvf"
 	alias -s bz2="tar -xjvf"
-# Completion
-	# 	
-	fpath=(
-		~/.zsh/completion 
-		$HOMEBREWOPT/share/zsh/site-functions
-		$fpath 
-	)
-	autoload -Uz compinit && compinit -i
-	# Kubectl completion
-	source <(kubectl completion zsh)
-
-# Theme P10K
-    #   
-	source $HOMEBREWOPT/opt/powerlevel10k/powerlevel10k.zsh-theme
-	# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-	[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-	# quiet warning message from p10k
-	typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
-
-# Customer Shell
-	# 	
-	[[ ! -f $HOME/.zshshell ]] || source $HOME/.zshshell
-# ZPlug 
-    #   
-	source "$ZPLUG_HOME/init.zsh"
-	setopt prompt_subst # Make sure prompt is able to be generated properly.
-
-	zplug "b4b4r07/enhancd", use:init.sh
-	zplug "b4b4r07/emoji-cli"
-	zplug "wfxr/forgit"
-	zplug "zsh-users/zsh-syntax-highlighting", defer:2
-	zplug "zsh-users/zsh-autosuggestions"
-    zplug "chitoku-k/fzf-zsh-completions"
-	zplug "zsh-users/zsh-completions"
-	zplug "zsh-users/zsh-history-substring-search"
-	zplug "supercrabtree/k"
-
-	# zplug check returns true if all packages are installed
-	# Therefore, when it returns false, run zplug install
-	if ! zplug check; then
-	    zplug install
-	fi
-
-	# source plugins and add commands to the PATH
-	zplug load
-
-	# zplug check returns true if the given repository exists
-	if zplug check b4b4r07/enhancd; then
-	    # setting if enhancd is available
-	    export ENHANCD_FILTER=fzf-tmux
-	fi
 
 # Thirdly Tools
 	# Google Cloud SDK
@@ -140,7 +91,7 @@
 	if [ -f "$HOME/code/google-cloud-sdk/completion.zsh.inc" ]; then 
 		. "$HOME/code/google-cloud-sdk/completion.zsh.inc"; 
 	fi
-    export USE_GKE_GCLOUD_AUTH_PLUGIN=True
+  export USE_GKE_GCLOUD_AUTH_PLUGIN=true
 
 
 	# FZF
@@ -179,4 +130,50 @@
 
 	# Iterm2 Plugin
 	test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+# Customer Shell
+	# 	
+	[[ ! -f $HOME/.zshshell ]] || source $HOME/.zshshell
+
+# ZPlug 
+    #   
+	source "$ZPLUG_HOME/init.zsh"
+	setopt prompt_subst # Make sure prompt is able to be generated properly.
+
+	zplug "b4b4r07/enhancd", use:init.sh
+	zplug "b4b4r07/emoji-cli"
+	zplug "wfxr/forgit"
+	zplug "zsh-users/zsh-syntax-highlighting", defer:2
+	zplug "zsh-users/zsh-autosuggestions"
+  zplug "chitoku-k/fzf-zsh-completions"
+	zplug "zsh-users/zsh-completions"
+	zplug "zsh-users/zsh-history-substring-search"
+	zplug "supercrabtree/k"
+
+	# zplug check returns true if all packages are installed
+	# Therefore, when it returns false, run zplug install
+	if ! zplug check; then
+	    zplug install
+	fi
+
+	# source plugins and add commands to the PATH
+	zplug load
+
+	# zplug check returns true if the given repository exists
+	if zplug check b4b4r07/enhancd; then
+	    # setting if enhancd is available
+	    export ENHANCD_FILTER=fzf-tmux
+	fi
+
+
+# Completion
+	# 	
+	fpath=(
+		~/.zsh/completion 
+		$HOMEBREWOPT/share/zsh/site-functions
+		$fpath 
+	)
+	autoload -Uz compinit && compinit -i
+	# Kubectl completion
+	source <(kubectl completion zsh)
 
