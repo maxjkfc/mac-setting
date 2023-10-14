@@ -1,19 +1,6 @@
 return {
   {
     "neovim/nvim-lspconfig",
-    event = { "BufReadPre", "BufNewFile" },
-    dependencies = {
-      { "folke/neoconf.nvim", cmd = "Neoconf", config = true },
-      { "folke/neodev.nvim", opts = {} },
-      "mason.nvim",
-      "williamboman/mason-lspconfig.nvim",
-      {
-        "hrsh7th/cmp-nvim-lsp",
-        cond = function()
-          return require("lazyvim.util").has("nvim-cmp")
-        end,
-      },
-    },
     ---@class PluginLspOpts
     opts = {
       -- options for vim.diagnostic.config()
@@ -30,10 +17,14 @@ return {
         },
         severity_sort = true,
       },
+      -- Enable this to enable the builtin LSP inlay hints on Neovim >= 0.10.0
+      -- Be aware that you also will need to properly configure your LSP server to
+      -- provide the inlay hints.
+      inlay_hints = {
+        enabled = false,
+      },
       -- add any global capabilities here
       capabilities = {},
-      -- Automatically format on save
-      autoformat = true,
       -- options for vim.lsp.buf.format
       -- `bufnr` and `filter` is handled by the LazyVim formatter,
       -- but can be also overridden when specified
@@ -127,6 +118,9 @@ return {
             },
           },
         },
+        tailwindcss = {
+          filetypes_exclude = { "markdown" },
+        },
       },
       -- you can do any additional lsp server setup here
       -- return true if you don't want this server to be setup with lspconfig
@@ -139,26 +133,6 @@ return {
         -- end,
         -- Specify * to use this function as a fallback for any server
         -- ["*"] = function(server, opts) end,
-        gopls = function()
-          -- workaround for gopls not supporting semantictokensprovider
-          -- https://github.com/golang/go/issues/54531#issuecomment-1464982242
-          require("lazyvim.util").on_attach(function(client, _)
-            if client.name == "gopls" then
-              if not client.server_capabilities.semanticTokensProvider then
-                local semantic = client.config.capabilities.textDocument.semanticTokens
-                client.server_capabilities.semanticTokensProvider = {
-                  full = true,
-                  legend = {
-                    tokenTypes = semantic.tokenTypes,
-                    tokenModifiers = semantic.tokenModifiers,
-                  },
-                  range = true,
-                }
-              end
-            end
-          end)
-          -- end workaround
-        end,
       },
     },
   },

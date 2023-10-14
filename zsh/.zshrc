@@ -1,3 +1,5 @@
+# Fig pre block. Keep at the top of this file.
+[[ -f "$HOME/.fig/shell/zshrc.pre.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.pre.zsh"
 # Enabl Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -71,6 +73,7 @@
 	alias curl='$HOMEBREWOPT/opt/curl/bin/curl'
 	alias sed="gsed" 
     # alias kubectl='$GCLOUD_HOME/bin/kubectl'
+  alias docker='podman'
 
 	# zsh part 
 	alias -s sh="sh "
@@ -177,3 +180,5 @@
 	# Kubectl completion
 	source <(kubectl completion zsh)
 
+# Fig post block. Keep at the bottom of this file.
+[[ -f "$HOME/.fig/shell/zshrc.post.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.post.zsh"

@@ -3,6 +3,25 @@ return {
   {
     "nvim-neo-tree/neo-tree.nvim",
     cmd = "Neotree",
+    dependencies = {
+      {
+        "ten3roberts/window-picker.nvim",
+        name = "window-picker",
+        config = function()
+          local picker = require("window-picker")
+          picker.setup()
+          picker.pick_window = function()
+            return picker.select({ hl = "WindowPicker", prompt = "Pick window: " }, function(winid)
+              if not winid then
+                return nil
+              else
+                return winid
+              end
+            end)
+          end
+        end,
+      },
+    },
     keys = {
       { "<leader>e", "<leader>fe", desc = "Explorer NeoTree (root dir)", remap = true },
       { "<leader>E", "<leader>fE", desc = "Explorer NeoTree (cwd)", remap = true },
@@ -13,7 +32,9 @@ return {
     opts = {
       filesystem = {
         bind_to_cwd = false,
-        follow_current_file = true,
+        follow_current_file = {
+          enabled = true,
+        },
         use_libuv_file_watcher = true,
         eanble_git_status = true,
         enable_diagnostics = true,
@@ -77,27 +98,27 @@ return {
       })
     end,
   },
-  {
-    "s1n7ax/nvim-window-picker",
-    version = "*",
-    config = function()
-      require("window-picker").setup({
-        autoselect_one = true,
-        include_current = false,
-        selection_chars = "12345",
-        show_prompt = false,
-        filter_rules = {
-          -- filter using buffer options
-          bo = {
-            -- if the file type is one of following, the window will be ignored
-            filetype = { "neo-tree", "neo-tree-popup", "notify", "quickfix" },
-            -- if the buffer type is one of following, the window will be ignored
-            buftype = { "terminal" },
-          },
-        },
-        current_win_hl_color = "#e35e4f",
-        other_win_hl_color = "#44cc41",
-      })
-    end,
-  },
+  -- {
+  --   "s1n7ax/nvim-window-picker",
+  --   version = "*",
+  --   config = function()
+  --     require("window-picker").setup({
+  --       autoselect_one = true,
+  --       include_current = false,
+  --       selection_chars = "12345",
+  --       show_prompt = false,
+  --       filter_rules = {
+  --         -- filter using buffer options
+  --         bo = {
+  --           -- if the file type is one of following, the window will be ignored
+  --           filetype = { "neo-tree", "neo-tree-popup", "notify", "quickfix" },
+  --           -- if the buffer type is one of following, the window will be ignored
+  --           buftype = { "terminal" },
+  --         },
+  --       },
+  --       current_win_hl_color = "#e35e4f",
+  --       other_win_hl_color = "#44cc41",
+  --     })
+  --   end,
+  -- },
 }
