@@ -1,5 +1,3 @@
-# Fig pre block. Keep at the top of this file.
-[[ -f "$HOME/.fig/shell/zshrc.pre.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.pre.zsh"
 # Enabl Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -7,14 +5,14 @@
     source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
   fi
 # Path Part
-  export HOMEBREWOPT="/opt/homebrew"
-	# Golang setting
+	export HOMEBREWOPT="/opt/homebrew"
+# Golang setting
 	export GOROOT="$HOMEBREWOPT/opt/go/libexec"
 	export GOPATH="$HOME/go"
   export OPENJAVA_PATH="$HOMEBREWOPT/opt/openjdk/bin"
 	# export coreutils path
 	export COREPATH="$HOMEBREWOPT/opt/coreutils/libexec/gnubin"
-	export MANPATH="$HOMEBREWOPT/opt/coreutils/libexec/gnuman:$MANPATH"
+	export MANPATH="$HOMEBREWOPT/opt/coreutils/libexec/gnuman"
 	export ZPLUG_HOME="$HOMEBREWOPT/opt/zplug"
   export GCLOUD_HOME="$HOME/code/google-cloud-sdk"
   export PODMAN_COMPOSE="$HOME/.local/share/containers/podman-desktop/extensions-storage/podman-desktop.compose/bin"
@@ -178,7 +176,5 @@
 	)
 	autoload -Uz compinit && compinit -i
 	# Kubectl completion
-	source <(kubectl completion zsh)
+	# source <(kubectl completion zsh)
 
-# Fig post block. Keep at the bottom of this file.
-[[ -f "$HOME/.fig/shell/zshrc.post.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.post.zsh"
