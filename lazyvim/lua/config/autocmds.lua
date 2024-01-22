@@ -12,11 +12,19 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
     vim.bo.filetype = "helm"
   end,
 })
--- " Use {{/* */}} as comments
+-- Use {{/* */}} as comments
 vim.api.nvim_create_autocmd({ "FileType" }, {
   group = augroup("helm filetype"),
   pattern = "helm",
   callback = function()
     vim.bo.commentstring = "{{/* %s */}}"
+  end,
+})
+
+-- cancle concealing in json files
+vim.api.nvim_create_autocmd({ "FileType" }, {
+  pattern = { "json", "jsonc", "markdown" },
+  callback = function()
+    vim.wo.conceallevel = 0
   end,
 })
