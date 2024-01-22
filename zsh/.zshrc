@@ -15,8 +15,10 @@
 	export MANPATH="$HOMEBREWOPT/opt/coreutils/libexec/gnuman"
 	export ZPLUG_HOME="$HOMEBREWOPT/opt/zplug"
   export GCLOUD_HOME="$HOME/code/google-cloud-sdk"
-  export PODMAN_COMPOSE="$HOME/.local/share/containers/podman-desktop/extensions-storage/podman-desktop.compose/bin"
 	export PATH="$PATH:$GOROOT/bin:$GOPATH/bin:$COREPATH:$ZPLUG_HOME:$GCLOUD_HOME/bin:~/.local/bin:$OPENJAVA_PATH:$PODMAN_COMPOSE"
+
+# set ulimit
+  # sudo launchctl limit maxfiles 65536 200000
 
   # Theme P10K
 	source $HOMEBREWOPT/opt/powerlevel10k/powerlevel10k.zsh-theme
@@ -71,7 +73,6 @@
 	alias curl='$HOMEBREWOPT/opt/curl/bin/curl'
 	alias sed="gsed" 
     # alias kubectl='$GCLOUD_HOME/bin/kubectl'
-  alias docker='podman'
 
 	# zsh part 
 	alias -s sh="sh "
@@ -98,7 +99,7 @@
 	# FZF
 	[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-	export FZF_DEFAULT_COMMAND='fd  --type file --hidden --follow  --exclude .git' 
+	export FZF_DEFAULT_COMMAND='fd  --type file --hidden --follow  --exclude .git --layout=reversed --color=always'
 
 	export FZF_DEFAULT_OPTS=' --height 40% --layout=reverse --border --ansi
                           --color fg:-1,bg:-1,hl:230,fg+:3,bg+:-1,hl+:229

@@ -8,17 +8,7 @@ return {
   },
   {
     "hrsh7th/nvim-cmp",
-    dependencies = {
-      "hrsh7th/cmp-emoji",
-      "hrsh7th/cmp-nvim-lsp",
-      "hrsh7th/cmp-buffer",
-      "hrsh7th/cmp-path",
-      "saadparwaiz1/cmp_luasnip",
-      {
-        "tzachar/cmp-tabnine",
-        build = "./install.sh",
-      },
-    },
+    dependencies = { "hrsh7th/cmp-emoji" },
     opts = function()
       local cmp = require("cmp")
       local luasnip = require("luasnip")
@@ -121,13 +111,13 @@ return {
     end,
     opts = {
       mappings = {
-        add = "gza", -- Add surrounding in Normal and Visual modes
-        delete = "gzd", -- Delete surrounding
-        find = "gzf", -- Find surrounding (to the right)
-        find_left = "gzF", -- Find surrounding (to the left)
-        highlight = "gzh", -- Highlight surrounding
-        replace = "gzr", -- Replace surrounding
-        update_n_lines = "gzn", -- Update `n_lines`
+        add = "gsa", -- Add surrounding in Normal and Visual modes
+        delete = "gsd", -- Delete surrounding
+        find = "gsf", -- Find surrounding (to the right)
+        find_left = "gsF", -- Find surrounding (to the left)
+        highlight = "gsh", -- Highlight surrounding
+        replace = "gsr", -- Replace surrounding
+        update_n_lines = "gsn", -- Update `n_lines`
       },
     },
     config = function(_, opts)
@@ -142,49 +132,78 @@ return {
       mappings = {
         comment = "<leader>/",
         comment_line = "<leader>/",
+        comment_visual = "<leader>/",
       },
     },
   },
-  -- add symbols-outline
   {
-    "simrat39/symbols-outline.nvim",
-    cmd = "SymbolsOutline",
-    keys = { { "<leader>cs", "<cmd>SymbolsOutline<cr>", desc = "Symbols Outline" } },
+    "mfussenegger/nvim-lint",
+    event = "LazyFile",
     opts = {
-      -- add your options that should be passed to the setup() function here
-      position = "right",
-    },
-  },
-  { "folke/neodev.nvim", opts = { experimental = { pathStrict = true } } },
-  {
-    "rcarriga/nvim-notify",
-    keys = {
-      {
-        "<leader>un",
-        function()
-          require("notify").dismiss({ silent = true, pending = true })
-        end,
-        desc = "Dismiss all Notifications",
+      -- Event to trigger linters
+      events = { "BufWritePost", "BufReadPost", "InsertLeave" },
+      linters_by_ft = {
+        fish = { "fish" },
+        -- Use the "*" filetype to run linters on all filetypes.
+        -- ['*'] = { 'global linter' },
+        -- Use the "_" filetype to run linters on filetypes that don't have other linters configured.
+        -- ['_'] = { 'fallback linter' },
+        proto = { "buf_lint" },
+      },
+      -- LazyVim extension to easily override linter options
+      -- or add custom linters.
+      ---@type table<string,table>
+      linters = {
+        -- -- Example of using selene only when a selene.toml file is present
+        -- selene = {
+        --   -- `condition` is another LazyVim extension that allows you to
+        --   -- dynamically enable/disable linters based on the context.
+        --   condition = function(ctx)
+        --     return vim.fs.find({ "selene.toml" }, { path = ctx.filename, upward = true })[1]
+        --   end,
+        -- },
       },
     },
-    opts = {
-      timeout = 3000,
-      max_height = function()
-        return math.floor(vim.o.lines * 0.75)
-      end,
-      max_width = function()
-        return math.floor(vim.o.columns * 0.75)
-      end,
-      background_colour = "#000000",
-    },
-    init = function()
-      -- when noice is not enabled, install notify on VeryLazy
-      local Util = require("lazyvim.util")
-      if not Util.has("noice.nvim") then
-        Util.on_very_lazy(function()
-          vim.notify = require("notify")
-        end)
-      end
+  },
+  {
+    "stevearc/conform.nvim",
+    opts = function()
+      -- local plugin = require("lazy.core.config").plugins["conform.nvim"]
+      ---@class ConformOpts
+      local opts = {
+        -- LazyVim will use these options when formatting with the conform.nvim formatter
+        format = {
+          timeout_ms = 3000,
+          async = false, -- not recommended to change
+          quiet = false, -- not recommended to change
+        },
+        ---@type table<string, conform.FormatterUnit[]>
+        formatters_by_ft = {
+          lua = { "stylua" },
+          fish = { "fish_indent" },
+          sh = { "shfmt" },
+          proto = { "buf" },
+          go = { "goimports" },
+        },
+        -- The options you set here will be merged with the builtin formatters.
+        -- You can also define any custom formatters here.
+        ---@type table<string, conform.FormatterConfigOverride|fun(bufnr: integer): nil|conform.FormatterConfigOverride>
+        formatters = {
+          injected = { options = { ignore_errors = true } },
+          -- # Example of using dprint only when a dprint.json file is present
+          -- dprint = {
+          --   condition = function(ctx)
+          --     return vim.fs.find({ "dprint.json" }, { path = ctx.filename, upward = true })[1]
+          --   end,
+          -- },
+          --
+          -- # Example of using shfmt with extra args
+          -- shfmt = {
+          --   prepend_args = { "-i", "2", "-ci" },
+          -- },
+        },
+      }
+      return opts
     end,
   },
 }
