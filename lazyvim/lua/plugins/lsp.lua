@@ -1,10 +1,26 @@
 return {
   {
+    "williamboman/mason.nvim",
+    opts = function(_, opts)
+      vim.list_extend(opts.ensure_installed, {
+        "stylua",
+        "selene",
+        "shellcheck",
+        "shfmt",
+        "tailwindcss-language-server",
+        "typescript-language-server",
+        "css-lsp",
+        "goimports",
+      })
+    end,
+  },
+
+  {
     "neovim/nvim-lspconfig",
     ---@class PluginLspOpts
     opts = {
+      inlay_hints = { enabled = false },
       -- LSP Server Settings
-      ---@type lspconfig.options
       servers = {
         jsonls = {
           -- lazy-load schemastore when needed
@@ -24,6 +40,7 @@ return {
         yamlls = {
           settings = {
             yaml = {
+              keyOrdering = false,
               schemas = {
                 ["https://json.schemastore.org/github-workflow.json"] = "/.github/workflows/*",
                 ["https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.22.4-standalone-strict/all.json"] = {
@@ -45,52 +62,74 @@ return {
           },
         },
         lua_ls = {
-          -- mason = false, -- set to false if you don't want this server to be installed with mason
+          -- enabled = false,
+          single_file_support = true,
           settings = {
             Lua = {
-              diagnostics = {
-                globals = { "vim" },
-              },
               workspace = {
                 checkThirdParty = false,
               },
               completion = {
-                callSnippet = "Replace",
+                workspaceWord = true,
+                callSnippet = "Both",
               },
-            },
-          },
-        },
-        gopls = {
-          cmd = { "gopls", "serve" },
-          settings = {
-            gopls = {
-              semanticTokens = true,
-              usePlaceholders = true,
-              codelenses = {
-                generate = false,
-                gc_details = true,
-                tidy = true,
-                upgrade_dependency = true,
-                vendor = true,
+              misc = {
+                parameters = {
+                  -- "--log-level=trace",
+                },
               },
-              staticcheck = true,
-              gofumpt = false,
-              analyses = {
-                unusedparams = true,
-                unreachable = false,
+              hint = {
+                enable = true,
+                setType = false,
+                paramType = true,
+                paramName = "Disable",
+                semicolon = "Disable",
+                arrayIndex = "Disable",
               },
-              completeUnimported = true,
-              hints = {
-                constantValues = true,
-                compositeLiteralTypes = true,
-                assignVariableTypes = true,
-                rangeVariableTypes = true,
+              doc = {
+                privateName = { "^_" },
+              },
+              type = {
+                castNumberToInteger = true,
+              },
+              diagnostics = {
+                disable = { "incomplete-signature-doc", "trailing-space" },
+                -- enable = false,
+                groupSeverity = {
+                  strong = "Warning",
+                  strict = "Warning",
+                },
+                groupFileStatus = {
+                  ["ambiguity"] = "Opened",
+                  ["await"] = "Opened",
+                  ["codestyle"] = "None",
+                  ["duplicate"] = "Opened",
+                  ["global"] = "Opened",
+                  ["luadoc"] = "Opened",
+                  ["redefined"] = "Opened",
+                  ["strict"] = "Opened",
+                  ["strong"] = "Opened",
+                  ["type-check"] = "Opened",
+                  ["unbalanced"] = "Opened",
+                  ["unused"] = "Opened",
+                },
+                unusedLocalExclude = { "_*" },
+              },
+              format = {
+                enable = false,
+                defaultConfig = {
+                  indent_style = "space",
+                  indent_size = "2",
+                  continuation_indent_size = "2",
+                },
               },
             },
           },
         },
         tailwindcss = {
-          filetypes_exclude = { "markdown" },
+          root_dir = function(...)
+            return require("lspconfig.util").root_pattern(".git")(...)
+          end,
         },
       },
       -- you can do any additional lsp server setup here

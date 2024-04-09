@@ -1,0 +1,3 @@
+[submodule "theme/catppuccin/iterm"]
+	path = theme/catppuccin/iterm
+	url = git@github.com:catppuccin/iterm.git

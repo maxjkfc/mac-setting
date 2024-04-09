@@ -1,15 +1,10 @@
 return {
-  -- {
-  --   "folke/tokyonight.nvim",
-  --   opts = {
-  --     transparent = true,
-  --     styles = {
-  --       -- 增加背景透明
-  --       sidebars = "transparent",
-  --       floats = "transparent",
-  --     },
-  --   },
-  -- },
+  {
+    "LazyVim/LazyVim",
+    opts = {
+      colorscheme = "catppuccin",
+    },
+  },
   {
     "folke/tokyonight.nvim",
     lazy = true,
@@ -20,6 +15,7 @@ return {
     lazy = true,
     name = "catppuccin",
     opts = {
+      flavour = "mocha",
       integrations = {
         aerial = true,
         alpha = true,

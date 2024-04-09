@@ -3,18 +3,18 @@
 -- Add any additional keymaps here
 --
 -- This file is automatically loaded by lazyvim.config.init
-local Util = require("lazyvim.util")
+-- local Util = require("lazyvim.util")
 
 -- DO NOT USE THIS IN YOU OWN CONFIG!!
 -- use `vim.keymap.set` instead
-local map = Util.safe_keymap_set
-local opts = { noremap = true, silent = true }
+-- local map = Util.safe_keymap_set
+-- local opts = { noremap = true, silent = true }
 --
 --
 --
 -- Split window
-map("n", "ss", ":split<Return>", opts)
-map("n", "sv", ":vsplit<Return>", opts)
+-- map("n", "ss", ":split<Return>", opts)
+-- map("n", "sv", ":vsplit<Return>", opts)
 -- Move window
 -- map("n", "sh", "<C-w>h", opts)
 -- map("n", "sk", "<C-w>k", opts)

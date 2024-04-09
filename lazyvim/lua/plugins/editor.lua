@@ -3,6 +3,15 @@ return {
     "nvim-telescope/telescope.nvim",
     cmd = "Telescope",
     version = false, -- telescope did only one release, so use HEAD for now
+    dependencies = {
+      {
+        "nvim-telescope/telescope-fzf-native.nvim",
+        build = "make",
+        config = function()
+          require("telescope").load_extension("fzf")
+        end,
+      },
+    },
     opts = {
       defaults = {
         prompt_prefix = " ",
@@ -42,6 +51,52 @@ return {
               return require("telescope.actions").close(...)
             end,
           },
+        },
+      },
+    },
+    keys = {
+      { "<leader>/", false },
+      { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find Files" },
+      -- {
+      --   "<leader>fP",
+      --   function()
+      --     require("telescope.builtin").find_files({ cwd = require("lazy.core.config").options.root })
+      --   end,
+      --   desc = "Find Plugin File",
+      -- },
+      {
+        ";r",
+        function()
+          require("telescope.builtin").live_grep({
+            additional_args = { "--hidden" },
+          })
+        end,
+        desc = "Search for a string in your current working directory and get results live as you type, respects .gitignore",
+      },
+      {
+        ";e",
+        function()
+          require("telescope.builtin").diagnostics()
+        end,
+        desc = "Lists Diagnostics for all open buffers or a specific buffer",
+      },
+      {
+        ";s",
+        function()
+          require("telescope.builtin").treesitter()
+        end,
+        desc = "Lists Function names, variables, from Treesitter",
+      },
+    },
+  },
+  {
+    "nvim-neo-tree/neo-tree.nvim",
+    cmd = "Neotree",
+    opts = {
+      window = {
+        mappings = {
+          ["<space>"] = "none",
+          ["v"] = "open_vsplit",
         },
       },
     },
