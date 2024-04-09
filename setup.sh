@@ -53,6 +53,12 @@ setup_zsh() {
 
 	ln -s "$PWD"/zsh/.zshshell "$HOME"/.zshshell
 
+	if [ -f "$HOME/.zprofile" ]; then
+		rm -rf "$HOME"/.zprofile
+	fi
+
+	ln -s "$PWD"/zsh/.zprofile "$HOME"/.zprofile
+
 	setup_install_depend
 
 	echo "setup [zsh] config finish"

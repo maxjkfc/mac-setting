@@ -21,7 +21,7 @@
   # sudo launchctl limit maxfiles 65536 200000
 
   # Theme P10K
-	source $HOMEBREWOPT/opt/powerlevel10k/powerlevel10k.zsh-theme
+	source $HOMEBREWOPT/share/powerlevel10k/powerlevel10k.zsh-theme
 	# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 	[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 	# quiet warning message from p10k
@@ -101,9 +101,15 @@
 
 	export FZF_DEFAULT_COMMAND='fd  --type file --hidden --follow  --exclude .git --layout=reversed --color=always'
 
-	export FZF_DEFAULT_OPTS=' --height 40% --layout=reverse --border --ansi
-                          --color fg:-1,bg:-1,hl:230,fg+:3,bg+:-1,hl+:229
-                          --color info:150,prompt:110,spinner:150,pointer:167,marker:174'
+	# export FZF_DEFAULT_OPTS=' --height 40% --layout=reverse --border --ansi
+	#                          --color fg:-1,bg:-1,hl:230,fg+:3,bg+:-1,hl+:229
+	#                          --color info:150,prompt:110,spinner:150,pointer:167,marker:174'
+  export FZF_DEFAULT_OPTS=" \
+    --height 40% --layout=reverse --border --ansi \
+    --color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8 \
+    --color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
+    --color=marker:#f5e0dc,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8"
+
 
 	export FZF_CTRL_T_OPTS='--preview "[[ $(file --mime {}) =~ binary ]] &&
                   echo {} is a binary file ||
@@ -167,6 +173,9 @@
 	    export ENHANCD_FILTER=fzf-tmux
 	fi
 
+
+# now load zsh-syntax-highlighting plugin
+source ~/.zsh/catppuccin_mocha-zsh-syntax-highlighting.zsh
 
 # Completion
 	# 	

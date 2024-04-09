@@ -3,14 +3,6 @@ return {
     "nvimdev/dashboard-nvim",
     event = "VimEnter",
     opts = function()
-      --     local logo = [[
-      --      ██╗      █████╗ ███████╗██╗   ██╗██╗   ██╗██╗███╗   ███╗          Z
-      --      ██║     ██╔══██╗╚══███╔╝╚██╗ ██╔╝██║   ██║██║████╗ ████║      Z
-      --      ██║     ███████║  ███╔╝  ╚████╔╝ ██║   ██║██║██╔████╔██║   z
-      --      ██║     ██╔══██║ ███╔╝    ╚██╔╝  ╚██╗ ██╔╝██║██║╚██╔╝██║ z
-      --      ███████╗██║  ██║███████╗   ██║    ╚████╔╝ ██║██║ ╚═╝ ██║
-      --      ╚══════╝╚═╝  ╚═╝╚══════╝   ╚═╝     ╚═══╝  ╚═╝╚═╝     ╚═╝
-      -- ]]
       local logo = [[
               ███╗   ███╗ █████╗ ██╗  ██╗
               ████╗ ████║██╔══██╗╚██╗██╔╝
@@ -68,64 +60,6 @@ return {
       end
 
       return opts
-    end,
-  },
-
-  {
-    "nvim-lualine/lualine.nvim",
-    opts = function(_, opts)
-      local Util = require("lazyvim.util")
-      local colors = {
-        [""] = Util.ui.fg("Special"),
-        ["Normal"] = Util.ui.fg("Special"),
-        ["Warning"] = Util.ui.fg("DiagnosticError"),
-        ["InProgress"] = Util.ui.fg("DiagnosticWarn"),
-      }
-      table.insert(opts.sections.lualine_x, 2, {
-        function()
-          local icon = require("lazyvim.config").icons.kinds.Copilot
-          local status = require("copilot.api").status.data
-          return icon .. (status.message or "")
-        end,
-        cond = function()
-          if not package.loaded["copilot"] then
-            return
-          end
-          local ok, clients = pcall(require("lazyvim.util").lsp.get_clients, { name = "copilot", bufnr = 0 })
-          if not ok then
-            return false
-          end
-          return ok and #clients > 0
-        end,
-        color = function()
-          if not package.loaded["copilot"] then
-            return
-          end
-          local status = require("copilot.api").status.data
-          return colors[status.status] or colors[""]
-        end,
-      })
-      table.insert(opts.sections.lualine_c, {
-        "aerial",
-        sep = " ", -- separator between symbols
-        sep_icon = "", -- separator between icon and symbol
-
-        -- The number of symbols to render top-down. In order to render only 'N' last
-        -- symbols, negative numbers may be supplied. For instance, 'depth = -1' can
-        -- be used in order to render only current symbol.
-        depth = 5,
-
-        -- When 'dense' mode is on, icons are not rendered near their symbols. Only
-        -- a single icon that represents the kind of current symbol is rendered at
-        -- the beginning of status line.
-        dense = false,
-
-        -- The separator to be used to separate symbols in dense mode.
-        dense_sep = ".",
-
-        -- Color the symbol icons.
-        colored = true,
-      })
     end,
   },
 }
