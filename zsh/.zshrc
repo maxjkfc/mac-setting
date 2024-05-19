@@ -101,9 +101,6 @@
 
 	export FZF_DEFAULT_COMMAND='fd  --type file --hidden --follow  --exclude .git --layout=reversed --color=always'
 
-	# export FZF_DEFAULT_OPTS=' --height 40% --layout=reverse --border --ansi
-	#                          --color fg:-1,bg:-1,hl:230,fg+:3,bg+:-1,hl+:229
-	#                          --color info:150,prompt:110,spinner:150,pointer:167,marker:174'
   export FZF_DEFAULT_OPTS=" \
     --height 40% --layout=reverse --border --ansi \
     --color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8 \
@@ -135,6 +132,18 @@
 	_fzf_compgen_dir() {
 	  fd --type d --hidden --follow --exclude ".git" . "$1"
 	}
+
+  _fzf_comprun() {
+  local command=$1
+  shift
+
+  case "$command" in
+    cd)           fzf --preview 'tree -C {} | head -200'   "$@" ;;
+    export|unset) fzf --preview "eval 'echo \$'{}"         "$@" ;;
+    ssh)          fzf --preview 'dig {}'                   "$@" ;;
+    *)            fzf --preview 'bat -n --color=always {}' "$@" ;;
+  esac
+}
 
 	# Iterm2 Plugin
 	test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"

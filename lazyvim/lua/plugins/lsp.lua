@@ -143,6 +143,9 @@ return {
         -- end,
         -- Specify * to use this function as a fallback for any server
         -- ["*"] = function(server, opts) end,
+        clangd = function(_, opts)
+          opts.capabilities.offsetEncoding = { "utf-16" }
+        end,
       },
     },
   },
