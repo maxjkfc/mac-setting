@@ -1,11 +1,11 @@
 return {
-  {
-    -- Disable default <tab> and <s-tab> behavior in LuaSnip
-    "L3MON4D3/LuaSnip",
-    -- keys = function()
-    --   return {}
-    -- end,
-  },
+  -- {
+  --   -- Disable default <tab> and <s-tab> behavior in LuaSnip
+  --   "L3MON4D3/LuaSnip",
+  --   keys = function()
+  --     return {}
+  --   end,
+  -- },
   {
     -- 快速設定括弧與取代括弧
     "echasnovski/mini.surround",
@@ -39,6 +39,16 @@ return {
       -- 客製化添加的設定
       formatters_by_ft = {
         proto = { "buf" },
+      },
+    },
+  },
+  {
+    "mfussenegger/nvim-lint",
+    event = "LazyFile",
+    opts = {
+      events = { "BufWritePost", "BufReadPost", "InsertLeave" },
+      linters_by_ft = {
+        proto = { "buf_lint" },
       },
     },
   },
