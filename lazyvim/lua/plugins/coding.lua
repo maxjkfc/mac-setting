@@ -1,11 +1,4 @@
 return {
-  -- {
-  --   -- Disable default <tab> and <s-tab> behavior in LuaSnip
-  --   "L3MON4D3/LuaSnip",
-  --   keys = function()
-  --     return {}
-  --   end,
-  -- },
   {
     -- 快速設定括弧與取代括弧
     "echasnovski/mini.surround",

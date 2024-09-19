@@ -51,12 +51,12 @@
 # Alias Part
 	alias zshconfig="nvim ~/.zshrc"
 	# Enhance ls tools
-	alias l='exa -lbF --git'
-	alias ls='exa'
-	alias la='exa -lbhHigUmuSa --git --color-scale --icons'
-	alias lx='exa -lbhHigUmuSa@ --git --color-scale --icons'
-	alias lt='exa --tree --level=5 --color-scale --icons'
-	alias ll='exa -lbF --git'
+	alias l='eza -lbF --git'
+	alias ls='eza'
+	alias la='eza -lbhHigUmuSa --git --color-scale --icons'
+	alias lx='eza -lbhHigUmuSa@ --git --color-scale --icons'
+	alias lt='eza --tree --level=5 --color-scale --icons'
+	alias ll='eza -lbF --git'
 
 	alias mv='mv -i'
 	alias cp='cp'
