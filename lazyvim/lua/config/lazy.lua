@@ -16,12 +16,13 @@ require("lazy").setup({
 
     { import = "lazyvim.plugins.extras.coding.copilot" }, -- copilot　工具
     { import = "lazyvim.plugins.extras.coding.copilot-chat" },
-    { import = "lazyvim.plugins.extras.coding.tabnine" },
+    -- { import = "lazyvim.plugins.extras.coding.tabnine" },
     -- { import = "lazyvim.plugins.extras.coding.codeium" }, --
     --
     { import = "lazyvim.plugins.extras.editor.refactoring" },
     { import = "lazyvim.plugins.extras.editor.aerial" }, -- outline 工具
 
+    { import = "lazyvim.plugins.extras.coding.blink" }, -- 自動補全工具(vs nvim-cmp)
     { import = "lazyvim.plugins.extras.lang.tailwind" },
     { import = "lazyvim.plugins.extras.lang.json" },
     { import = "lazyvim.plugins.extras.lang.docker" },

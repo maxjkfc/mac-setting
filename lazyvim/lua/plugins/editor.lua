@@ -40,14 +40,14 @@ return {
   --     })
   --   end,
   -- },
-  {
-    "hrsh7th/nvim-cmp",
-    dependencies = { "hrsh7th/cmp-emoji" },
-    ---@param opts cmp.ConfigSchema
-    opts = function(_, opts)
-      table.insert(opts.sources, { name = "emoji" })
-    end,
-  },
+  -- {
+  --   "hrsh7th/nvim-cmp",
+  --   dependencies = { "hrsh7th/cmp-emoji" },
+  --   ---@param opts cmp.ConfigSchema
+  --   opts = function(_, opts)
+  --     table.insert(opts.sources, { name = "emoji" })
+  --   end,
+  -- },
   {
     "nvim-telescope/telescope.nvim",
     cmd = "Telescope",
@@ -188,5 +188,33 @@ return {
     config = function()
       require("window-picker").setup()
     end,
+  },
+  {
+    "saghen/blink.cmp",
+    optional = true,
+    opts = {
+      windows = {
+        ghost_text = {
+          enabled = false,
+        },
+      },
+      keymap = {
+        ["<Tab>"] = {
+          function(cmp)
+            if cmp.is_in_snippet() then
+              return cmp.accept()
+            elseif require("copilot.suggestion").is_visible() then
+              LazyVim.create_undo()
+              require("copilot.suggestion").accept()
+              return true
+            else
+              return cmp.select_and_accept()
+            end
+          end,
+          "snippet_forward",
+          "fallback",
+        },
+      },
+    },
   },
 }
