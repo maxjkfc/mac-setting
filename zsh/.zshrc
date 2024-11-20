@@ -21,7 +21,7 @@
   # sudo launchctl limit maxfiles 65536 200000
 
   # Theme P10K
-	source $HOMEBREWOPT/share/powerlevel10k/powerlevel10k.zsh-theme
+	source $(brew --prefix)/share/powerlevel10k/powerlevel10k.zsh-theme
 	# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 	[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 	# quiet warning message from p10k
@@ -97,7 +97,9 @@
 
 
 	# FZF
-	[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+	# [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+  # Set up fzf key bindings and fuzzy completion
+  source <(fzf --zsh)
 
 	export FZF_DEFAULT_COMMAND='fd  --type file --hidden --follow  --exclude .git --layout=reversed --color=always'
 
@@ -162,7 +164,7 @@
 	zplug "wfxr/forgit"
 	zplug "zsh-users/zsh-syntax-highlighting", defer:2
 	zplug "zsh-users/zsh-autosuggestions"
-  zplug "chitoku-k/fzf-zsh-completions"
+  	zplug "chitoku-k/fzf-zsh-completions"
 	zplug "zsh-users/zsh-completions"
 	zplug "zsh-users/zsh-history-substring-search"
 	zplug "supercrabtree/k"
@@ -187,7 +189,7 @@
 source ~/.zsh/catppuccin_mocha-zsh-syntax-highlighting.zsh
 
 # Completion
-	# 	
+ 	
 	fpath=(
 		~/.zsh/completion 
 		$HOMEBREWOPT/share/zsh/site-functions
@@ -197,3 +199,9 @@ source ~/.zsh/catppuccin_mocha-zsh-syntax-highlighting.zsh
 	# Kubectl completion
 	# source <(kubectl completion zsh)
 
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/maxjkfc/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/maxjkfc/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/maxjkfc/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/maxjkfc/google-cloud-sdk/completion.zsh.inc'; fi
