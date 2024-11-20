@@ -1,53 +1,4 @@
 return {
-  -- {
-  --   "hrsh7th/nvim-cmp",
-  --   ---@param opts cmp.ConfigSchema
-  --   opts = function(_, opts)
-  --     local has_words_before = function()
-  --       unpack = unpack or table.unpack
-  --       local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-  --       return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
-  --     end
-  --
-  --     local cmp = require("cmp")
-  --
-  --     opts.mapping = vim.tbl_extend("force", opts.mapping, {
-  --       ["<Tab>"] = cmp.mapping(function(fallback)
-  --         if cmp.visible() then
-  --           -- You could replace select_next_item() with confirm({ select = true }) to get VS Code autocompletion behavior
-  --           cmp.select_next_item()
-  --         elseif vim.snippet.active({ direction = 1 }) then
-  --           vim.schedule(function()
-  --             vim.snippet.jump(1)
-  --           end)
-  --         elseif has_words_before() then
-  --           cmp.complete()
-  --         else
-  --           fallback()
-  --         end
-  --       end, { "i", "s" }),
-  --       ["<S-Tab>"] = cmp.mapping(function(fallback)
-  --         if cmp.visible() then
-  --           cmp.select_prev_item()
-  --         elseif vim.snippet.active({ direction = -1 }) then
-  --           vim.schedule(function()
-  --             vim.snippet.jump(-1)
-  --           end)
-  --         else
-  --           fallback()
-  --         end
-  --       end, { "i", "s" }),
-  --     })
-  --   end,
-  -- },
-  -- {
-  --   "hrsh7th/nvim-cmp",
-  --   dependencies = { "hrsh7th/cmp-emoji" },
-  --   ---@param opts cmp.ConfigSchema
-  --   opts = function(_, opts)
-  --     table.insert(opts.sources, { name = "emoji" })
-  --   end,
-  -- },
   {
     "nvim-telescope/telescope.nvim",
     cmd = "Telescope",
@@ -190,30 +141,48 @@ return {
     end,
   },
   {
-    "saghen/blink.cmp",
-    optional = true,
+    -- 快速設定括弧與取代括弧
+    "echasnovski/mini.surround",
     opts = {
-      windows = {
-        ghost_text = {
-          enabled = false,
-        },
+      mappings = {
+        add = "gsa", -- Add surrounding in Normal and Visual modes
+        delete = "gsd", -- Delete surrounding
+        find = "gsf", -- Find surrounding (to the right)
+        find_left = "gsF", -- Find surrounding (to the left)
+        highlight = "gsh", -- Highlight surrounding
+        replace = "gsr", -- Replace surrounding
+        update_n_lines = "gsn", -- Update `n_lines`
       },
-      keymap = {
-        ["<Tab>"] = {
-          function(cmp)
-            if cmp.is_in_snippet() then
-              return cmp.accept()
-            elseif require("copilot.suggestion").is_visible() then
-              LazyVim.create_undo()
-              require("copilot.suggestion").accept()
-              return true
-            else
-              return cmp.select_and_accept()
-            end
-          end,
-          "snippet_forward",
-          "fallback",
-        },
+    },
+  },
+  {
+    -- 這個是用來設定註解的
+    "echasnovski/mini.comment",
+    event = "VeryLazy",
+    opts = {
+      mappings = {
+        comment = "<leader>/",
+        comment_line = "<leader>/",
+        comment_visual = "<leader>/",
+      },
+    },
+  },
+  {
+    "stevearc/conform.nvim",
+    opts = {
+      -- 客製化添加的設定
+      formatters_by_ft = {
+        proto = { "buf" },
+      },
+    },
+  },
+  {
+    "mfussenegger/nvim-lint",
+    event = "LazyFile",
+    opts = {
+      events = { "BufWritePost", "BufReadPost", "InsertLeave" },
+      linters_by_ft = {
+        proto = { "buf_lint" },
       },
     },
   },

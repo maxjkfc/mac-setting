@@ -20,7 +20,6 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
     vim.bo.commentstring = "{{/* %s */}}"
   end,
 })
-
 -- cancle concealing in json files
 vim.api.nvim_create_autocmd({ "FileType" }, {
   pattern = { "json", "jsonc", "markdown" },

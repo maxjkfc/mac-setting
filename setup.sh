@@ -7,9 +7,9 @@ setup_install_depend() {
 		brew install zplug
 	fi
 
-	brew install exa
+	brew install eza
 	brew install bat
-	brew install romkatv/powerlevel10k/powerlevel10k
+	brew install powerlevel10k
 	brew install ripgrep
 	brew install fzf
 	brew install wget
@@ -17,6 +17,7 @@ setup_install_depend() {
 	brew install git
 	brew install fd
 	brew install tmux
+	brew install curl
 	brew install reattach-to-user-namespace
 	## install git-cz
 	# npm install -g git-cz
@@ -72,7 +73,7 @@ setup_nvim() {
 		rm -rf $NVIM_PATH/nvim
 	fi
 
-	ln -s "$PWD"/nvim "$NVIM_PATH"/nvim
+	ln -s "$PWD"/lazyvim "$NVIM_PATH"/nvim
 
 	echo "setup [nvim] config finish"
 
