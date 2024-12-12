@@ -9,6 +9,7 @@
 # Golang setting
 	export GOROOT="$HOMEBREWOPT/opt/go/libexec"
 	export GOPATH="$HOME/go"
+  export GOPROXY=https://proxy.golang.org
   export OPENJAVA_PATH="$HOMEBREWOPT/opt/openjdk/bin"
 	# export coreutils path
 	export COREPATH="$HOMEBREWOPT/opt/coreutils/libexec/gnubin"
