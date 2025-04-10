@@ -18,14 +18,8 @@ require("lazy").setup({
   spec = {
     -- add LazyVim and import its plugins
     { "LazyVim/LazyVim", import = "lazyvim.plugins" },
-    -- { import = "lazyvim.plugins.extras.ai.copilot" }, -- copilot　工具
-    -- { import = "lazyvim.plugins.extras.ai.copilot-chat" },
     { import = "lazyvim.plugins.extras.ai.codeium" },
-
     { import = "lazyvim.plugins.extras.editor.inc-rename" }, -- rename
-    { import = "lazyvim.plugins.extras.editor.telescope" },
-
-    -- { import = "lazyvim.plugins.extras.coding.blink" }, -- 取代 nvim-cmp
 
     { import = "lazyvim.plugins.extras.lang.json" },
     { import = "lazyvim.plugins.extras.lang.docker" },
