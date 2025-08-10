@@ -185,7 +185,9 @@ fi
 
 
 # now load zsh-syntax-highlighting plugin
-source ~/.zsh/catppuccin_mocha-zsh-syntax-highlighting.zsh
+if [ -f ~/.zsh/catppuccin_mocha-zsh-syntax-highlighting.zsh ]; then
+	source ~/.zsh/catppuccin_mocha-zsh-syntax-highlighting.zsh
+fi
 
 # Completion
  	
@@ -194,7 +196,11 @@ fpath=(
 	$HOMEBREWOPT/share/zsh/site-functions
 	$fpath 
 )
+
 autoload -Uz compinit && compinit -i
+
+eval "$(fnm env)"
+
 # Kubectl completion
 # source <(kubectl completion zsh)
 

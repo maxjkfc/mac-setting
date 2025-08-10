@@ -104,6 +104,27 @@ setup_backend_tools() {
     print_info "安裝網路除錯工具..."
     brew install nmap            # 網路掃描工具
     
+    # Node.js 和 npm 開發環境
+    print_info "安裝 Node.js 版本管理工具..."
+    brew install fnm             # 快速的 Node.js 版本管理器
+    brew install oven-sh/bun/bun # 現代化的 JavaScript 運行時和套件管理器
+    
+    # 設置 fnm 環境
+    print_info "設置 fnm 環境變數..."
+    if ! grep -q "fnm env" "$HOME/.zshrc" 2>/dev/null; then
+        echo 'eval "$(fnm env --use-on-cd)"' >> "$HOME/.zshrc"
+        print_info "已添加 fnm 環境變數到 .zshrc"
+    fi
+    
+    # 使用 fnm 安裝 LTS 版本
+    print_info "使用 fnm 安裝 Node.js LTS 版本..."
+    if command -v fnm &>/dev/null; then
+        fnm install --lts
+        fnm use lts-latest
+        fnm default lts-latest
+        print_success "已安裝並設置 Node.js LTS 為預設版本"
+    fi
+    
     # 環境管理工具
     print_info "安裝環境管理工具..."
     brew install direnv          # 目錄環境變數管理
@@ -146,6 +167,15 @@ setup_tmux() {
 	print_success "Tmux 配置設置完成"
 	print_info "請重新啟動 tmux 或執行 'tmux source ~/.tmux.conf' 來載入新配置"
 	print_info "按 Prefix + I (預設是 Ctrl-a + I) 來安裝 tmux 插件"
+}
+
+setup_ai_tools() {
+	print_info "開始設置 [ai tools] 配置..."
+    
+    # 安裝 Claude CLI
+    brew install claude-code
+    # 安裝 Gemini CLI
+    brew install gemini-cli
 }
 
 # 設置 Zsh 配置
@@ -268,7 +298,7 @@ health_check() {
     
     # 檢查基礎工具
     print_info "檢查基礎工具:"
-    tools=("brew" "git" "nvim" "tmux" "zsh" "fzf" "ripgrep")
+    tools=("brew" "git" "nvim" "tmux" "zsh" "fzf" "ripgrep" "node" "npm" "bun" "fnm")
     for tool in "${tools[@]}"; do
         if command -v "$tool" &>/dev/null; then
             print_success "✓ $tool 已安裝"
