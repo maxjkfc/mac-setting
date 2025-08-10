@@ -92,26 +92,7 @@ if command -v fzf >/dev/null 2>&1; then
     source <(fzf --zsh)
 fi
 
-# FZF Settings
-export FZF_DEFAULT_COMMAND='fd --type file --hidden --follow --exclude .git'
-export FZF_DEFAULT_OPTS=" \
-    --height 40% --layout=reverse --border --ansi \
-    --color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8 \
-    --color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
-    --color=marker:#f5e0dc,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8"
-
-export FZF_CTRL_T_OPTS='--preview "[[ $(file --mime {}) =~ binary ]] &&
-    echo {} is a binary file ||
-    (bat --style=numbers --color=always {} ||
-    highlight -O ansi -l {} ||
-    coderay {} ||
-    rougify {} ||
-    cat {}) 2> /dev/null | head -500"'
-
-export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview'"
-
-export FZF_TMUX=1
-export FZF_TMUX_HEIGHT=40
+# FZF Settings (環境變數已移至 ~/.zshenv)
 
 # FZF Functions
 _fzf_compgen_path() {
