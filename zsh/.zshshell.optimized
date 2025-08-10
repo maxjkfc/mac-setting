@@ -141,19 +141,11 @@ ff() {
             --height=60% \
             --border \
             --prompt="選擇檔案: " \
-            --preview="[[ -f {} ]] && (bat --color=always --style=numbers --line-range=:500 {} 2>/dev/null || cat {} 2>/dev/null || echo '無法預覽此檔案')" \
+            --preview="bat --color=always --style=numbers {}" \
             --preview-window=right:60%)
     
     if [[ -n "$file" ]]; then
-        echo "正在開啟檔案: $file"
-        if [[ -f "$file" ]]; then
-            "${EDITOR:-nvim}" "$file"
-        else
-            echo "錯誤: 檔案不存在或無法存取: $file" >&2
-            return 1
-        fi
-    else
-        echo "未選擇任何檔案"
+        ${EDITOR:-nvim} "$file"
     fi
 }
 

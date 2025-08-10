@@ -1,65 +1,52 @@
-# Enabl Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%n)}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%n)}.zsh"
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
-# Path Part
-export HOMEBREWOPT="/opt/homebrew"
-# Golang setting
-export GOROOT="$HOMEBREWOPT/opt/go/libexec"
-export GOPATH="$HOME/go"
-export GOPROXY=https://proxy.golang.org
-export OPENJAVA_PATH="$HOMEBREWOPT/opt/openjdk/bin"
-# export coreutils path
-export COREPATH="$HOMEBREWOPT/opt/coreutils/libexec/gnubin"
-export MANPATH="$HOMEBREWOPT/opt/coreutils/libexec/gnuman"
-export ZPLUG_HOME="$HOMEBREWOPT/opt/zplug"
-export GCLOUD_HOME="$HOME/code/google-cloud-sdk"
-# npm-global
-export NPM_GLOBAL="$HOME/.npm-global"
-export VOLTA_HOME="$HOME/.volta"
-# bun
-export BUN_INSTALL="$HOME/.bun"
-#
-export LINKERD_HOME="$HOME/.linkerd2"
 
-export PATH="$PATH:$NPM_GLOBAL/bin:$VOLTA_HOME/bin:$BUN_INSTALL/bin:$LINKERD_HOME/bin:$GOROOT/bin:$GOPATH/bin:$COREPATH:$ZPLUG_HOME:$GCLOUD_HOME/bin:~/.local/bin:$OPENJAVA_PATH:$PODMAN_COMPOSE"
+# ============================================================================
+# ENVIRONMENT VARIABLES
+# ============================================================================
+# 注意：環境變數已移至 ~/.zshenv 以符合 zsh 最佳實踐
+# ~/.zshenv 會在所有 zsh 實例中載入，包括非互動式和腳本執行
 
-# Theme P10K
-source $(brew --prefix)/share/powerlevel10k/powerlevel10k.zsh-theme
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+# ============================================================================
+# ZSH CONFIGURATION
+# ============================================================================
+
+# Default Settings
+ZSH_DISABLE_COMPFIX="true"
+ZSH_THEME="powerlevel10k"
+setopt prompt_subst
+
+# Terminal Settings
+set -o emacs
+
+# ============================================================================
+# POWERLEVEL10K THEME
+# ============================================================================
+
+# Load theme
+if [[ -f "$HOMEBREWOPT/share/powerlevel10k/powerlevel10k.zsh-theme" ]]; then
+    source "$HOMEBREWOPT/share/powerlevel10k/powerlevel10k.zsh-theme"
+fi
+
+# Load P10K configuration
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-# quiet warning message from p10k
+
+# P10K Settings
 typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
-# Show prompt segment "kubecontext" only when the command you are typing invokes
-# invokes kubectl, helm, or kubens.
 typeset -g POWERLEVEL9K_KUBECONTEXT_SHOW_ON_COMMAND='kubectl|helm|kubens'
 
-# Defualt Setting Part
-ZSH_DISABLE_COMPFIX="true"
-# tmux color
-[[ $TMUX = "" ]] && export TERM="xterm-256color"
-# zsh theme
-ZSH_THEME="powerlevel10k"
-# You may need to manually set your language environment
-export LANG=en_US.UTF-8
-# default editor  
-export EDITOR='nvim'
-# set the default shell  options
-set -o emacs
-# set Title 
-echo $fg[blue]
-echo    ' ███╗   ███╗ █████╗ ██╗  ██╗  '
-echo    ' ████╗ ████║██╔══██╗╚██╗██╔╝  '
-echo    ' ██╔████╔██║███████║ ╚███╔╝   '
-echo    ' ██║╚██╔╝██║██╔══██║ ██╔██╗   '
-echo    ' ██║ ╚═╝ ██║██║  ██║██╔╝ ██╗  '
-echo    ' ╚═╝     ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝  '
+# ============================================================================
+# ALIASES
+# ============================================================================
 
-# Alias Part
+# Configuration
 alias zshconfig="nvim ~/.zshrc"
-# Enhance ls tools
+
+# Enhanced ls (eza)
 alias l='eza -lbF --git'
 alias ls='eza'
 alias la='eza -lbhHigUmuSa --git --color-scale --icons'
@@ -67,143 +54,166 @@ alias lx='eza -lbhHigUmuSa@ --git --color-scale --icons'
 alias lt='eza --tree --level=5 --color-scale --icons'
 alias ll='eza -lbF --git'
 
+# File Operations
 alias mv='mv -i'
-alias cp='cp'
+alias cp='cp -i'
+alias rm='rm -i'
+
+# Editor
 alias v='nvim'
 alias vdiff='nvim -d'
+
+# Search
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 
-# tools path
-alias mtr=' sudo mtr'
+# Tools
+alias cat='bat'
+alias mtr='sudo mtr'
 alias git='$HOMEBREWOPT/bin/git'
-alias cat='bat' 
 alias curl='$HOMEBREWOPT/opt/curl/bin/curl'
-alias sed="gsed" 
-# alias kubectl='$GCLOUD_HOME/bin/kubectl'
+alias sed="gsed"
 
-# zsh part 
-alias -s sh="sh "
-alias -s go="go run "
+# File Extensions
+alias -s sh="sh"
+alias -s go="go run"
 alias -s zip="unzip"
 alias -s gz="tar -xzvf"
 alias -s tgz="tar -xzvf"
 alias -s bz2="tar -xjvf"
 
-# Thirdly Tools
-# Google Cloud SDK
-export USE_GKE_GCLOUD_AUTH_PLUGIN=true
-export GOOGLE_APPLICATION_CREDENTIALS="$HOME/.config/gcloud/application_default_credentials.json"
+# ============================================================================
+# FZF CONFIGURATION
+# ============================================================================
 
+# Load FZF
+if command -v fzf >/dev/null 2>&1; then
+    source <(fzf --zsh)
+fi
 
-# FZF
-# [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-# Set up fzf key bindings and fuzzy completion
-source <(fzf --zsh)
+# FZF Settings (環境變數已移至 ~/.zshenv)
 
-export FZF_DEFAULT_COMMAND='fd  --type file --hidden --follow  --exclude .git --layout=reversed --color=always'
-
-export FZF_DEFAULT_OPTS=" \
-    --height 40% --layout=reverse --border --ansi \
-    --color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8 \
-    --color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
-    --color=marker:#f5e0dc,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8"
-
-
-export FZF_CTRL_T_OPTS='--preview "[[ $(file --mime {}) =~ binary ]] &&
-	echo {} is a binary file ||
-	(bat --style=numbers --color=always {} ||
-	highlight -O ansi -l {} ||
-	coderay {} ||
-	rougify {} ||
-	cat {}) 2> /dev/null | head -500"'
-
-export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview'"
-
-export FZF_TMUX=1
-export FZF_TMUX_HEIGHT=40
-# Use fd (https://github.com/sharkdp/fd) instead of the default find
-# command for listing path candidates.
-# - The first argument to the function ($1) is the base path to start traversal
-# - See the source code (completion.{bash,zsh}) for the details.
+# FZF Functions
 _fzf_compgen_path() {
-  fd --hidden --follow --exclude ".git" . "$1"
+    fd --hidden --follow --exclude ".git" . "$1"
 }
 
-# Use fd to generate the list for directory completion
 _fzf_compgen_dir() {
-  fd --type d --hidden --follow --exclude ".git" . "$1"
+    fd --type d --hidden --follow --exclude ".git" . "$1"
 }
 
 _fzf_comprun() {
-  local command=$1
-  shift
+    local command=$1
+    shift
 
-  case "$command" in
-    cd)           fzf --preview 'tree -C {} | head -200'   "$@" ;;
-    export|unset) fzf --preview "eval 'echo \$'{}"         "$@" ;;
-    ssh)          fzf --preview 'dig {}'                   "$@" ;;
-    *)            fzf --preview 'bat -n --color=always {}' "$@" ;;
-  esac
+    case "$command" in
+        cd)           fzf --preview 'tree -C {} | head -200'   "$@" ;;
+        export|unset) fzf --preview "eval 'echo \$'{}"         "$@" ;;
+        ssh)          fzf --preview 'dig {}'                   "$@" ;;
+        *)            fzf --preview 'bat -n --color=always {}' "$@" ;;
+    esac
 }
 
-# Iterm2 Plugin
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+# ============================================================================
+# ZPLUG PLUGIN MANAGER
+# ============================================================================
 
-# Customer Shell
-[[ ! -f $HOME/.zshshell ]] || source $HOME/.zshshell
+if [[ -f "$ZPLUG_HOME/init.zsh" ]]; then
+    source "$ZPLUG_HOME/init.zsh"
 
-# ZPlug 
-source "$ZPLUG_HOME/init.zsh"
-setopt prompt_subst # Make sure prompt is able to be generated properly.
+    # Essential Plugins
+    zplug "b4b4r07/enhancd", use:init.sh
+    zplug "wfxr/forgit"
+    zplug "zsh-users/zsh-syntax-highlighting", defer:2
+    zplug "zsh-users/zsh-autosuggestions"
+    zplug "chitoku-k/fzf-zsh-completions"
+    zplug "zsh-users/zsh-completions"
+    zplug "zsh-users/zsh-history-substring-search"
+    zplug "supercrabtree/k"
 
-zplug "b4b4r07/enhancd", use:init.sh
-zplug "b4b4r07/emoji-cli"
-zplug "wfxr/forgit"
-zplug "zsh-users/zsh-syntax-highlighting", defer:2
-zplug "zsh-users/zsh-autosuggestions"
-zplug "chitoku-k/fzf-zsh-completions"
-zplug "zsh-users/zsh-completions"
-zplug "zsh-users/zsh-history-substring-search"
-zplug "supercrabtree/k"
+    # Optional Plugins (可根據需要啟用)
+    # zplug "b4b4r07/emoji-cli"
 
-# zplug check returns true if all packages are installed
-# Therefore, when it returns false, run zplug install
-if ! zplug check; then
-	zplug install
+    # Install plugins if not installed
+    if ! zplug check; then
+        zplug install
+    fi
+
+    # Load plugins
+    zplug load
+
+    # Plugin Settings
+    if zplug check b4b4r07/enhancd; then
+        export ENHANCD_FILTER=fzf-tmux
+    fi
 fi
 
-# source plugins and add commands to the PATH
-zplug load
+# ============================================================================
+# SYNTAX HIGHLIGHTING THEME
+# ============================================================================
 
-# zplug check returns true if the given repository exists
-if zplug check b4b4r07/enhancd; then
-	# setting if enhancd is available
-	export ENHANCD_FILTER=fzf-tmux
+if [[ -f ~/.zsh/catppuccin_mocha-zsh-syntax-highlighting.zsh ]]; then
+    source ~/.zsh/catppuccin_mocha-zsh-syntax-highlighting.zsh
 fi
 
+# ============================================================================
+# COMPLETION SYSTEM
+# ============================================================================
 
-# now load zsh-syntax-highlighting plugin
-source ~/.zsh/catppuccin_mocha-zsh-syntax-highlighting.zsh
-
-# Completion
- 	
+# Completion paths
 fpath=(
-	~/.zsh/completion 
-	$HOMEBREWOPT/share/zsh/site-functions
-	$fpath 
+    ~/.zsh/completion
+    $HOMEBREWOPT/share/zsh/site-functions
+    $fpath
 )
+
+# Initialize completion system
 autoload -Uz compinit && compinit -i
-# Kubectl completion
-# source <(kubectl completion zsh)
 
+# ============================================================================
+# VERSION MANAGERS
+# ============================================================================
 
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/maxjkfc/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/maxjkfc/google-cloud-sdk/path.zsh.inc'; fi
+# Node.js Version Manager (fnm)
+if command -v fnm >/dev/null 2>&1; then
+    eval "$(fnm env --use-on-cd)"
+fi
 
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/maxjkfc/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/maxjkfc/google-cloud-sdk/completion.zsh.inc'; fi
+# ============================================================================
+# INTEGRATIONS
+# ============================================================================
 
-# bun completions
-[ -s "/Users/maxjkfc/.bun/_bun" ] && source "/Users/maxjkfc/.bun/_bun"
+# iTerm2 Integration
+[[ -f "${HOME}/.iterm2_shell_integration.zsh" ]] && source "${HOME}/.iterm2_shell_integration.zsh"
+
+# Custom Shell Functions
+[[ -f "$HOME/.zshshell" ]] && source "$HOME/.zshshell"
+
+# Google Cloud SDK
+[[ -f '/Users/maxjkfc/google-cloud-sdk/path.zsh.inc' ]] && source '/Users/maxjkfc/google-cloud-sdk/path.zsh.inc'
+[[ -f '/Users/maxjkfc/google-cloud-sdk/completion.zsh.inc' ]] && source '/Users/maxjkfc/google-cloud-sdk/completion.zsh.inc'
+
+# Bun completions
+[[ -s "/Users/maxjkfc/.bun/_bun" ]] && source "/Users/maxjkfc/.bun/_bun"
+
+# Kubectl completion (可根據需要啟用)
+if command -v kubectl >/dev/null 2>&1; then
+    source <(kubectl completion zsh)
+fi
+
+# ============================================================================
+# WELCOME MESSAGE (可選，建議移除以提升啟動速度)
+# ============================================================================
+
+# 如果您想保留歡迎訊息，可以取消註解以下內容
+# show_welcome() {
+#     echo $fg[blue]
+#     echo    ' ███╗   ███╗ █████╗ ██╗  ██╗  '
+#     echo    ' ████╗ ████║██╔══██╗╚██╗██╔╝  '
+#     echo    ' ██╔████╔██║███████║ ╚███╔╝   '
+#     echo    ' ██║╚██╔╝██║██╔══██║ ██╔██╗   '
+#     echo    ' ██║ ╚═╝ ██║██║  ██║██╔╝ ██╗  '
+#     echo    ' ╚═╝     ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝  '
+# }
+# show_welcome
