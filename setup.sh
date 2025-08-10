@@ -69,10 +69,6 @@ setup_install_depend() {
 setup_backend_tools() {
     print_info "開始安裝後端開發工具..."
 
-    brew install --cask raycast # 生產力工具
-    brew install --cask rectangle  # 視窗管理
-brew install --cask stats      # 系統監控
-    
     # 容器化和 Kubernetes 工具
     print_info "安裝容器化工具..."
     brew install orbstack --cask # OrbStack
@@ -312,6 +308,20 @@ health_check() {
     else
         print_error "✗ Docker 未安裝"
     fi
+}
+
+setup_vim_mode_repeating() {
+    print_info "開始設置 [vim-mode-repeating] 配置..."
+    # 禁用按鍵長按
+    defaults write -g ApplePressAndHoldEnabled -bool false
+}
+
+install_gui_tools() {
+    print_info "開始安裝 GUI 工具..."
+    brew install --cask raycast # 生產力工具
+    brew install --cask stats      # 系統監控
+    brew install --cask warp
+    brew install --cask appcleaner
 }
 
 # 主程式邏輯
