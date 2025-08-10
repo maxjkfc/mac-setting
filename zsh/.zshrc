@@ -8,55 +8,8 @@ fi
 # ============================================================================
 # ENVIRONMENT VARIABLES
 # ============================================================================
-
-# Homebrew
-export HOMEBREWOPT="/opt/homebrew"
-
-# Language and Editor
-export LANG=en_US.UTF-8
-export EDITOR='nvim'
-
-# Development Tools Paths
-export GOROOT="$HOMEBREWOPT/opt/go/libexec"
-export GOPATH="$HOME/go"
-export GOPROXY=https://proxy.golang.org
-export OPENJAVA_PATH="$HOMEBREWOPT/opt/openjdk/bin"
-export COREPATH="$HOMEBREWOPT/opt/coreutils/libexec/gnubin"
-export MANPATH="$HOMEBREWOPT/opt/coreutils/libexec/gnuman"
-
-# Plugin Managers
-export ZPLUG_HOME="$HOMEBREWOPT/opt/zplug"
-
-# Cloud Tools
-export GCLOUD_HOME="$HOME/code/google-cloud-sdk"
-export USE_GKE_GCLOUD_AUTH_PLUGIN=true
-export GOOGLE_APPLICATION_CREDENTIALS="$HOME/.config/gcloud/application_default_credentials.json"
-
-# JavaScript/Node.js Tools (統一使用 fnm 管理)
-export BUN_INSTALL="$HOME/.bun"
-export LINKERD_HOME="$HOME/.linkerd2"
-
-# ============================================================================
-# PATH CONFIGURATION (條件式添加，避免無效路徑)
-# ============================================================================
-
-# 初始化 PATH
-typeset -U path  # 確保 PATH 中沒有重複項目
-
-# 條件式添加路徑到 PATH
-add_to_path() {
-    [[ -d "$1" ]] && path=("$1" $path)
-}
-
-# 按優先級順序添加路徑
-add_to_path "$HOME/.local/bin"
-add_to_path "$OPENJAVA_PATH"
-add_to_path "$COREPATH"
-add_to_path "$GOROOT/bin"
-add_to_path "$GOPATH/bin"
-add_to_path "$LINKERD_HOME/bin"
-add_to_path "$BUN_INSTALL/bin"
-add_to_path "$GCLOUD_HOME/bin"
+# 注意：環境變數已移至 ~/.zshenv 以符合 zsh 最佳實踐
+# ~/.zshenv 會在所有 zsh 實例中載入，包括非互動式和腳本執行
 
 # ============================================================================
 # ZSH CONFIGURATION
@@ -68,7 +21,6 @@ ZSH_THEME="powerlevel10k"
 setopt prompt_subst
 
 # Terminal Settings
-[[ $TMUX = "" ]] && export TERM="xterm-256color"
 set -o emacs
 
 # ============================================================================
@@ -265,9 +217,9 @@ fi
 [[ -s "/Users/maxjkfc/.bun/_bun" ]] && source "/Users/maxjkfc/.bun/_bun"
 
 # Kubectl completion (可根據需要啟用)
-# if command -v kubectl >/dev/null 2>&1; then
-#     source <(kubectl completion zsh)
-# fi
+if command -v kubectl >/dev/null 2>&1; then
+    source <(kubectl completion zsh)
+fi
 
 # ============================================================================
 # WELCOME MESSAGE (可選，建議移除以提升啟動速度)
