@@ -231,6 +231,7 @@ setup_install_depend() {
         "curl:HTTP 客戶端"
         "reattach-to-user-namespace:tmux 剪貼簿支援"
         "macchina:Rust 製作的系統資訊顯示工具"
+        "zoxide:智能目錄跳轉工具"
     )
     
     local total=${#tools[@]}
