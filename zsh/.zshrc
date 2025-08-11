@@ -184,6 +184,11 @@ fi
 # INTEGRATIONS
 # ============================================================================
 
+# Zoxide (智能目錄跳轉)
+if command -v zoxide >/dev/null 2>&1; then
+    eval "$(zoxide init zsh)"
+fi
+
 # iTerm2 Integration
 [[ -f "${HOME}/.iterm2_shell_integration.zsh" ]] && source "${HOME}/.iterm2_shell_integration.zsh"
 
@@ -217,3 +222,5 @@ fi
 #     echo    ' ╚═╝     ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝  '
 # }
 # show_welcome
+
+source /Users/maxjkfc/.config/broot/launcher/bash/br
