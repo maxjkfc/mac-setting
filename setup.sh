@@ -230,6 +230,8 @@ setup_install_depend() {
         "tmux:終端多工器"
         "curl:HTTP 客戶端"
         "reattach-to-user-namespace:tmux 剪貼簿支援"
+        "macchina:Rust 製作的系統資訊顯示工具"
+        "zoxide:智能目錄跳轉工具"
     )
     
     local total=${#tools[@]}
@@ -427,6 +429,8 @@ setup_zsh() {
         ".zshrc:Zsh 主配置檔"
         ".zshshell:Zsh 自定義函數"
         ".zprofile:Zsh 環境變數"
+        ".zshenv:Zsh 環境設定"
+        ".zlogin:Zsh 登入配置"
     )
     
     for config_desc in "${configs[@]}"; do
