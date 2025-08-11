@@ -19,6 +19,22 @@ local CYAN='\033[0;36m'
 local WHITE='\033[1;37m'
 local NC='\033[0m' # No Color
 
+# 使用 macchina 顯示系統資訊（如果可用）
+show_system_info() {
+    if command -v macchina >/dev/null 2>&1; then
+        echo ""
+        echo -e "${CYAN}╭─────────────────────────────────────────────────────────────╮${NC}"
+        echo -e "${CYAN}│${WHITE}                    歡迎回來，$(whoami)！                     ${CYAN}│${NC}"
+        echo -e "${CYAN}╰─────────────────────────────────────────────────────────────╯${NC}"
+        echo ""
+        macchina
+        echo ""
+    else
+        # Fallback 到原有的系統資訊顯示
+        get_system_info
+    fi
+}
+
 # 獲取系統資訊
 get_system_info() {
     local hostname=$(hostname -s)
@@ -141,8 +157,8 @@ show_tips() {
 
 # 只在互動式登入 shell 中顯示資訊
 if [[ -o interactive && -o login ]]; then
-    # 顯示系統資訊
-    get_system_info
+    # 顯示系統資訊（優先使用 macchina）
+    show_system_info
     
     # 顯示開發工具狀態
     check_dev_tools
