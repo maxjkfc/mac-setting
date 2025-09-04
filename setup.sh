@@ -319,6 +319,9 @@ setup_backend_tools() {
     # Node.js 開發環境
     setup_nodejs_environment
     
+    # Go 開發環境
+    setup_golang_environment
+    
     # 環境管理工具
     print_info "安裝環境管理工具..."
     safe_brew_install "direnv" "目錄環境變數管理"
@@ -376,6 +379,90 @@ setup_nodejs_environment() {
         else
             print_warning "Node.js LTS 版本安裝失敗，請手動執行: fnm install --lts"
         fi
+    fi
+}
+
+setup_golang_environment() {
+    print_info "設置 Go 開發環境..."
+    
+    # 安裝 Go 語言
+    safe_brew_install "go" "Go 程式語言"
+    
+    # Go 開發工具
+    print_info "安裝 Go 開發工具..."
+    local go_tools=(
+        "golangci-lint:Go 程式碼檢查工具"
+        "goreleaser:Go 專案發布工具"
+        "air:Go 熱重載工具"
+        "delve:Go 除錯工具"
+    )
+    
+    for tool_desc in "${go_tools[@]}"; do
+        IFS=':' read -r tool desc <<< "$tool_desc"
+        safe_brew_install "$tool" "$desc"
+    done
+    
+    # 檢查 Go 是否安裝成功並設置 GOPATH
+    if command_exists go; then
+        print_info "設置 Go 環境變數..."
+        
+        # 獲取 Go 版本資訊
+        local go_version=$(go version 2>/dev/null | awk '{print $3}' | sed 's/go//')
+        if [[ -n "$go_version" ]]; then
+            print_success "Go $go_version 安裝成功"
+        fi
+        
+        # 設置 Go 環境變數到 .zshenv
+        local zshenv="$HOME/.zshenv"
+        local go_root=$(go env GOROOT 2>/dev/null)
+        local go_path="$HOME/go"
+        
+        # 確保 .zshenv 存在
+        touch "$zshenv"
+        
+        # 添加 Go 環境變數
+        add_to_file_if_missing "# Go 環境變數" "$zshenv" "Go 環境變數註解"
+        add_to_file_if_missing "export GOROOT=\"$go_root\"" "$zshenv" "GOROOT 環境變數"
+        add_to_file_if_missing "export GOPATH=\"$go_path\"" "$zshenv" "GOPATH 環境變數"
+        add_to_file_if_missing "export PATH=\"\$GOPATH/bin:\$GOROOT/bin:\$PATH\"" "$zshenv" "Go PATH 設定"
+        
+        # 創建 GOPATH 目錄結構
+        mkdir -p "$go_path"/{bin,src,pkg}
+        print_info "已創建 Go 工作目錄: $go_path"
+        
+        # 安裝常用的 Go 工具
+        print_info "安裝常用 Go 工具..."
+        
+        # 設置臨時環境變數
+        export GOPATH="$go_path"
+        export PATH="$go_path/bin:$PATH"
+        
+        local go_packages=(
+            "golang.org/x/tools/cmd/goimports@latest:自動導入管理"
+            "github.com/golangci/golangci-lint/cmd/golangci-lint@latest:程式碼檢查"
+            "github.com/air-verse/air@latest:熱重載工具"
+            "github.com/go-delve/delve/cmd/dlv@latest:除錯工具"
+            "github.com/fatih/gomodifytags@latest:結構體標籤工具"
+            "github.com/josharian/impl@latest:介面實作生成"
+            "github.com/cweill/gotests/gotests@latest:測試生成工具"
+            "honnef.co/go/tools/cmd/staticcheck@latest:靜態分析工具"
+        )
+        
+        for pkg_desc in "${go_packages[@]}"; do
+            IFS=':' read -r pkg desc <<< "$pkg_desc"
+            print_info "安裝 $desc..."
+            if go install "$pkg" >/dev/null 2>&1; then
+                print_success "$desc 安裝成功"
+            else
+                print_warning "$desc 安裝失敗"
+            fi
+        done
+        
+        print_success "Go 開發環境設置完成"
+        print_info "GOPATH: $go_path"
+        print_info "請重新啟動終端或執行 'source ~/.zshenv' 來載入環境變數"
+    else
+        print_error "Go 安裝失敗"
     fi
 }
 
@@ -555,7 +642,7 @@ health_check() {
     
     # 檢查基礎工具
     print_info "檢查基礎工具:"
-    local tools=("brew" "git" "nvim" "tmux" "zsh" "fzf" "ripgrep" "node" "npm" "bun" "fnm")
+    local tools=("brew" "git" "nvim" "tmux" "zsh" "fzf" "ripgrep" "node" "npm" "bun" "fnm" "go")
     local missing_tools=()
     
     for tool in "${tools[@]}"; do
@@ -565,6 +652,7 @@ health_check() {
                 "node") version=$(node --version 2>/dev/null || echo "unknown") ;;
                 "npm") version=$(npm --version 2>/dev/null || echo "unknown") ;;
                 "git") version=$(git --version 2>/dev/null | cut -d' ' -f3 || echo "unknown") ;;
+                "go") version=$(go version 2>/dev/null | awk '{print $3}' | sed 's/go//' || echo "unknown") ;;
                 *) version=$($tool --version 2>/dev/null | head -n1 | grep -oE '[0-9]+\.[0-9]+(\.[0-9]+)?' || echo "unknown") ;;
             esac
             print_success "✓ $tool ($version)"
@@ -635,6 +723,31 @@ health_check() {
     fi
     
     echo ""
+    print_info "檢查 Go 環境:"
+    if command_exists go; then
+        local go_version=$(go version 2>/dev/null | awk '{print $3}' | sed 's/go//')
+        local go_root=$(go env GOROOT 2>/dev/null)
+        local go_path=$(go env GOPATH 2>/dev/null)
+        print_success "✓ Go 版本: $go_version"
+        print_info "GOROOT: $go_root"
+        print_info "GOPATH: $go_path"
+        
+        # 檢查 Go 工具
+        local go_tools=("goimports" "golangci-lint" "air" "dlv")
+        local installed_tools=()
+        for tool in "${go_tools[@]}"; do
+            if command_exists "$tool"; then
+                installed_tools+=("$tool")
+            fi
+        done
+        if [[ ${#installed_tools[@]} -gt 0 ]]; then
+            print_info "已安裝的 Go 工具: ${installed_tools[*]}"
+        fi
+    else
+        print_warning "⚠ Go 未安裝"
+    fi
+    
+    echo ""
     print_separator
     if $all_good; then
         print_success "🎉 開發環境健康檢查通過！"
@@ -667,6 +780,7 @@ $(print_step "選項:")
   zsh           - 設置 Zsh 配置（包含基礎工具安裝）
   nvim          - 設置 Neovim 配置
   backend       - 安裝後端開發工具
+  golang        - 安裝 Go 開發環境與工具
   ai-tools      - 安裝 AI 開發工具
   gui-tools     - 安裝 GUI 工具
   vim-repeat    - 設置 Vim 模式按鍵重複
@@ -678,6 +792,7 @@ $(print_step "範例:")
   $0 zsh        # 只設置 zsh 配置
   $0 all        # 安裝所有配置
   $0 backend    # 只安裝後端開發工具
+  $0 golang     # 只安裝 Go 開發環境
   $0 health     # 檢查環境狀態
 
 $(print_step "注意事項:")
@@ -723,6 +838,10 @@ main() {
         "backend")
             check_homebrew
             setup_backend_tools
+            ;;
+        "golang")
+            check_homebrew
+            setup_golang_environment
             ;;
         "ai-tools")
             check_homebrew

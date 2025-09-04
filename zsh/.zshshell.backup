@@ -24,7 +24,7 @@ fs() {
 # vg - vim and rg
 vg() {
   local file
-  file="$(rg --no-block-buffered --color=always --no-heading $@ | fzf 1 -1 | awk -F: '{print $1}')" 
+  file="$(rg --no-block-buffered --color=always --no-heading $@ | fzf 1 -1 | awk -F: '{print $1}')"
   if [[ -n $file ]]; then
       ${EDITOR:-nvim} "$file"
   fi
@@ -55,4 +55,3 @@ myip() {
     echo $fg[red]"Local:" $fg[white] $local_ip
     echo $fg[red]"Inter:" $fg[white] $inter_ip
 }
-

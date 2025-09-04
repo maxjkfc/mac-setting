@@ -54,7 +54,7 @@ get_system_info() {
             printf "%.1fGB / %.1fGB", used, total
         }')
     local disk_usage=$(df -h / | awk 'NR==2 {print $3 " / " $2 " (" $5 ")"}')
-    
+
     # 顯示歡迎資訊
     echo ""
     echo -e "${CYAN}╭─────────────────────────────────────────────────────────────╮${NC}"
@@ -77,18 +77,18 @@ get_system_info() {
 # 檢查開發工具狀態
 check_dev_tools() {
     local tools_status=""
-    
+
     # 檢查重要的開發工具
     if command -v node >/dev/null 2>&1; then
         local node_version=$(node --version)
         tools_status+="${GREEN}Node.js${NC} ${node_version} "
     fi
-    
+
     if command -v go >/dev/null 2>&1; then
         local go_version=$(go version | awk '{print $3}')
         tools_status+="${BLUE}${go_version}${NC} "
     fi
-    
+
     if command -v docker >/dev/null 2>&1; then
         if docker info >/dev/null 2>&1; then
             tools_status+="${CYAN}Docker${NC} ✅ "
@@ -96,11 +96,11 @@ check_dev_tools() {
             tools_status+="${YELLOW}Docker${NC} ⚠️  "
         fi
     fi
-    
+
     if command -v kubectl >/dev/null 2>&1; then
         tools_status+="${PURPLE}kubectl${NC} ✅ "
     fi
-    
+
     if [[ -n "$tools_status" ]]; then
         echo -e "${WHITE}🛠️  開發工具:${NC} ${tools_status}"
         echo ""
@@ -117,7 +117,7 @@ show_git_status() {
         local branch=$(git branch --show-current 2>/dev/null)
         local git_status=$(git status --porcelain 2>/dev/null | wc -l | tr -d ' ')
         local repo_name=$(basename "$(git rev-parse --show-toplevel 2>/dev/null)")
-        
+
         if [[ -n "$branch" ]]; then
             echo -e "${WHITE}📁 Git 倉庫:${NC} ${repo_name}"
             echo -e "${WHITE}🌿 當前分支:${NC} ${GREEN}${branch}${NC}"
@@ -144,7 +144,7 @@ show_tips() {
         "🐳 使用 ${CYAN}fdc${NC} 管理 Docker 容器"
         "📊 輸入 ${CYAN}sysinfo${NC} 查看詳細系統資訊"
     )
-    
+
     # 隨機選擇一個提示
     local random_tip=${tips[$((RANDOM % ${#tips[@]} + 1))]}
     echo -e "${random_tip}"
@@ -159,13 +159,13 @@ show_tips() {
 if [[ -o interactive && -o login ]]; then
     # 顯示系統資訊（優先使用 macchina）
     show_system_info
-    
+
     # 顯示開發工具狀態
     check_dev_tools
-    
+
     # 顯示 Git 狀態（如果在 Git 倉庫中）
     show_git_status
-    
+
     # 顯示隨機提示
     show_tips
 fi
@@ -181,7 +181,7 @@ fi
 check_brew_updates() {
     local last_check_file="$HOME/.cache/brew_last_check"
     local today=$(date +%Y-%m-%d)
-    
+
     if [[ ! -f "$last_check_file" ]] || [[ "$(cat "$last_check_file" 2>/dev/null)" != "$today" ]]; then
         if command -v brew >/dev/null 2>&1; then
             echo -e "${YELLOW}🍺 檢查 Homebrew 更新...${NC}"
