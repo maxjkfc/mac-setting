@@ -236,3 +236,13 @@ fi
 # show_welcome
 
 source /Users/maxjkfc/.config/broot/launcher/bash/br
+
+# ============================================================================
+# LOCAL CONFIGURATION
+# ============================================================================
+
+# Load local configuration if it exists
+# 用於存放敏感資訊如 API keys、個人設定等，不會同步到 GitHub
+if [[ -f ~/.zshrc.local ]]; then
+    source ~/.zshrc.local
+fi
