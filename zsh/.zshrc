@@ -39,6 +39,18 @@ fi
 typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
 typeset -g POWERLEVEL9K_KUBECONTEXT_SHOW_ON_COMMAND='kubectl|helm|kubens'
 
+# 開發環境優化設定
+# 顯示 Git 狀態和分支資訊（對開發很重要）
+typeset -g POWERLEVEL9K_VCS_SHOW_SUBMODULES=false
+typeset -g POWERLEVEL9K_VCS_HIDE_TAGS=false
+
+# 目錄顯示優化（對 GOPATH 導航有幫助）
+typeset -g POWERLEVEL9K_SHORTEN_STRATEGY=truncate_to_unique
+typeset -g POWERLEVEL9K_SHORTEN_DELIMITER=''
+
+# 命令執行時間顯示（對性能調優有幫助）
+typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_THRESHOLD=3
+
 # ============================================================================
 # ALIASES
 # ============================================================================
