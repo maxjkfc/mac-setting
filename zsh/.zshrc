@@ -64,7 +64,7 @@ alias ls='eza'
 alias la='eza -lbhHigUmuSa --git --color-scale --icons'
 alias lx='eza -lbhHigUmuSa@ --git --color-scale --icons'
 alias lt='eza --tree --level=5 --color-scale --icons'
-alias ll='eza -lbF --git'
+alias ll='eza -lbhHigUmua --git'
 
 # File Operations
 alias mv='mv -i'
@@ -135,7 +135,6 @@ if [[ -f "$ZPLUG_HOME/init.zsh" ]]; then
     source "$ZPLUG_HOME/init.zsh"
 
     # Essential Plugins
-    zplug "b4b4r07/enhancd", use:init.sh
     zplug "wfxr/forgit"
     zplug "zsh-users/zsh-syntax-highlighting", defer:2
     zplug "zsh-users/zsh-autosuggestions"
@@ -155,10 +154,6 @@ if [[ -f "$ZPLUG_HOME/init.zsh" ]]; then
     # Load plugins
     zplug load
 
-    # Plugin Settings
-    if zplug check b4b4r07/enhancd; then
-        export ENHANCD_FILTER=fzf-tmux
-    fi
 fi
 
 # ============================================================================
@@ -180,8 +175,13 @@ fpath=(
     $fpath
 )
 
-# Initialize completion system
-autoload -Uz compinit && compinit -i
+# Initialize completion system (with 24h cache to speed up startup)
+autoload -Uz compinit
+if [[ -n ~/.zcompdump(#qN.mh+24) ]]; then
+    compinit -i
+else
+    compinit -C -i
+fi
 
 # ============================================================================
 # VERSION MANAGERS
@@ -214,9 +214,14 @@ fi
 # Bun completions
 [[ -s "/Users/maxjkfc/.bun/_bun" ]] && source "/Users/maxjkfc/.bun/_bun"
 
-# Kubectl completion (可根據需要啟用)
+# Kubectl completion (cached to avoid slow startup)
 if command -v kubectl >/dev/null 2>&1; then
-    source <(kubectl completion zsh)
+    local _kube_cache="${HOME}/.cache/kubectl_completion.zsh"
+    if [[ ! -f $_kube_cache || $(command -v kubectl) -nt $_kube_cache ]]; then
+        mkdir -p "${HOME}/.cache"
+        kubectl completion zsh > $_kube_cache
+    fi
+    source $_kube_cache
 fi
 
 # ============================================================================
@@ -246,3 +251,5 @@ source /Users/maxjkfc/.config/broot/launcher/bash/br
 if [[ -f ~/.zshrc.local ]]; then
     source ~/.zshrc.local
 fi
+
+[[ "$TERM_PROGRAM" == "kiro" ]] && . "$(kiro --locate-shell-integration-path zsh)"

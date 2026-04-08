@@ -22,7 +22,7 @@ export BROWSER='open'
 # HOMEBREW CONFIGURATION
 # ============================================================================
 
-export HOMEBREWOPT="/opt/homebrew"
+export HOMEBREWOPT="${HOMEBREW_PREFIX:-/opt/homebrew}"
 
 # ============================================================================
 # DEVELOPMENT TOOLS PATHS
@@ -38,7 +38,7 @@ export OPENJAVA_PATH="$HOMEBREWOPT/opt/openjdk/bin"
 
 # Core Utilities
 export COREPATH="$HOMEBREWOPT/opt/coreutils/libexec/gnubin"
-export MANPATH="$HOMEBREWOPT/opt/coreutils/libexec/gnuman"
+export MANPATH="$HOMEBREWOPT/opt/coreutils/libexec/gnuman:${MANPATH}"
 
 # ============================================================================
 # CLOUD AND DEVOPS TOOLS
@@ -80,6 +80,7 @@ add_to_path() {
 
 # 按優先級順序添加路徑
 add_to_path "$HOME/.local/bin"
+add_to_path "$HOME/.antigravity/antigravity/bin"
 add_to_path "$OPENJAVA_PATH"
 add_to_path "$COREPATH"
 add_to_path "$GOROOT/bin"
@@ -87,6 +88,8 @@ add_to_path "$GOPATH/bin"
 add_to_path "$LINKERD_HOME/bin"
 add_to_path "$BUN_INSTALL/bin"
 add_to_path "$GCLOUD_HOME/bin"
+add_to_path "$ZPLUG_HOME/bin"
+add_to_path "$HOMEBREWOPT/bin"
 
 # ============================================================================
 # FZF CONFIGURATION

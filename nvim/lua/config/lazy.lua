@@ -16,18 +16,24 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
   spec = {
-    -- add LazyVim and import its plugins
+    -- 1. 基礎 LazyVim 核心
     { "LazyVim/LazyVim", import = "lazyvim.plugins" },
-    { import = "lazyvim.plugins.extras.ai.codeium" },
-    { import = "lazyvim.plugins.extras.editor.inc-rename" }, -- rename
+    
+    -- 2. 這些功能在 VS Code 裡也很好用，保留！
+    { import = "lazyvim.plugins.extras.coding.mini-surround" }, 
+    { import = "lazyvim.plugins.extras.vscode" }, -- 關鍵
 
-    { import = "lazyvim.plugins.extras.lang.json" },
-    { import = "lazyvim.plugins.extras.lang.docker" },
-    { import = "lazyvim.plugins.extras.lang.go" },
-    { import = "lazyvim.plugins.extras.test.core" },
-
-    { import = "lazyvim.plugins.extras.coding.mini-surround" }, -- surround
-    { import = "lazyvim.plugins.extras.vscode" },
+    -- 3. 使用 vim.g.vscode 判斷：只在「非」VS Code 模式下才載入這些重型模組
+    -- 這樣在 Antigravity 裡啟動速度會更快，且完全避免衝突
+    not vim.g.vscode and {
+       -- 語言支援 (IDE 本身就有了，不需要載入)
+       { import = "lazyvim.plugins.extras.lang.json" },
+       { import = "lazyvim.plugins.extras.lang.docker" },
+       { import = "lazyvim.plugins.extras.lang.go" },
+       -- 測試與重新命名 (IDE 有自己的介面)
+       { import = "lazyvim.plugins.extras.test.core" },
+       { import = "lazyvim.plugins.extras.editor.inc-rename" }, 
+    } or nil,
 
     -- import/override with your plugins
     { import = "plugins" },
