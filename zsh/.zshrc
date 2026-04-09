@@ -95,6 +95,18 @@ alias -s gz="tar -xzvf"
 alias -s tgz="tar -xzvf"
 alias -s bz2="tar -xjvf"
 
+# Claude code
+alias  cc="CLAUDE_CODE_NO_FLICKER=1 claude"
+alias  ccm="cd $OBSIDIAN_HOME/max-agent && CLAUDE_CODE_NO_FLICKER=1 claude"
+alias  ccw="cd $OBSIDIAN_HOME/max-wiki && CLAUDE_CODE_NO_FLICKER=1 claude"
+
+# ═══════════════════════════════════════════════════════════════
+# 安全刪除 - rm 改用垃圾桶（可還原）
+# ═══════════════════════════════════════════════════════════════
+alias rm='trash'
+# 真的要永久刪除時用 rm! 或 /bin/rm
+alias rm!='/bin/rm'
+
 # ============================================================================
 # FZF CONFIGURATION
 # ============================================================================
