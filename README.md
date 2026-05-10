@@ -94,6 +94,7 @@ cd ~/code/mac-setting
 |------|------|----------|
 | `ftm` | TMUX Session 管理 | `ftm work` |
 | `fs` | 快速 Session 切換 | `fs` |
+| `claude-watch` | 啟動 claude --remote watchdog | `claude-watch ~/code/my-project` |
 
 ### 🔧 程序管理
 
@@ -159,6 +160,42 @@ cd ~/code/mac-setting
 ### AI 工具
 - **Claude CLI**：Anthropic Claude 命令列工具
 - **Gemini CLI**：Google Gemini 命令列工具
+
+#### claude --remote 持久運行
+
+`claude --remote` 會建立長連線到 claude.ai，斷線後 session 即終止。使用 `claude-watch` 可在 tmux 背景自動重啟並記錄 log。
+
+```bash
+# 在當前目錄啟動（session 名稱固定為 claude-remote）
+claude-watch
+
+# 指定工作目錄
+claude-watch ~/code/my-project
+```
+
+常用 tmux 指令：
+
+| 指令 | 作用 |
+|------|------|
+| `tmux attach -t claude-remote` | 進入查看 log |
+| `Ctrl+B, D` | 離開但保持背景運行 |
+| `tmux kill-session -t claude-remote` | 完全停止 |
+
+Log 存放於 `~/logs/claude-remote.log`，格式如下：
+
+```
+[2026-05-10 14:32:01] === Watchdog started (PID 12345, dir=/Users/you/code/my-project) ===
+[2026-05-10 14:32:01] --- Attempt #1: starting claude --remote ---
+[2026-05-10 14:35:22] --- Process exited (code=1), restarting in 5s ---
+[2026-05-10 14:35:27] --- Attempt #2: starting claude --remote ---
+```
+
+底層腳本位於 `scripts/claude-remote-watchdog.sh`，可直接呼叫：
+
+```bash
+# 直接執行（不透過 tmux）
+~/code/mac-setting/scripts/claude-remote-watchdog.sh ~/code/my-project
+```
 
 ## ⚙️ 自訂配置
 
