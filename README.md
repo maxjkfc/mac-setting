@@ -24,6 +24,9 @@ mac-setting/
 │   └── .zshshell            # 自訂 fzf 工具函數集合
 ├── scripts/                 # 工具腳本
 │   └── claude-remote-watchdog.sh  # claude --remote 斷線自動重啟
+├── tmux/                    # tmux 配置
+│   ├── .tmux.conf           # tmux 主設定檔
+│   └── shortcuts.md         # 快捷鍵速查表
 └── README.md                # 本檔案
 ```
 
