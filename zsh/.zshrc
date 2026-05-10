@@ -252,8 +252,6 @@ fi
 # }
 # show_welcome
 
-[[ -f "$HOME/.config/broot/launcher/bash/br" ]] && source "$HOME/.config/broot/launcher/bash/br"
-
 # ============================================================================
 # LOCAL CONFIGURATION
 # ============================================================================
