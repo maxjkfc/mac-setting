@@ -252,7 +252,7 @@ fi
 # }
 # show_welcome
 
-source /Users/maxjkfc/.config/broot/launcher/bash/br
+[[ -f "$HOME/.config/broot/launcher/bash/br" ]] && source "$HOME/.config/broot/launcher/bash/br"
 
 # ============================================================================
 # LOCAL CONFIGURATION
