@@ -79,6 +79,20 @@ fs() {
     fi
 }
 
+# claude-watch - 在 tmux session 中啟動 claude --remote watchdog
+# 用法: claude-watch [directory]
+claude-watch() {
+    local dir="${1:-$PWD}"
+    if tmux has-session -t claude-remote 2>/dev/null; then
+        echo "Session 已在運行中。使用 'tmux attach -t claude-remote' 查看"
+    else
+        tmux new-session -d -s claude-remote -c "$dir" \
+            "$HOME/code/mac-setting/scripts/claude-remote-watchdog.sh '$dir'"
+        echo "claude-remote 已啟動 (dir=$dir)"
+        echo "使用 'tmux attach -t claude-remote' 查看 log"
+    fi
+}
+
 # ============================================================================
 # 檔案搜尋與編輯工具
 # ============================================================================
@@ -444,6 +458,7 @@ fzf_help() {
 🖥️  TMUX 管理:
   ftm [session]    - 創建或切換 tmux session
   fs [pattern]     - 快速切換 tmux session
+  claude-watch [dir] - 啟動 claude --remote watchdog（tmux 背景執行）
 
 🔧 程序管理:
   fkill [signal]   - 選擇並終止程序
