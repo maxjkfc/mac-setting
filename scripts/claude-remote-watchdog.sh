@@ -31,7 +31,7 @@ while true; do
     ATTEMPT=$((ATTEMPT + 1))
     log "--- Attempt #${ATTEMPT}: starting claude --remote ---"
 
-    claude --remote >> "$LOG_FILE" 2>&1
+    claude --remote
     EXIT_CODE=$?
 
     log "--- Process exited (code=${EXIT_CODE}), restarting in ${RESTART_DELAY}s ---"
