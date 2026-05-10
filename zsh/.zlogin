@@ -170,29 +170,5 @@ if [[ -o interactive && -o login ]]; then
     show_tips
 fi
 
-# ============================================================================
-# OPTIONAL: STARTUP TASKS
-# ============================================================================
-
-# 可選：執行登入後的一次性任務
-# 例如：檢查更新、清理暫存檔案等
-
-# 檢查 Homebrew 更新（每天一次）
-check_brew_updates() {
-    local last_check_file="$HOME/.cache/brew_last_check"
-    local today=$(date +%Y-%m-%d)
-
-    if [[ ! -f "$last_check_file" ]] || [[ "$(cat "$last_check_file" 2>/dev/null)" != "$today" ]]; then
-        if command -v brew >/dev/null 2>&1; then
-            echo -e "${YELLOW}🍺 檢查 Homebrew 更新...${NC}"
-            brew update >/dev/null 2>&1 &
-            echo "$today" > "$last_check_file"
-        fi
-    fi
-}
-
 # 創建快取目錄
 [[ ! -d "$HOME/.cache" ]] && mkdir -p "$HOME/.cache"
-
-# 執行更新檢查（背景執行，不阻塞登入）
-# check_brew_updates

@@ -219,10 +219,6 @@ fi
 # Custom Shell Functions
 [[ -f "$HOME/.zshshell" ]] && source "$HOME/.zshshell"
 
-# Google Cloud SDK
-[[ -f '/Users/maxjkfc/google-cloud-sdk/path.zsh.inc' ]] && source '/Users/maxjkfc/google-cloud-sdk/path.zsh.inc'
-[[ -f '/Users/maxjkfc/google-cloud-sdk/completion.zsh.inc' ]] && source '/Users/maxjkfc/google-cloud-sdk/completion.zsh.inc'
-
 # Bun completions
 [[ -s "/Users/maxjkfc/.bun/_bun" ]] && source "/Users/maxjkfc/.bun/_bun"
 
