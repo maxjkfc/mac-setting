@@ -335,6 +335,7 @@ setup_backend_tools() {
     # 環境管理工具
     print_info "安裝環境管理工具..."
     safe_brew_install "direnv" "目錄環境變數管理"
+    safe_brew_install "uv" "Python 套件與虛擬環境管理器"
     
     # 自動化和 CI/CD 工具
     print_info "安裝自動化工具..."
@@ -474,6 +475,25 @@ setup_golang_environment() {
     else
         print_error "Go 安裝失敗"
     fi
+}
+
+setup_fonts() {
+    print_step "安裝 Nerd Fonts..."
+    print_separator
+
+    local fonts=(
+        "font-hack-nerd-font:Hack Nerd Font"
+        "font-jetbrains-mono-nerd-font:JetBrains Mono Nerd Font"
+        "font-fira-code-nerd-font:Fira Code Nerd Font"
+        "font-meslo-lg-nerd-font:MesloLG Nerd Font（Powerlevel10k 推薦）"
+    )
+
+    for font_desc in "${fonts[@]}"; do
+        IFS=':' read -r font desc <<< "$font_desc"
+        safe_brew_cask_install "$font" "$desc"
+    done
+
+    print_success "Nerd Fonts 安裝完成"
 }
 
 setup_ai_tools() {
@@ -621,6 +641,7 @@ setup_all() {
         "setup_tmux:Tmux 配置"
         "setup_nvim:Neovim 配置"
         "setup_backend_tools:後端開發工具"
+        "setup_fonts:Nerd Fonts"
         "setup_ai_tools:AI 開發工具"
         "setup_vim_mode_repeating:Vim 模式設置"
     )
@@ -661,7 +682,7 @@ health_check() {
     
     # 檢查基礎工具
     print_info "檢查基礎工具:"
-    local tools=("brew" "git" "nvim" "tmux" "zsh" "fzf" "ripgrep" "node" "npm" "bun" "fnm" "go")
+    local tools=("brew" "git" "nvim" "tmux" "zsh" "fzf" "ripgrep" "node" "npm" "bun" "fnm" "go" "uv")
     local missing_tools=()
     
     for tool in "${tools[@]}"; do
@@ -798,10 +819,11 @@ $(print_step "選項:")
   tmux          - 設置 Tmux 配置
   zsh           - 設置 Zsh 配置（包含基礎工具安裝）
   nvim          - 設置 Neovim 配置
-  backend       - 安裝後端開發工具
+  backend       - 安裝後端開發工具（含 uv）
   golang        - 安裝 Go 開發環境與工具
   ai-tools      - 安裝 AI 開發工具
   gui-tools     - 安裝 GUI 工具
+  fonts         - 安裝 Nerd Fonts
   vim-repeat    - 設置 Vim 模式按鍵重複
   all           - 安裝所有配置和工具
   health        - 檢查開發環境狀態
@@ -865,6 +887,10 @@ main() {
         "ai-tools")
             check_homebrew
             setup_ai_tools
+            ;;
+        "fonts")
+            check_homebrew
+            setup_fonts
             ;;
         "gui-tools")
             check_homebrew
