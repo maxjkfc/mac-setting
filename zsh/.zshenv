@@ -33,9 +33,6 @@ export GOROOT="$HOMEBREWOPT/opt/go/libexec"
 export GOPATH="$HOME/go"
 export GOPROXY=https://proxy.golang.org
 
-# Java Development
-export OPENJAVA_PATH="$HOMEBREWOPT/opt/openjdk/bin"
-
 # Core Utilities
 export COREPATH="$HOMEBREWOPT/opt/coreutils/libexec/gnubin"
 export MANPATH="$HOMEBREWOPT/opt/coreutils/libexec/gnuman:${MANPATH}"
@@ -44,13 +41,9 @@ export MANPATH="$HOMEBREWOPT/opt/coreutils/libexec/gnuman:${MANPATH}"
 # CLOUD AND DEVOPS TOOLS
 # ============================================================================
 
-# Google Cloud SDK
-export GCLOUD_HOME="$HOME/code/google-cloud-sdk"
+# Google Cloud SDK (installed via Homebrew)
 export USE_GKE_GCLOUD_AUTH_PLUGIN=true
 export GOOGLE_APPLICATION_CREDENTIALS="$HOME/.config/gcloud/application_default_credentials.json"
-
-# Linkerd Service Mesh
-export LINKERD_HOME="$HOME/.linkerd2"
 
 # ============================================================================
 # JAVASCRIPT/NODE.JS TOOLS
@@ -96,7 +89,6 @@ add_to_path "$GOROOT/bin"
 add_to_path "$GOPATH/bin"
 add_to_path "$LINKERD_HOME/bin"
 add_to_path "$BUN_INSTALL/bin"
-add_to_path "$GCLOUD_HOME/bin"
 add_to_path "$ZPLUG_HOME/bin"
 add_to_path "$HOMEBREWOPT/bin"
 
