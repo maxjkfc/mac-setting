@@ -87,7 +87,7 @@ claude-watch() {
         echo "Session 已在運行中。使用 'tmux attach -t claude-remote' 查看"
     else
         tmux new-session -d -s claude-remote -c "$dir" \
-            "$HOME/code/mac-setting/scripts/claude-remote-watchdog.sh '$dir'"
+            "zsh -l -c '$HOME/code/mac-setting/scripts/claude-remote-watchdog.sh \"$dir\"'"
         echo "claude-remote 已啟動 (dir=$dir)"
         echo "使用 'tmux attach -t claude-remote' 查看 log"
     fi

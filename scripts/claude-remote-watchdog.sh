@@ -7,6 +7,9 @@ WORK_DIR="${1:-$PWD}"
 LOG_FILE="${HOME}/logs/claude-remote.log"
 RESTART_DELAY=5
 
+# Ensure claude is findable regardless of how this script is launched
+export PATH="$HOME/.local/bin:$HOME/.npm-global/bin:/opt/homebrew/bin:/usr/local/bin:$PATH"
+
 mkdir -p "$(dirname "$LOG_FILE")"
 
 log() {
