@@ -271,6 +271,16 @@ setup_backend_tools() {
         fi
     done
     
+    # Java 開發環境
+    print_info "安裝 Java 開發環境..."
+    safe_brew_install "openjdk" "OpenJDK"
+    # openjdk 需要手動 symlink 才能被系統 Java wrappers 找到
+    if [[ -d "$HOMEBREW_PREFIX/opt/openjdk" ]]; then
+        sudo ln -sfn "$HOMEBREW_PREFIX/opt/openjdk/libexec/openjdk.jdk" \
+            /Library/Java/JavaVirtualMachines/openjdk.jdk 2>/dev/null || \
+            print_warning "openjdk symlink 建立失敗，請手動執行"
+    fi
+
     # 雲端平台工具
     print_info "安裝雲端平台工具..."
     safe_brew_cask_install "google-cloud-sdk" "Google Cloud SDK"
@@ -469,17 +479,30 @@ setup_golang_environment() {
 setup_ai_tools() {
     print_step "安裝 AI 開發工具..."
     print_separator
-    
-    local ai_tools=(
+
+    # CLI 工具（透過 brew 安裝）
+    local ai_cli_tools=(
         "claude-code:Claude CLI"
         "gemini-cli:Gemini CLI"
     )
-    
-    for tool_desc in "${ai_tools[@]}"; do
+
+    for tool_desc in "${ai_cli_tools[@]}"; do
         IFS=':' read -r tool desc <<< "$tool_desc"
         safe_brew_install "$tool" "$desc"
     done
-    
+
+    # AI IDE（透過 brew cask 安裝）
+    print_info "安裝 AI IDE..."
+    safe_brew_cask_install "kiro" "Kiro (Amazon AI IDE)"
+
+    # Antigravity（Google AI IDE，需手動下載）
+    if [[ ! -d "$HOME/.antigravity" ]]; then
+        print_warning "Antigravity (Google AI IDE) 需手動下載安裝"
+        print_info "下載頁面：https://antigravity.google/download"
+    else
+        print_success "Antigravity 已安裝"
+    fi
+
     print_success "AI 開發工具安裝完成"
 }
 
