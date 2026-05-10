@@ -22,6 +22,8 @@ mac-setting/
 │   ├── .zshrc               # 互動式 shell 配置（主題、別名、插件）
 │   ├── .zlogin              # 登入完成後執行（歡迎訊息、系統資訊）
 │   └── .zshshell            # 自訂 fzf 工具函數集合
+├── scripts/                 # 工具腳本
+│   └── claude-remote-watchdog.sh  # claude --remote 斷線自動重啟
 └── README.md                # 本檔案
 ```
 
