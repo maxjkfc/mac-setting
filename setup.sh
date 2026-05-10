@@ -491,10 +491,6 @@ setup_ai_tools() {
         safe_brew_install "$tool" "$desc"
     done
 
-    # AI IDE（透過 brew cask 安裝）
-    print_info "安裝 AI IDE..."
-    safe_brew_cask_install "kiro" "Kiro (Amazon AI IDE)"
-
     # Antigravity（Google AI IDE，需手動下載）
     if [[ ! -d "$HOME/.antigravity" ]]; then
         print_warning "Antigravity (Google AI IDE) 需手動下載安裝"
