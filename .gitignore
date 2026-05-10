@@ -1,6 +1,21 @@
-node_modules/*
+node_modules/
 package-lock.json
+
+# macOS
 .DS_Store
+
+# Editor
 .vscode/
+*.swp
+*.swo
+
+# Backup files
+*.backup
+*.bak
+
+# Claude Code session data
+.claude/
+
+# Neovim
 nvim/plugin
-lazyvim/lazy-lock.json
+nvim/lazy-lock.json
