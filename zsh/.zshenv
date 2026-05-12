@@ -69,6 +69,13 @@ export OBSIDIAN_HOME="$HOME/Library/Mobile\ Documents/iCloud~md~obsidian/Documen
 # ============================================================================
 export CLAUDE_CODE_NO_FLICKER=1
 # ============================================================================
+# PQSQL
+# ============================================================================
+export PQSQL_HOME="$HOMEBREWOPT/opt/libpq"
+export LDFLAGS="-L$HOMEBREWOPT/opt/libpq/lib"
+export CPPFLAGS="-I$HOMEBREWOPT/opt/libpq/include"
+export PKG_CONFIG_PATH="$HOMEBREWOPT/opt/libpq/lib/pkgconfig"
+# ============================================================================
 # PATH CONFIGURATION
 # ============================================================================
 
@@ -91,6 +98,8 @@ add_to_path "$LINKERD_HOME/bin"
 add_to_path "$BUN_INSTALL/bin"
 add_to_path "$ZPLUG_HOME/bin"
 add_to_path "$HOMEBREWOPT/bin"
+add_to_path "$PQSQL_HOME/bin"
+
 
 # ============================================================================
 # FZF CONFIGURATION
