@@ -379,6 +379,64 @@ myip() {
     echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 }
 
+# flan — 區網內 Apple 裝置查詢
+flan() {
+    local show_all=false
+    local iface="en0"
+
+    while [[ $# -gt 0 ]]; do
+        case "$1" in
+            -a) show_all=true; shift ;;
+            -i) iface="$2"; shift 2 ;;
+            -h|--help)
+                echo "用法: flan [-a] [-i iface]"
+                echo "  -a        列出所有裝置（不僅 Apple）"
+                echo "  -i iface  指定網卡（預設 en0）"
+                echo "  -h        顯示說明"
+                return 0
+                ;;
+            *) echo "未知參數: $1" >&2; return 1 ;;
+        esac
+    done
+
+    if ! command -v arp-scan >/dev/null 2>&1; then
+        echo "❌ arp-scan 未安裝，請執行: brew install arp-scan" >&2
+        return 1
+    fi
+    if ! command -v dig >/dev/null 2>&1 || ! command -v nc >/dev/null 2>&1; then
+        echo "❌ 缺少 dig 或 nc，請檢查 PATH" >&2
+        return 1
+    fi
+
+    echo "🔍 掃描中（介面 $iface）..."
+
+    local raw
+    raw=$(sudo arp-scan -l -I "$iface" 2>/dev/null)
+    if [[ -z "$raw" ]]; then
+        echo "❌ 掃描失敗（可能未授權 sudo 或網卡 $iface 不存在）" >&2
+        return 1
+    fi
+
+    # arp-scan 輸出含 header/footer，過濾出以 IP 開頭的行
+    local filtered
+    if $show_all; then
+        filtered=$(echo "$raw" | awk -F'\t' 'NF>=3 && $1 ~ /^[0-9]+\./')
+    else
+        filtered=$(echo "$raw" | awk -F'\t' 'NF>=3 && $1 ~ /^[0-9]+\./ && $3 ~ /Apple/')
+    fi
+
+    if [[ -z "$filtered" ]]; then
+        if $show_all; then
+            echo "未找到任何裝置"
+        else
+            echo "未找到 Apple 裝置"
+        fi
+        return 0
+    fi
+
+    echo "$filtered"
+}
+
 # ============================================================================
 # Git 工具
 # ============================================================================
