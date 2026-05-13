@@ -381,6 +381,9 @@ myip() {
 
 # flan — 區網內裝置查詢（含 Bonjour hostname 與 SSH/VNC 偵測）
 flan() {
+    # 抑制 background subshell 的 job control 通知（[N] PID / [N] done）
+    setopt local_options no_notify no_monitor
+
     local iface="en0"
 
     while [[ $# -gt 0 ]]; do
@@ -467,7 +470,7 @@ flan() {
         printf 'IP\tMAC\tVENDOR\tHOSTNAME\tSSH\tVNC\n'
         cat "$tmpdir"/* 2>/dev/null | sort -t. -k1,1n -k2,2n -k3,3n -k4,4n
     } | column -t -s $'\t'
-    rm -rf "$tmpdir"
+    command rm -rf "$tmpdir"
 
     local elapsed=$(($(date +%s) - start_ts))
     echo ""
