@@ -434,7 +434,30 @@ flan() {
         return 0
     fi
 
-    echo "$filtered"
+    # 對每個 host 並行 probe（mDNS 反查 + SSH/VNC port 偵測）
+    local tmpdir
+    tmpdir=$(mktemp -d)
+    local i=0
+    while IFS=$'\t' read -r ip mac vendor _rest; do
+        i=$((i + 1))
+        (
+            local hostname
+            hostname=$(dig -x "$ip" @224.0.0.251 -p 5353 +short +time=1 +tries=1 2>/dev/null | head -n1 | sed 's/\.$//')
+            [[ -z "$hostname" ]] && hostname="-"
+
+            local ssh="-"
+            nc -z -G 1 "$ip" 22 >/dev/null 2>&1 && ssh="✓"
+
+            local vnc="-"
+            nc -z -G 1 "$ip" 5900 >/dev/null 2>&1 && vnc="✓"
+
+            printf '%s\t%s\t%s\t%s\t%s\t%s\n' "$ip" "$mac" "$vendor" "$hostname" "$ssh" "$vnc" > "$tmpdir/$i"
+        ) &
+    done <<< "$filtered"
+    wait
+
+    cat "$tmpdir"/* 2>/dev/null
+    rm -rf "$tmpdir"
 }
 
 # ============================================================================
