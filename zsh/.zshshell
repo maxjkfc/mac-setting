@@ -414,12 +414,21 @@ flan() {
         return 1
     fi
 
+    # 取得本機 IP 並改掃同 /24 子網（避免 /16 等大網段花費數分鐘）
+    local local_ip subnet
+    local_ip=$(ifconfig "$iface" 2>/dev/null | awk '/inet / { print $2; exit }')
+    if [[ -z "$local_ip" ]]; then
+        echo "❌ 找不到 $iface 的 IP 位址（網卡可能不存在或未連線）" >&2
+        return 1
+    fi
+    subnet="${local_ip%.*}.0/24"
+
     local start_ts=$(date +%s)
 
-    echo "🔍 掃描中（介面 $iface）..."
+    echo "🔍 掃描中（介面 $iface, 範圍 $subnet）..."
 
     local raw
-    raw=$(sudo arp-scan -l -I "$iface" 2>/dev/null)
+    raw=$(sudo arp-scan --retry=1 -I "$iface" "$subnet" 2>/dev/null)
     if [[ -z "$raw" ]]; then
         echo "❌ 掃描失敗（可能未授權 sudo 或網卡 $iface 不存在）" >&2
         return 1
