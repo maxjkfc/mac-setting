@@ -379,6 +379,106 @@ myip() {
     echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 }
 
+# flan — 區網內裝置查詢（含 Bonjour hostname 與 SSH/VNC 偵測）
+flan() {
+    # 抑制 background subshell 的 job control 通知（[N] PID / [N] done）
+    setopt local_options no_notify no_monitor
+
+    local iface="en0"
+
+    while [[ $# -gt 0 ]]; do
+        case "$1" in
+            -i) iface="$2"; shift 2 ;;
+            -h|--help)
+                echo "用法: flan [-i iface]"
+                echo "  -i iface  指定網卡（預設 en0）"
+                echo "  -h        顯示說明"
+                return 0
+                ;;
+            *) echo "未知參數: $1" >&2; return 1 ;;
+        esac
+    done
+
+    if ! command -v arp-scan >/dev/null 2>&1; then
+        echo "❌ arp-scan 未安裝，請執行: brew install arp-scan" >&2
+        return 1
+    fi
+    if ! command -v dig >/dev/null 2>&1 || ! command -v nc >/dev/null 2>&1; then
+        echo "❌ 缺少 dig 或 nc，請檢查 PATH" >&2
+        return 1
+    fi
+
+    # 預先取得 sudo 授權，讓密碼提示在主掃描前顯示（arp-scan 需要 raw socket）
+    if ! sudo -v; then
+        echo "❌ 需要 sudo 權限才能執行 arp-scan" >&2
+        return 1
+    fi
+
+    # 取得本機 IP 並改掃同 /24 子網（避免 /16 等大網段花費數分鐘）
+    local local_ip subnet
+    local_ip=$(ifconfig "$iface" 2>/dev/null | awk '/inet / { print $2; exit }')
+    if [[ -z "$local_ip" ]]; then
+        echo "❌ 找不到 $iface 的 IP 位址（網卡可能不存在或未連線）" >&2
+        return 1
+    fi
+    subnet="${local_ip%.*}.0/24"
+
+    local start_ts=$(date +%s)
+
+    echo "🔍 掃描中（介面 $iface, 範圍 $subnet）..."
+
+    local raw
+    raw=$(sudo arp-scan --retry=1 -I "$iface" "$subnet" 2>/dev/null)
+    if [[ -z "$raw" ]]; then
+        echo "❌ 掃描失敗（可能未授權 sudo 或網卡 $iface 不存在）" >&2
+        return 1
+    fi
+
+    # arp-scan 輸出含 header/footer，過濾出以 IP 開頭的行（vendor 過濾因 MAC 隨機化已不可靠，改靠 hostname 辨識）
+    local filtered
+    filtered=$(echo "$raw" | awk -F'\t' 'NF>=3 && $1 ~ /^[0-9]+\./')
+
+    if [[ -z "$filtered" ]]; then
+        local elapsed=$(($(date +%s) - start_ts))
+        echo "未找到任何裝置（共掃描 ${elapsed} 秒）"
+        return 0
+    fi
+
+    # 對每個 host 並行 probe（mDNS 反查 + SSH/VNC port 偵測）
+    local tmpdir
+    tmpdir=$(mktemp -d)
+    local i=0
+    while IFS=$'\t' read -r ip mac vendor _rest; do
+        i=$((i + 1))
+        (
+            local hostname
+            hostname=$(dig -x "$ip" @224.0.0.251 -p 5353 +short +time=1 +tries=1 2>/dev/null | head -n1 | sed 's/\.$//')
+            [[ -z "$hostname" ]] && hostname="-"
+
+            local ssh="-"
+            nc -z -G 1 "$ip" 22 >/dev/null 2>&1 && ssh="✓"
+
+            local vnc="-"
+            nc -z -G 1 "$ip" 5900 >/dev/null 2>&1 && vnc="✓"
+
+            printf '%s\t%s\t%s\t%s\t%s\t%s\n' "$ip" "$mac" "$vendor" "$hostname" "$ssh" "$vnc" > "$tmpdir/$i"
+        ) &
+    done <<< "$filtered"
+    wait
+
+    {
+        printf 'IP\tMAC\tVENDOR\tHOSTNAME\tSSH\tVNC\n'
+        cat "$tmpdir"/* 2>/dev/null | sort -t. -k1,1n -k2,2n -k3,3n -k4,4n
+    } | column -t -s $'\t'
+    command rm -rf "$tmpdir"
+
+    local elapsed=$(($(date +%s) - start_ts))
+    echo ""
+    local total_count
+    total_count=$(echo "$raw" | awk -F'\t' 'NF>=3 && $1 ~ /^[0-9]+\./' | wc -l | tr -d ' ')
+    echo "找到 ${total_count} 台裝置（共掃描 ${elapsed} 秒）"
+}
+
 # ============================================================================
 # Git 工具
 # ============================================================================
@@ -473,6 +573,7 @@ fzf_help() {
 
 🌍 網路工具:
   myip             - 顯示 IP 地址資訊
+  flan [-i iface]  - 列出區網內所有裝置（含 Bonjour hostname 與 SSH/VNC）
 
 ℹ️  系統資訊:
   sysinfo          - 顯示系統資訊摘要
