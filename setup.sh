@@ -232,6 +232,7 @@ setup_install_depend() {
         "reattach-to-user-namespace:tmux 剪貼簿支援"
         "macchina:Rust 製作的系統資訊顯示工具"
         "zoxide:智能目錄跳轉工具"
+        "arp-scan:Active ARP scanner with OUI vendor lookup"
     )
     
     local total=${#tools[@]}
