@@ -379,18 +379,15 @@ myip() {
     echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 }
 
-# flan — 區網內 Apple 裝置查詢
+# flan — 區網內裝置查詢（含 Bonjour hostname 與 SSH/VNC 偵測）
 flan() {
-    local show_all=false
     local iface="en0"
 
     while [[ $# -gt 0 ]]; do
         case "$1" in
-            -a) show_all=true; shift ;;
             -i) iface="$2"; shift 2 ;;
             -h|--help)
-                echo "用法: flan [-a] [-i iface]"
-                echo "  -a        列出所有裝置（不僅 Apple）"
+                echo "用法: flan [-i iface]"
                 echo "  -i iface  指定網卡（預設 en0）"
                 echo "  -h        顯示說明"
                 return 0
@@ -434,21 +431,13 @@ flan() {
         return 1
     fi
 
-    # arp-scan 輸出含 header/footer，過濾出以 IP 開頭的行
+    # arp-scan 輸出含 header/footer，過濾出以 IP 開頭的行（vendor 過濾因 MAC 隨機化已不可靠，改靠 hostname 辨識）
     local filtered
-    if $show_all; then
-        filtered=$(echo "$raw" | awk -F'\t' 'NF>=3 && $1 ~ /^[0-9]+\./')
-    else
-        filtered=$(echo "$raw" | awk -F'\t' 'NF>=3 && $1 ~ /^[0-9]+\./ && $3 ~ /Apple/')
-    fi
+    filtered=$(echo "$raw" | awk -F'\t' 'NF>=3 && $1 ~ /^[0-9]+\./')
 
     if [[ -z "$filtered" ]]; then
         local elapsed=$(($(date +%s) - start_ts))
-        if $show_all; then
-            echo "未找到任何裝置（共掃描 ${elapsed} 秒）"
-        else
-            echo "未找到 Apple 裝置（共掃描 ${elapsed} 秒）"
-        fi
+        echo "未找到任何裝置（共掃描 ${elapsed} 秒）"
         return 0
     fi
 
@@ -482,14 +471,9 @@ flan() {
 
     local elapsed=$(($(date +%s) - start_ts))
     echo ""
-    local total_count apple_count
+    local total_count
     total_count=$(echo "$raw" | awk -F'\t' 'NF>=3 && $1 ~ /^[0-9]+\./' | wc -l | tr -d ' ')
-    apple_count=$(echo "$raw" | awk -F'\t' 'NF>=3 && $1 ~ /^[0-9]+\./ && $3 ~ /Apple/' | wc -l | tr -d ' ')
-    if $show_all; then
-        echo "找到 ${total_count} 台裝置（其中 ${apple_count} 台 Apple，共掃描 ${elapsed} 秒）"
-    else
-        echo "找到 ${apple_count} 台 Apple 裝置（共掃描 ${elapsed} 秒）"
-    fi
+    echo "找到 ${total_count} 台裝置（共掃描 ${elapsed} 秒）"
 }
 
 # ============================================================================
@@ -586,7 +570,7 @@ fzf_help() {
 
 🌍 網路工具:
   myip             - 顯示 IP 地址資訊
-  flan [-a] [-i iface] - 列出區網內 Apple 裝置（-a 顯示全部）
+  flan [-i iface]  - 列出區網內所有裝置（含 Bonjour hostname 與 SSH/VNC）
 
 ℹ️  系統資訊:
   sysinfo          - 顯示系統資訊摘要
