@@ -571,7 +571,7 @@ fzf_help() {
 
 🌍 網路工具:
   myip             - 顯示 IP 地址資訊
-  flan [-a] [-i]   - 列出區網內 Apple 裝置（-a 顯示全部）
+  flan [-a] [-i iface] - 列出區網內 Apple 裝置（-a 顯示全部）
 
 ℹ️  系統資訊:
   sysinfo          - 顯示系統資訊摘要
