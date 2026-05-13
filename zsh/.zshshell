@@ -408,6 +408,8 @@ flan() {
         return 1
     fi
 
+    local start_ts=$(date +%s)
+
     echo "🔍 掃描中（介面 $iface）..."
 
     local raw
@@ -426,10 +428,11 @@ flan() {
     fi
 
     if [[ -z "$filtered" ]]; then
+        local elapsed=$(($(date +%s) - start_ts))
         if $show_all; then
-            echo "未找到任何裝置"
+            echo "未找到任何裝置（共掃描 ${elapsed} 秒）"
         else
-            echo "未找到 Apple 裝置"
+            echo "未找到 Apple 裝置（共掃描 ${elapsed} 秒）"
         fi
         return 0
     fi
@@ -456,8 +459,22 @@ flan() {
     done <<< "$filtered"
     wait
 
-    cat "$tmpdir"/* 2>/dev/null
+    {
+        printf 'IP\tMAC\tVENDOR\tHOSTNAME\tSSH\tVNC\n'
+        cat "$tmpdir"/* 2>/dev/null | sort -t. -k1,1n -k2,2n -k3,3n -k4,4n
+    } | column -t -s $'\t'
     rm -rf "$tmpdir"
+
+    local elapsed=$(($(date +%s) - start_ts))
+    echo ""
+    local total_count apple_count
+    total_count=$(echo "$raw" | awk -F'\t' 'NF>=3 && $1 ~ /^[0-9]+\./' | wc -l | tr -d ' ')
+    apple_count=$(echo "$raw" | awk -F'\t' 'NF>=3 && $1 ~ /^[0-9]+\./ && $3 ~ /Apple/' | wc -l | tr -d ' ')
+    if $show_all; then
+        echo "找到 ${total_count} 台裝置（其中 ${apple_count} 台 Apple，共掃描 ${elapsed} 秒）"
+    else
+        echo "找到 ${apple_count} 台 Apple 裝置（共掃描 ${elapsed} 秒）"
+    fi
 }
 
 # ============================================================================
