@@ -408,6 +408,12 @@ flan() {
         return 1
     fi
 
+    # 預先取得 sudo 授權，讓密碼提示在主掃描前顯示（arp-scan 需要 raw socket）
+    if ! sudo -v; then
+        echo "❌ 需要 sudo 權限才能執行 arp-scan" >&2
+        return 1
+    fi
+
     local start_ts=$(date +%s)
 
     echo "🔍 掃描中（介面 $iface）..."
