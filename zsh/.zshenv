@@ -10,8 +10,9 @@
 # ============================================================================
 
 # Language and Locale
+# 只設 LANG；不設 LC_ALL（LC_ALL 會強制覆蓋所有 LC_* 分類，
+# 留空可讓時間/排序等個別分類跟隨系統設定）
 export LANG=en_US.UTF-8
-export LC_ALL=en_US.UTF-8
 
 # Default Editor and Browser
 export EDITOR='nvim'
@@ -62,7 +63,7 @@ export ZPLUG_HOME="$HOMEBREWOPT/opt/zplug"
 # ============================================================================
 # Obsidian
 # ============================================================================
-export OBSIDIAN_HOME="$HOME/Library/Mobile\ Documents/iCloud~md~obsidian/Documents"
+export OBSIDIAN_HOME="$HOME/Library/Mobile Documents/iCloud~md~obsidian/Documents"
 
 # ============================================================================
 # Claude Code
@@ -90,14 +91,13 @@ add_to_path() {
 # 按優先級順序添加路徑
 add_to_path "$HOME/.local/bin"
 add_to_path "$HOME/.antigravity/antigravity/bin"
-add_to_path "$OPENJAVA_PATH"
 add_to_path "$COREPATH"
 add_to_path "$GOROOT/bin"
 add_to_path "$GOPATH/bin"
-add_to_path "$LINKERD_HOME/bin"
 add_to_path "$BUN_INSTALL/bin"
 add_to_path "$ZPLUG_HOME/bin"
 add_to_path "$HOMEBREWOPT/bin"
+add_to_path "$HOMEBREWOPT/opt/curl/bin"
 add_to_path "$PQSQL_HOME/bin"
 
 
