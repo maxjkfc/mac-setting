@@ -5,3 +5,5 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # Added by Obsidian
 export PATH="$PATH:/Applications/Obsidian.app/Contents/MacOS"
+
+# 註：$HOME/.local/bin 已在 .zshenv 透過 add_to_path 加入，毋須在此重複
