@@ -102,6 +102,16 @@ add_to_path "$PQSQL_HOME/bin"
 
 
 # ============================================================================
+# PRIVATE REGISTRY TOKENS
+# ============================================================================
+# @likochat/ui 安裝自 GitHub Packages，.npmrc 需要 GITHUB_PACKAGES_TOKEN。
+# 借 gh 登入態動態取得，避免把 PAT 硬編進這個版控檔。:- guard 確保只在
+# 尚未從父 shell 繼承時才呼叫 gh（一般開終端機只跑一次，子 shell 直接繼承）。
+# 放在 PATH 設定之後，確保非互動 `zsh -c` 也找得到 gh。
+export GITHUB_PACKAGES_TOKEN="${GITHUB_PACKAGES_TOKEN:-$(gh auth token 2>/dev/null)}"
+
+
+# ============================================================================
 # FZF CONFIGURATION
 # ============================================================================
 
