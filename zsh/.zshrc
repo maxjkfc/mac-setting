@@ -24,6 +24,20 @@ setopt prompt_subst
 set -o emacs
 
 # ============================================================================
+# HISTORY
+# ============================================================================
+# 明確版控 history 設定（先前值來自 plugin/系統預設，過小且不可控）
+HISTFILE="$HOME/.zsh_history"
+HISTSIZE=50000          # 記憶體內保留的行數
+SAVEHIST=50000          # 寫入 HISTFILE 的行數
+setopt SHARE_HISTORY        # 多個 session 即時共享 history
+setopt HIST_IGNORE_DUPS     # 不記錄與前一筆相同的指令
+setopt HIST_IGNORE_ALL_DUPS # 新指令重複時刪除舊的同名項
+setopt HIST_IGNORE_SPACE    # 以空白開頭的指令不入 history（敏感操作用）
+setopt HIST_REDUCE_BLANKS   # 寫入前壓掉多餘空白
+setopt HIST_VERIFY          # 展開 history 後先顯示、不直接執行
+
+# ============================================================================
 # POWERLEVEL10K THEME
 # ============================================================================
 
@@ -69,7 +83,7 @@ alias ll='eza -lbhHigUmua --git'
 # File Operations
 alias mv='mv -i'
 alias cp='cp -i'
-alias rm='rm -i'
+# rm 的定義集中在下方「安全刪除」區塊（trash），此處不重複
 
 # Editor
 alias v='nvim'
@@ -83,9 +97,8 @@ alias egrep='egrep --color=auto'
 # Tools
 alias cat='bat'
 alias mtr='sudo mtr'
-alias git='$HOMEBREWOPT/bin/git'
-alias curl='$HOMEBREWOPT/opt/curl/bin/curl'
 alias sed="gsed"
+# 註：git / curl 改由 PATH 解析（見 .zshenv 的 add_to_path），不再用絕對路徑 alias
 
 # File Extensions
 alias -s sh="sh"
@@ -97,8 +110,9 @@ alias -s bz2="tar -xjvf"
 
 # Claude code
 alias  cc="CLAUDE_CODE_NO_FLICKER=1 claude"
-alias  ccm="cd $OBSIDIAN_HOME/max-agent && CLAUDE_CODE_NO_FLICKER=1 claude"
-alias  ccw="cd $OBSIDIAN_HOME/max-wiki && CLAUDE_CODE_NO_FLICKER=1 claude"
+alias  ccr="CLAUDE_CODE_NO_FLICKER=1 claude remote-control"
+alias  ccm='cd "$OBSIDIAN_HOME/max-agent" && CLAUDE_CODE_NO_FLICKER=1 claude'
+alias  ccw='cd "$OBSIDIAN_HOME/max-wiki" && CLAUDE_CODE_NO_FLICKER=1 claude'
 
 # ═══════════════════════════════════════════════════════════════
 # 安全刪除 - rm 改用垃圾桶（可還原）
@@ -166,6 +180,17 @@ if [[ -f "$ZPLUG_HOME/init.zsh" ]]; then
     # Load plugins
     zplug load
 
+fi
+
+# ============================================================================
+# HISTORY SUBSTRING SEARCH KEYBINDINGS
+# ============================================================================
+# 必須在 zplug load 之後綁定，否則 widget 尚未定義（先前載入但未綁鍵 = 無作用）
+if (( $+widgets[history-substring-search-up] )); then
+    bindkey '^[[A' history-substring-search-up      # ↑
+    bindkey '^[[B' history-substring-search-down    # ↓
+    bindkey '^P'   history-substring-search-up      # emacs 慣用
+    bindkey '^N'   history-substring-search-down
 fi
 
 # ============================================================================
