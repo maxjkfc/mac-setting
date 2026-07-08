@@ -1,47 +1,8 @@
 return {
-  {
-    "nvim-neo-tree/neo-tree.nvim",
-    cmd = "Neotree",
-    opts = {
-      filesystem = {
-        bind_to_cwd = false,
-        follow_current_file = { enabled = true },
-        use_libuv_file_watcher = true,
-        filtered_items = {
-          always_show = {
-            ".gitignore",
-            ".dockerignore",
-            ".github",
-          },
-          always_show_by_pattern = {
-            ".env*",
-          },
-          never_show = {
-            ".DS_Store",
-            "thumbs.db",
-          },
-        },
-      },
-      window = {
-        mappings = {
-          ["<space>"] = "none",
-          ["v"] = "open_vsplit",
-        },
-      },
-    },
-  },
-  {
-    "mg979/vim-visual-multi",
-  },
-  {
-    "s1n7ax/nvim-window-picker",
-    name = "window-picker",
-    event = "VeryLazy",
-    version = "2.*",
-    config = function()
-      require("window-picker").setup()
-    end,
-  },
+  -- 先暫時移除，後續再考慮要不要加回來
+  -- {
+  --   "mg979/vim-visual-multi",
+  -- },
   {
     "stevearc/conform.nvim",
     opts = {

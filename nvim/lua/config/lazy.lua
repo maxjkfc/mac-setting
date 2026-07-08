@@ -20,15 +20,15 @@ require("lazy").setup({
     { "LazyVim/LazyVim", import = "lazyvim.plugins" },
 
     -- 在 VS Code / Antigravity 裡也適用的 extras
-    { import = "lazyvim.plugins.extras.coding.mini-surround" },
-    { import = "lazyvim.plugins.extras.vscode" },
+    -- { import = "lazyvim.plugins.extras.coding.mini-surround" },
+    -- { import = "lazyvim.plugins.extras.vscode" },
 
     -- 只在終端 Neovim 下載入（IDE 本身提供 LSP/Test 支援）
-    { import = "lazyvim.plugins.extras.lang.json",        cond = not vim.g.vscode },
-    { import = "lazyvim.plugins.extras.lang.docker",      cond = not vim.g.vscode },
-    { import = "lazyvim.plugins.extras.lang.go",          cond = not vim.g.vscode },
-    { import = "lazyvim.plugins.extras.test.core",        cond = not vim.g.vscode },
-    { import = "lazyvim.plugins.extras.editor.inc-rename", cond = not vim.g.vscode },
+    { import = "lazyvim.plugins.extras.lang.json", cond = not vim.g.vscode },
+    { import = "lazyvim.plugins.extras.lang.docker", cond = not vim.g.vscode },
+    { import = "lazyvim.plugins.extras.lang.go", cond = not vim.g.vscode },
+    { import = "lazyvim.plugins.extras.test.core", cond = not vim.g.vscode },
+    -- { import = "lazyvim.plugins.extras.editor.inc-rename", cond = not vim.g.vscode },
 
     -- 使用者自訂 plugins
     { import = "plugins" },
