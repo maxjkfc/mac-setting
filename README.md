@@ -67,17 +67,22 @@ cd ~/code/mac-setting
 ./setup.sh all
 
 # 或分別安裝
-./setup.sh backend-tools    # 後端開發工具
-./setup.sh shell-tools      # Shell 增強工具
-./setup.sh ai-tools         # AI 工具 (Claude CLI, Gemini CLI)
-./setup.sh gui-tools        # GUI 應用程式
+./setup.sh backend         # 後端開發工具
+./setup.sh zsh             # Zsh 配置（含基礎工具）
+./setup.sh review-tools    # Code Review 工具鏈（shellcheck/gitleaks/hadolint/actionlint/kubeconform/govulncheck/ruff/pip-audit）
+./setup.sh ai-tools        # AI 工具 (Claude CLI, Gemini CLI)
+./setup.sh gui-tools       # GUI 應用程式
 ```
 
 ### 3. 健康檢查
 
 ```bash
-./setup.sh health-check
+./setup.sh health
 ```
+
+> `review-tools` 是 code review agent（john）mechanical checks 的依賴工具鏈；
+> vault 的 `knowledge-base/scripts/setup-machine.sh` 會自動呼叫本選項，工具清單以本 repo 為唯一源。
+> 重跑同一指令即可補裝；go 系工具（govulncheck）每次跑都會升到 @latest。
 
 ## 🛠️ 強大的 fzf 工具集合
 

@@ -523,6 +523,61 @@ setup_ai_tools() {
     print_success "AI 開發工具安裝完成"
 }
 
+setup_review_tools() {
+    print_step "安裝 Code Review 工具鏈..."
+    print_separator
+
+    # 給 code review mechanical checks 用（agent john 的 john-checks.sh 依賴這批工具）
+    # golangci-lint / staticcheck 已由 golang 選項涵蓋，這裡不重複
+    local review_tools=(
+        "shellcheck:Shell 腳本靜態分析"
+        "gitleaks:Secret 掃描"
+        "hadolint:Dockerfile 檢查"
+        "actionlint:GitHub Actions workflow 檢查"
+        "kubeconform:K8s manifest schema 驗證"
+    )
+
+    for tool_desc in "${review_tools[@]}"; do
+        IFS=':' read -r tool desc <<< "$tool_desc"
+        safe_brew_install "$tool" "$desc"
+    done
+
+    # Go 依賴漏洞掃描（go install @latest 同時就是升級方式）
+    if command_exists go; then
+        print_info "安裝 govulncheck..."
+        if go install golang.org/x/vuln/cmd/govulncheck@latest >/dev/null 2>&1; then
+            print_success "govulncheck 安裝成功"
+        else
+            print_warning "govulncheck 安裝失敗"
+        fi
+    else
+        print_warning "Go 未安裝，跳過 govulncheck（先跑: $0 golang）"
+    fi
+
+    # Python lint 與依賴漏洞掃描（uv 優先，退回 brew）
+    local py_tools=(
+        "ruff:Python linter"
+        "pip-audit:Python 依賴漏洞掃描"
+    )
+    for tool_desc in "${py_tools[@]}"; do
+        IFS=':' read -r tool desc <<< "$tool_desc"
+        if command_exists "$tool"; then
+            print_info "$desc 已安裝，跳過"
+        elif command_exists uv; then
+            print_info "安裝 $desc..."
+            if uv tool install "$tool" >/dev/null 2>&1; then
+                print_success "$desc 安裝成功"
+            else
+                print_warning "$desc 安裝失敗"
+            fi
+        else
+            safe_brew_install "$tool" "$desc"
+        fi
+    done
+
+    print_success "Code Review 工具鏈安裝完成"
+}
+
 setup_tmux() {
     print_step "設置 Tmux 配置..."
     print_separator
@@ -642,6 +697,7 @@ setup_all() {
         "setup_tmux:Tmux 配置"
         "setup_nvim:Neovim 配置"
         "setup_backend_tools:後端開發工具"
+        "setup_review_tools:Code Review 工具鏈"
         "setup_fonts:Nerd Fonts"
         "setup_ai_tools:AI 開發工具"
         "setup_vim_mode_repeating:Vim 模式設置"
@@ -822,6 +878,7 @@ $(print_step "選項:")
   nvim          - 設置 Neovim 配置
   backend       - 安裝後端開發工具（含 uv）
   golang        - 安裝 Go 開發環境與工具
+  review-tools  - 安裝 Code Review 工具鏈（shellcheck/gitleaks/hadolint/actionlint/kubeconform/govulncheck/ruff/pip-audit）
   ai-tools      - 安裝 AI 開發工具
   gui-tools     - 安裝 GUI 工具
   fonts         - 安裝 Nerd Fonts
@@ -884,6 +941,10 @@ main() {
         "golang")
             check_homebrew
             setup_golang_environment
+            ;;
+        "review-tools")
+            check_homebrew
+            setup_review_tools
             ;;
         "ai-tools")
             check_homebrew
