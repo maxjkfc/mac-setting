@@ -114,6 +114,13 @@ alias  ccr="CLAUDE_CODE_NO_FLICKER=1 claude remote-control"
 alias  ccm='cd "$OBSIDIAN_HOME/max-agent" && CLAUDE_CODE_NO_FLICKER=1 claude'
 alias  ccw='cd "$OBSIDIAN_HOME/max-wiki" && CLAUDE_CODE_NO_FLICKER=1 claude'
 
+# Herdr
+alias  hr="herdr"
+alias  hrls="herdr session list"
+alias  hrst="herdr status"
+alias  hrwt="herdr worktree create"
+alias  hrremote="herdr --remote"
+
 # ═══════════════════════════════════════════════════════════════
 # 安全刪除 - rm 改用垃圾桶（可還原）
 # ═══════════════════════════════════════════════════════════════
@@ -236,6 +243,11 @@ fi
 # Zoxide (智能目錄跳轉)
 if command -v zoxide >/dev/null 2>&1; then
     eval "$(zoxide init zsh)"
+fi
+
+# Herdr (AI coding agent 終端機管理工具)
+if command -v herdr >/dev/null 2>&1; then
+    source <(herdr completion zsh)
 fi
 
 # iTerm2 Integration
