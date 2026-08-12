@@ -94,6 +94,28 @@ claude-watch() {
 }
 
 # ============================================================================
+# HERDR 管理工具
+# ============================================================================
+
+# fherdr - 使用 fzf 選擇並 attach 到 herdr session
+# 用法: fherdr
+fherdr() {
+    if ! command -v herdr >/dev/null 2>&1; then
+        echo "錯誤: herdr 未安裝" >&2
+        return 1
+    fi
+
+    local session
+    session=$(herdr session list | sed 1d | fzf --height=40% --border --prompt="選擇 herdr session: " | awk '{print $1}')
+
+    if [[ -n "$session" ]]; then
+        herdr session attach "$session"
+    else
+        echo "未選擇任何 session"
+    fi
+}
+
+# ============================================================================
 # 檔案搜尋與編輯工具
 # ============================================================================
 
@@ -559,6 +581,9 @@ fzf_help() {
   ftm [session]    - 創建或切換 tmux session
   fs [pattern]     - 快速切換 tmux session
   claude-watch [dir] - 啟動 claude --remote watchdog（tmux 背景執行）
+
+🤖 HERDR 管理:
+  fherdr           - 選擇並 attach 到 herdr session
 
 🔧 程序管理:
   fkill [signal]   - 選擇並終止程序

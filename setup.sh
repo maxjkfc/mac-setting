@@ -505,6 +505,7 @@ setup_ai_tools() {
     local ai_cli_tools=(
         "claude-code:Claude CLI"
         "gemini-cli:Gemini CLI"
+        "herdr:AI coding agent 終端機工作區管理工具"
     )
 
     for tool_desc in "${ai_cli_tools[@]}"; do
