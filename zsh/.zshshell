@@ -115,6 +115,77 @@ fherdr() {
     fi
 }
 
+# fherdr-ws - 使用 fzf 選擇並切換 Herdr workspace
+# 用法: fherdr-ws
+fherdr-ws() {
+    if ! command -v herdr >/dev/null 2>&1; then
+        echo "錯誤: herdr 未安裝" >&2
+        return 1
+    fi
+
+    local ws
+    ws=$(herdr workspace list 2>/dev/null | sed 1d | fzf --height=40% --border --prompt="選擇 Herdr Workspace: " | awk '{print $1}')
+    if [[ -n "$ws" ]]; then
+        herdr workspace switch "$ws"
+    fi
+}
+
+# herdr-omp - 在 Herdr 新分頁啟動 OMP
+# 用法: herdr-omp [工作目錄]
+herdr-omp() {
+    if ! command -v herdr >/dev/null 2>&1; then
+        echo "錯誤: herdr 未安裝" >&2
+        return 1
+    fi
+
+    local dir="${1:-$(pwd)}"
+    herdr tab create --cwd "$dir" --command "omp"
+}
+
+# ============================================================================
+# OMP (OH MY PI) 工具
+# ============================================================================
+
+# fompr - 互動式恢復歷史 Session
+# 用法: fompr
+fompr() {
+    if ! command -v omp >/dev/null 2>&1; then
+        echo "錯誤: omp 未安裝" >&2
+        return 1
+    fi
+    omp --resume
+}
+
+# fompm - 互動式選擇模型啟動 OMP
+# 用法: fompm [其他 omp 參數]
+fompm() {
+    if ! command -v omp >/dev/null 2>&1; then
+        echo "錯誤: omp 未安裝" >&2
+        return 1
+    fi
+
+    local model
+    model=$(omp models | fzf --height=40% --border --prompt="選擇 OMP 模型: " | awk '{print $1}')
+    if [[ -n "$model" ]]; then
+        omp --model "$model" "$@"
+    fi
+}
+
+# fompw - 互動式切換至 OMP Worktree 目錄
+# 用法: fompw
+fompw() {
+    if ! command -v omp >/dev/null 2>&1; then
+        echo "錯誤: omp 未安裝" >&2
+        return 1
+    fi
+
+    local wt
+    wt=$(omp worktree | fzf --height=40% --border --prompt="選擇 OMP Worktree: " | awk '{print $1}')
+    if [[ -n "$wt" && -d "$wt" ]]; then
+        cd "$wt"
+    fi
+}
+
 # ============================================================================
 # 檔案搜尋與編輯工具
 # ============================================================================
@@ -212,6 +283,34 @@ fcd() {
     
     if [[ -n "$dir" ]]; then
         cd "$dir" && echo "已切換到: $(pwd)"
+    fi
+}
+
+# fcode - 模糊搜尋 ~/code 目錄下的專案並切換
+# 用法: fcode [搜尋模式]
+fcode() {
+    if ! command -v fd >/dev/null 2>&1; then
+        echo "錯誤: fd 未安裝" >&2
+        return 1
+    fi
+
+    local code_dir="${HOME}/code"
+    if [[ ! -d "$code_dir" ]]; then
+        echo "錯誤: 目錄不存在: $code_dir" >&2
+        return 1
+    fi
+
+    local target
+    target=$(fd --max-depth 2 --type d . "$code_dir" | \
+        fzf --query="$1" \
+            --height=40% \
+            --border \
+            --prompt="選擇專案: " \
+            --preview="eza --tree --level=1 --color=always {}" \
+            --preview-window=right:50%)
+
+    if [[ -n "$target" ]]; then
+        cd "$target" && echo "已切換到: $(pwd)"
     fi
 }
 
@@ -546,6 +645,23 @@ fgl() {
             --bind="enter:execute(echo {} | grep -o '[a-f0-9]\{7\}' | head -1 | xargs -I % sh -c 'git show %')"
 }
 
+# gnew - 安全從 origin/main 建立並切換至新分支
+# 用法: gnew <分支名稱>
+gnew() {
+    if [[ -z "$1" ]]; then
+        echo "用法: gnew <新分支名稱>" >&2
+        return 1
+    fi
+
+    if ! git rev-parse --git-dir >/dev/null 2>&1; then
+        echo "錯誤: 不在 Git 倉庫中" >&2
+        return 1
+    fi
+
+    git fetch origin main:main 2>/dev/null || git fetch origin
+    git checkout -b "$1" origin/main
+}
+
 # ============================================================================
 # 系統資訊工具
 # ============================================================================
@@ -575,6 +691,7 @@ fzf_help() {
 📁 檔案與目錄:
   ff [pattern]     - 搜尋並開啟檔案
   fcd [pattern]    - 搜尋並切換目錄
+  fcode [pattern]  - 搜尋 ~/code 專案目錄並切換
   vg <pattern>     - 搜尋文字內容並開啟檔案
 
 🖥️  TMUX 管理:
@@ -584,6 +701,13 @@ fzf_help() {
 
 🤖 HERDR 管理:
   fherdr           - 選擇並 attach 到 herdr session
+  fherdr-ws        - 選擇並切換 Herdr workspace
+  herdr-omp [dir]  - 在 Herdr 新分頁啟動 OMP
+
+🦉 OMP (Oh My Pi) 工具:
+  fompr            - 互動式選擇並恢復歷史 Session
+  fompm            - 互動式選擇模型並啟動 OMP
+  fompw            - 互動式切換至 OMP Worktree 目錄
 
 🔧 程序管理:
   fkill [signal]   - 選擇並終止程序
@@ -595,6 +719,7 @@ fzf_help() {
 🌐 Git 工具:
   fgb              - 選擇並切換 Git 分支
   fgl              - 瀏覽 Git 日誌
+  gnew <branch>    - 安全從 origin/main 建立並切換至新分支
 
 🌍 網路工具:
   myip             - 顯示 IP 地址資訊

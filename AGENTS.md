@@ -169,14 +169,21 @@ All functions check for required tools and print errors if missing.
 |----------|-------|-------------|
 | `ff [pattern]` | `ff config` | Find file with fd + fzf, open in `$EDITOR` |
 | `fcd [pattern]` | `fcd src` | Find directory, `cd` into it |
+| `fcode [pattern]` | `fcode mac` | Search and `cd` into `~/code` project directory |
 | `vg <pattern>` | `vg "func"` | ripgrep + fzf, open file at matching line |
 | `ftm [session]` | `ftm work` | Create or attach to tmux session |
 | `fs [pattern]` | `fs` | Quick tmux session switch |
+| `fherdr` | `fherdr` | Select and attach to Herdr session |
+| `fherdr-ws` | `fherdr-ws` | Select and switch Herdr workspace |
+| `herdr-omp [dir]` | `herdr-omp` | Launch OMP in a new Herdr tab |
+| `fompm [args]` | `fompm` | Select model and launch Oh My Pi |
+| `fompw` | `fompw` | Select and cd into Oh My Pi worktree |
 | `fkill [signal]` | `fkill` | Multi-select processes and kill (default signal 9) |
 | `fdim` | `fdim` | Select and remove Docker images |
 | `fdc [action]` | `fdc logs` | Manage Docker containers (start/stop/restart/remove/logs/exec) |
 | `fgb` | `fgb` | fzf branch switcher (`git checkout`) |
 | `fgl` | `fgl` | Browse git log with diff preview |
+| `gnew <branch>` | `gnew feat/x` | Safely create and checkout new branch from `origin/main` |
 | `myip` | `myip` | Show local + public IP with geolocation |
 | `sysinfo` | `sysinfo` | CPU, RAM, uptime summary |
 | `fzf_help` | `fzf_help` | Print all function descriptions |

@@ -121,6 +121,16 @@ alias  hrst="herdr status"
 alias  hrwt="herdr worktree create"
 alias  hrremote="herdr --remote"
 
+
+# Oh My Pi (omp)
+alias  ompc="omp --continue"
+alias  ompp="omp -p"
+alias  ompy="omp --approval-mode=yolo"
+alias  ompu="omp usage"
+alias  omps="omp stats"
+alias  ompm-list="omp models"
+alias  ompm='cd "$OBSIDIAN_HOME/max-agent" && omp'
+alias  ompw='cd "$OBSIDIAN_HOME/max-wiki" && omp'
 # ═══════════════════════════════════════════════════════════════
 # 安全刪除 - rm 改用垃圾桶（可還原）
 # ═══════════════════════════════════════════════════════════════
@@ -248,6 +258,16 @@ fi
 # Herdr (AI coding agent 終端機管理工具)
 if command -v herdr >/dev/null 2>&1; then
     source <(herdr completion zsh)
+fi
+
+# Oh My Pi (omp completion, cached to avoid slow startup)
+if command -v omp >/dev/null 2>&1; then
+    local _omp_cache="${HOME}/.cache/omp_completion.zsh"
+    if [[ ! -f $_omp_cache || $(command -v omp) -nt $_omp_cache ]]; then
+        mkdir -p "${HOME}/.cache"
+        omp completions zsh > $_omp_cache
+    fi
+    source $_omp_cache
 fi
 
 # iTerm2 Integration
