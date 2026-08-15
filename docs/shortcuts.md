@@ -108,14 +108,36 @@
 
 ---
 
-## 4. Git 操作與分支防護
+## 4. Git 增強與互動操作 (Forgit + 自訂工具)
 
+你的環境載入了 **`wfxr/forgit`**，提供強大的 FZF 互動式 Git 操作指令，配合自訂的防護腳本：
+
+### 常用 Forgit 互動指令 (FZF 驅動)
+| 指令 | 功能 | 說明 |
+|---|---|---|
+| `ga` | `git add` | 互動式選擇檔案加入暫存區（含 Diff 預覽，支援 Tab 多選） |
+| `gd` | `git diff` | 互動式瀏覽各檔案的 Diff 差異 |
+| `gcb` | `git checkout branch` | 互動式切換分支（含 Commit 預覽） |
+| `gco` | `git checkout commit` | 互動式搜尋並切換到特定的 Commit |
+| `gcf` | `git checkout file` | 互動式還原或檢出指定檔案 |
+| `gbd` | `git branch delete` | 互動式刪除分支（支援多選） |
+| `glo` | `git log` | 互動式檢視 Git 日誌圖形與 Commit 內容 |
+| `gbl` | `git blame` | 互動式檢視檔案行作者與 commit 歷史 |
+| `grh` | `git reset HEAD` | 互動式將檔案移出暫存區（Unstage） |
+| `grb` | `git rebase -i` | 互動式選擇 Rebase 基準點 |
+| `grc` | `git revert commit` | 互動式選擇要 Revert 的 Commit |
+| `gcp` | `git cherry-pick` | 互動式從其他分支 Cherry-pick Commit |
+| `gsp` | `git stash push` | 互動式將選定檔案加入 Stash |
+| `gss` | `git stash show` | 互動式檢視與套用 Stash 清單 |
+| `gclean` | `git clean` | 互動式清理未追蹤檔案（防誤刪） |
+| `gi` | `gitignore` | 互動式搜尋並產生 `.gitignore` 範本 |
+
+### 自訂 Git 防護與檢視函式
 | 指令 / 函式 | 說明 |
 |---|---|
-| `gnew <branch>` | **安全開分支**：自動從遠端 `origin/main` 切出新分支，避免在 main 或舊分支上開發 |
-| `fgb` | 透過 `fzf` 搜尋並切換本地／遠端 Git 分支（右側即時預覽最近 Commit） |
-| `fgl` | 透過 `fzf` 瀏覽 Git Log，按 Enter 可直接查看該 Commit 的詳細 Diff |
-
+| `gnew <branch>` | **安全開分支**：自動從最新 `origin/main` 切出新分支，防止在 main 直接開發 |
+| `fgb` | 自訂 FZF 分支切換（右側即時預覽最近 10 筆 Commit） |
+| `fgl` | 自訂 FZF 日誌檢視（Enter 直接開啟該 Commit 完整 Diff） |
 ---
 
 ## 5. Neovim (LazyVim & Antigravity)
