@@ -131,6 +131,13 @@ alias  omps="omp stats"
 alias  ompm-list="omp models"
 alias  ompm='cd "$OBSIDIAN_HOME/max-agent" && omp'
 alias  ompw='cd "$OBSIDIAN_HOME/max-wiki" && omp'
+
+# Google Antigravity CLI (agy)
+alias  agyc="agy -c"
+alias  agyp="agy -p"
+alias  agyy="agy --dangerously-skip-permissions"
+alias  agym='cd "$OBSIDIAN_HOME/max-agent" && agy'
+alias  agyw='cd "$OBSIDIAN_HOME/max-wiki" && agy'
 # ═══════════════════════════════════════════════════════════════
 # 安全刪除 - rm 改用垃圾桶（可還原）
 # ═══════════════════════════════════════════════════════════════

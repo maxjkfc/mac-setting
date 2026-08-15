@@ -504,7 +504,6 @@ setup_ai_tools() {
     # CLI 工具（透過 brew 安裝）
     local ai_cli_tools=(
         "claude-code:Claude CLI"
-        "gemini-cli:Gemini CLI"
         "herdr:AI coding agent 終端機工作區管理工具"
     )
 
@@ -513,12 +512,20 @@ setup_ai_tools() {
         safe_brew_install "$tool" "$desc"
     done
 
-    # Antigravity（Google AI IDE，需手動下載）
-    if [[ ! -d "$HOME/.antigravity" ]]; then
+    # Google Antigravity CLI (agy) 與 IDE 檢查
+    if command_exists agy; then
+        print_success "Antigravity CLI (agy) 已安裝"
+    elif [[ -x "$HOME/.local/bin/agy" ]]; then
+        print_success "Antigravity CLI (agy) 已安裝於 ~/.local/bin/agy"
+    else
+        print_info "提示: agy (Antigravity CLI) 可由 Antigravity 內部安裝或手動下載"
+    fi
+
+    if [[ ! -d "$HOME/.antigravity" && ! -d "/Applications/Antigravity.app" ]]; then
         print_warning "Antigravity (Google AI IDE) 需手動下載安裝"
         print_info "下載頁面：https://antigravity.google/download"
     else
-        print_success "Antigravity 已安裝"
+        print_success "Antigravity IDE 已安裝"
     fi
 
     print_success "AI 開發工具安裝完成"

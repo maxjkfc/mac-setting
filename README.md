@@ -7,8 +7,7 @@
 - 🎯 **完整的 zsh 配置結構**：符合最佳實踐的檔案組織
 - 🛠️ **15+ 個 fzf 增強工具**：大幅提升終端生產力
 - 🔧 **現代化開發環境**：Node.js (fnm)、Go、Docker、Kubernetes 等
-- 🎨 **美觀的登入體驗**：系統資訊顯示和開發工具狀態
-- 🤖 **AI 工具整合**：Claude CLI、Gemini CLI
+- 🤖 **AI 工具整合**：Claude CLI、Antigravity CLI (agy)、Oh My Pi (omp)、Herdr
 - 📦 **模組化設計**：易於維護和自訂
 
 ## 📁 專案結構
@@ -24,9 +23,11 @@ mac-setting/
 │   └── .zshshell            # 自訂 fzf 工具函數集合
 ├── scripts/                 # 工具腳本
 │   └── claude-remote-watchdog.sh  # claude --remote 斷線自動重啟
+├── docs/                    # 文件目錄
+│   └── shortcuts.md         # 完整快捷鍵與命令速查手冊
 ├── tmux/                    # tmux 配置
 │   ├── .tmux.conf           # tmux 主設定檔
-│   └── shortcuts.md         # 快捷鍵速查表
+│   └── shortcuts.md         # tmux 快捷鍵速查表
 └── README.md                # 本檔案
 ```
 
@@ -69,8 +70,7 @@ cd ~/code/mac-setting
 # 或分別安裝
 ./setup.sh backend         # 後端開發工具
 ./setup.sh zsh             # Zsh 配置（含基礎工具）
-./setup.sh review-tools    # Code Review 工具鏈（shellcheck/gitleaks/hadolint/actionlint/kubeconform/govulncheck/ruff/pip-audit）
-./setup.sh ai-tools        # AI 工具 (Claude CLI, Gemini CLI)
+./setup.sh ai-tools        # AI 工具 (Claude CLI, Herdr, Antigravity CLI 檢查)
 ./setup.sh gui-tools       # GUI 應用程式
 ```
 
@@ -182,8 +182,10 @@ cd ~/code/mac-setting
 - **Google Cloud SDK**：雲端開發支援
 
 ### AI 工具
-- **Claude CLI**：Anthropic Claude 命令列工具
-- **Gemini CLI**：Google Gemini 命令列工具
+- **Claude CLI** (`claude`)：Anthropic Claude 命令列工具
+- **Antigravity CLI** (`agy`)：Google Antigravity CLI 工具
+- **Oh My Pi** (`omp`)：AI Coding Harness 工具
+- **Herdr** (`herdr`)：AI coding agent 終端機工作區管理工具
 
 #### claude --remote 持久運行
 
