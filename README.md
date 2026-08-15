@@ -94,8 +94,8 @@ cd ~/code/mac-setting
 |------|------|----------|
 | `ff` | 智能檔案搜尋與開啟 | `ff config` |
 | `fcd` | 智能目錄切換 | `fcd src` |
+| `fcode` | 專案目錄切換 (`~/code`) | `fcode mac` |
 | `vg` | 內容搜尋與編輯 | `vg "function"` |
-
 ### 🖥️ TMUX 管理
 
 | 命令 | 功能 | 使用範例 |
@@ -104,6 +104,22 @@ cd ~/code/mac-setting
 | `fs` | 快速 Session 切換 | `fs` |
 | `claude-watch` | 啟動 claude --remote watchdog | `claude-watch ~/code/my-project` |
 
+
+### 🤖 Herdr 管理
+
+| 命令 | 功能 | 使用範例 |
+|------|------|----------|
+| `fherdr` | 選擇並 attach 到 Herdr session | `fherdr` |
+| `fherdr-ws` | 選擇並切換 Herdr workspace | `fherdr-ws` |
+| `herdr-omp` | 在 Herdr 新分頁啟動 OMP | `herdr-omp ~/code/my-project` |
+
+### 🦉 OMP (Oh My Pi) 工具
+
+| 命令 | 功能 | 使用範例 |
+|------|------|----------|
+| `fompr` | 互動式選擇並恢復歷史 Session | `fompr` |
+| `fompm` | 互動式選擇模型並啟動 OMP | `fompm` |
+| `fompw` | 互動式切換至 OMP Worktree 目錄 | `fompw` |
 ### 🔧 程序管理
 
 | 命令 | 功能 | 使用範例 |
@@ -123,7 +139,7 @@ cd ~/code/mac-setting
 |------|------|----------|
 | `fgb` | Git 分支切換 | `fgb` |
 | `fgl` | Git 日誌瀏覽 | `fgl` |
-
+| `gnew` | 安全從 `origin/main` 建立新分支 | `gnew feat/my-feature` |
 ### 🌍 系統工具
 
 | 命令 | 功能 | 使用範例 |
