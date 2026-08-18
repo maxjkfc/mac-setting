@@ -223,6 +223,7 @@ setup_install_depend() {
         "powerlevel10k:Zsh 主題"
         "ripgrep:快速文字搜尋工具"
         "fzf:模糊搜尋工具"
+        "atuin:Shell history 與 AI 工具"
         "fd:現代化的 find 替代品"
         "wget:下載工具"
         "gnu-sed:GNU sed"
@@ -629,6 +630,11 @@ setup_zsh() {
             safe_symlink "$SCRIPT_DIR/zsh/$config" "$HOME/$config" "$desc"
         fi
     done
+
+    # Atuin 設定（不包含帳號、加密金鑰或同步 session）
+    if [[ -f "$SCRIPT_DIR/atuin/config.toml" ]]; then
+        safe_symlink "$SCRIPT_DIR/atuin/config.toml" "$CONFIG_DIR/atuin/config.toml" "Atuin 設定"
+    fi
     
     # 安裝基礎依賴工具
     setup_install_depend
@@ -747,7 +753,7 @@ health_check() {
     
     # 檢查基礎工具
     print_info "檢查基礎工具:"
-    local tools=("brew" "git" "nvim" "tmux" "zsh" "fzf" "ripgrep" "node" "npm" "bun" "fnm" "go" "uv")
+    local tools=("brew" "git" "nvim" "tmux" "zsh" "fzf" "atuin" "ripgrep" "node" "npm" "bun" "fnm" "go" "uv")
     local missing_tools=()
     
     for tool in "${tools[@]}"; do
