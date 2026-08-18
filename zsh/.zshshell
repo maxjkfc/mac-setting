@@ -104,9 +104,20 @@ fherdr() {
         echo "錯誤: herdr 未安裝" >&2
         return 1
     fi
+    if ! command -v jq >/dev/null 2>&1; then
+        echo "錯誤: jq 未安裝" >&2
+        return 1
+    fi
+
+    local sessions
+    if ! sessions=$(herdr session list --json); then
+        echo "錯誤: 無法取得 herdr session 列表" >&2
+        return 1
+    fi
 
     local session
-    session=$(herdr session list | sed 1d | fzf --height=40% --border --prompt="選擇 herdr session: " | awk '{print $1}')
+    session=$(echo "$sessions" | jq -r '.sessions[].name' | \
+        fzf --height=40% --border --prompt="選擇 herdr session: ")
 
     if [[ -n "$session" ]]; then
         herdr session attach "$session"
