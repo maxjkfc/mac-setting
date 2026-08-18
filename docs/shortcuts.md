@@ -153,7 +153,7 @@ Atuin AI 的 `?` 按鍵目前未啟用；需要先檢查資料範圍與權限，
 |---|---|
 | `gnew <branch>` | **安全開分支**：自動從最新 `origin/main` 切出新分支，防止在 main 直接開發 |
 | `fgb` | 自訂 FZF 分支切換（右側即時預覽最近 10 筆 Commit） |
-| `fgw [pattern]` | 自訂 FZF Git Worktree 切換（即時預覽 worktree status 與 branch） |
+| `fgw [-d\|prune]` | 自訂 FZF Git Worktree 切換、刪除 (`-d`) 或清理 (`prune`) |
 | `fgl` | 自訂 FZF 日誌檢視（Enter 直接開啟該 Commit 完整 Diff） |
 | `gh dash` | **GitHub Dashboard TUI**：終端內直接檢視 PR、Issue 與 CI 狀態 |
 ---

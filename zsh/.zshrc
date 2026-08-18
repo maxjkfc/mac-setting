@@ -196,9 +196,11 @@ if [[ -f "$ZPLUG_HOME/init.zsh" ]]; then
     # Optional Plugins (可根據需要啟用)
     # zplug "b4b4r07/emoji-cli"
 
-    # Install plugins if not installed
-    if ! zplug check; then
-        zplug install
+    # Install plugins if missing (only run install if plugin directory doesn't exist to speed up shell startup)
+    if [[ ! -d "$ZPLUG_HOME/repos" ]] || [[ -z "$(ls -A "$ZPLUG_HOME/repos" 2>/dev/null)" ]]; then
+        if ! zplug check; then
+            zplug install
+        fi
     fi
 
     # Load plugins

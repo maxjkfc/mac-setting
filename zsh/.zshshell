@@ -710,8 +710,8 @@ gnew() {
     git checkout -b "$1" origin/main
 }
 
-# fgw - 使用 fzf 快速切換或瀏覽 Git Worktree
-# 用法: fgw [pattern]
+# fgw - 使用 fzf 快速切換、刪除或清理 Git Worktree
+# 用法: fgw [pattern] | fgw -d [pattern] | fgw prune
 fgw() {
     if ! git rev-parse --git-dir >/dev/null 2>&1; then
         echo "錯誤: 不在 Git 倉庫中" >&2
@@ -723,26 +723,51 @@ fgw() {
         return 1
     fi
 
-    local worktrees
-    worktrees=$(git worktree list --porcelain 2>/dev/null)
-
-    if [[ -z "$worktrees" ]]; then
-        echo "目前沒有其他 Git Worktree"
-        return 0
+    if [[ "$1" == "prune" ]]; then
+        echo "正在清理無效的 Git Worktrees..."
+        git worktree prune -v
+        return $?
     fi
+
+    local delete_mode=false
+    if [[ "$1" == "-d" || "$1" == "--delete" ]]; then
+        delete_mode=true
+        shift
+    fi
+
+    local main_worktree
+    main_worktree=$(git rev-parse --show-toplevel 2>/dev/null)
 
     local selected
     selected=$(git worktree list | fzf \
         --query="$1" \
         --height=40% \
         --border \
-        --prompt="選擇 Git Worktree: " \
+        --prompt="$([ "$delete_mode" = true ] && echo "選擇要刪除的 Worktree: " || echo "選擇 Git Worktree: ")" \
         --preview="git -C {1} status --short --branch 2>/dev/null" \
         --preview-window=right:50% \
         | awk '{print $1}')
 
-    if [[ -n "$selected" && -d "$selected" ]]; then
-        cd "$selected" && echo "已切換至 Worktree: $(pwd)"
+    if [[ -z "$selected" ]]; then
+        echo "未選擇任何 Worktree"
+        return 0
+    fi
+
+    if [[ "$delete_mode" == true ]]; then
+        if [[ "$selected" == "$main_worktree" ]]; then
+            echo "錯誤: 不能刪除主要 Worktree ($selected)" >&2
+            return 1
+        fi
+        read -p "確認刪除 Worktree '$selected'? (y/N): " confirm
+        if [[ "$confirm" =~ ^[Yy]$ ]]; then
+            git worktree remove "$selected" && echo "已成功刪除 Worktree: $selected"
+        else
+            echo "已取消刪除"
+        fi
+    else
+        if [[ -d "$selected" ]]; then
+            cd "$selected" && echo "已切換至 Worktree: $(pwd)"
+        fi
     fi
 }
 
@@ -777,17 +802,6 @@ fzf_help() {
   fcd [pattern]    - 搜尋並切換目錄
   fcode [pattern]  - 搜尋 ~/code 專案目錄並切換
   vg <pattern>     - 搜尋文字內容並開啟檔案
-
-🖥️  TMUX 管理:
-  ftm [session]    - 創建或切換 tmux session
-  fs [pattern]     - 快速切換 tmux session
-  claude-watch [dir] - 啟動 claude --remote watchdog（tmux 背景執行）
-
-🤖 HERDR 管理:
-  fherdr           - 選擇並 attach 到 herdr session
-  fherdr-ws        - 選擇並切換 Herdr workspace
-  herdr-omp [dir]  - 在 Herdr 新分頁啟動 OMP
-
 🦉 OMP (Oh My Pi) 工具:
   fompr            - 互動式選擇並恢復歷史 Session
   fompm            - 互動式選擇模型並啟動 OMP
@@ -802,7 +816,7 @@ fzf_help() {
 
 🌐 Git 工具:
   fgb              - 選擇並切換 Git 分支
-  fgw [pattern]    - 選擇並切換 Git Worktree
+  fgw [-d|prune]   - 選擇切換、刪除 (-d) 或清理 (prune) Git Worktree
   fgl              - 瀏覽 Git 日誌
   gnew <branch>    - 安全從 origin/main 建立並切換至新分支
 
