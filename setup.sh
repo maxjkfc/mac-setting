@@ -768,14 +768,16 @@ health_check() {
     local missing_tools=()
     
     for tool in "${tools[@]}"; do
-        if command_exists "$tool"; then
+        local bin_cmd="$tool"
+        [[ "$tool" == "ripgrep" ]] && bin_cmd="rg"
+        if command_exists "$bin_cmd"; then
             local version
             case "$tool" in
                 "node") version=$(node --version 2>/dev/null || echo "unknown") ;;
                 "npm") version=$(npm --version 2>/dev/null || echo "unknown") ;;
                 "git") version=$(git --version 2>/dev/null | cut -d' ' -f3 || echo "unknown") ;;
                 "go") version=$(go version 2>/dev/null | awk '{print $3}' | sed 's/go//' || echo "unknown") ;;
-                *) version=$($tool --version 2>/dev/null | head -n1 | grep -oE '[0-9]+\.[0-9]+(\.[0-9]+)?' || echo "unknown") ;;
+                *) version=$($bin_cmd --version 2>/dev/null | head -n1 | grep -oE '[0-9]+\.[0-9]+(\.[0-9]+)?' || echo "unknown") ;;
             esac
             print_success "✓ $tool ($version)"
         else
