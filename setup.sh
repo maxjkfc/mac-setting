@@ -313,6 +313,17 @@ setup_backend_tools() {
         IFS=':' read -r tool desc <<< "$tool_desc"
         safe_brew_install "$tool" "$desc"
     done
+
+    # GitHub CLI Extensions
+    if command -v gh >/dev/null 2>&1; then
+        print_info "檢查 GitHub CLI Extensions..."
+        if ! gh extension list 2>/dev/null | grep -q "dlvhdr/gh-dash"; then
+            print_info "安裝 gh-dash (GitHub Dashboard TUI)..."
+            gh extension install dlvhdr/gh-dash 2>/dev/null || print_warning "gh-dash 安裝失敗，可稍後手動執行: gh extension install dlvhdr/gh-dash"
+        else
+            print_info "gh-dash 已安裝，跳過"
+        fi
+    fi
     
     # 系統監控工具
     print_info "安裝系統監控工具..."

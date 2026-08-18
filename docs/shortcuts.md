@@ -73,6 +73,7 @@ Atuin AI 的 `?` 按鍵目前未啟用；需要先檢查資料範圍與權限，
 | 函式 | 範例 | 說明 |
 |---|---|---|
 | `fkill [signal]` | `fkill` | 互動式選擇程序並終止（預設 signal 9，支援 Tab 多選） |
+| `fssh [pattern]` | `fssh` / `fssh mini` | 模糊搜尋 `~/.ssh/config` 定義的主機並一鍵 SSH 連線 |
 | `flan [-i iface]` | `flan` | 掃描區域網路內所有上線設備（含 IP, MAC, Hostname, SSH/VNC 狀態） |
 | `myip` | `myip` | 顯示本機 LAN IP、公網 WAN IP 及地理位置資訊 |
 | `sysinfo` | `sysinfo` | 顯示 CPU、記憶體、負載與系統資訊摘要 |
@@ -152,7 +153,9 @@ Atuin AI 的 `?` 按鍵目前未啟用；需要先檢查資料範圍與權限，
 |---|---|
 | `gnew <branch>` | **安全開分支**：自動從最新 `origin/main` 切出新分支，防止在 main 直接開發 |
 | `fgb` | 自訂 FZF 分支切換（右側即時預覽最近 10 筆 Commit） |
+| `fgw [pattern]` | 自訂 FZF Git Worktree 切換（即時預覽 worktree status 與 branch） |
 | `fgl` | 自訂 FZF 日誌檢視（Enter 直接開啟該 Commit 完整 Diff） |
+| `gh dash` | **GitHub Dashboard TUI**：終端內直接檢視 PR、Issue 與 CI 狀態 |
 ---
 
 ## 6. Neovim (LazyVim & Antigravity)

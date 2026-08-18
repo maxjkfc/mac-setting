@@ -185,8 +185,10 @@ All functions check for required tools and print errors if missing.
 | `fdim` | `fdim` | Select and remove Docker images |
 | `fdc [action]` | `fdc logs` | Manage Docker containers (start/stop/restart/remove/logs/exec) |
 | `fgb` | `fgb` | fzf branch switcher (`git checkout`) |
+| `fgw [pattern]` | `fgw` | fzf Git worktree switcher |
 | `fgl` | `fgl` | Browse git log with diff preview |
 | `gnew <branch>` | `gnew feat/x` | Safely create and checkout new branch from `origin/main` |
+| `fssh [pattern]` | `fssh` | Fuzzy search `~/.ssh/config` hosts and connect |
 | `myip` | `myip` | Show local + public IP with geolocation |
 | `sysinfo` | `sysinfo` | CPU, RAM, uptime summary |
 | `fzf_help` | `fzf_help` | Print all function descriptions |
