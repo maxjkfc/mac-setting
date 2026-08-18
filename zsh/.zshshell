@@ -600,6 +600,43 @@ flan() {
     echo "找到 ${total_count} 台裝置（共掃描 ${elapsed} 秒）"
 }
 
+# fssh - 使用 fzf 選擇 SSH 主機並連線
+# 用法: fssh [pattern]
+fssh() {
+    local ssh_config="${HOME}/.ssh/config"
+    if [[ ! -f "$ssh_config" ]]; then
+        echo "錯誤: 找不到 SSH 設定檔 ($ssh_config)" >&2
+        return 1
+    fi
+
+    if ! command -v fzf >/dev/null 2>&1; then
+        echo "錯誤: fzf 未安裝" >&2
+        return 1
+    fi
+
+    local host
+    host=$(awk '
+        tolower($1) == "host" {
+            for (i=2; i<=NF; i++) {
+                if ($i !~ /[*?]/) print $i
+            }
+        }
+    ' "$ssh_config" | sort -u | fzf \
+        --query="$1" \
+        --height=50% \
+        --border \
+        --prompt="選擇 SSH 主機: " \
+        --preview="ssh -G {} 2>/dev/null | grep -E '^(hostname|user|port|identityfile) ' | head -10" \
+        --preview-window=right:50%)
+
+    if [[ -n "$host" ]]; then
+        echo "連線至 $host ..."
+        ssh "$host"
+    else
+        echo "未選擇主機"
+    fi
+}
+
 # ============================================================================
 # Git 工具
 # ============================================================================
@@ -662,6 +699,42 @@ gnew() {
     git checkout -b "$1" origin/main
 }
 
+# fgw - 使用 fzf 快速切換或瀏覽 Git Worktree
+# 用法: fgw [pattern]
+fgw() {
+    if ! git rev-parse --git-dir >/dev/null 2>&1; then
+        echo "錯誤: 不在 Git 倉庫中" >&2
+        return 1
+    fi
+
+    if ! command -v fzf >/dev/null 2>&1; then
+        echo "錯誤: fzf 未安裝" >&2
+        return 1
+    fi
+
+    local worktrees
+    worktrees=$(git worktree list --porcelain 2>/dev/null)
+
+    if [[ -z "$worktrees" ]]; then
+        echo "目前沒有其他 Git Worktree"
+        return 0
+    fi
+
+    local selected
+    selected=$(git worktree list | fzf \
+        --query="$1" \
+        --height=40% \
+        --border \
+        --prompt="選擇 Git Worktree: " \
+        --preview="git -C {1} status --short --branch 2>/dev/null" \
+        --preview-window=right:50% \
+        | awk '{print $1}')
+
+    if [[ -n "$selected" && -d "$selected" ]]; then
+        cd "$selected" && echo "已切換至 Worktree: $(pwd)"
+    fi
+}
+
 # ============================================================================
 # 系統資訊工具
 # ============================================================================
@@ -718,10 +791,12 @@ fzf_help() {
 
 🌐 Git 工具:
   fgb              - 選擇並切換 Git 分支
+  fgw [pattern]    - 選擇並切換 Git Worktree
   fgl              - 瀏覽 Git 日誌
   gnew <branch>    - 安全從 origin/main 建立並切換至新分支
 
-🌍 網路工具:
+🌍 網路與遠端:
+  fssh [pattern]   - 模糊搜尋 ~/.ssh/config 主機並連線
   myip             - 顯示 IP 地址資訊
   flan [-i iface]  - 列出區網內所有裝置（含 Bonjour hostname 與 SSH/VNC）
 
