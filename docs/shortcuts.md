@@ -6,11 +6,12 @@
 
 ## 目錄
 1. [Zsh Aliases (常用命令簡寫)](#1-zsh-aliases-常用命令簡寫)
-2. [FZF 互動函式 (Shell 增強)](#2-fzf-互動函式-shell-增強)
-3. [AI Agent 工具鏈 (Claude / OMP / Antigravity / Herdr)](#3-ai-agent-工具鏈-claude--omp--antigravity--herdr)
-4. [Git 操作與分支防護](#4-git-操作與分支防護)
-5. [Neovim (LazyVim & Antigravity)](#5-neovim-lazyvim--antigravity)
-6. [Tmux 快捷鍵](#6-tmux-快捷鍵)
+2. [History 與補全](#2-history-與補全)
+3. [FZF 互動函式 (Shell 增強)](#3-fzf-互動函式-shell-增強)
+4. [AI Agent 工具鏈 (Claude / OMP / Antigravity / Herdr)](#4-ai-agent-工具鏈-claude--omp--antigravity--herdr)
+5. [Git 操作與分支防護](#5-git-操作與分支防護)
+6. [Neovim (LazyVim & Antigravity)](#6-neovim-lazyvim--antigravity)
+7. [Tmux 快捷鍵](#7-tmux-快捷鍵)
 
 ---
 
@@ -42,7 +43,21 @@
 
 ---
 
-## 2. FZF 互動函式 (Shell 增強)
+## 2. History 與補全
+
+| 快捷鍵 | 工具 | 說明 |
+|---|---|---|
+| `Ctrl-R` | Atuin | 依 workspace、directory、session 搜尋 history；`Tab` 插入結果 |
+| `↑` / `↓` | zsh-history-substring-search | 依目前輸入內容搜尋 native history |
+| `Ctrl-P` / `Ctrl-N` | zsh-history-substring-search | `↑` / `↓` 的 emacs 快捷鍵 |
+| Ghost text | zsh-autosuggestions + Atuin | 以 history 提供 inline suggestion |
+| `Ctrl-T` / `Alt-C` | fzf | 檔案與目錄搜尋，功能不受 Atuin 取代 |
+
+Atuin AI 的 `?` 按鍵目前未啟用；需要先檢查資料範圍與權限，再個別開啟。
+
+---
+
+## 3. FZF 互動函式 (Shell 增強)
 
 所有 FZF 工具均支援互動式搜尋、多選 (Tab) 及右側即時預覽。隨時輸入 `fzf_help` 可在終端機查看說明。
 
@@ -70,7 +85,7 @@
 
 ---
 
-## 3. AI Agent 工具鏈 (Claude / OMP / Antigravity / Herdr)
+## 4. AI Agent 工具鏈 (Claude / OMP / Antigravity / Herdr)
 
 ### 常用 Alias
 
@@ -108,7 +123,7 @@
 
 ---
 
-## 4. Git 增強與互動操作 (Forgit + 自訂工具)
+## 5. Git 增強與互動操作 (Forgit + 自訂工具)
 
 你的環境載入了 **`wfxr/forgit`**，提供強大的 FZF 互動式 Git 操作指令，配合自訂的防護腳本：
 
@@ -140,7 +155,7 @@
 | `fgl` | 自訂 FZF 日誌檢視（Enter 直接開啟該 Commit 完整 Diff） |
 ---
 
-## 5. Neovim (LazyVim & Antigravity)
+## 6. Neovim (LazyVim & Antigravity)
 
 ### 常用檔案與導航 (Leader 預設為 Space)
 | 快捷鍵 | 模式 | 功能 |
@@ -175,7 +190,7 @@
 
 ---
 
-## 6. Tmux 快捷鍵
+## 7. Tmux 快捷鍵
 
 > **Prefix 鍵**: `Ctrl + A` (即 `C-a`)
 
