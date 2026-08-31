@@ -50,9 +50,6 @@ mac-setting/
 ├── tmux/
 │   └── .tmux.conf             # Tmux config; prefix = Ctrl-a, theme = Catppuccin Mocha
 │
-├── atuin/                    # Atuin history configuration
-│   └── config.toml           # Local search and daemon settings
-│
 ├── gitcz/                     # Commitizen configuration
 │   ├── .cz-config.js          # Commit types and messages (Traditional Chinese)
 │   ├── .commitlintrc.js       # Commitlint rules

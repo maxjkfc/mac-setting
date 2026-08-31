@@ -7,7 +7,7 @@
 - 🎯 **完整的 zsh 配置結構**：符合最佳實踐的檔案組織
 - 🛠️ **15+ 個 fzf 增強工具**：大幅提升終端生產力
 - 🔧 **現代化開發環境**：Node.js (fnm)、Go、Docker、Kubernetes 等
-- 🤖 **AI 工具整合**：Claude CLI、Antigravity CLI (agy)、Oh My Pi (omp)、Herdr、Atuin
+- 🤖 **AI 工具整合**：Claude CLI、Antigravity CLI (agy)、Oh My Pi (omp)、Herdr
 - 📦 **模組化設計**：易於維護和自訂
 
 ## 📁 專案結構
@@ -21,8 +21,6 @@ mac-setting/
 │   ├── .zshrc               # 互動式 shell 配置（主題、別名、插件）
 │   ├── .zlogin              # 登入完成後執行（歡迎訊息、系統資訊）
 │   └── .zshshell            # 自訂 fzf 工具函數集合
-├── atuin/                    # Atuin history 設定
-│   └── config.toml           # 本機 history 搜尋與 daemon 設定
 ├── scripts/                 # 工具腳本
 │   └── claude-remote-watchdog.sh  # claude --remote 斷線自動重啟
 ├── docs/                    # 文件目錄
@@ -85,18 +83,6 @@ cd ~/code/mac-setting
 > `review-tools` 是 code review agent（john）mechanical checks 的依賴工具鏈；
 > vault 的 `knowledge-base/scripts/setup-machine.sh` 會自動呼叫本選項，工具清單以本 repo 為唯一源。
 > 重跑同一指令即可補裝；go 系工具（govulncheck）每次跑都會升到 @latest。
-
-### Atuin History
-
-Atuin 負責 `Ctrl-R` 的 context-aware history search；`↑/↓` 與 `Ctrl-P/N` 保留給 `zsh-history-substring-search`，fzf 的檔案／目錄快捷鍵不變。
-
-首次安裝後匯入既有 zsh history：
-
-```bash
-atuin import zsh
-```
-
-目前 repo 設定為 local-only，未啟用同步或 Atuin AI。AI、同步與 command execution 應在檢查資料範圍後個別開啟。
 
 ## 🛠️ 強大的 fzf 工具集合
 
