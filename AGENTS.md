@@ -1,6 +1,7 @@
 # AGENTS.md — AI Assistant Guide for mac-setting
 
-This file provides context for AI assistants (Codex, Copilot, etc.) working in this repository.
+This file provides context for AI assistants (Claude, Codex, Copilot, etc.) working in this repository.
+`CLAUDE.md` is a symlink to this file — edit `AGENTS.md` only, never maintain two copies.
 
 ## Repository Overview
 
@@ -22,7 +23,8 @@ mac-setting/
 ├── setup.sh                   # Main installer script (Bash, strict mode)
 ├── setup.sh.backup            # Auto-generated backup; do not edit
 ├── README.md                  # User-facing documentation (Traditional Chinese)
-├── AGENTS.md                  # This file
+├── AGENTS.md                  # This file — single source of truth for agent context
+├── CLAUDE.md                  # Symlink -> AGENTS.md
 │
 ├── zsh/                       # Zsh configuration files
 │   ├── .zshenv                # All zsh instances: env vars, PATH
