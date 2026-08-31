@@ -161,27 +161,42 @@ alias rm!='/bin/rm'
 # 產生並載入 CLI 補全快取，避免每次啟動都 fork 子行程重新產生。
 # 在函式內宣告 local 才會真正生效（頂層的 local 不會 scope，會洩漏成全域變數）。
 #
-# 先寫暫存檔、確認 exit code 為 0 且輸出非空才覆蓋正式快取。
-# 若直接寫入正式快取，指令失敗會留下 0-byte 檔案，且其 mtime 必然新於 binary，
-# 導致下方的 mtime 判斷永遠成立、壞掉的快取被永久鎖住且每次啟動都 source。
-# 產生失敗時保留舊快取並將錯誤輸出到 stderr，不靜默吞掉。
+# 快取寫入流程：先寫暫存檔 → 確認 exit code 為 0 → 確認非空 → 確認語法可解析
+# → 才 mv 覆蓋正式快取。三道檢查缺一不可：
+#   - 不檢查 exit code：失敗會留下 0-byte 檔，且其 mtime 恆新於 binary，
+#     導致下方判斷永遠不成立、壞掉的快取被永久鎖住。
+#   - 只檢查非空：輸出被截斷時（exit 0 但內容不完整）仍會寫入，
+#     之後每次啟動 source 都噴 parse error。故需 zsh -n 驗證。
+# 失敗時保留舊快取並輸出實際錯誤到 stderr，不靜默吞掉。
+#
+# 過期判斷同時比對 binary mtime 與「解析後的實際路徑」。只看 mtime 不夠：
+# 例如 /usr/local/bin/kubectl 指向 Google Cloud SDK 的 binary，其 mtime 固定為 1980，
+# 恆早於快取，SDK 升級後永遠不會重新產生。記錄實際路徑可在 symlink 改指向時觸發更新。
 #
 # 用法: _load_completion_cache <指令> <快取檔名> <產生補全所需的參數...>
 _load_completion_cache() {
     local cmd=$1 name=$2
     shift 2
-    command -v "$cmd" >/dev/null 2>&1 || return 0
+
+    local bin
+    bin=$(command -v "$cmd" 2>/dev/null) || return 0
 
     local cache="${HOME}/.cache/${name}"
-    if [[ ! -f $cache || $(command -v "$cmd") -nt $cache ]]; then
+    local src="${cache}.src"
+    local resolved="${bin:A}"
+
+    if [[ ! -s $cache || $bin -nt $cache || ! -r $src || "$(<$src)" != "$resolved" ]]; then
         mkdir -p "${HOME}/.cache"
-        local tmp="${cache}.tmp.$$"
-        if "$cmd" "$@" > "$tmp" 2>/dev/null && [[ -s $tmp ]]; then
+        local tmp="${cache}.tmp.$$" err="${cache}.err.$$"
+        if "$cmd" "$@" > "$tmp" 2>"$err" && [[ -s $tmp ]] && zsh -n "$tmp" 2>>"$err"; then
             command mv -f "$tmp" "$cache"
+            print -r -- "$resolved" > "$src"
         else
-            command rm -f "$tmp"
             print -u2 "warn: 產生 $name 補全失敗，沿用既有快取"
+            [[ -s $err ]] && print -u2 "  $(head -n 3 "$err")"
+            command rm -f "$tmp"
         fi
+        command rm -f "$err"
     fi
     [[ -s $cache ]] && source "$cache"
 }
