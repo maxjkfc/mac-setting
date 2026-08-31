@@ -15,10 +15,16 @@ fi
 # ZSH CONFIGURATION
 # ============================================================================
 
-# Default Settings
-ZSH_DISABLE_COMPFIX="true"
-ZSH_THEME="powerlevel10k"
+# 註：此設定未載入 Oh-My-Zsh 框架，p10k 主題是在下方手動 source，
+# 因此 ZSH_THEME / ZSH_DISABLE_COMPFIX 這類 OMZ 專用變數不適用、已移除。
 setopt prompt_subst
+setopt auto_cd               # 輸入目錄名稱直接切換目錄
+setopt auto_pushd            # cd 自動將目錄加入堆疊
+setopt pushd_ignore_dups     # 目錄堆疊忽略重複項目
+setopt pushd_silent          # pushd/popd 不輸出堆疊內容
+setopt no_beep               # 關閉終端機嗶嗶聲
+setopt interactive_comments  # 允許在互動式 shell 中使用 # 註解
+setopt complete_in_word      # 游標在單詞中間也能進行補全
 
 # Terminal Settings
 set -o emacs
@@ -26,17 +32,19 @@ set -o emacs
 # ============================================================================
 # HISTORY
 # ============================================================================
-# 明確版控 history 設定（先前值來自 plugin/系統預設，過小且不可控）
 HISTFILE="$HOME/.zsh_history"
-HISTSIZE=50000          # 記憶體內保留的行數
-SAVEHIST=50000          # 寫入 HISTFILE 的行數
-setopt SHARE_HISTORY        # 多個 session 即時共享 history
-setopt HIST_IGNORE_DUPS     # 不記錄與前一筆相同的指令
-setopt HIST_IGNORE_ALL_DUPS # 新指令重複時刪除舊的同名項
-setopt HIST_IGNORE_SPACE    # 以空白開頭的指令不入 history（敏感操作用）
-setopt HIST_REDUCE_BLANKS   # 寫入前壓掉多餘空白
-setopt HIST_VERIFY          # 展開 history 後先顯示、不直接執行
-
+HISTSIZE=50000               # 記憶體內保留的行數
+SAVEHIST=50000               # 寫入 HISTFILE 的行數
+setopt SHARE_HISTORY         # 多個 session 即時共享 history
+setopt EXTENDED_HISTORY      # 記錄指令執行時間戳與耗時
+setopt HIST_EXPIRE_DUPS_FIRST # 歷史記錄滿時優先刪除最舊的重複項
+setopt HIST_IGNORE_DUPS      # 不記錄與前一筆相同的指令
+setopt HIST_IGNORE_ALL_DUPS  # 新指令重複時刪除舊的同名項
+setopt HIST_FIND_NO_DUPS     # 歷史搜尋時不顯示重複項目
+setopt HIST_IGNORE_SPACE     # 以空白開頭的指令不入 history（敏感操作用）
+setopt HIST_SAVE_NO_DUPS     # 寫入歷史檔案時忽略重複項目
+setopt HIST_REDUCE_BLANKS    # 寫入前壓掉多餘空白
+setopt HIST_VERIFY           # 展開 history 後先顯示、不直接執行
 # ============================================================================
 # POWERLEVEL10K THEME
 # ============================================================================
@@ -69,9 +77,10 @@ typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_THRESHOLD=3
 # ALIASES
 # ============================================================================
 
-# Configuration
+# Configuration & Maintenance
 alias zshconfig="nvim ~/.zshrc"
-
+alias zshreload="source ~/.zshrc"
+alias path='echo -e ${PATH//:/\\n}'
 # Enhanced ls (eza)
 alias l='eza -lbF --git'
 alias ls='eza'
@@ -149,10 +158,24 @@ alias rm!='/bin/rm'
 # FZF CONFIGURATION
 # ============================================================================
 
-# Load FZF
-if command -v fzf >/dev/null 2>&1; then
-    source <(fzf --zsh)
-fi
+# 產生並載入 CLI 補全快取，避免每次啟動都 fork 子行程重新產生。
+# 在函式內宣告 local 才會真正生效（頂層的 local 不會 scope，會洩漏成全域變數）。
+# 用法: _load_completion_cache <指令> <快取檔名> <產生補全所需的參數...>
+_load_completion_cache() {
+    local cmd=$1 name=$2
+    shift 2
+    command -v "$cmd" >/dev/null 2>&1 || return 0
+
+    local cache="${HOME}/.cache/${name}"
+    if [[ ! -f $cache || $(command -v "$cmd") -nt $cache ]]; then
+        mkdir -p "${HOME}/.cache"
+        "$cmd" "$@" > "$cache" 2>/dev/null
+    fi
+    source "$cache"
+}
+
+# Load FZF (key-bindings + 補全)
+_load_completion_cache fzf fzf_completion.zsh --zsh
 
 # FZF Settings (環境變數已移至 ~/.zshenv)
 
@@ -178,6 +201,34 @@ _fzf_comprun() {
 }
 
 # ============================================================================
+# COMPLETION SYSTEM SETUP (必須在 zplug 之前，zplug 內部會強制執行一次 compinit)
+# ============================================================================
+
+# Completion paths
+fpath=(
+    ~/.zsh/completion
+    $HOMEBREWOPT/share/zsh/site-functions
+    $fpath
+)
+
+# Completion System Styles (zstyle 優化)
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*' # 大小寫不敏感 + 模糊比對
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"                                      # 彩色補全列表（fzf-tab 靠這個上色）
+zstyle ':completion:*' menu no                                                               # 關閉原生選單，交給 fzf-tab 接手
+zstyle ':completion:*:descriptions' format '[%d]'                                            # fzf-tab 群組標題（不可用色碼，否則會被忽略）
+zstyle ':completion:*:messages' format '[%d]'
+zstyle ':completion:*:warnings' format '[無匹配項目]'
+zstyle ':completion:*' use-cache on                                                          # 啟用補全快取
+zstyle ':completion:*' cache-path "$HOME/.zcompcache"
+zstyle ':completion:*:git-checkout:*' sort false                                             # git 分支依時間排序，不要字母排序
+
+# fzf-tab 專屬設定
+zstyle ':fzf-tab:*' use-fzf-default-opts yes                                                 # 沿用 .zshenv 的 Catppuccin 配色
+zstyle ':fzf-tab:*' switch-group '<' '>'                                                     # 用 < > 切換補全群組
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'                # cd 補全時預覽目錄內容
+zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'eza -1 --color=always $realpath'        # zoxide z 同上
+
+# ============================================================================
 # ZPLUG PLUGIN MANAGER
 # ============================================================================
 
@@ -186,12 +237,14 @@ if [[ -f "$ZPLUG_HOME/init.zsh" ]]; then
 
     # Essential Plugins
     zplug "wfxr/forgit"
-    zplug "zsh-users/zsh-syntax-highlighting", defer:2
+    # fzf-tab 必須在 compinit 之後、且在會 wrap widget 的 syntax-highlighting 之前載入。
+    # zplug 的載入順序固定為 defer_1 → compinit → defer_2 → defer_3，
+    # 故 fzf-tab 掛 defer:2、syntax-highlighting 降到 defer:3 才能滿足官方要求。
+    zplug "Aloxaf/fzf-tab", defer:2
+    zplug "zsh-users/zsh-syntax-highlighting", defer:3
     zplug "zsh-users/zsh-autosuggestions"
-    zplug "chitoku-k/fzf-zsh-completions"
     zplug "zsh-users/zsh-completions"
     zplug "zsh-users/zsh-history-substring-search"
-    zplug "supercrabtree/k"
 
     # Optional Plugins (可根據需要啟用)
     # zplug "b4b4r07/emoji-cli"
@@ -219,6 +272,17 @@ if (( $+widgets[history-substring-search-up] )); then
     bindkey '^N'   history-substring-search-down
 fi
 
+# Autosuggestions 快捷鍵：Ctrl-Space 接受建議
+bindkey '^ ' autosuggest-accept
+
+# macOS 慣用單詞跳轉與編輯快捷鍵
+bindkey '^[f'  forward-word                         # Option + Right (前進一個單詞)
+bindkey '^[b'  backward-word                        # Option + Left (後退一個單詞)
+bindkey '^[^?' backward-kill-word                   # Option + Backspace (刪除前一個單詞)
+bindkey '^W'   backward-kill-word                   # Ctrl + W (刪除前一個單詞)
+bindkey '^A'   beginning-of-line                    # Ctrl + A (行首)
+bindkey '^E'   end-of-line                          # Ctrl + E (行尾)
+
 # ============================================================================
 # SYNTAX HIGHLIGHTING THEME
 # ============================================================================
@@ -228,24 +292,19 @@ if [[ -f ~/.zsh/catppuccin_mocha-zsh-syntax-highlighting.zsh ]]; then
 fi
 
 # ============================================================================
-# COMPLETION SYSTEM
+# COMPLETION SYSTEM INIT
 # ============================================================================
-
-# Completion paths
-fpath=(
-    ~/.zsh/completion
-    $HOMEBREWOPT/share/zsh/site-functions
-    $fpath
-)
-
-# Initialize completion system (with 24h cache to speed up startup)
+# zplug load 內部已經對其自身的 zcompdump 強制跑過一次完整 compinit
+# （見 base/core/load.zsh 的 __zplug::core::load::from_cache，defer 機制寫死、無法關閉）。
+# 這裡只在 zplug 尚未初始化完成時（compdef 未定義）才補跑一次，避免同一個 session 重複掃描 fpath。
 autoload -Uz compinit
-if [[ -n ~/.zcompdump(#qN.mh+24) ]]; then
-    compinit -i
-else
-    compinit -C -i
+if (( ! $+functions[compdef] )); then
+    if [[ -n ~/.zcompdump(#qN.mh+24) ]]; then
+        compinit -i
+    else
+        compinit -C -i
+    fi
 fi
-
 # ============================================================================
 # VERSION MANAGERS
 # ============================================================================
@@ -265,19 +324,10 @@ if command -v zoxide >/dev/null 2>&1; then
 fi
 
 # Herdr (AI coding agent 終端機管理工具)
-if command -v herdr >/dev/null 2>&1; then
-    source <(herdr completion zsh)
-fi
+_load_completion_cache herdr herdr_completion.zsh completion zsh
 
-# Oh My Pi (omp completion, cached to avoid slow startup)
-if command -v omp >/dev/null 2>&1; then
-    local _omp_cache="${HOME}/.cache/omp_completion.zsh"
-    if [[ ! -f $_omp_cache || $(command -v omp) -nt $_omp_cache ]]; then
-        mkdir -p "${HOME}/.cache"
-        omp completions zsh > $_omp_cache
-    fi
-    source $_omp_cache
-fi
+# Oh My Pi (omp)
+_load_completion_cache omp omp_completion.zsh completions zsh
 
 # iTerm2 Integration
 [[ -f "${HOME}/.iterm2_shell_integration.zsh" ]] && source "${HOME}/.iterm2_shell_integration.zsh"
@@ -286,17 +336,10 @@ fi
 [[ -f "$HOME/.zshshell" ]] && source "$HOME/.zshshell"
 
 # Bun completions
-[[ -s "/Users/maxjkfc/.bun/_bun" ]] && source "/Users/maxjkfc/.bun/_bun"
+[[ -s "${BUN_INSTALL:-$HOME/.bun}/_bun" ]] && source "${BUN_INSTALL:-$HOME/.bun}/_bun"
 
-# Kubectl completion (cached to avoid slow startup)
-if command -v kubectl >/dev/null 2>&1; then
-    local _kube_cache="${HOME}/.cache/kubectl_completion.zsh"
-    if [[ ! -f $_kube_cache || $(command -v kubectl) -nt $_kube_cache ]]; then
-        mkdir -p "${HOME}/.cache"
-        kubectl completion zsh > $_kube_cache
-    fi
-    source $_kube_cache
-fi
+# Kubectl
+_load_completion_cache kubectl kubectl_completion.zsh completion zsh
 
 # ============================================================================
 # WELCOME MESSAGE (可選，建議移除以提升啟動速度)
@@ -323,3 +366,4 @@ fi
 if [[ -f ~/.zshrc.local ]]; then
     source ~/.zshrc.local
 fi
+
