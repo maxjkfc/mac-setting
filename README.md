@@ -7,7 +7,7 @@
 - 🎯 **完整的 zsh 配置結構**：符合最佳實踐的檔案組織
 - 🛠️ **15+ 個 fzf 增強工具**：大幅提升終端生產力
 - 🔧 **現代化開發環境**：Node.js (fnm)、Go、Docker、Kubernetes 等
-- 🤖 **AI 工具整合**：Claude CLI、Antigravity CLI (agy)、Oh My Pi (omp)、Herdr
+- 🤖 **AI 工具整合**：Claude CLI、Antigravity CLI (agy)、Oh My Pi (omp)、Herdr、pass-cli
 - 📦 **模組化設計**：易於維護和自訂
 
 ## 📁 專案結構

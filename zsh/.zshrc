@@ -160,6 +160,12 @@ alias rm!='/bin/rm'
 
 # 產生並載入 CLI 補全快取，避免每次啟動都 fork 子行程重新產生。
 # 在函式內宣告 local 才會真正生效（頂層的 local 不會 scope，會洩漏成全域變數）。
+#
+# 先寫暫存檔、確認 exit code 為 0 且輸出非空才覆蓋正式快取。
+# 若直接寫入正式快取，指令失敗會留下 0-byte 檔案，且其 mtime 必然新於 binary，
+# 導致下方的 mtime 判斷永遠成立、壞掉的快取被永久鎖住且每次啟動都 source。
+# 產生失敗時保留舊快取並將錯誤輸出到 stderr，不靜默吞掉。
+#
 # 用法: _load_completion_cache <指令> <快取檔名> <產生補全所需的參數...>
 _load_completion_cache() {
     local cmd=$1 name=$2
@@ -169,9 +175,15 @@ _load_completion_cache() {
     local cache="${HOME}/.cache/${name}"
     if [[ ! -f $cache || $(command -v "$cmd") -nt $cache ]]; then
         mkdir -p "${HOME}/.cache"
-        "$cmd" "$@" > "$cache" 2>/dev/null
+        local tmp="${cache}.tmp.$$"
+        if "$cmd" "$@" > "$tmp" 2>/dev/null && [[ -s $tmp ]]; then
+            command mv -f "$tmp" "$cache"
+        else
+            command rm -f "$tmp"
+            print -u2 "warn: 產生 $name 補全失敗，沿用既有快取"
+        fi
     fi
-    source "$cache"
+    [[ -s $cache ]] && source "$cache"
 }
 
 # Load FZF (key-bindings + 補全)
@@ -213,7 +225,8 @@ fpath=(
 
 # Completion System Styles (zstyle 優化)
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*' # 大小寫不敏感 + 模糊比對
-zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"                                      # 彩色補全列表（fzf-tab 靠這個上色）
+# 註：未設定 list-colors。本機無 GNU dircolors，LS_COLORS 始終為空，
+# 寫了也不會上色，故不留這行以免誤導。
 zstyle ':completion:*' menu no                                                               # 關閉原生選單，交給 fzf-tab 接手
 zstyle ':completion:*:descriptions' format '[%d]'                                            # fzf-tab 群組標題（不可用色碼，否則會被忽略）
 zstyle ':completion:*:messages' format '[%d]'
@@ -249,12 +262,26 @@ if [[ -f "$ZPLUG_HOME/init.zsh" ]]; then
     # Optional Plugins (可根據需要啟用)
     # zplug "b4b4r07/emoji-cli"
 
-    # Install plugins if missing (only run install if plugin directory doesn't exist to speed up shell startup)
-    if [[ ! -d "$ZPLUG_HOME/repos" ]] || [[ -z "$(ls -A "$ZPLUG_HOME/repos" 2>/dev/null)" ]]; then
-        if ! zplug check; then
-            zplug install
+    # 只在「宣告的外掛清單有變動」時才跑 zplug check / install。
+    # 每次啟動都跑 zplug check 要多花約 40-70ms；
+    # 但原本僅判斷 repos 目錄是否為空，會導致既有機器在新增外掛後
+    # 永遠不會安裝它（靜默缺件，如本次新增的 fzf-tab）。
+    # 這裡以 zplug 自身註冊的 $zplugs 鍵值排序後當作指紋，比對成本僅一次讀檔。
+    # 註：${(k)zplugs} 直接內嵌到巢狀展開會被壓成 scalar，導致 (o) 與 (j) 都失效，
+    # 必須先指派給真正的陣列再排序，否則指紋會退化成依賴 hash 走訪順序。
+    _zplug_marker="${HOME}/.cache/zplug_declared.list"
+    typeset -a _zplug_keys
+    _zplug_keys=("${(@k)zplugs}")
+    _zplug_now="${(j.:.)${(@o)_zplug_keys}}"
+    if [[ ! -r $_zplug_marker || "$_zplug_now" != "$(<$_zplug_marker)" ]]; then
+        zplug check || zplug install
+        # 僅在確認全部安裝完成後才寫入指紋，避免安裝失敗被記成已完成
+        if zplug check; then
+            mkdir -p "${HOME}/.cache"
+            print -r -- "$_zplug_now" > "$_zplug_marker"
         fi
     fi
+    unset _zplug_marker _zplug_now _zplug_keys
 
     # Load plugins
     zplug load
@@ -275,13 +302,8 @@ fi
 # Autosuggestions 快捷鍵：Ctrl-Space 接受建議
 bindkey '^ ' autosuggest-accept
 
-# macOS 慣用單詞跳轉與編輯快捷鍵
-bindkey '^[f'  forward-word                         # Option + Right (前進一個單詞)
-bindkey '^[b'  backward-word                        # Option + Left (後退一個單詞)
-bindkey '^[^?' backward-kill-word                   # Option + Backspace (刪除前一個單詞)
-bindkey '^W'   backward-kill-word                   # Ctrl + W (刪除前一個單詞)
-bindkey '^A'   beginning-of-line                    # Ctrl + A (行首)
-bindkey '^E'   end-of-line                          # Ctrl + E (行尾)
+# 註：^[f / ^[b / ^[^? / ^W / ^A / ^E 不需綁定，
+# 上方已 set -o emacs，這些正是 zsh emacs keymap 的預設值。
 
 # ============================================================================
 # SYNTAX HIGHLIGHTING THEME
@@ -366,4 +388,3 @@ _load_completion_cache kubectl kubectl_completion.zsh completion zsh
 if [[ -f ~/.zshrc.local ]]; then
     source ~/.zshrc.local
 fi
-
