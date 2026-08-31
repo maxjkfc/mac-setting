@@ -516,6 +516,7 @@ setup_ai_tools() {
     local ai_cli_tools=(
         "claude-code:Claude CLI"
         "herdr:AI coding agent 終端機工作區管理工具"
+        "protonpass/tap/pass-cli:Proton Pass CLI 憑證管理工具"
     )
 
     for tool_desc in "${ai_cli_tools[@]}"; do
