@@ -284,11 +284,17 @@ if [[ -f "$ZPLUG_HOME/init.zsh" ]]; then
     # 這裡以 zplug 自身註冊的 $zplugs 鍵值排序後當作指紋，比對成本僅一次讀檔。
     # 註：${(k)zplugs} 直接內嵌到巢狀展開會被壓成 scalar，導致 (o) 與 (j) 都失效，
     # 必須先指派給真正的陣列再排序，否則指紋會退化成依賴 hash 走訪順序。
+    #
+    # 另註：zplug 的 add.zsh 開頭有 `[[ -p /dev/stdin ]]` 判斷，只要 stdin 是 pipe
+    # 就把所有宣告當成已廢棄的 pipe 語法拒收（例如 `ssh host 'zsh -i -c ...'`）。
+    # 此時 $zplugs 為空，指紋成為空字串；若照樣寫入會清空 marker，
+    # 使下次真實終端再次觸發 check，且空指紋本身不具任何意義。
+    # 因此僅在確實註冊到外掛時才進行比對與寫入。
     _zplug_marker="${HOME}/.cache/zplug_declared.list"
     typeset -a _zplug_keys
     _zplug_keys=("${(@k)zplugs}")
     _zplug_now="${(j.:.)${(@o)_zplug_keys}}"
-    if [[ ! -r $_zplug_marker || "$_zplug_now" != "$(<$_zplug_marker)" ]]; then
+    if (( ${#_zplug_keys} > 0 )) && [[ ! -r $_zplug_marker || "$_zplug_now" != "$(<$_zplug_marker)" ]]; then
         zplug check || zplug install
         # 僅在確認全部安裝完成後才寫入指紋，避免安裝失敗被記成已完成
         if zplug check; then
