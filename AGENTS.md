@@ -1,6 +1,7 @@
 # AGENTS.md — AI Assistant Guide for mac-setting
 
-This file provides context for AI assistants (Codex, Copilot, etc.) working in this repository.
+This file provides context for AI assistants (Claude, Codex, Copilot, etc.) working in this repository.
+`CLAUDE.md` is a symlink to this file — edit `AGENTS.md` only, never maintain two copies.
 
 ## Repository Overview
 
@@ -22,7 +23,8 @@ mac-setting/
 ├── setup.sh                   # Main installer script (Bash, strict mode)
 ├── setup.sh.backup            # Auto-generated backup; do not edit
 ├── README.md                  # User-facing documentation (Traditional Chinese)
-├── AGENTS.md                  # This file
+├── AGENTS.md                  # This file — single source of truth for agent context
+├── CLAUDE.md                  # Symlink -> AGENTS.md
 │
 ├── zsh/                       # Zsh configuration files
 │   ├── .zshenv                # All zsh instances: env vars, PATH
@@ -49,9 +51,6 @@ mac-setting/
 │
 ├── tmux/
 │   └── .tmux.conf             # Tmux config; prefix = Ctrl-a, theme = Catppuccin Mocha
-│
-├── atuin/                    # Atuin history configuration
-│   └── config.toml           # Local search and daemon settings
 │
 ├── gitcz/                     # Commitizen configuration
 │   ├── .cz-config.js          # Commit types and messages (Traditional Chinese)
@@ -98,7 +97,7 @@ Understanding the load order is critical when modifying zsh files:
 ./setup.sh nvim          # Neovim + symlink ~/.config/nvim
 ./setup.sh backend       # Docker/k8s, Go, Node.js, cloud tools
 ./setup.sh golang        # Go language + dev tools only
-./setup.sh ai-tools      # Claude CLI, Herdr, Antigravity CLI
+./setup.sh ai-tools      # Claude CLI, Herdr, Antigravity CLI, pass-cli
 ./setup.sh gui-tools     # Raycast, Warp, Stats, AppCleaner (Cask)
 ./setup.sh vim-repeat    # Disable macOS key-hold delay for Vim
 ./setup.sh health        # Check what is/isn't installed

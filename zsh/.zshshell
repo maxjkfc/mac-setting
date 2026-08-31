@@ -632,7 +632,7 @@ fssh() {
                 if ($i !~ /[*?]/) print $i
             }
         }
-    ' "$ssh_config" | sort -u | fzf \
+    ' ~/.ssh/config(N) ~/.ssh/conf.d/*(N) 2>/dev/null | sort -u | fzf \
         --query="$1" \
         --height=50% \
         --border \
