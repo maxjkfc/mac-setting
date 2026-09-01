@@ -18,7 +18,6 @@ fi
 # 註：此設定未載入 Oh-My-Zsh 框架，p10k 主題是在下方手動 source，
 # 因此 ZSH_THEME / ZSH_DISABLE_COMPFIX 這類 OMZ 專用變數不適用、已移除。
 setopt prompt_subst
-setopt auto_cd               # 輸入目錄名稱直接切換目錄
 setopt auto_pushd            # cd 自動將目錄加入堆疊
 setopt pushd_ignore_dups     # 目錄堆疊忽略重複項目
 setopt pushd_silent          # pushd/popd 不輸出堆疊內容
