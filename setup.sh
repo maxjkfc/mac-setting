@@ -540,6 +540,15 @@ setup_ai_tools() {
         print_success "Antigravity IDE 已安裝"
     fi
 
+    # LM Studio CLI (lms) 檢查
+    if command_exists lms; then
+        print_success "LM Studio CLI (lms) 已安裝"
+    elif [[ -x "$HOME/.lmstudio/bin/lms" ]]; then
+        print_success "LM Studio CLI (lms) 已安裝於 ~/.lmstudio/bin/lms"
+    else
+        print_info "提示: lms (LM Studio CLI) 可由 LM Studio 內部安裝"
+    fi
+
     print_success "AI 開發工具安裝完成"
 }
 

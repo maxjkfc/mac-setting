@@ -91,6 +91,7 @@ add_to_path() {
 # 按優先級順序添加路徑
 add_to_path "$HOME/.local/bin"
 add_to_path "$HOME/.antigravity/antigravity/bin"
+add_to_path "$HOME/.lmstudio/bin"
 add_to_path "$COREPATH"
 add_to_path "$GOROOT/bin"
 add_to_path "$GOPATH/bin"
