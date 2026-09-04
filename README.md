@@ -70,7 +70,7 @@ cd ~/code/mac-setting
 # 或分別安裝
 ./setup.sh backend         # 後端開發工具
 ./setup.sh zsh             # Zsh 配置（含基礎工具）
-./setup.sh ai-tools        # AI 工具 (Claude CLI, Herdr, Antigravity CLI 檢查)
+./setup.sh ai-tools        # AI 工具 (Claude CLI, Herdr, Antigravity CLI, pass-cli, LM Studio CLI 檢查)
 ./setup.sh gui-tools       # GUI 應用程式
 ```
 
