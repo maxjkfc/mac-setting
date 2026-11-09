@@ -552,6 +552,75 @@ setup_ai_tools() {
     print_success "AI 開發工具安裝完成"
 }
 
+# Herdr app（桌面版，與 brew 的 herdr TUI 是不同程式）：
+# 安裝 app，再從 maxjkfc/herdr-max 套用 layout / mods / keys / programs，並補上 settings.json。
+# 可重複執行：app 已存在就跳過，herdr-max 用 --ff-only 更新。
+setup_herdr_app() {
+    print_step "設置 Herdr app 與 herdr-max 配置..."
+    print_separator
+
+    if [[ "$(uname -s)" != "Darwin" || "$(uname -m)" != "arm64" ]]; then
+        print_warning "Herdr app 此腳本只支援 macOS Apple silicon，跳過"
+        return 0
+    fi
+
+    local app_home="${HERDR_APP_HOME:-$HOME/.config/herdr-app}"
+    local max_repo="https://github.com/maxjkfc/herdr-max.git"
+    local max_dir="${HERDR_MAX_DIR:-$HOME/code/herdr-max}"
+    export PATH="$HOME/.local/bin:$PATH"
+
+    # 1. Herdr app（官方安裝腳本會放到 /Applications 並建立 ~/.local/bin/herdr-app、hc）
+    if [[ -d /Applications/Herdr.app ]]; then
+        print_info "Herdr.app 已安裝，跳過"
+    else
+        print_info "安裝 Herdr app..."
+        if curl -fsSL https://releases.herdr.dev/app/install.sh | sh; then
+            print_success "Herdr app 安裝成功"
+        else
+            print_error "Herdr app 安裝失敗，請改從 https://releases.herdr.dev/app/Herdr.dmg 手動安裝"
+            return 1
+        fi
+    fi
+
+    # 2. mods 用到的工具：macmon（系統監控）、gh（Git / PR 面板）、python3（worktree 與額度腳本）
+    safe_brew_install macmon "macmon (系統監控)"
+    safe_brew_install gh "GitHub CLI"
+    if ! command_exists python3; then
+        print_warning "找不到 python3，worktree-plus 與 status-quota 需要它（xcode-select --install 或 brew install python）"
+    fi
+
+    # 3. 取得 / 更新 herdr-max（公開 repo，不需要 ssh key）
+    if [[ ! -d "$max_dir/.git" ]]; then
+        print_info "下載 herdr-max 到 $max_dir..."
+        mkdir -p "$(dirname "$max_dir")"
+        git clone "$max_repo" "$max_dir"
+    elif [[ -n "$(git -C "$max_dir" status --porcelain)" ]]; then
+        print_warning "$max_dir 有未 commit 的改動，不更新，直接套用現有內容"
+    elif git -C "$max_dir" pull --ff-only; then
+        print_info "herdr-max 已更新"
+    else
+        print_warning "herdr-max 無法 fast-forward，直接套用現有內容"
+    fi
+
+    # 4. 套用 layout / mods / keys / programs（既有 keys.json 會備份成 keys.json.bak）
+    bash "$max_dir/install.sh"
+
+    # 5. settings.json（字型、音效、遙測等）：只在不存在時放入，不覆蓋你之後在 app 裡的調整
+    if [[ -f "$app_home/settings.json" ]]; then
+        print_info "settings.json 已存在，跳過"
+    else
+        cp "$SCRIPT_DIR/herdr-app/settings.json" "$app_home/settings.json"
+        print_success "已放入 settings.json"
+    fi
+
+    print_success "Herdr app 配置完成"
+    print_info "還需要手動做的事："
+    print_info "  - gh auth login（Git / PR 面板、worktree 自動清理用）"
+    print_info "  - 登入 Claude / Codex（status-quota 額度面板讀取本機登入資料）"
+    print_info "  - 遠端機器：hc machine add macmini"
+    print_info "  - 若 programs.json 已存在，omp 圖示需自行合併 $max_dir/programs.json"
+}
+
 setup_review_tools() {
     print_step "安裝 Code Review 工具鏈..."
     print_separator
@@ -729,6 +798,7 @@ setup_all() {
         "setup_review_tools:Code Review 工具鏈"
         "setup_fonts:Nerd Fonts"
         "setup_ai_tools:AI 開發工具"
+        "setup_herdr_app:Herdr app 與 herdr-max 配置"
         "setup_vim_mode_repeating:Vim 模式設置"
     )
     
@@ -874,6 +944,20 @@ health_check() {
     else
         print_warning "⚠ Go 未安裝"
     fi
+
+    # 檢查 Herdr app
+    echo ""
+    print_info "檢查 Herdr app:"
+    if [[ -d /Applications/Herdr.app ]]; then
+        print_success "✓ Herdr.app"
+    else
+        print_warning "⚠ Herdr.app 未安裝（./setup.sh herdr-app）"
+    fi
+    if [[ -f "$HOME/.config/herdr-app/layouts/main-custom.json" ]]; then
+        print_success "✓ herdr-max 配置（main-custom layout）"
+    else
+        print_warning "⚠ herdr-max 配置尚未套用（./setup.sh herdr-app）"
+    fi
     
     echo ""
     print_separator
@@ -911,6 +995,7 @@ $(print_step "選項:")
   golang        - 安裝 Go 開發環境與工具
   review-tools  - 安裝 Code Review 工具鏈（shellcheck/gitleaks/hadolint/actionlint/kubeconform/govulncheck/ruff/pip-audit）
   ai-tools      - 安裝 AI 開發工具
+  herdr-app     - 安裝 Herdr app（桌面版）並套用 herdr-max 配置（layout/mods/keys）
   gui-tools     - 安裝 GUI 工具
   fonts         - 安裝 Nerd Fonts
   vim-repeat    - 設置 Vim 模式按鍵重複
@@ -980,6 +1065,10 @@ main() {
         "ai-tools")
             check_homebrew
             setup_ai_tools
+            ;;
+        "herdr-app")
+            check_homebrew
+            setup_herdr_app
             ;;
         "fonts")
             check_homebrew

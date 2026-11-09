@@ -71,6 +71,7 @@ cd ~/code/mac-setting
 ./setup.sh backend         # 後端開發工具
 ./setup.sh zsh             # Zsh 配置（含基礎工具）
 ./setup.sh ai-tools        # AI 工具 (Claude CLI, Herdr, Antigravity CLI, pass-cli, LM Studio CLI 檢查)
+./setup.sh herdr-app       # Herdr app（桌面版）與 herdr-max 配置
 ./setup.sh gui-tools       # GUI 應用程式
 ```
 
@@ -186,6 +187,7 @@ cd ~/code/mac-setting
 - **Antigravity CLI** (`agy`)：Google Antigravity CLI 工具
 - **Oh My Pi** (`omp`)：AI Coding Harness 工具
 - **Herdr** (`herdr`)：AI coding agent 終端機工作區管理工具
+- **Herdr app** (`Herdr.app`)：桌面版，與上面 brew 的 `herdr`（TUI）是不同程式。`./setup.sh herdr-app` 會安裝 app、`macmon`、`gh`，再從 [maxjkfc/herdr-max](https://github.com/maxjkfc/herdr-max) 套用 layout / mods / keys / programs（既有 `keys.json` 備份成 `keys.json.bak`），並在 `~/.config/herdr-app/settings.json` 不存在時放入本 repo 的 `herdr-app/settings.json`。可重複執行。裝完還需手動：`gh auth login`、登入 Claude / Codex、`hc machine add macmini`
 
 #### claude --remote 持久運行
 
