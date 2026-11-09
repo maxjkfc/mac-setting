@@ -153,6 +153,12 @@ alias rm='trash'
 # 真的要永久刪除時用 rm! 或 /bin/rm
 alias rm!='/bin/rm'
 
+# ═══════════════════════════════════════════════════════════════
+# OpenDesign CLI 
+# ═══════════════════════════════════════════════════════════════
+alias opendesign="/Applications/Open\ Design.app/Contents/MacOS/Open\ Design --disable-gpu-sandbox"
+
+
 # ============================================================================
 # FZF CONFIGURATION
 # ============================================================================
@@ -408,3 +414,9 @@ _load_completion_cache kubectl kubectl_completion.zsh completion zsh
 if [[ -f ~/.zshrc.local ]]; then
     source ~/.zshrc.local
 fi
+
+# direnv
+eval "$(direnv hook zsh)"
+
+# 偵測被 agent 遺留的 headless Chrome（會搶走 com.google.Chrome 註冊，導致 Chrome 打不開/關不掉）
+alias chrome-orphans='ps -axo pid,ppid,etime,command | grep "Google Chrome.app/Contents/MacOS/Google Chrome --headless" | grep -v grep'
