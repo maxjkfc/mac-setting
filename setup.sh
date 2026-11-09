@@ -524,6 +524,20 @@ setup_ai_tools() {
         safe_brew_install "$tool" "$desc"
     done
 
+    # Oh My Pi (omp) 檢查與配置連結
+    if command_exists omp; then
+        print_success "Oh My Pi (omp) 已安裝"
+    elif [[ -x "$HOME/.bun/bin/omp" || -x "$HOME/.local/bin/omp" ]]; then
+        print_success "Oh My Pi (omp) 已安裝"
+    else
+        print_info "提示: omp (Oh My Pi) 可透過 bun install -g @oh-my-pi/pi-coding-agent 安裝"
+    fi
+
+    if [[ -f "$SCRIPT_DIR/omp/config.yml" ]]; then
+        mkdir -p "$HOME/.omp/agent"
+        safe_symlink "$SCRIPT_DIR/omp/config.yml" "$HOME/.omp/agent/config.yml" "OMP 主配置檔"
+    fi
+
     # Google Antigravity CLI (agy) 與 IDE 檢查
     if command_exists agy; then
         print_success "Antigravity CLI (agy) 已安裝"
@@ -863,7 +877,7 @@ health_check() {
     
     echo ""
     print_info "檢查配置檔:"
-    local configs=("$HOME/.zshrc" "$HOME/.tmux.conf" "$HOME/.config/nvim")
+    local configs=("$HOME/.zshrc" "$HOME/.tmux.conf" "$HOME/.config/nvim" "$HOME/.omp/agent/config.yml")
     local missing_configs=()
     
     for config in "${configs[@]}"; do

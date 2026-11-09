@@ -1,0 +1,224 @@
+providers:
+  openai-codex:
+    codeMode: auto
+  openaiLiveSteering: true
+modelRoles:
+  default: anthropic/claude-sonnet-5-5
+  smol: openai-codex/gpt-6.1-terra
+  slow: anthropic/claude-opus-5-5:auto
+  plan: anthropic/claude-sonnet-5-5
+  commit: anthropic/claude-haiku-5-5
+  advisor: anthropic/claude-opus-5-5:auto
+  task: anthropic/claude-sonnet-5-5:auto
+  tiny: anthropic/claude-haiku-5-5
+  vision: google-antigravity/gemini-4-argon:low
+  highlevel-chatgpt: openai-codex/gpt-6-astra:auto
+  highlevel: anthropic/claude-fable-5-1:auto
+  memory: anthropic/claude-haiku-5-5
+  image: google-antigravity/gemini-3-pro-image
+  judge: typesafe/jev-1.14.0
+symbolPreset: nerd
+theme:
+  dark: titanium
+setupVersion: 3
+defaultThinkingLevel: auto
+stt:
+  enabled: true
+  submitTrigger: never
+hideThinkingBlock: false
+composer:
+  shape: band
+  tokenRate: true
+cycleOrder:
+  - default
+  - smol
+  - slow
+  - plan
+  - task
+  - advisor
+  - vision
+  - highlevel
+  - highlevel-chatgpt
+retry:
+  fallbackChains:
+    default:
+      - openai-codex/gpt-6.1-sol
+      - google-antigravity/claude-sonnet-5-5
+      - google-antigravity/gemini-4-argon
+    smol:
+      - google-antigravity/gemini-3.8-flash:medium
+      - anthropic/claude-sonnet-5-5
+    slow:
+      - openai-codex/gpt-6.1-sol
+      - google-antigravity/claude-opus-5-5
+      - anthropic/claude-sonnet-5-5
+    vision:
+      - openai-codex/gpt-6.1-sol
+      - anthropic/claude-sonnet-5-5
+    plan:
+      - openai-codex/gpt-6.1-sol
+      - anthropic/claude-opus-5-5
+      - google-antigravity/claude-sonnet-5-5
+    commit:
+      - openai-codex/gpt-6-luna
+      - google-antigravity/gemini-3.5-flash-lite
+      - google-antigravity/gemini-3.8-flash:medium
+    tiny:
+      - openai-codex/gpt-6-luna
+      - google-antigravity/gemini-3.8-flash:medium
+    task:
+      - openai-codex/gpt-6.1-terra
+      - google-antigravity/gemini-3.8-flash
+      - openai-codex/gpt-6-luna
+    advisor:
+      - openai-codex/gpt-6.1-sol
+      - google-antigravity/claude-opus-5-5
+      - google-antigravity/gemini-4-argon
+    highlevel:
+      - anthropic/claude-mythos-5-1:auto
+      - anthropic/claude-opus-5-5:auto
+      - openai-codex/gpt-6-astra:auto
+    highlevel-chatgpt:
+      - openai-codex/gpt-6.1-sol:auto
+      - anthropic/claude-fable-5-1:auto
+    image:
+      - google-antigravity/gemini-3.1-flash-image
+      - openai-codex/gpt-image-2
+  rateLimitWalksChain: true
+  usageAwareFallback: true
+  usageReservePct: 5
+task:
+  agentModelOverrides:
+    scout: "@tiny"
+    sonic: "@tiny"
+  enableEffort: true
+  enableLsp: true
+  isolation:
+    enabled: true
+  disabledAgents:
+    - review-gpt
+compaction:
+  idleEnabled: true
+  thresholdPercent: 75
+display:
+  showTokenUsage: true
+  showTurnTime: false
+  hideToolActivity: false
+disabledExtensions:
+  - skill:orca-cli
+  - skill:orchestration
+  - skill:supacode-cli
+  - skill:book-review
+  - skill:build-persona
+  - skill:highlight-graph
+  - skill:feed-catchup
+  - skill:now-reading-page
+  - skill:quiz
+  - skill:readwise-mcp
+  - skill:readwise-cli
+  - skill:reader-recap
+  - skill:heptabase-cli
+memory:
+  backend: local
+vault:
+  enabled: true
+github:
+  enabled: true
+dev:
+  autoqaConsent: granted
+codexResets:
+  autoRedeem: "no"
+statusLine:
+  separator: powerline
+  preset: default
+  sessionAccent: true
+  transparent: false
+  compactThinkingLevel: true
+  showHookStatus: true
+colorBlindMode: false
+tui:
+  textSizing: false
+  vimMode: true
+  vimModeDisplay: icon
+terminal:
+  showProgress: false
+todo:
+  remindersMax: 5
+browser:
+  relay: false
+claudeResets:
+  autoRedeem: "no"
+worktree:
+  onStart: "off"
+  onExit: ask
+bash:
+  gitGuard: true
+checkpoint:
+  enabled: true
+security:
+  enabled: true
+update:
+  auto: false
+prewalk:
+  auto: "on"
+  autoTarget: "@smol"
+edit:
+  autoRepair:
+    enabled: true
+tools:
+  speculativeExecution:
+    enabled: true
+advisor:
+  reviewMode: agent-end
+modelPresets:
+  daily:
+    defaultThinkingLevel: auto
+    modelRoles:
+      default: anthropic/claude-sonnet-5-5
+      smol: openai-codex/gpt-6.1-terra
+      slow: anthropic/claude-opus-5-5:auto
+      plan: anthropic/claude-sonnet-5-5
+      commit: anthropic/claude-haiku-5-5
+      advisor: anthropic/claude-opus-5-5:auto
+      task: anthropic/claude-sonnet-5-5:auto
+      tiny: anthropic/claude-haiku-5-5
+      vision: google-antigravity/gemini-4-argon:low
+      highlevel-chatgpt: openai-codex/gpt-6-astra:auto
+      highlevel: anthropic/claude-fable-5-1:auto
+      memory: anthropic/claude-haiku-5-5
+      image: google-antigravity/gemini-3-pro-image
+      judge: typesafe/jev-1.14.0
+  deep:
+    defaultThinkingLevel: high
+    modelRoles:
+      default: anthropic/claude-opus-5-5:high
+      smol: anthropic/claude-sonnet-5-5:medium
+      slow: anthropic/claude-fable-5-1:high
+      plan: anthropic/claude-opus-5-5:high
+      commit: anthropic/claude-haiku-5-5
+      advisor: openai-codex/gpt-6-astra:high
+      task: anthropic/claude-opus-5-5:auto
+      tiny: anthropic/claude-haiku-5-5
+      vision: google-antigravity/gemini-4-argon:high
+      highlevel-chatgpt: openai-codex/gpt-6-astra:xhigh
+      highlevel: anthropic/claude-fable-5-1:xhigh
+      memory: anthropic/claude-haiku-5-5
+      image: google-antigravity/gemini-3-pro-image
+      judge: typesafe/jev-1.14.0
+  fast:
+    defaultThinkingLevel: medium
+    modelRoles:
+      default: openai-codex/gpt-6.1-terra:medium
+      smol: google-antigravity/gemini-3.8-flash:low
+      slow: openai-codex/gpt-6.1-sol:high
+      plan: openai-codex/gpt-6.1-sol:medium
+      commit: openai-codex/gpt-6-luna
+      advisor: anthropic/claude-sonnet-5-5:medium
+      task: google-antigravity/gemini-3.8-flash:medium
+      tiny: openai-codex/gpt-6-luna
+      vision: google-antigravity/gemini-3.8-flash:low
+      highlevel-chatgpt: openai-codex/gpt-6.1-sol:high
+      highlevel: anthropic/claude-opus-5-5:high
+      memory: openai-codex/gpt-6-luna
+      image: google-antigravity/gemini-3.1-flash-image
+      judge: typesafe/jev-1.14.0

@@ -25,6 +25,8 @@ mac-setting/
 │   └── claude-remote-watchdog.sh  # claude --remote 斷線自動重啟
 ├── docs/                    # 文件目錄
 │   └── shortcuts.md         # 完整快捷鍵與命令速查手冊
+├── omp/                     # Oh My Pi (omp) 配置
+│   └── config.yml           # OMP 全域設定與模型角色配置（連結至 ~/.omp/agent/config.yml）
 ├── tmux/                    # tmux 配置
 │   ├── .tmux.conf           # tmux 主設定檔
 │   └── shortcuts.md         # tmux 快捷鍵速查表
@@ -185,7 +187,7 @@ cd ~/code/mac-setting
 ### AI 工具
 - **Claude CLI** (`claude`)：Anthropic Claude 命令列工具
 - **Antigravity CLI** (`agy`)：Google Antigravity CLI 工具
-- **Oh My Pi** (`omp`)：AI Coding Harness 工具
+- **Oh My Pi** (`omp`)：AI Coding Harness 工具（設定檔 `omp/config.yml` 由 `./setup.sh ai-tools` 連結至 `~/.omp/agent/config.yml`）
 - **Herdr** (`herdr`)：AI coding agent 終端機工作區管理工具
 - **Herdr app** (`Herdr.app`)：桌面版，與上面 brew 的 `herdr`（TUI）是不同程式。`./setup.sh herdr-app` 會安裝 app、`macmon`、`gh`，再從 [maxjkfc/herdr-max](https://github.com/maxjkfc/herdr-max) 套用 layout / mods / keys / programs（既有 `keys.json` 備份成 `keys.json.bak`），並在 `~/.config/herdr-app/settings.json` 不存在時放入本 repo 的 `herdr-app/settings.json`。可重複執行。裝完還需手動：`gh auth login`、登入 Claude / Codex、`hc machine add macmini`
 
