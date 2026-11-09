@@ -174,9 +174,14 @@ fompm() {
         echo "錯誤: omp 未安裝" >&2
         return 1
     fi
+    if ! command -v jq >/dev/null 2>&1; then
+        echo "錯誤: jq 未安裝" >&2
+        return 1
+    fi
 
     local model
-    model=$(omp models | fzf --height=40% --border --prompt="選擇 OMP 模型: " | awk '{print $1}')
+    model=$(omp models --json | jq -r '.models[] | "\(.selector)\t\(.name)\tctx:\(.contextWindow // "-")"' | \
+        fzf --height=40% --border --delimiter=$'\t' --with-nth=1,2,3 --prompt="選擇 OMP 模型: " | cut -f1)
     if [[ -n "$model" ]]; then
         omp --model "$model" "$@"
     fi
@@ -189,9 +194,14 @@ fompw() {
         echo "錯誤: omp 未安裝" >&2
         return 1
     fi
+    if ! command -v jq >/dev/null 2>&1; then
+        echo "錯誤: jq 未安裝" >&2
+        return 1
+    fi
 
     local wt
-    wt=$(omp worktree | fzf --height=40% --border --prompt="選擇 OMP Worktree: " | awk '{print $1}')
+    wt=$(omp worktree list --json | jq -r '.[] | "\(.path)\t\(.kind // "")"' | \
+        fzf --height=40% --border --delimiter=$'\t' --with-nth=1,2 --prompt="選擇 OMP Worktree: " | cut -f1)
     if [[ -n "$wt" && -d "$wt" ]]; then
         cd "$wt"
     fi
