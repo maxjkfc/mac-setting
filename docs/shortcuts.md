@@ -47,13 +47,11 @@
 
 | 快捷鍵 | 工具 | 說明 |
 |---|---|---|
-| `Ctrl-R` | Atuin | 依 workspace、directory、session 搜尋 history；`Tab` 插入結果 |
+| `Ctrl-R` | fzf | 模糊搜尋命令歷史（支援 `?` 切換預覽） |
 | `↑` / `↓` | zsh-history-substring-search | 依目前輸入內容搜尋 native history |
 | `Ctrl-P` / `Ctrl-N` | zsh-history-substring-search | `↑` / `↓` 的 emacs 快捷鍵 |
-| Ghost text | zsh-autosuggestions + Atuin | 以 history 提供 inline suggestion |
-| `Ctrl-T` / `Alt-C` | fzf | 檔案與目錄搜尋，功能不受 Atuin 取代 |
-
-Atuin AI 的 `?` 按鍵目前未啟用；需要先檢查資料範圍與權限，再個別開啟。
+| Ghost text | zsh-autosuggestions | 以 history 提供 inline suggestion |
+| `Ctrl-T` / `Alt-C` | fzf | 檔案與目錄模糊搜尋 |
 
 ---
 

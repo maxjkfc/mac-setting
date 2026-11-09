@@ -85,9 +85,16 @@ safe_brew_install() {
     local package="$1"
     local description="${2:-$package}"
     
-    if command_exists "${package##*/}"; then
-        print_info "$description 已安裝，跳過"
-        return 0
+    if brew list --formula --versions "${package##*/}" >/dev/null 2>&1 || command_exists "${package##*/}"; then
+        if [[ "$package" == "git" || "$package" == "curl" || "$package" == "gnu-sed" || "$package" == "powerlevel10k" ]]; then
+            if brew list --formula --versions "${package##*/}" >/dev/null 2>&1; then
+                print_info "$description 已安裝，跳過"
+                return 0
+            fi
+        else
+            print_info "$description 已安裝，跳過"
+            return 0
+        fi
     fi
     
     print_info "安裝 $description..."
@@ -226,6 +233,7 @@ setup_install_depend() {
         "fd:現代化的 find 替代品"
         "wget:下載工具"
         "gnu-sed:GNU sed"
+        "coreutils:GNU 核心工具集"
         "git:版本控制"
         "tmux:終端多工器"
         "curl:HTTP 客戶端"
@@ -293,6 +301,8 @@ setup_backend_tools() {
         "jq:JSON 處理工具"
         "yq:YAML 處理工具"
         "grpcurl:gRPC 測試工具"
+        "bufbuild/buf/buf:Protobuf lint 與格式化工具"
+        "libpq:PostgreSQL 客戶端工具與函式庫"
     )
     
     for tool_desc in "${api_tools[@]}"; do
@@ -383,10 +393,7 @@ setup_nodejs_environment() {
     safe_brew_install "fnm" "Node.js 版本管理器"
     safe_brew_install "oven-sh/bun/bun" "Bun JavaScript 運行時"
     
-    # 設置 fnm 環境變數
-    local zshrc="$HOME/.zshrc"
-    add_to_file_if_missing 'eval "$(fnm env --use-on-cd)"' "$zshrc" "fnm 環境變數"
-    
+    # fnm 環境變數已在 zsh/.zshrc 中配置，無需動態追加至 ~/.zshrc
     # 使用 fnm 安裝 LTS 版本
     if command_exists fnm; then
         print_info "使用 fnm 安裝 Node.js LTS 版本..."
@@ -435,20 +442,8 @@ setup_golang_environment() {
             print_success "Go $go_version 安裝成功"
         fi
         
-        # 設置 Go 環境變數到 .zshenv
-        local zshenv="$HOME/.zshenv"
-        local go_root=$(go env GOROOT 2>/dev/null)
+        # Go 環境變數與 PATH 已在 zsh/.zshenv 統一透過 add_to_path 管理
         local go_path="$HOME/go"
-        
-        # 確保 .zshenv 存在
-        touch "$zshenv"
-        
-        # 添加 Go 環境變數
-        add_to_file_if_missing "# Go 環境變數" "$zshenv" "Go 環境變數註解"
-        add_to_file_if_missing "export GOROOT=\"$go_root\"" "$zshenv" "GOROOT 環境變數"
-        add_to_file_if_missing "export GOPATH=\"$go_path\"" "$zshenv" "GOPATH 環境變數"
-        add_to_file_if_missing "export PATH=\"\$GOPATH/bin:\$GOROOT/bin:\$PATH\"" "$zshenv" "Go PATH 設定"
-        
         # 創建 GOPATH 目錄結構
         mkdir -p "$go_path"/{bin,src,pkg}
         print_info "已創建 Go 工作目錄: $go_path"

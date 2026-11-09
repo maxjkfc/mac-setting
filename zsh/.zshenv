@@ -100,6 +100,7 @@ add_to_path "$ZPLUG_HOME/bin"
 add_to_path "$HOMEBREWOPT/bin"
 add_to_path "$HOMEBREWOPT/opt/curl/bin"
 add_to_path "$PQSQL_HOME/bin"
+add_to_path "/Applications/Obsidian.app/Contents/MacOS"
 
 
 # ============================================================================

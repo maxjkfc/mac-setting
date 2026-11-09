@@ -11,6 +11,7 @@ package-lock.json
 
 # Backup files
 *.backup
+*.backup.*
 *.bak
 
 # Claude Code session data

@@ -44,9 +44,10 @@ mac-setting/
 │       │   ├── lazy.lua       # Lazy.nvim bootstrap
 │       │   └── options.lua    # Vim options
 │       └── plugins/
-│           ├── editor.lua     # Telescope, Neo-tree, editing tools
-│           ├── theme.lua      # Colorscheme
-│           ├── ui.lua         # UI enhancements
+│           ├── csv.lua        # csvview.nvim (CSV/TSV table view)
+│           ├── editor.lua     # conform.nvim & nvim-lint (proto via buf)
+│           ├── theme.lua      # Colorscheme (Catppuccin Mocha)
+│           ├── ui.lua         # snacks.nvim (explorer & dashboard)
 │           └── vscode.lua     # VSCode-specific overrides
 │
 ├── tmux/
@@ -124,28 +125,14 @@ Based on **LazyVim**. Plugin management via `lazy.nvim`.
 
 | File | Contents |
 |------|----------|
-| `lua/plugins/editor.lua` | Telescope (find files: `<leader>ff`, live grep: `;r`, diagnostics: `;e`), Neo-tree, numb.nvim, multi-cursor, mini.surround, mini.comment, conform.nvim (proto formatting via `buf`), nvim-lint (proto lint via `buf_lint`) |
-| `lua/plugins/theme.lua` | Colorscheme setup |
-| `lua/plugins/ui.lua` | UI enhancements |
-| `lua/plugins/vscode.lua` | VSCode-specific overrides |
+| `lua/plugins/csv.lua` | `csvview.nvim` for CSV/TSV border table view (`<leader>cv`) |
+| `lua/plugins/editor.lua` | `conform.nvim` (proto formatting via `buf`), `nvim-lint` (proto lint via `buf_lint`) |
+| `lua/plugins/theme.lua` | Colorscheme setup (`catppuccin` mocha) |
+| `lua/plugins/ui.lua` | `snacks.nvim` explorer (shows hidden & gitignored files) and dashboard header |
+| `lua/plugins/vscode.lua` | VSCode / Antigravity specific overrides (`vscode-multi-cursor.nvim`, Flash, Treesitter) |
 
-### Telescope keymaps
-- `<leader>ff` — find files
-- `;r` — live grep (includes hidden files)
-- `;e` — diagnostics
-- `;s` — Treesitter symbols
-- In picker: `Ctrl-j/k` navigate, `Ctrl-c` close, `Ctrl-t` open in Trouble
-
-### Mini.surround mappings
-`gsa` add, `gsd` delete, `gsf`/`gsF` find, `gsh` highlight, `gsr` replace, `gsn` update n_lines
-
-### mini.comment
-`<leader>/` — toggle comment (normal, visual, line)
-
-### Neo-tree
-- Always shows `.gitignore`, `.dockerignore`, `.github`, `.env*`
-- `v` — open in vertical split
-- `<space>` — disabled (reserved for leader)
+### LazyVim Extras (`lazyvim.json`)
+Uses LazyVim v8 defaults with `snacks_picker` and `snacks_explorer` (replacing Telescope and Neo-tree), plus `claudecode`, `copilot`, `yanky`, `aerial`, `dial`, `inc-rename`, `helm`, `markdown`, `python`, `dot`, and `mini-hipatterns`.
 
 ---
 
@@ -163,7 +150,7 @@ Based on **LazyVim**. Plugin management via `lazy.nvim`.
   - Copy mode: `v` begin selection, `y` copy
 
 ### TPM Plugins
-`tmux-pain-control`, `tmux-sensible`, `tmux-sessionist`, `tmux-copycat`, `tmux-yank`, `tmux-resurrect`, `tmux-continuum`, `tmux-open`, `tmux-prefix-highlight`, `catppuccin/tmux`, `sainnhe/tmux-fzf`
+`tmux-pain-control`, `tmux-sensible`, `tmux-sessionist`, `tmux-yank`, `tmux-resurrect`, `tmux-continuum`, `tmux-open`, `tmux-prefix-highlight`, `catppuccin/tmux`, `sainnhe/tmux-fzf`
 
 ---
 
@@ -182,6 +169,7 @@ All functions check for required tools and print errors if missing.
 | `fherdr` | `fherdr` | Select and attach to Herdr session |
 | `fherdr-ws` | `fherdr-ws` | Select and switch Herdr workspace |
 | `herdr-omp [dir]` | `herdr-omp` | Launch OMP in a new Herdr tab |
+| `fompr` | `fompr` | Select and resume Oh My Pi session |
 | `fompm [args]` | `fompm` | Select model and launch Oh My Pi |
 | `fompw` | `fompw` | Select and cd into Oh My Pi worktree |
 | `fkill [signal]` | `fkill` | Multi-select processes and kill (default signal 9) |
@@ -193,6 +181,8 @@ All functions check for required tools and print errors if missing.
 | `gnew <branch>` | `gnew feat/x` | Safely create and checkout new branch from `origin/main` |
 | `fssh [pattern]` | `fssh` | Fuzzy search `~/.ssh/config` hosts and connect |
 | `myip` | `myip` | Show local + public IP with geolocation |
+| `flan [-i iface]` | `flan` | Scan LAN devices (IP, MAC, Bonjour hostname, SSH/VNC status) |
+| `claude-watch [dir]` | `claude-watch` | Run `claude --remote` watchdog in tmux session |
 | `sysinfo` | `sysinfo` | CPU, RAM, uptime summary |
 | `fzf_help` | `fzf_help` | Print all function descriptions |
 
