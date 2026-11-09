@@ -10,14 +10,14 @@
 # ============================================================================
 
 # 顏色定義
-local RED='\033[0;31m'
-local GREEN='\033[0;32m'
-local YELLOW='\033[1;33m'
-local BLUE='\033[0;34m'
-local PURPLE='\033[0;35m'
-local CYAN='\033[0;36m'
-local WHITE='\033[1;37m'
-local NC='\033[0m' # No Color
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+BLUE='\033[0;34m'
+PURPLE='\033[0;35m'
+CYAN='\033[0;36m'
+WHITE='\033[1;37m'
+NC='\033[0m' # No Color
 
 # 使用 macchina 顯示系統資訊（如果可用）
 show_system_info() {
@@ -172,3 +172,6 @@ fi
 
 # 創建快取目錄
 [[ ! -d "$HOME/.cache" ]] && mkdir -p "$HOME/.cache"
+
+# 清除暫時顏色變數，避免污染互動式 shell 環境
+unset RED GREEN YELLOW BLUE PURPLE CYAN WHITE NC

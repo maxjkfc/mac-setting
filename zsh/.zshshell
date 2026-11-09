@@ -73,7 +73,9 @@ fs() {
         fzf --query="$1" --select-1 --exit-0 --height=40% --border)
     
     if [[ -n "$session" ]]; then
-        tmux switch-client -t "$session"
+        local change_cmd
+        [[ -n "$TMUX" ]] && change_cmd="switch-client" || change_cmd="attach-session"
+        tmux $change_cmd -t "$session"
     else
         echo "未找到匹配的 session"
     fi
@@ -346,7 +348,7 @@ fkill() {
     
     # 獲取程序列表，排除標題行
     local processes
-    processes=$(ps -eo pid,ppid,user,%cpu,%mem,command --sort=-%cpu | sed 1d)
+    processes=$(ps -ro pid,ppid,user,%cpu,%mem,command | sed 1d)
     
     if [[ -z "$processes" ]]; then
         echo "未找到任何程序"
@@ -812,6 +814,14 @@ fzf_help() {
   fcd [pattern]    - 搜尋並切換目錄
   fcode [pattern]  - 搜尋 ~/code 專案目錄並切換
   vg <pattern>     - 搜尋文字內容並開啟檔案
+
+🖥️  TMUX 與終端管理:
+  ftm [session]    - 建立或切換至 tmux session
+  fs [pattern]     - 快速模糊切換 tmux session
+  claude-watch     - 在 tmux 背景啟動 claude --remote watchdog
+  fherdr           - 互動式選擇並連接 Herdr session
+  fherdr-ws        - 互動式選擇並切換 Herdr workspace
+  herdr-omp [dir]  - 在 Herdr 新分頁啟動 OMP
 🦉 OMP (Oh My Pi) 工具:
   fompr            - 互動式選擇並恢復歷史 Session
   fompm            - 互動式選擇模型並啟動 OMP
