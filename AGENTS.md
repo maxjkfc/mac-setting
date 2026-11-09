@@ -98,6 +98,7 @@ Understanding the load order is critical when modifying zsh files:
 ./setup.sh backend       # Docker/k8s, Go, Node.js, cloud tools
 ./setup.sh golang        # Go language + dev tools only
 ./setup.sh ai-tools      # Claude CLI, Herdr, Antigravity CLI, pass-cli, LM Studio CLI
+./setup.sh herdr-app     # Herdr app (desktop) + maxjkfc/herdr-max layout/mods/keys + herdr-app/settings.json
 ./setup.sh gui-tools     # Raycast, Warp, Stats, AppCleaner (Cask)
 ./setup.sh vim-repeat    # Disable macOS key-hold delay for Vim
 ./setup.sh health        # Check what is/isn't installed
