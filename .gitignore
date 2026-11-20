@@ -20,3 +20,6 @@ package-lock.json
 # Neovim
 nvim/plugin
 nvim/lazy-lock.json
+
+# omp
+omp/config.yml.lock
