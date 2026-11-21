@@ -10,13 +10,14 @@ modelRoles:
   commit: anthropic/claude-haiku-5-5
   advisor: anthropic/claude-opus-5-5:auto
   task: anthropic/claude-sonnet-5-5:auto
-  tiny: anthropic/claude-haiku-5-5
-  vision: google-antigravity/gemini-4-argon:low
+  tiny: odystudio/qwen3.8:27b-1m
+  vision: openai-codex/gpt-6.1-sol
   highlevel-chatgpt: openai-codex/gpt-6-astra:auto
   highlevel: anthropic/claude-fable-5-2:auto
   memory: anthropic/claude-haiku-5-5
-  image: google-antigravity/gemini-3-pro-image
+  image: openai-codex/gpt-image-2
   judge: typesafe/jev-1.14.0
+  local: odystudio/qwen3.8:27b-1m
 symbolPreset: nerd
 theme:
   dark: titanium
@@ -39,41 +40,34 @@ cycleOrder:
   - vision
   - highlevel
   - highlevel-chatgpt
+  - local
 retry:
   fallbackChains:
     default:
       - openai-codex/gpt-6.1-sol
-      - google-antigravity/claude-sonnet-5-5
-      - google-antigravity/gemini-4-argon
+      - anthropic/claude-opus-5-5
     smol:
-      - google-antigravity/gemini-3.8-flash:medium
       - anthropic/claude-sonnet-5-5
     slow:
       - openai-codex/gpt-6.1-sol
-      - google-antigravity/claude-opus-5-5
       - anthropic/claude-sonnet-5-5
     vision:
-      - openai-codex/gpt-6.1-sol
       - anthropic/claude-sonnet-5-5
     plan:
       - openai-codex/gpt-6.1-sol
       - anthropic/claude-opus-5-5
-      - google-antigravity/claude-sonnet-5-5
     commit:
       - openai-codex/gpt-6-luna
-      - google-antigravity/gemini-3.5-flash-lite
-      - google-antigravity/gemini-3.8-flash:medium
+      - anthropic/claude-sonnet-5-5
     tiny:
+      - anthropic/claude-haiku-5-5
       - openai-codex/gpt-6-luna
-      - google-antigravity/gemini-3.8-flash:medium
     task:
       - openai-codex/gpt-6.1-terra
-      - google-antigravity/gemini-3.8-flash
       - openai-codex/gpt-6-luna
     advisor:
       - openai-codex/gpt-6.1-sol
-      - google-antigravity/claude-opus-5-5
-      - google-antigravity/gemini-4-argon
+      - anthropic/claude-sonnet-5-5
     highlevel:
       - anthropic/claude-mythos-5-1:auto
       - anthropic/claude-opus-5-5:auto
@@ -81,16 +75,14 @@ retry:
     highlevel-chatgpt:
       - openai-codex/gpt-6.1-sol:auto
       - anthropic/claude-fable-5-1:auto
-    image:
-      - google-antigravity/gemini-3.1-flash-image
-      - openai-codex/gpt-image-2
+    image: []
   rateLimitWalksChain: true
   usageAwareFallback: true
   usageReservePct: 5
 task:
   agentModelOverrides:
     scout: "@tiny"
-    sonic: "@tiny"
+    sonic: "@smol"
   enableEffort: true
   enableLsp: true
   isolation:
@@ -184,12 +176,12 @@ modelPresets:
       commit: anthropic/claude-haiku-5-5
       advisor: anthropic/claude-opus-5-5:auto
       task: anthropic/claude-sonnet-5-5:auto
-      tiny: anthropic/claude-haiku-5-5
-      vision: google-antigravity/gemini-4-argon:low
+      tiny: odystudio/qwen3.8:27b-1m
+      vision: openai-codex/gpt-6.1-sol:low
       highlevel-chatgpt: openai-codex/gpt-6-astra:auto
       highlevel: anthropic/claude-fable-5-1:auto
       memory: anthropic/claude-haiku-5-5
-      image: google-antigravity/gemini-3-pro-image
+      image: openai-codex/gpt-image-2
       judge: typesafe/jev-1.14.0
   deep:
     defaultThinkingLevel: high
@@ -201,27 +193,27 @@ modelPresets:
       commit: anthropic/claude-haiku-5-5
       advisor: openai-codex/gpt-6-astra:high
       task: anthropic/claude-opus-5-5:auto
-      tiny: anthropic/claude-haiku-5-5
-      vision: google-antigravity/gemini-4-argon:high
+      tiny: odystudio/qwen3.8:27b-1m
+      vision: openai-codex/gpt-6.1-sol:high
       highlevel-chatgpt: openai-codex/gpt-6-astra:xhigh
       highlevel: anthropic/claude-fable-5-1:xhigh
       memory: anthropic/claude-haiku-5-5
-      image: google-antigravity/gemini-3-pro-image
+      image: openai-codex/gpt-image-2
       judge: typesafe/jev-1.14.0
   fast:
     defaultThinkingLevel: medium
     modelRoles:
       default: openai-codex/gpt-6.1-terra:medium
-      smol: google-antigravity/gemini-3.8-flash:low
+      smol: openai-codex/gpt-6.1-terra:low
       slow: openai-codex/gpt-6.1-sol:high
       plan: openai-codex/gpt-6.1-sol:medium
       commit: openai-codex/gpt-6-luna
       advisor: anthropic/claude-sonnet-5-5:medium
-      task: google-antigravity/gemini-3.8-flash:medium
-      tiny: openai-codex/gpt-6-luna
-      vision: google-antigravity/gemini-3.8-flash:low
+      task: openai-codex/gpt-6.1-terra:medium
+      tiny: odystudio/qwen3.8:27b-1m
+      vision: openai-codex/gpt-6.1-sol:low
       highlevel-chatgpt: openai-codex/gpt-6.1-sol:high
       highlevel: anthropic/claude-opus-5-5:high
       memory: openai-codex/gpt-6-luna
-      image: google-antigravity/gemini-3.1-flash-image
+      image: openai-codex/gpt-image-2
       judge: typesafe/jev-1.14.0
